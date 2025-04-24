@@ -31,9 +31,10 @@ jobs:
           pnpm playwright install --with-deps
           pnpm test:e2e
 
-      - name: 📊 Upload HTML report
+      - name: 📤 Deploy Playwright report to GitHub Pages
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: playwright-report
-          path: playwright-report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./playwright-report
+          publish_branch: gh-pages
