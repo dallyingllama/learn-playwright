@@ -1,0 +1,29 @@
+{
+  "name": "learn-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:ui:dev": "cross-env TEST_ENV=dev npx playwright test --ui",
+    "test:ui:test": "cross-env TEST_ENV=test npx playwright test --ui",
+    "test:ui:e2e": "cross-env TEST_ENV=e2e npx playwright test --ui",
+
+    "test:dev": "cross-env TEST_ENV=dev npx playwright test",
+    "test:test": "cross-env TEST_ENV=test npx playwright test",
+    "test:e2e": "cross-env TEST_ENV=e2e npx playwright test",
+
+    "show-report": "pnpm exec playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.9.0",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.14.1",
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
