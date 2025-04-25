@@ -35,6 +35,12 @@ jobs:
       - name: 📅 Set timestamp
         run: echo "REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S')" >> $GITHUB_ENV
 
+      - name: 🧲 Download existing GitHub Pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: history
+
       - name: 🧱 Create folder-safe timestamp
         run: |
           SAFE_DIR_NAME=$(echo "$REPORT_DIR" | tr ':' '-')
