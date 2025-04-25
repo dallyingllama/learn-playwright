@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🟢 Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: 📦 Install dependencies
         run: |
@@ -33,20 +33,22 @@ jobs:
 
       - name: 📅 Set timestamp
         id: timestamp
-        run: echo "REPORT_DIR=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+        run: echo "REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S')" >> $GITHUB_ENV
 
-      - name: 📁 Copy report to history folder
+      - name: 🧱 Create folder-safe timestamp
         run: |
-          mkdir -p history/$REPORT_DIR
-          cp -r playwright-report/* history/$REPORT_DIR
+          SAFE_DIR_NAME=$(echo "$REPORT_DIR" | tr ':' '-')
+          echo "SAFE_DIR_NAME=$SAFE_DIR_NAME" >> $GITHUB_ENV
+          mkdir -p history/$SAFE_DIR_NAME
+          cp -r playwright-report/* history/$SAFE_DIR_NAME
 
       - name: 📝 Generate HTML index with report links
         run: |
           echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Playwright Report Index</title></head><body><h1>Playwright Test Reports</h1><ul>" > history/index.html
           for d in history/*/ ; do
-            stamp=$(basename $d)
-            formatted=$(date -d "${stamp//_/ }" +"%d.%m.%Y, %H:%M:%S")
-            echo "<li><a href=\"$stamp/index.html\">$formatted</a></li>" >> history/index.html
+             stamp=$(basename $d)
+             readable=$(echo "$stamp" | tr '-' ':' | sed 's/_/ /')
+          echo "<li><a href=\"$stamp/index.html\">$readable</a></li>" >> history/index.html
           done
           echo "</ul></body></html>" >> history/index.html
 
