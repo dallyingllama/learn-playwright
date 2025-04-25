@@ -67,33 +67,29 @@ jobs:
             <meta charset="utf-8">
             <title>Playwright Test Reports</title>
             <style>
-              body { font-family: Arial, sans-serif; background: #f6f8fa; padding: 2rem; }
-              h1 { color: #24292e; }
+              /* Default Dark Mode */
+              body { font-family: Arial, sans-serif; background: #1f1f1f; color: white; padding: 2rem; }
+              h1 { color: white; }
               ul { list-style: none; padding: 0; }
-              li { background: white; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-              a { text-decoration: none; color: #0366d6; font-weight: bold; }
+              li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+              a { text-decoration: none; color: #1e90ff; font-weight: bold; }
+
+              /* Light Mode */
+              @media (prefers-color-scheme: light) {
+                body { background: #f6f8fa; color: #24292e; }
+                h1 { color: #24292e; }
+                li { background: white; color: #24292e; }
+                a { color: #0366d6; }
+              }
             </style>
           </head>
           <body>
             <h1>Playwright Test Reports</h1>
             <ul>' > history/index.html
-            for d in $(ls -dt history/*/); do
-              stamp=$(basename "$d")
-              readable=$(echo "$stamp" | tr '-' ':' | sed 's/_/ /')
-
-              status_icon="❓"
-              if [[ -f "$d/status.txt" ]]; then
-                result=$(cat "$d/status.txt")
-                if [[ "$result" == "PASS" ]]; then
-                  status_icon="✅"
-                elif [[ "$result" == "FAIL" ]]; then
-                  status_icon="❌"
-                fi
-              fi
-              echo "<li>$status_icon <a href=\"$stamp/index.html\">$readable</a></li>" >> history/index.html
-            done
-          echo '</ul></body></html>' >> history/index.html
-
+          for d in $(ls -dt history/*/); do
+            stamp=$(basename "$d")
+            readable=$(echo "$stamp" | tr '-' ':' | sed '
+        
       - name: 📦 Zip report and upload as artifact
         run: |
           mkdir -p artifacts
