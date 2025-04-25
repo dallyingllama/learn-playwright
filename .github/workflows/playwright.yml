@@ -32,16 +32,19 @@ jobs:
           pnpm playwright install --with-deps
           pnpm test:e2e
 
-      - name: 📋 Record test results  
+      - name: 📋 Record test pass status if passed  
         if: success()
-        run: echo "PASS" > playwright-report/status.txttatus
+        run: echo "PASS" > playwright-report/status.txt
 
-      - name: 📋 Record test failure status
+      - name: 📋 Record test failure status if failed
         if: failure()
         run: echo "FAIL" > playwright-report/status.txt
 
-      - name: 📅 Set timestamp
-        run: echo "REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S')" >> $GITHUB_ENV
+      - name: 📅 Set timestamp including converting to timezone
+        run: |
+          export TZ="Europe/Berlin"
+          export REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S') 
+          echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
 
       - name: 🧲 Download existing GitHub Pages branch
         uses: actions/checkout@v3
