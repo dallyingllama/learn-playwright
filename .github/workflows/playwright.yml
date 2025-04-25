@@ -82,7 +82,7 @@ jobs:
 
       - name: 📣 Add direct link to report in summary
         run: |
-          echo "### ✅ [View latest HTML report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
 
       - name: 🚀 Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
