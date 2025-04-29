@@ -16,7 +16,6 @@ export class LoginPage {
     await this.page.goto('/');
   }
   
-
   // login
   async login(username: string, password: string) {
     await this.page.fill(this.usernameInput, username);
@@ -32,5 +31,13 @@ export class LoginPage {
   async loginFailed() {
     await expect(this.page.locator(this.errorMessage)).toBeVisible()
   }
+  
+  async loginWithEmptyFields() {
+    await expect(this.page.locator(this.loginButton)).toBeEnabled(); // toBeDisabled Check if Button is disabled when fields are empty, for this site it is always
+  }
 
+  async loginWithLongCredentials() {
+    await expect(this.page.locator(this.errorMessage)).toBeVisible(); // Check error on long inputs
+  }
 }
+
