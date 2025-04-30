@@ -1,5 +1,4 @@
 name: Playwright Tests
-# TODO needs to be updated to run the report even when a test fails
 on:
   push:
     branches: [ main ]
