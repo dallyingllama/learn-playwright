@@ -1,5 +1,5 @@
 name: Playwright Tests
-
+# TODO needs to be updated to run the report even when a test fails
 on:
   push:
     branches: [ main ]
@@ -27,6 +27,7 @@ jobs:
           pnpm install
 
       - name: 🧪 Run Playwright tests
+        continue-on-error: true
         run: |
           export TEST_ENV=e2e
           pnpm playwright install --with-deps
@@ -124,3 +125,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./history
           publish_branch: gh-pages
+
+      - name: ❌ Fail job if any tests fail
+        if: steps.test.outcome == 'failure'
+        run: exit 1          
