@@ -68,14 +68,13 @@ jobs:
             <meta charset="utf-8">
             <title>Playwright Test Reports</title>
             <style>
-              /* Default Dark Mode */
               body { font-family: Arial, sans-serif; background: #1f1f1f; color: white; padding: 2rem; }
               h1 { color: white; }
-              ul { list-style: none; padding: 0; }
+              details { margin-bottom: 1rem; }
+              summary { font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+              ul { list-style: none; padding-left: 1rem; }
               li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
               a { text-decoration: none; color: #1e90ff; font-weight: bold; }
-      
-              /* Light Mode */
               @media (prefers-color-scheme: light) {
                 body { background: #f6f8fa; color: #24292e; }
                 h1 { color: #24292e; }
@@ -85,12 +84,15 @@ jobs:
             </style>
           </head>
           <body>
-            <h1>Playwright Test Reports</h1>
-            <ul>' > history/index.html
+            <h1>Playwright Test Reports</h1>' > history/index.html
+
+          declare -A reports_by_date
+
           for d in $(ls -dt history/*/); do
             stamp=$(basename "$d")
-            readable=$(echo "$stamp" | tr '-' ':' | sed 's/_/ /')
-      
+            date_part=${stamp%%_*}
+            time_part=${stamp#*_}
+
             status_icon="❓"
             if [[ -f "$d/status.txt" ]]; then
               result=$(cat "$d/status.txt")
@@ -100,9 +102,25 @@ jobs:
                 status_icon="❌"
               fi
             fi
-            echo "<li>$status_icon <a href=\"$stamp/index.html\" target=\"_blank\">$readable</a></li>" >> history/index.html
+
+            readable_time=$(echo "$time_part" | tr '-' ':')
+
+            reports_by_date["$date_part"]+=$'\n'"<li>$status_icon <a href=\"$stamp/index.html\" target=\"_blank\">$readable_time</a></li>"
           done
-          echo '</ul></body></html>' >> history/index.html        
+
+          today=$(date +'%Y-%m-%d')
+
+          for date_key in "${!reports_by_date[@]}"; do
+            if [[ "$date_key" == "$today" ]]; then
+              open="open"
+            else
+              open=""
+            fi
+
+            echo "<details $open><summary>$date_key</summary><ul>${reports_by_date[$date_key]}</ul></details>" >> history/index.html
+          done
+
+          echo '</body></html>' >> history/index.html
 
       - name: 📦 Zip report and upload as artifact
         run: |

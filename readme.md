@@ -66,6 +66,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -113,20 +114,16 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/dallyingllama/learn-playwright.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
    ```
-5. Change git remote url to avoid accidental pushes to base project
+3. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin dallyingllama/learn-playwright
    git remote -v # confirm the changes
@@ -143,6 +140,18 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- FEATURES -->
+## Features
+
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
+    - [ ] Nested Feature
+
+ 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
