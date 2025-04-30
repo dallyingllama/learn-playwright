@@ -27,6 +27,7 @@ jobs:
           pnpm install
 
       - name: 🧪 Run Playwright tests
+        id: testrun
         continue-on-error: true
         run: |
           export TEST_ENV=e2e
@@ -135,7 +136,7 @@ jobs:
 
       - name: 📣 Add direct link to report in summary
         run: |
-          if [ "${{ steps.test.outcome }}" == "success" ]; then
+          if [ "${{ steps.testrun.outcome }}" == "success" ]; then
             echo "### ✅ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
           else
             echo "### ❌ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
@@ -149,5 +150,5 @@ jobs:
           publish_branch: gh-pages
 
       - name: ❌ Fail job if any tests fail
-        if: steps.test.outcome != 'success'
+        if: steps.testrun.outcome != 'success'
         run: exit 1     
