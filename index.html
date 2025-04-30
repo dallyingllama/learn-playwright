@@ -4,14 +4,13 @@
   <meta charset="utf-8">
   <title>Playwright Test Reports</title>
   <style>
-    /* Default Dark Mode */
     body { font-family: Arial, sans-serif; background: #1f1f1f; color: white; padding: 2rem; }
     h1 { color: white; }
-    ul { list-style: none; padding: 0; }
+    details { margin-bottom: 1rem; }
+    summary { font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+    ul { list-style: none; padding-left: 1rem; }
     li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     a { text-decoration: none; color: #1e90ff; font-weight: bold; }
-
-    /* Light Mode */
     @media (prefers-color-scheme: light) {
       body { background: #f6f8fa; color: #24292e; }
       h1 { color: #24292e; }
@@ -22,14 +21,18 @@
 </head>
 <body>
   <h1>Playwright Test Reports</h1>
-  <ul>
-<li>✅ <a href="2025-04-30_16-32-02/index.html" target="_blank">2025:04:30 16:32:02</a></li>
-<li>✅ <a href="2025-04-30_10-01-44/index.html" target="_blank">2025:04:30 10:01:44</a></li>
-<li>✅ <a href="2025-04-29_15-50-45/index.html" target="_blank">2025:04:29 15:50:45</a></li>
-<li>✅ <a href="2025-04-29_14-49-07/index.html" target="_blank">2025:04:29 14:49:07</a></li>
-<li>✅ <a href="2025-04-26_00-01-40/index.html" target="_blank">2025:04:26 00:01:40</a></li>
-<li>✅ <a href="2025-04-25_23-46-50/index.html" target="_blank">2025:04:25 23:46:50</a></li>
-<li>❓ <a href="2025-04-25_21-37-47/index.html" target="_blank">2025:04:25 21:37:47</a></li>
-<li>❓ <a href="2025-04-25_21-28-10/index.html" target="_blank">2025:04:25 21:28:10</a></li>
-<li>❓ <a href="2025-04-25_21-19-47/index.html" target="_blank">2025:04:25 21:19:47</a></li>
-</ul></body></html>
+<details open><summary>2025-04-30</summary><ul>
+<li>✅ <a href="2025-04-30_16-47-11/index.html" target="_blank">16:47:11</a></li>
+<li>✅ <a href="2025-04-30_16-32-02/index.html" target="_blank">16:32:02</a></li>
+<li>✅ <a href="2025-04-30_10-01-44/index.html" target="_blank">10:01:44</a></li></ul></details>
+<details ><summary>2025-04-29</summary><ul>
+<li>✅ <a href="2025-04-29_15-50-45/index.html" target="_blank">15:50:45</a></li>
+<li>✅ <a href="2025-04-29_14-49-07/index.html" target="_blank">14:49:07</a></li></ul></details>
+<details ><summary>2025-04-25</summary><ul>
+<li>✅ <a href="2025-04-25_23-46-50/index.html" target="_blank">23:46:50</a></li>
+<li>❓ <a href="2025-04-25_21-37-47/index.html" target="_blank">21:37:47</a></li>
+<li>❓ <a href="2025-04-25_21-28-10/index.html" target="_blank">21:28:10</a></li>
+<li>❓ <a href="2025-04-25_21-19-47/index.html" target="_blank">21:19:47</a></li></ul></details>
+<details ><summary>2025-04-26</summary><ul>
+<li>✅ <a href="2025-04-26_00-01-40/index.html" target="_blank">00:01:40</a></li></ul></details>
+</body></html>
