@@ -7,6 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
+  env:
+  REPORT_RETENTION_DAYS: 2
   test:
     runs-on: ubuntu-latest
 
@@ -33,14 +35,6 @@ jobs:
           pnpm playwright install --with-deps
           pnpm test:e2e
 
-      - name: 📋 Record test pass status if passed  
-        if: success()
-        run: echo "PASS" > playwright-report/status.txt
-
-      - name: 📋 Record test failure status if failed
-        if: failure()
-        run: echo "FAIL" > playwright-report/status.txt
-
       - name: 📅 Set timestamp including converting to timezone
         run: |
           export TZ="Europe/Berlin"
@@ -60,6 +54,14 @@ jobs:
           mkdir -p history/$SAFE_DIR_NAME
           cp -r playwright-report/* history/$SAFE_DIR_NAME
 
+      - name: 📋 Record test result status
+        run: |
+          if [ "${{ steps.testrun.outcome }}" = "success" ]; then
+            echo "PASS" > playwright-report/status.txt
+          else
+            echo "FAIL" > playwright-report/status.txt
+          fi
+            
       - name: 📝 Generate styled index.html
         run: |
           echo '<!DOCTYPE html>
