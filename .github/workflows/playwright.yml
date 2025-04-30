@@ -100,7 +100,7 @@ jobs:
                 status_icon="❌"
               fi
             fi
-            echo "<li>$status_icon <a href=\"$stamp/index.html\">$readable</a></li>" >> history/index.html
+            echo "<li>$status_icon <a href=\"$stamp/index.html\" target=\"_blank\">$readable</a></li>" >> history/index.html
           done
           echo '</ul></body></html>' >> history/index.html        
 
