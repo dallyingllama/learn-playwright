@@ -7,9 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  env:
-    REPORT_RETENTION_DAYS: 2
-    
   test:
     runs-on: ubuntu-latest
 
@@ -58,11 +55,11 @@ jobs:
       - name: 📋 Record test result status
         run: |
           if [ "${{ steps.testrun.outcome }}" = "success" ]; then
-            echo "PASS" > playwright-report/status.txt
+            echo "PASS" > history/$SAFE_DIR_NAME/status.txt
           else
-            echo "FAIL" > playwright-report/status.txt
+            echo "FAIL" > history/$SAFE_DIR_NAME/status.txt
           fi
-            
+
       - name: 📝 Generate styled index.html
         run: |
           echo '<!DOCTYPE html>
@@ -153,4 +150,4 @@ jobs:
 
       - name: ❌ Fail job if any tests fail
         if: steps.testrun.outcome != 'success'
-        run: exit 1     
+        run: exit 1
