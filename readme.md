@@ -145,12 +145,27 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- FEATURES -->
 ## Features
+### Simple Features
+- POM (Page Object Model). 
+  - [Page Objects](https://github.com/dallyingllama/learn-playwright/tree/main/pageObjects). 
+  - [LoginPage.ts](https://github.com/dallyingllama/learn-playwright/blob/main/pageObjects/LoginPage.ts)
+- Environment. 
+  - [.env](https://github.com/dallyingllama/learn-playwright/tree/main/.env)
+  - [dev.env](https://github.com/dallyingllama/learn-playwright/blob/main/.env/dev.env)
+- Data. 
+  - [data](https://github.com/dallyingllama/learn-playwright/tree/main/data)
+  - [loginData.ts](https://github.com/dallyingllama/learn-playwright/blob/main/data/loginData.ts)
+- Utils. Annotations. This is useful for providing further information in the report output that might be helpful to the tester.
+  - [utils annotations](https://github.com/dallyingllama/learn-playwright/blob/main/utils/annotations.ts)
+- GitHub and GitHub Actions
+  - [yaml](https://github.com/dallyingllama/learn-playwright/blob/main/.github/workflows/playwright.yml)
+- creates a Report in GitHub Pages keeping the previous history. 
+  - [Generate styled index](https://github.com/dallyingllama/learn-playwright/blob/8b10207845e6bf2ca26145fde084a79f31629849/.github/workflows/playwright.yml#L63)
+  - [Playwright Reports](https://dallyingllama.github.io/learn-playwright/)
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
+### Test Examples
+- Tests that loop through login data
+  - [login.spec.ts](https://github.com/dallyingllama/learn-playwright/blob/main/tests/login.spec.ts)
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

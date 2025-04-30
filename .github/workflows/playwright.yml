@@ -135,7 +135,11 @@ jobs:
 
       - name: 📣 Add direct link to report in summary
         run: |
-          echo "### ✅ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.test.outcome }}" == "success" ]; then
+            echo "### ✅ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: 🚀 Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -145,5 +149,5 @@ jobs:
           publish_branch: gh-pages
 
       - name: ❌ Fail job if any tests fail
-        if: steps.test.outcome == 'failure'
-        run: exit 1          
+        if: steps.test.outcome != 'success'
+        run: exit 1     
