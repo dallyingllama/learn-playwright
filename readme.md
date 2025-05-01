@@ -157,11 +157,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [loginData.ts](https://github.com/dallyingllama/learn-playwright/blob/main/data/loginData.ts)
 - Utils. Annotations. This is useful for providing further information in the report output that might be helpful to the tester.
   - [utils annotations](https://github.com/dallyingllama/learn-playwright/blob/main/utils/annotations.ts)
-- GitHub and GitHub Actions
+- GitHub Actions
   - [yaml](https://github.com/dallyingllama/learn-playwright/blob/main/.github/workflows/playwright.yml)
-- creates a Report in GitHub Pages keeping the previous history. 
-  - [Generate styled index](https://github.com/dallyingllama/learn-playwright/blob/8b10207845e6bf2ca26145fde084a79f31629849/.github/workflows/playwright.yml#L63)
+- Playwright Repots in Github Pages
   - [Playwright Reports](https://dallyingllama.github.io/learn-playwright/)
+  - published to github pages in [repo branch](https://github.com/dallyingllama/learn-playwright/tree/gh-pages)
+    - includes past reports
+    - includes icon to see if fail/pass for the entire report at a glance
+    - includes option to delete reports older than config days
 
 ### Test Examples
 - Tests that loop through login data
@@ -174,10 +177,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- TBD
+
 
 See the [open issues](https://github.com/dallyingllama/learn-playwright/issues) for a full list of proposed features (and known issues).
 

@@ -1,10 +1,14 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+
+env:
+  REPORT_RETENTION_DAYS: 2
 
 jobs:
   test:
@@ -33,10 +37,19 @@ jobs:
           pnpm playwright install --with-deps
           pnpm test:e2e
 
+      - name: 📋 Record test result status
+        run: |
+          mkdir -p playwright-report
+          if [ "${{ steps.testrun.outcome }}" = "success" ]; then
+            echo "PASS" > playwright-report/status.txt
+          else
+            echo "FAIL" > playwright-report/status.txt
+          fi
+
       - name: 📅 Set timestamp including converting to timezone
         run: |
           export TZ="Europe/Berlin"
-          export REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S') 
+          export REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S')
           echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
 
       - name: 🧲 Download existing GitHub Pages branch
@@ -45,6 +58,10 @@ jobs:
           ref: gh-pages
           path: history
 
+      - name: 🧹 Delete old reports
+        run: |
+          find history -maxdepth 1 -type d -name "20*" -mtime +${{ env.REPORT_RETENTION_DAYS }} -exec rm -rf {} \;
+
       - name: 🧱 Create folder-safe timestamp
         run: |
           SAFE_DIR_NAME=$(echo "$REPORT_DIR" | tr ':' '-')
@@ -52,75 +69,8 @@ jobs:
           mkdir -p history/$SAFE_DIR_NAME
           cp -r playwright-report/* history/$SAFE_DIR_NAME
 
-      - name: 📋 Record test result status
-        run: |
-          if [ "${{ steps.testrun.outcome }}" = "success" ]; then
-            echo "PASS" > history/$SAFE_DIR_NAME/status.txt
-          else
-            echo "FAIL" > history/$SAFE_DIR_NAME/status.txt
-          fi
-
-      - name: 📝 Generate styled index.html
-        run: |
-          echo '<!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8">
-            <title>Playwright Test Reports</title>
-            <style>
-              body { font-family: Arial, sans-serif; background: #1f1f1f; color: white; padding: 2rem; }
-              h1 { color: white; }
-              details { margin-bottom: 1rem; }
-              summary { font-size: 1.2rem; font-weight: bold; cursor: pointer; }
-              ul { list-style: none; padding-left: 1rem; }
-              li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-              a { text-decoration: none; color: #1e90ff; font-weight: bold; }
-              @media (prefers-color-scheme: light) {
-                body { background: #f6f8fa; color: #24292e; }
-                h1 { color: #24292e; }
-                li { background: white; color: #24292e; }
-                a { color: #0366d6; }
-              }
-            </style>
-          </head>
-          <body>
-            <h1>Playwright Test Reports</h1>' > history/index.html
-
-          declare -A reports_by_date
-
-          for d in $(ls -dt history/*/); do
-            stamp=$(basename "$d")
-            date_part=${stamp%%_*}
-            time_part=${stamp#*_}
-
-            status_icon="❓"
-            if [[ -f "$d/status.txt" ]]; then
-              result=$(cat "$d/status.txt")
-              if [[ "$result" == "PASS" ]]; then
-                status_icon="✅"
-              elif [[ "$result" == "FAIL" ]]; then
-                status_icon="❌"
-              fi
-            fi
-
-            readable_time=$(echo "$time_part" | tr '-' ':')
-
-            reports_by_date["$date_part"]+=$'\n'"<li>$status_icon <a href=\"$stamp/index.html\" target=\"_blank\">$readable_time</a></li>"
-          done
-
-          today=$(date +'%Y-%m-%d')
-
-          for date_key in "${!reports_by_date[@]}"; do
-            if [[ "$date_key" == "$today" ]]; then
-              open="open"
-            else
-              open=""
-            fi
-
-            echo "<details $open><summary>$date_key</summary><ul>${reports_by_date[$date_key]}</ul></details>" >> history/index.html
-          done
-
-          echo '</body></html>' >> history/index.html
+      - name: 🧠 Generate styled index with EJS
+        run: node .github/scripts/render-index.js
 
       - name: 📦 Zip report and upload as artifact
         run: |
