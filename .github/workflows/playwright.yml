@@ -91,13 +91,13 @@ jobs:
             echo "### ❌ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
           fi
 
-      - name: 🚀 Deploy report to GitHub Pages
+      - name: 📊 Publish Playwright Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./history
           publish_branch: gh-pages
-
+        
       - name: ❌ Fail job if any tests fail
         if: steps.testrun.outcome != 'success'
         run: exit 1
