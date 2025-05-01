@@ -7,7 +7,6 @@ export class LoginPage {
   private usernameInput = '#userName';
   private passwordInput = '#password';
   private loginButton = '#login';
-  private errorMessage = '#name';
   private logoutButton = '#submit';
 
   async goTo() {
