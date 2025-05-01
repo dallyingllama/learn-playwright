@@ -1,43 +1,37 @@
-import { expect, Page } from '@playwright/test'
+import { expect, Page } from '@playwright/test';
 
 export class LoginPage {
   constructor(private page: Page) {}
 
-  // Locators
-  private usernameInput = '[data-test="username"]';
-  private passwordInput = '[data-test="password"]';
-  private loginButton = '[data-test="login-button"]';
-  private errorMessage = '[data-test="error"]';
-  private title = '.title';
+  // Locators for https://demoqa.com/login
+  private usernameInput = '#userName';
+  private passwordInput = '#password';
+  private loginButton = '#login';
+  private errorMessage = '#name';
+  private logoutButton = '#submit';
 
-  // Methods
-  // go to root url setup in .env for the enviornment
   async goTo() {
-    await this.page.goto('/');
+    await this.page.goto('/login'); // Relies on BASE_URL from env
   }
-  
-  // login
+
   async login(username: string, password: string) {
     await this.page.fill(this.usernameInput, username);
     await this.page.fill(this.passwordInput, password);
     await this.page.click(this.loginButton);
   }
-
-  async loginSuccessful() {
-    await this.page.waitForURL(/.inventory/);
-    await expect(this.page.locator(this.title)).toHaveText('Products');
-  }
-
-  async loginFailed() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible()
+  
+  async expectSuccessfulLogin() {
+    await expect(this.page.locator('#userName-value')).toBeVisible(); // or another post-login element
   }
   
-  async loginWithEmptyFields() {
-    await expect(this.page.locator(this.loginButton)).toBeEnabled(); // toBeDisabled Check if Button is disabled when fields are empty, for this site it is always
+  async expectFailedLogin() {
+    await expect(this.page.locator('[id="name"]')).toContainText('Invalid username or password!');
   }
 
-  async loginWithLongCredentials() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible(); // Check error on long inputs
+  async expectFieldInvalid(selector: string) {
+    const field = this.page.locator(selector);
+    await expect(field).toHaveClass(/is-invalid/);
   }
+
 }
-
+  

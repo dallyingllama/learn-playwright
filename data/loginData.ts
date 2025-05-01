@@ -1,11 +1,8 @@
 export const loginData = [
-  { dataname: 'valid', username: 'standard_user', password: 'secret_sauce'},
-  { dataname: 'locked', username: 'locked_out_user', password: 'secret_sauce'},
-  { dataname: 'invalid username', username: 'invalid_user', password: 'secret_sauce'},
-  { dataname: 'invalid password', username: 'standard_user', password: 'invalid_password'},
-  { dataname: 'empty username', username: '', password: 'secret_sauce' },
-  { dataname: 'empty password', username: 'standard_user', password: '' },
-  { dataname: 'empty fields', username: '', password: '' },
-  { dataname: 'long username', username: 'a'.repeat(256), password: 'secret_sauce' },
-  { dataname: 'long password', username: 'standard_user', password: 'a'.repeat(256) }
-]
+  { dataname: 'registered', logintype: 'valid', username: 'bob.slydel', password: 'Password123!' },
+  { dataname: 'unregistered', logintype: 'invalid', username: 'invalid_user', password: 'invalid_password' },
+  { dataname: 'invalid username', logintype: 'invalid', username: 'invalid_user', password: 'Password123!' },
+  { dataname: 'invalid password', logintype: 'invalid', username: 'bob.slydel', password: 'invalid_password' },
+  { dataname: 'missing username', logintype: 'invalid', username: '', password: 'Password123!' },
+  { dataname: 'missing password', logintype: 'invalid', username: 'bob.slydel', password: '' },
+];

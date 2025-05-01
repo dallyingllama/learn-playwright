@@ -22,7 +22,7 @@ if (missingVars.length > 0) {
     `❌ Missing required environment variables in ${envPath}: ${missingVars.join(', ')}`
   );
 }
-
+const isDev = process.env.TEST_ENV === 'dev';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
