@@ -4,32 +4,57 @@
   <meta charset="utf-8">
   <title>Playwright Test Reports</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #1f1f1f; color: white; padding: 2rem; }
-    h1 { color: white; }
+    body { font-family: sans-serif; padding: 2rem; background: #1f1f1f; color: white; }
+    .filter-buttons { margin-bottom: 1rem; }
+    button { margin-right: 0.5rem; padding: 0.5rem 1rem; cursor: pointer; }
     details { margin-bottom: 1rem; }
-    summary { font-size: 1.2rem; font-weight: bold; cursor: pointer; }
-    ul { list-style: none; padding-left: 1rem; }
-    li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    a { text-decoration: none; color: #1e90ff; font-weight: bold; }
-    @media (prefers-color-scheme: light) {
-      body { background: #f6f8fa; color: #24292e; }
-      h1 { color: #24292e; }
-      li { background: white; color: #24292e; }
-      a { color: #0366d6; }
-    }
+    li { background: #333; margin: 0.5rem 0; padding: 1rem; border-radius: 8px; }
+    a { color: #1e90ff; text-decoration: none; }
   </style>
 </head>
 <body>
   <h1>Playwright Test Reports</h1>
+
+  <!-- Filter buttons for showing PASS/FAIL -->
+  <div class="filter-buttons">
+    <button onclick="filterReports('all')">Show All</button>
+    <button onclick="filterReports('pass')">Show Passed</button>
+    <button onclick="filterReports('fail')">Show Failed</button>
+  </div>
+
+  <!-- Loop through reports by date -->
   <% for (const date in reportsByDate) { %>
-    <details <%= date === today ? "open" : "" %>>
+    <details <%= date === today ? 'open' : '' %>>
       <summary><%= date %></summary>
       <ul>
-        <% reportsByDate[date].forEach(r => { %>
-          <li><%= r.icon %> <a href="<%= r.href %>" target="_blank"><%= r.time %></a></li>
-        <% }); %>
+        <% reportsByDate[date].forEach(report => {
+          // Determine the class based on status
+          const statusClass = report.icon === '✅' ? 'status-pass' :
+                              report.icon === '❌' ? 'status-fail' : 'status-unknown';
+        %>
+          <!-- Each report item, with a class for status filtering -->
+          <li class="report-item <%= statusClass %>">
+            <%= report.icon %> <a href="<%= report.href %>" target="_blank"><%= report.time %></a>
+          </li>
+        <% }) %>
       </ul>
     </details>
   <% } %>
+
+  <!-- JavaScript for filtering reports -->
+  <script>
+    function filterReports(status) {
+      const items = document.querySelectorAll('.report-item');
+      items.forEach(item => {
+        if (status === 'all') {
+          item.style.display = 'list-item';
+        } else if (item.classList.contains(`status-${status}`)) {
+          item.style.display = 'list-item';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

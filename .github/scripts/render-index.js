@@ -15,7 +15,6 @@ node .github/scripts/render-index.js
 
 Then preview the index.html in a broweser.
 */
-
 const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
