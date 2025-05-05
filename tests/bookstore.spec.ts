@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { BookStorePage } from '../pageObjects/BookStorePage';
+import { BookStorePage } from '../pageObjects/BookstorePage';
 import { bookData } from '../data/bookData';
 
 test.describe('📚 Bookstore Search Scenarios', () => {
