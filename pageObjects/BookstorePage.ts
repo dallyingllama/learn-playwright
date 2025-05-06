@@ -1,7 +1,12 @@
+// pageObjects/BookstorePage.ts
+
+import { BasePage } from './BasePage';
 import { Page, expect } from '@playwright/test';
 
-export class BookStorePage {
-  constructor(private page: Page) {}
+export class BookstorePage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
 
   private searchInput = '#searchBox';
   private bookTitle = (title: string) => this.page.locator('a', { hasText: title });

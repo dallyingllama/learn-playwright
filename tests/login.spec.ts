@@ -5,7 +5,7 @@ import { loginData } from '../data/loginData';
 const validLogins = loginData.filter(data => data.logintype === 'valid');
 const invalidLogins = loginData.filter(data => data.logintype === 'invalid');
 
-test.describe('🔐 Valid Login Scenarios', () => {
+test.describe('🔐✅ Valid Login Scenarios', () => {
   for (const { dataname, username, password } of validLogins) {
     test(`✅ ${dataname}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
@@ -16,7 +16,7 @@ test.describe('🔐 Valid Login Scenarios', () => {
   }
 });
 
-test.describe('🚫 Invalid Login Scenarios', () => {
+test.describe('🔐🚫 Invalid Login Scenarios', () => {
   for (const { dataname, username, password } of invalidLogins) {
     test(`❌ ${dataname}`, async ({ page }) => {
       const loginPage = new LoginPage(page);

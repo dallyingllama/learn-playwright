@@ -1,8 +1,11 @@
 // pageObjects/RegisterPage.ts
 import { Page, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class RegisterPage {
-  constructor(private page: Page) {}
+export class RegisterPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
 
   // Locators
   private firstNameInput = '#firstname';

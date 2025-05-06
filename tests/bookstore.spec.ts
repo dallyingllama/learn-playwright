@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { BookStorePage } from '../pageObjects/BookstorePage';
+import { BookstorePage } from '../pageObjects/BookstorePage';
 import { bookData } from '../data/bookData';
 
 test.describe('📚 Bookstore Search Scenarios', () => {
   for (const { dataname, booktype, bookname, booksearch } of bookData) {
     test(`Search scenario: ${dataname}`, async ({ page }) => {
-      const bookstore = new BookStorePage(page);
+      const bookstore = new BookstorePage(page);
       await bookstore.goto();
       await bookstore.searchBook(booksearch);
 

@@ -1,3 +1,4 @@
+//pageObjects/LoginPage.ts
 import { expect, Page } from '@playwright/test';
 
 export class LoginPage {
