@@ -1,8 +1,17 @@
+// pageObjects/TextBoxPage.ts
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { createGotoWithVariants } from '../utils/gotoHelper';
+import { NavigablePage } from './interfaces/NavigablePage';
 
-export class TextBoxPage extends BasePage {
+const config = {
+  menu: 'Elements',
+  menuItem: 'Text Box',
+  url: '/text-box',
+  header: 'Text Box',
+};
+
+export class TextBoxPage extends BasePage implements NavigablePage {
   readonly fullNameInput: Locator;
   readonly emailInput: Locator;
   readonly currentAddressInput: Locator;
@@ -15,23 +24,17 @@ export class TextBoxPage extends BasePage {
   readonly outputCurrentAddress: Locator;
   readonly outputPermanentAddress: Locator;
 
-  readonly goto: {
-    (): Promise<void>;
-    viaMenu: () => Promise<void>;
-    viaDirectLink: () => Promise<void>;
-  };
+  readonly goto;
 
   constructor(page: Page) {
     super(page);
 
-    // Inputs
     this.fullNameInput = page.locator('#userName');
     this.emailInput = page.locator('#userEmail');
     this.currentAddressInput = page.locator('#currentAddress');
     this.permanentAddressInput = page.locator('#permanentAddress');
     this.submitButton = page.locator('#submit');
 
-    // Output
     this.output = page.locator('#output');
     this.outputName = page.locator('#name');
     this.outputEmail = page.locator('#email');
@@ -40,14 +43,19 @@ export class TextBoxPage extends BasePage {
 
     this.goto = createGotoWithVariants(
       async () => {
-        await this.sidebarMenu.navigateTo('Elements', 'Text Box');
-        await this.expectOnPage();
+        await this.openSidebarFromHome(config.menu);
+        await this.sidebarMenu.navigateTo(config.menuItem);
+        await this.waitForPageReady();
       },
       async () => {
-        await page.goto('/text-box');
-        await this.expectOnPage();
+        await this.page.goto(config.url);
+        await this.waitForPageReady();
       }
     );
+  }
+
+  override async waitForPageReady(): Promise<void> {
+    await expect(this.page.locator('h1')).toHaveText(config.header);
   }
 
   async fillForm(data: {
@@ -66,11 +74,8 @@ export class TextBoxPage extends BasePage {
     await this.submitButton.click();
   }
 
-  async expectOnPage() {
-    await expect(this.fullNameInput).toBeVisible();
-  }
-
-  async getEmailField(): Promise<Locator> {
-    return this.emailInput;
+  async assertOnPage(): Promise<void> {
+    await expect(this.page).toHaveURL(new RegExp(config.url));
+    await expect(this.page.locator('h1')).toHaveText(config.header);
   }
 }

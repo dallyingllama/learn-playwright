@@ -1,5 +1,5 @@
 // pageObjects/HomePage.ts
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 
 export class HomePage {
@@ -21,12 +21,11 @@ export class HomePage {
   }
 
   private async gotoViaMenu() {
-    // For demoqa, direct navigation and menu are effectively the same
     await this.page.goto('/');
   }
 
   private async gotoViaDirectLink() {
-    await this.page.goto('https://demoqa.com'); // Absolute URL if needed
+    await this.page.goto('/');
   }
 
   async clickCard(sectionName: string) {
@@ -34,5 +33,13 @@ export class HomePage {
     await card.waitFor({ state: 'visible' });
     await card.scrollIntoViewIfNeeded();
     await card.click();
+  }
+
+  async assertOnPage() {
+    // URL check
+    await expect(this.page).toHaveURL(/\/$/);
+
+    // UI element check (for demoqa homepage)
+    await expect(this.page.locator('.home-body')).toBeVisible();
   }
 }

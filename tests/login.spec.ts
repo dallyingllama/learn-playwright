@@ -9,7 +9,8 @@ test.describe('🔐✅ Valid Login Scenarios', () => {
   for (const { dataname, username, password } of validLogins) {
     test(`✅ ${dataname}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
-      await loginPage.openLoginPage();
+      await loginPage.goto(); // 👈 replaces openLoginPage()
+      await loginPage.waitForLoginForm(); // 👍 optional but robust
       await loginPage.login(username, password);
       await loginPage.expectSuccessfulLogin();
     });
@@ -20,8 +21,10 @@ test.describe('🔐🚫 Invalid Login Scenarios', () => {
   for (const { dataname, username, password } of invalidLogins) {
     test(`❌ ${dataname}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
-      await loginPage.openLoginPage();
+      await loginPage.goto(); // 👈 replaces openLoginPage()
+      await loginPage.waitForLoginForm();
       await loginPage.login(username, password);
+
       if (username && password) {
         await loginPage.expectFailedLogin();
       } else if (!username) {

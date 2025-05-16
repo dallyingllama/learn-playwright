@@ -1,19 +1,19 @@
-// pageObjects/InteractionsPage.ts
+// pageObjects/FormPage.ts
 import { Page, expect } from '@playwright/test';
 import { SidebarMenu } from './components/SidebarMenu';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 
 const config = {
-  card: 'Interactions',
+  card: 'Forms',
   message: 'Please select an item from left to start practice.',
-  menuItem: 'Interactions',
-  url: 'interaction',
+  menuItem: 'Forms',
+  url: 'forms',
 };
 
-export class InteractionsPage {
+export class FormsPage {
   readonly page: Page;
   readonly sidebarMenu: SidebarMenu;
-  
+
   readonly goto: {
     (): Promise<void>;
     viaMenu: () => Promise<void>;

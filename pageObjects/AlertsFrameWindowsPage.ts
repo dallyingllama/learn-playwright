@@ -1,19 +1,19 @@
-// pageObjects/InteractionsPage.ts
+// pageObjects/AlertsWindowsPage.ts
 import { Page, expect } from '@playwright/test';
 import { SidebarMenu } from './components/SidebarMenu';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 
 const config = {
-  card: 'Interactions',
+  menu: 'Alerts, Frame & Windows',
   message: 'Please select an item from left to start practice.',
-  menuItem: 'Interactions',
-  url: 'interaction',
+  menuItem: 'Alerts',
+  url: 'alerts',
 };
 
-export class InteractionsPage {
+export class AlertsWindowsPage {
   readonly page: Page;
   readonly sidebarMenu: SidebarMenu;
-  
+
   readonly goto: {
     (): Promise<void>;
     viaMenu: () => Promise<void>;
