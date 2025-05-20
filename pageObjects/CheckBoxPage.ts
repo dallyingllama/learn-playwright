@@ -85,6 +85,7 @@ export class CheckBoxPage extends BasePage implements NavigablePage {
         break;
       }
     }
+    console.log('✔️ Checked boxes:', await this.getCheckedBoxCount());
   }
   
   async uncheckAll() {
@@ -164,15 +165,40 @@ export class CheckBoxPage extends BasePage implements NavigablePage {
   
   async getOutputItems(): Promise<string[]> {
     const items = this.resultOutput.locator('span.text-success');
-    const count = await items.count();
-    const values: string[] = []; // Explicitly type the array
   
-    for (let i = 0; i < count; i++) {
-      values.push(await items.nth(i).innerText());
+    let previousCount = -1;
+    let stableCount = 0;
+    const maxRetries = 10; // total wait = maxRetries * interval
+    const interval = 200; // ms
+  
+    for (let i = 0; i < maxRetries; i++) {
+      const currentCount = await items.count();
+  
+      if (currentCount === previousCount && currentCount > 0) {
+        stableCount++;
+        if (stableCount >= 2) break; // Stable for two consecutive checks
+      } else {
+        stableCount = 0;
+      }
+  
+      previousCount = currentCount;
+      await this.page.waitForTimeout(interval);
     }
+  
+    const finalCount = await items.count();
+    if (finalCount === 0) {
+      throw new Error('No result items (.text-success) were found after checking checkboxes.');
+    }
+  
+    const values: string[] = [];
+    for (let i = 0; i < finalCount; i++) {
+      values.push(await items.nth(i).innerText());
+    } 
   
     return values;
   }
+  
+  
 
   async isOutputItemPresent(target: string): Promise<boolean> {
     const normalize = (str: string) =>

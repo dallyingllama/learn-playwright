@@ -37,4 +37,17 @@ export class RadioButtonPage extends BasePage implements NavigablePage {
     await expect(this.page).toHaveURL(config.url);
     await expect(this.page.locator('h1')).toHaveText(config.header);
   }
+
+  async selectRadio(option: 'Yes' | 'Impressive' | 'No') {
+    await this.page.getByLabel(option).click({ force: true });
+  }
+
+  async expectSelected(option: 'Yes' | 'Impressive' | 'No') {
+    const result = this.page.locator('.text-success');
+    await expect(result).toHaveText(option);
+  }
+
+  async isDisabled(option: 'Yes' | 'Impressive' | 'No'): Promise<boolean> {
+    return this.page.getByLabel(option).isDisabled();
+  }
 }
