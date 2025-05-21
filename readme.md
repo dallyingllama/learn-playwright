@@ -1,95 +1,21 @@
-= Learn Playwright
-:icons: font
-:source-highlighter: rouge
-:sectanchors:
-:sectlinks:
-:toc: left
+# Learn Playwright
 
-image::https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/tests.yml?branch=main[GitHub Actions]
-image::https://img.shields.io/github/deployments/dallyingllama/learn-playwright/github-pages[GitHub Pages]
+This repository demonstrates structured end-to-end testing using [Playwright](https://playwright.dev/), with features like:
 
-== Overview
+- Page Object Model
+- Data-driven tests
+- GitHub Actions CI
+- HTML Reports on GitHub Pages
 
-This repository is a practical learning ground for Playwright end-to-end testing, using:
+📘 **Full Documentation**  
+👉 Visit the docs here: [https://dallyingllama.github.io/learn-playwright](https://dallyingllama.github.io/learn-playwright)
 
-* Page Object Model (POM)
-* Data-driven testing
-* CI/CD with GitHub Actions
-* GitHub Pages for publishing reports
+Includes:
+- Test tour and coverage
+- Usage instructions
+- Development practices and examples
 
-== Features
+---
 
-- ✅ Login Tests with valid and invalid scenarios
-- ✅ Form field validation
-- ✅ UI component testing (checkboxes, radio buttons, buttons)
-- ✅ Table operations: add, edit, delete, search
-- ✅ Navigation coverage
-- ✅ CI-integrated HTML reports with tour of test coverage
-
-== Usage
-
-Run tests locally:
-
-[source, bash]
-----
-npx playwright test
-----
-
-To view the HTML report after local run:
-
-[source, bash]
-----
-npx playwright show-report
-----
-
-CI-generated reports are auto-published to:
-link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages Reports]
-
-== Tour of the Tests
-
-[cols="1,2,3", options="header"]
-|===
-| Feature | Test File | Highlights
-
-| ✅ Login
-| `login.spec.ts`
-| Valid and invalid tests using data-driven loop
-
-| 📄 Text Box
-| `textBox.spec.ts`
-| Field validation (positive and negative)
-
-| 🎚️ Radio Button
-| `radioButton.spec.ts`
-| Single-selection logic
-
-| ☑️ Check Box
-| `checkBox.spec.ts`
-| Multi-selection and visibility
-
-| 📊 Web Tables
-| `webTables.spec.ts`
-| CRUD operations and pagination
-
-| 🖱️ Buttons
-| `buttons.spec.ts`
-| Single, double, and right-clicks
-
-| 🔗 Navigation
-| `navigation.spec.ts`
-| Sidebar and direct URL validation
-
-| 📑 Reports
-| `GitHub Pages`
-| Full HTML report viewer
-|===
-
-All tests follow the Page Object Model with `assertOnPage()` methods.
-
-== Contributing
-
-PRs welcome! Ideas for new test scenarios or tools are especially appreciated.
-
-== License
-
-MIT License.
+📂 Project folder: `docs/`  
+Docs are written in [AsciiDoc](https://asciidoc.org/) and auto-published via GitHub Actions.
