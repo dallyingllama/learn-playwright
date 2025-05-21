@@ -29,6 +29,11 @@ jobs:
           corepack prepare pnpm@latest --activate
           pnpm install
 
+      - name: 📚 Install Asciidoctor CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y asciidoctor
+
       - name: 🧪 Run Playwright tests
         id: testrun
         continue-on-error: true
@@ -69,6 +74,11 @@ jobs:
           mkdir -p history/$SAFE_DIR_NAME
           cp -r playwright-report/* history/$SAFE_DIR_NAME
 
+      - name: 🛠 Build documentation with Asciidoctor
+        run: |
+          mkdir -p history/docs
+          asciidoctor -D history/docs docs/*.adoc
+
       - name: 🧠 Generate styled index with EJS
         run: node .github/scripts/render-index.js
 
@@ -97,7 +107,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./history
           publish_branch: gh-pages
-        
+
       - name: ❌ Fail job if any tests fail
         if: steps.testrun.outcome != 'success'
         run: exit 1
