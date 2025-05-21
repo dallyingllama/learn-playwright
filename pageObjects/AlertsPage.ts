@@ -3,7 +3,6 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 import { NavigablePage } from './interfaces/NavigablePage';
-const { chromium } = require('playwright');
 
 const config = {
   menu: 'Alerts, Frame & Windows',  

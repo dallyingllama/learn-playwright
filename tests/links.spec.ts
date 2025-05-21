@@ -1,28 +1,39 @@
-// tests/webTables.spec.ts
+// tests/links.spec.ts
 import { test, expect } from '@playwright/test';
 import { LinksPage } from '../pageObjects/LinksPage';
 
 test.describe('🔗 Links Page', () => {
+
+  async function navigateToLinksPage(page): Promise<LinksPage> {
+    return await test.step('🌐 Navigate to Links page', async () => {
+      const linksPage = new LinksPage(page);
+      await linksPage.goto();
+      return linksPage;
+    });
+  }
+
   test('🧪 Clicking simple Home link opens demoqa.com homepage in new tab', async ({ page }) => {
-    const linksPage = new LinksPage(page);
-    await linksPage.goto();
-  
-    const newTabUrl = await linksPage.clickSimpleHomeLink();
-    expect(newTabUrl).toContain('demoqa.com');
+    const linksPage = await navigateToLinksPage(page);
+
+    await test.step('🔗 Click simple Home link and capture URL', async () => {
+      const newTabUrl = await linksPage.clickSimpleHomeLink();
+      expect(newTabUrl).toContain('demoqa.com');
+    });
   });
-  
-  test('🔁 dynamicLink opens new tab to homepage', async ({ page, context }) => {
-    const linksPage = new LinksPage(page);
-    await linksPage.goto();
 
-    const [newPage] = await Promise.all([
-      context.waitForEvent('page'),
-      linksPage.clickDynamicHomeLink(),
-    ]);
+  test('🔁 Clicking dynamic Home link opens homepage in new tab', async ({ page, context }) => {
+    const linksPage = await navigateToLinksPage(page);
 
-    await newPage.waitForLoadState();
-    expect(newPage.url()).toBe('https://demoqa.com/');
-    await newPage.close();
+    await test.step('🪟 Open new tab and validate URL', async () => {
+      const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        linksPage.clickDynamicHomeLink(),
+      ]);
+
+      await newPage.waitForLoadState();
+      expect(newPage.url()).toBe('https://demoqa.com/');
+      await newPage.close();
+    });
   });
 
   const statusLinks = [
@@ -37,38 +48,30 @@ test.describe('🔗 Links Page', () => {
 
   for (const { id, expected } of statusLinks) {
     test(`📨 ${id} shows correct status response`, async ({ page }) => {
-      const linksPage = new LinksPage(page);
-      await linksPage.goto();
+      const linksPage = await navigateToLinksPage(page);
 
-      await linksPage.clickLinkAndWaitForResponse(id);
-      await linksPage.assertResponseTextContains(expected);
+      await test.step(`🔘 Click "${id}" link and validate response`, async () => {
+        await linksPage.clickLinkAndWaitForResponse(id);
+        await linksPage.assertResponseTextContains(expected);
+      });
     });
   }
 
-  test('✅ Clicking Created link shows correct response', async ({ page }) => {
-    const linksPage = new LinksPage(page);
-    await linksPage.goto();
+  const staticApiTests = [
+    { id: 'created', emoji: '✅', code: 201 },
+    { id: 'noContent', emoji: '🚫', code: 204 },
+    { id: 'moved', emoji: '📦', code: 301 },
+  ];
 
-    await linksPage.clickApiLink('created');
-    const responseText = await linksPage.getLinkResponseText();
-    expect(responseText).toContain('Link has responded with staus 201');
-  });
+  for (const { id, emoji, code } of staticApiTests) {
+    test(`${emoji} Clicking ${id} link shows correct response`, async ({ page }) => {
+      const linksPage = await navigateToLinksPage(page);
 
-  test('🚫 Clicking No Content link shows correct response', async ({ page }) => {
-    const linksPage = new LinksPage(page);
-    await linksPage.goto();
-
-    await linksPage.clickApiLink('noContent');
-    const responseText = await linksPage.getLinkResponseText();
-    expect(responseText).toContain('Link has responded with staus 204');
-  });
-
-  test('📦 Clicking Moved link shows correct response', async ({ page }) => {
-    const linksPage = new LinksPage(page);
-    await linksPage.goto();
-
-    await linksPage.clickApiLink('moved');
-    const responseText = await linksPage.getLinkResponseText();
-    expect(responseText).toContain('Link has responded with staus 301');
-  });
+      await test.step(`🔘 Click "${id}" API link and validate status ${code}`, async () => {
+        await linksPage.clickApiLink(id);
+        const responseText = await linksPage.getLinkResponseText();
+        expect(responseText).toContain(`Link has responded with staus ${code}`);
+      });
+    });
+  }
 });

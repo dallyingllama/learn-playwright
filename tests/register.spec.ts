@@ -18,50 +18,89 @@ function generateUser(overrides = {}) {
   };
 }
 
-test.describe('Bookstore Registration Scenarios', () => {
+test.describe('📚 Bookstore Registration Scenarios', () => {
   test('✅ Valid user registration (captcha expected)', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser();
 
-    await registerPage.goto();
-    await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    await registerPage.expectSuccessOrCaptcha();
+    await test.step('📄 Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
+
+    await test.step('📝 Fill out and submit registration form', async () => {
+      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+    });
+
+    await test.step('✅ Expect success or captcha prompt', async () => {
+      await registerPage.expectSuccessOrCaptcha();
+    });
   });
 
   test('❌ Invalid registration: missing first name', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser({ firstName: '' });
 
-    await registerPage.goto();
-    await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    await registerPage.expectFieldInvalid('#firstname');
+    await test.step('📄 Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
+
+    await test.step('🚫 Submit form with missing first name', async () => {
+      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+    });
+
+    await test.step('🔍 Expect first name field validation error', async () => {
+      await registerPage.expectFieldInvalid('#firstname');
+    });
   });
 
   test('❌ Invalid registration: missing last name', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser({ lastName: '' });
 
-    await registerPage.goto();
-    await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    await registerPage.expectFieldInvalid('#lastname');
+    await test.step('📄 Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
+
+    await test.step('🚫 Submit form with missing last name', async () => {
+      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+    });
+
+    await test.step('🔍 Expect last name field validation error', async () => {
+      await registerPage.expectFieldInvalid('#lastname');
+    });
   });
 
   test('❌ Invalid registration: missing username', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser({ username: '' });
 
-    await registerPage.goto();
-    await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    await registerPage.expectFieldInvalid('#userName');
+    await test.step('📄 Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
+
+    await test.step('🚫 Submit form with missing username', async () => {
+      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+    });
+
+    await test.step('🔍 Expect username field validation error', async () => {
+      await registerPage.expectFieldInvalid('#userName');
+    });
   });
 
   test('❌ Invalid registration: missing password', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser({ password: '' });
 
-    await registerPage.goto();
-    await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    await registerPage.expectFieldInvalid('#password');
-  });  
+    await test.step('📄 Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
 
+    await test.step('🚫 Submit form with missing password', async () => {
+      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+    });
+
+    await test.step('🔍 Expect password field validation error', async () => {
+      await registerPage.expectFieldInvalid('#password');
+    });
+  });
 });
