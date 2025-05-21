@@ -77,7 +77,12 @@ jobs:
       - name: 🛠 Build documentation with Asciidoctor
         run: |
           mkdir -p history/docs
-          asciidoctor -D history/docs docs/*.adoc
+          asciidoctor \
+            -a stylesheet=_theme/playwright.css \
+            -a linkcss \
+            -a docinfo=shared \
+            -D history/docs \
+            docs/*.adoc
 
       - name: 🧠 Generate styled index with EJS
         run: node .github/scripts/render-index.js

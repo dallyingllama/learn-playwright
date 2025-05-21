@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { AlertsPage } from '../pageObjects/AlertsPage';
 
-test.describe('🔔 Alerts and Windows Tests', () => {
+test.describe('🔔 Alerts and Windows Tests', { tag: '@sanity' }, () => {
   async function navigateToAlertsPage(page) {
     await test.step('🌐 Navigate to Alerts page', async () => {
       const alertsPage = new AlertsPage(page);

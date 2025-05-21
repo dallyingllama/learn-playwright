@@ -10,16 +10,21 @@
     "test:dev": "cross-env TEST_ENV=dev npx playwright test",
     "test:test": "cross-env TEST_ENV=test npx playwright test",
     "test:e2e": "cross-env TEST_ENV=e2e npx playwright test",
-    "show-report": "pnpm exec playwright show-report"
+    "show-report": "pnpm exec playwright show-report",
+    "docs:build": "asciidoctor docs/index.adoc -o localDocs/index.html -a stylesheet=_theme/playwright.css -a linkcss",
+    "docs:preview": "live-server localDocs --open=index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.9.0",
   "devDependencies": {
+    "@asciidoctor/cli": "^4.0.0",
+    "@asciidoctor/core": "^3.0.4",
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.14.1",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "live-server": "^1.2.2"
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",

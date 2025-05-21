@@ -22,7 +22,7 @@ const strategies = [
 ];
 
 for (const strategy of strategies) {
-  test.describe(`📚✅ Navigation (${strategy.name})`, { tag: '@sanity' }, () => {
+  test.describe(`📚✅ Navigation (${strategy.name})`, { tag: '@smoke' }, () => {
     for (const section of sections) {
       test.describe(`${section.name}`, () => {
         for (const subPage of section.subPages) {
