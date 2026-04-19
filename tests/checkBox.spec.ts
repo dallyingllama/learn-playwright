@@ -1,6 +1,7 @@
 // tests/checkBox.spec.ts
 import { test, expect } from '@playwright/test';
 import { CheckBoxPage } from '../pageObjects/CheckBoxPage';
+import { checkboxTreeData, checkboxSelectionScenarios, CheckboxTreeNode } from '../data/checkboxData';
 
 test.describe('Elements', { tag: '@sanity' }, () => {
   test.describe('✅ Check Box', () => {
@@ -12,76 +13,105 @@ test.describe('Elements', { tag: '@sanity' }, () => {
       });
     }
 
-    test.describe('✅ Check Box - Expand all and check all boxes', () => {
-      const strategies: ('viaText' | 'viaCheckbox' | 'viaIcon')[] = ['viaText', 'viaCheckbox', 'viaIcon'];
+    async function verifyHierarchy(checkBoxPage: CheckBoxPage, node: CheckboxTreeNode): Promise<void> {
+      await test.step(`👀 Verify node "${node.label}" is visible`, async () => {
+        await checkBoxPage.expectNodeVisible(node.label);
+      });
 
-      for (const method of strategies) {
-        test(`should expand and check all boxes ${method}`, async ({ page }) => {
-          const checkBoxPage = await navigateToCheckBoxPage(page);
-
-          await test.step('🔽 Expand all items', async () => {
-            await checkBoxPage.expandAll();
-          });
-
-          await test.step(`☑️ Check all boxes using method "${method}"`, async () => {
-            await checkBoxPage.checkAll({ method });
-          });
-
-          await test.step('✅ Verify all expected output items are checked', async () => {
-            const checkedBoxes = await checkBoxPage.getCheckedBoxCount();
-            expect(checkedBoxes).toBeGreaterThan(0);
-
-            const expectedItems = [
-              'Desktop', 'Notes', 'Commands', 'Documents', 'WorkSpace', 'React', 'Angular', 'Veu', 'Office',
-              'Public', 'Private', 'Classified', 'General', 'Downloads', 'Word File.doc', 'Excel File.doc',
-            ];
-
-            for (const item of expectedItems) {
-              const found = await checkBoxPage.isOutputItemPresent(item);
-              expect(found, `Expected output to contain "${item}" (case-insensitive without spaces)`).toBe(true);
-            }
-          });
-        });
+      const children = node.children ?? [];
+      if (!children.length) {
+        return;
       }
-    });
 
-    test('✅ Drill-down Home → Office → Public and check the box', async ({ page }) => {
+      await test.step(`🔽 Expand "${node.label}"`, async () => {
+        await checkBoxPage.expand(node.label, children[0]?.label);
+      });
+
+      await test.step(`🧭 Verify children of "${node.label}"`, async () => {
+        const visibleChildren = await Promise.all(
+          children.map(async (child) => {
+            await checkBoxPage.expectNodeVisible(child.label);
+            return child.label;
+          })
+        );
+
+        expect(visibleChildren).toEqual(children.map((child) => child.label));
+      });
+
+      for (const child of children) {
+        await verifyHierarchy(checkBoxPage, child);
+      }
+    }
+
+    async function expandHierarchy(checkBoxPage: CheckBoxPage, node: CheckboxTreeNode): Promise<void> {
+      const children = node.children ?? [];
+      if (!children.length) {
+        return;
+      }
+
+      await checkBoxPage.expand(node.label, children[0]?.label);
+
+      for (const child of children) {
+        await expandHierarchy(checkBoxPage, child);
+      }
+    }
+
+    test('✅ Expand checkbox tree and verify hierarchy matches data', async ({ page }) => {
       const checkBoxPage = await navigateToCheckBoxPage(page);
 
-      await test.step('🔽 Expand Home > Documents > Office', async () => {
-        await checkBoxPage.expand('Home');
-        await checkBoxPage.expand('Documents');
-        await checkBoxPage.expand('Office');
+      await verifyHierarchy(checkBoxPage, checkboxTreeData);
+    });
+
+    test('✅ Clicking parent checkbox ticks all child checkboxes', async ({ page }) => {
+      const checkBoxPage = await navigateToCheckBoxPage(page);
+      const scenario = checkboxSelectionScenarios.home;
+
+      await test.step(`☑️ Check "${scenario.label}"`, async () => {
+        await checkBoxPage.check(scenario.label);
       });
 
-      await test.step('☑️ Check Public checkbox (text + checkbox)', async () => {
-        await checkBoxPage.check('Public');
-        await checkBoxPage.check('Public', { method: 'viaCheckbox' });
+      await test.step('✅ Verify selected items message', async () => {
+        await checkBoxPage.expectSelectedItems(scenario.expectedSelectedItems);
       });
 
-      await test.step('✅ Verify Public is selected', async () => {
-        expect(await checkBoxPage.isOutputItemPresent('Public')).toBe(true);
-        expect(await checkBoxPage.isCheckboxChecked('Public')).toBe(true);
-        await checkBoxPage.expectCheckboxVisible('Public');
+      await test.step('✅ Verify all expected checkboxes are checked', async () => {
+        await expandHierarchy(checkBoxPage, checkboxTreeData);
+
+        for (const label of scenario.expectedCheckedNodes ?? []) {
+          await checkBoxPage.expectChecked(label);
+        }
       });
     });
 
-    test('✅ Drill-down and select Notes under Desktop', async ({ page }) => {
+    test('✅ Clicking child checkbox ticks all parent checkboxes', async ({ page }) => {
       const checkBoxPage = await navigateToCheckBoxPage(page);
+      const scenario = checkboxSelectionScenarios.general;
 
-      await test.step('🔽 Expand Home > Desktop', async () => {
-        await checkBoxPage.expand('Home');
-        await checkBoxPage.expand('Desktop');
+      await test.step(`🔽 Expand path to "${scenario.label}"`, async () => {
+        const path = scenario.expandPath ?? [];
+        for (let i = 0; i < path.length; i++) {
+          await checkBoxPage.expand(path[i], path[i + 1]);
+        }
       });
 
-      await test.step('☑️ Check Notes checkbox', async () => {
-        await checkBoxPage.check('Notes');
+      await test.step(`☑️ Check "${scenario.label}"`, async () => {
+        await checkBoxPage.check(scenario.label);
       });
 
-      await test.step('✅ Verify Notes is selected', async () => {
-        expect(await checkBoxPage.isOutputItemPresent('Notes')).toBe(true);
-        expect(await checkBoxPage.isCheckboxChecked('Notes')).toBe(true);
-        await checkBoxPage.expectCheckboxVisible('Notes');
+      await test.step('✅ Verify selected items message', async () => {
+        await checkBoxPage.expectSelectedItems(scenario.expectedSelectedItems);
+      });
+
+      await test.step('✅ Verify parent chain checkboxes are checked', async () => {
+        await expandHierarchy(checkBoxPage, checkboxTreeData);
+
+        for (const label of scenario.expectedCheckedNodes ?? []) {
+          await checkBoxPage.expectChecked(label);
+        }
+
+        for (const label of scenario.expectedIndeterminateNodes ?? []) {
+          await checkBoxPage.expectIndeterminate(label);
+        }
       });
     });
   });

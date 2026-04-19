@@ -13,6 +13,8 @@ const config = {
 
 export class BookstorePage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly table = this.page.getByRole('table');
+  private readonly pageIndicator = this.page.getByText('Page 1 of 0');
 
   constructor(page: Page) {
     super(page);
@@ -26,7 +28,14 @@ export class BookstorePage extends BasePage implements NavigablePage {
   // Locators
   private searchInput = '#searchBox';
   private bookTitle = (title: string) => this.page.locator('a', { hasText: title });
-  private noRowsFound = this.page.locator('.rt-noData');
+
+  private getHeaderRowGroup(): Locator {
+    return this.table.getByRole('rowgroup').first();
+  }
+
+  private getBodyRowGroup(): Locator {
+    return this.table.getByRole('rowgroup').nth(1);
+  }
 
   // Goto Methods
   private async gotoViaMenu() {
@@ -43,9 +52,8 @@ export class BookstorePage extends BasePage implements NavigablePage {
   }
 
   override async waitForPageReady(): Promise<void> {
-    // Wait for a visible element that reliably identifies the Bookstore page
     await expect(this.page.locator('#searchBox')).toBeVisible();
-    await expect(this.page.locator('.rt-thead')).toContainText('Title');
+    await expect(this.getHeaderRowGroup()).toContainText('Title');
   }
   
   async assertOnPage(): Promise<void> {
@@ -56,6 +64,7 @@ export class BookstorePage extends BasePage implements NavigablePage {
   // Page actions
   async searchBook(title: string): Promise<void> {
     await this.page.fill(this.searchInput, title);
+    await expect(this.page.locator(this.searchInput)).toHaveValue(title);
   }
 
   async expectBookToBeVisible(title: string): Promise<void> {
@@ -63,6 +72,7 @@ export class BookstorePage extends BasePage implements NavigablePage {
   }
 
   async expectNoResults(): Promise<void> {
-    await expect(this.noRowsFound).toHaveText('No rows found');
+    await expect(this.getBodyRowGroup()).toBeEmpty();
+    await expect(this.pageIndicator).toBeVisible();
   }
 }

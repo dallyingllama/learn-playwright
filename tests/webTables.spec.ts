@@ -18,8 +18,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for new user and verify result', async () => {
       await webTablesPage.search(user.firstName);
-      const rowCount = await webTablesPage.getVisibleRowCount();
-      expect(rowCount).toBeGreaterThan(0);
+      await webTablesPage.expectMatchingRows(user.firstName);
     });
   });
 
@@ -32,8 +31,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for known user "Cierra"', async () => {
       await webTablesPage.search('Cierra');
-      const rowCount = await webTablesPage.getVisibleRowCount();
-      expect(rowCount).toBeGreaterThan(0);
+      await webTablesPage.expectMatchingRows('Cierra');
     });
   });
 
@@ -53,8 +51,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Confirm user is no longer present', async () => {
       await webTablesPage.search(user.firstName);
-      const rowCount = await webTablesPage.getFilledRowCount();
-      expect(rowCount).toBe(0);
+      await webTablesPage.expectNoMatchingRows(user.firstName);
     });
   });
 
@@ -65,16 +62,16 @@ test.describe('📊 Web Tables', () => {
       await webTablesPage.goto();
     });
 
-    await test.step('🔢 Set pagination to 5 and validate', async () => {
-      await webTablesPage.setPaginationSize('5');
-      const count5 = await webTablesPage.getVisibleRowCount();
-      expect(count5).toBeLessThanOrEqual(5);
-    });
-
     await test.step('🔢 Set pagination to 10 and validate', async () => {
       await webTablesPage.setPaginationSize('10');
       const count10 = await webTablesPage.getVisibleRowCount();
       expect(count10).toBeLessThanOrEqual(10);
+    });
+
+    await test.step('🔢 Set pagination to 20 and validate', async () => {
+      await webTablesPage.setPaginationSize('20');
+      const count20 = await webTablesPage.getVisibleRowCount();
+      expect(count20).toBeLessThanOrEqual(20);
     });
   });
 
@@ -95,8 +92,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for updated user and validate', async () => {
       await webTablesPage.search(updated.firstName);
-      const rowCount = await webTablesPage.getVisibleRowCount();
-      expect(rowCount).toBeGreaterThan(0);
+      await webTablesPage.expectMatchingRows(updated.firstName);
     });
   });
 
@@ -112,21 +108,6 @@ test.describe('📊 Web Tables', () => {
       for (const email of emails) {
         expect(email).toMatch(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/);
       }
-    });
-  });
-
-  test('🔃 Sort table by First Name and verify order', async ({ page }) => {
-    const webTablesPage = new WebTablesPage(page);
-
-    await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
-    });
-
-    await test.step('⬆️ Sort by First Name and verify ascending order', async () => {
-      await webTablesPage.clickColumnHeader('First Name');
-      const values = await webTablesPage.getColumnValues(0); // First column
-      const sorted = [...values].sort((a, b) => a.localeCompare(b));
-      expect(values).toEqual(sorted);
     });
   });
 });

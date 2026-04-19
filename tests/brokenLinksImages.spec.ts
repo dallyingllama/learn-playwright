@@ -15,15 +15,34 @@ test.describe('✅ Broken Links - Images', () => {
     const brokenPage = await navigateToBrokenLinksImages(page);
 
     await test.step('📸 Collect all image elements', async () => {
-      const images = await page.$$('img');
-      expect(images.length).toBeGreaterThan(0);
+      const contentImages = page.locator('img').filter({ hasNot: page.locator('[src*="Toolsqa"]') });
+      const imageCount = await contentImages.count();
+      expect(imageCount).toBeGreaterThanOrEqual(2);
 
-      for (const img of images) {
-        const isLoaded = await img.evaluate((imgEl: HTMLImageElement) => imgEl.naturalWidth > 0);
-        const src = await img.getAttribute('src');
-        console.log(`Image src="${src}" => ${isLoaded ? 'OK' : 'BROKEN'}`);
-        expect(isLoaded, `Image with src="${src}" should load`).toBe(true);
-      }
+      await expect
+        .poll(async () => {
+          const statuses: Array<{ src: string | null; isLoaded: boolean; isComplete: boolean }> = [];
+
+          for (let i = 0; i < imageCount; i++) {
+            const img = contentImages.nth(i);
+            const imageState = await img.evaluate((imgEl: HTMLImageElement) => ({
+              isLoaded: imgEl.naturalWidth > 0,
+              isComplete: imgEl.complete,
+            }));
+            const src = await img.getAttribute('src');
+            statuses.push({ src, ...imageState });
+          }
+
+          const completeStatuses = statuses.filter((image) => image.isComplete);
+          return {
+            hasLoadedImage: completeStatuses.some((image) => image.isLoaded),
+            hasBrokenImage: completeStatuses.some((image) => !image.isLoaded),
+          };
+        })
+        .toEqual({
+          hasLoadedImage: true,
+          hasBrokenImage: true,
+        });
     });
   });
 
@@ -31,17 +50,20 @@ test.describe('✅ Broken Links - Images', () => {
     const brokenPage = await navigateToBrokenLinksImages(page);
 
     await test.step('🔍 Collect and validate all link elements', async () => {
-      const links = await page.$$('a[href]');
-      expect(links.length).toBeGreaterThan(0);
+      const validLink = page.getByRole('link', { name: 'Click Here for Valid Link' });
+      const brokenLink = page.getByRole('link', { name: 'Click Here for Broken Link' });
 
-      for (const link of links) {
-        const url = await link.getAttribute('href');
-        if (!url || url.startsWith('javascript')) continue;
+      const validUrl = await validLink.getAttribute('href');
+      const brokenUrl = await brokenLink.getAttribute('href');
 
-        const response = await request.get(url);
-        console.log(`Link "${url}" => ${response.status()}`);
-        expect(response.status(), `Link "${url}" should return status < 400`).toBeLessThan(400);
-      }
+      expect(validUrl).toBeTruthy();
+      expect(brokenUrl).toBeTruthy();
+
+      const validResponse = await request.get(validUrl!);
+      const brokenResponse = await request.get(brokenUrl!);
+
+      expect(validResponse.status()).toBeLessThan(400);
+      expect(brokenResponse.status()).toBeGreaterThanOrEqual(400);
     });
   });
 });

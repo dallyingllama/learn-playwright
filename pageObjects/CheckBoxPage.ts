@@ -9,30 +9,44 @@ const config = {
   menuItem: 'Check Box',
   url: 'checkbox',
   header: 'Check Box',
-  topNodeCheckboxText: 'Home',
+};
+
+const parentByLabel: Record<string, string | undefined> = {
+  Home: undefined,
+  Desktop: 'Home',
+  Documents: 'Home',
+  WorkSpace: 'Documents',
+  Office: 'Documents',
+  Downloads: 'Home',
+  Notes: 'Desktop',
+  Commands: 'Desktop',
+  React: 'WorkSpace',
+  Angular: 'WorkSpace',
+  Veu: 'WorkSpace',
+  Public: 'Office',
+  Private: 'Office',
+  Classified: 'Office',
+  General: 'Office',
+  'Word File.doc': 'Downloads',
+  'Excel File.doc': 'Downloads',
 };
 
 export class CheckBoxPage extends BasePage implements NavigablePage {
-  readonly expandAllButton: Locator;
-  readonly resultOutput: Locator;
   readonly goto;
 
   constructor(page: Page) {
     super(page);
-    this.expandAllButton = page.locator('button[title="Expand all"]');
-    this.resultOutput = page.locator('#result');
-
-        this.goto = createGotoWithVariants(
-          async () => {
-            await this.openSidebarFromHome(config.menu);
-            await this.sidebarMenu.navigateTo(config.menuItem);
-            await this.waitForPageReady();
-          },
-          async () => {
-            await this.page.goto(config.url);
-            await this.waitForPageReady();
-          }
-        );
+    this.goto = createGotoWithVariants(
+      async () => {
+        await this.openSidebarFromHome(config.menu);
+        await this.sidebarMenu.navigateTo(config.menuItem);
+        await this.waitForPageReady();
+      },
+      async () => {
+        await this.page.goto(config.url);
+        await this.waitForPageReady();
+      }
+    );
   }
 
   override async waitForPageReady(): Promise<void> {
@@ -44,184 +58,113 @@ export class CheckBoxPage extends BasePage implements NavigablePage {
     await expect(this.page.locator('h1')).toHaveText(config.header);
   }
 
-  async expandAll() {
-    await this.expandAllButton.click(); // Expand all checkboxes
+  private escapeRegex(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  async checkAll({
-    expand = true,
-    method = Math.random() > 0.66 ? 'viaText' : (Math.random() > 0.5 ? 'viaCheckbox' : 'viaIcon'), // Random default
-  }: {
-    expand?: boolean;
-    method?: 'viaText' | 'viaCheckbox' | 'viaIcon';
-  } = {}): Promise<void> {
-    if (expand) {
-      await this.expandAll();
-    }
-  
-    switch (method) {
-      case 'viaCheckbox': {
-        const checkbox = this.page.locator('label').filter({ hasText: config.topNodeCheckboxText }).getByRole('img').first()
-        await expect(checkbox).toBeVisible();
-        await expect(checkbox).toBeEnabled();
-        await checkbox.check();
-        break;
-      }
-  
-      case 'viaIcon': {
-        const icon = this.page.locator('.rct-icon-parent-close, .rct-icon-parent-open')
-          .first();
-        await expect(icon).toBeVisible();
-        await icon.click();
-        break;
-      }
-  
-      case 'viaText':
-      default: {
-        const label = this.page.getByText(config.topNodeCheckboxText);
-        await expect(label).toBeVisible();
-        await expect(label).toBeEnabled();
-        await label.click();
-        break;
-      }
-    }
-    console.log('✔️ Checked boxes:', await this.getCheckedBoxCount());
-  }
-  
-  async uncheckAll() {
-    const checkbox = this.page.getByRole('checkbox', { name: config.topNodeCheckboxText });
-    await checkbox.uncheck(); // Uncheck all checkboxes
-  }
- 
-  async expand(label: string): Promise<void> {
-    // 1. Locate the tree node container by its title
-    const node = this.page.locator('span.rct-text', {
-      has: this.page.locator('span.rct-title', { hasText: new RegExp(`^${label}$`) })
-    });
-    await expect(node).toBeVisible();
-  
-    // 2. Select the toggle button in this node
-    const toggleBtn = node.locator('button[aria-label="Toggle"]');
-    await expect(toggleBtn).toBeVisible();
-  
-    // 3. Click to toggle expansion
-    await toggleBtn.click();
-  
-    // 4. Wait for the <ul> child inside the same <li role="treeitem">
-
-    const treeItem = node.locator('xpath=parent::li');
-    // Wait for its class to include "rct-node-expanded"
-    await expect(treeItem).toHaveClass(/.*\brct-node-expanded\b.*/, { timeout: 5000 });
+  private getTreeItem(labelText: string): Locator {
+    return this.page.getByRole('treeitem').filter({
+      hasText: new RegExp(`\\b${this.escapeRegex(labelText)}\\b`),
+    }).first();
   }
 
-  async check(
-    labelText: string,
-    {
-      expand = true,
-      method = Math.random() > 0.66 ? 'viaText' : (Math.random() > 0.5 ? 'viaCheckbox' : 'viaIcon'),
-    }: {
-      expand?: boolean;
-      method?: 'viaText' | 'viaCheckbox' | 'viaIcon';
-    } = {}
-  ): Promise<void> {
-    if (expand) {
-      await this.expandAll(); // Optional: adjust if label-specific expansion is needed
+  private getNode(labelText: string): Locator {
+    return this.page.locator('.rc-tree-treenode').filter({
+      hasText: new RegExp(`\\b${this.escapeRegex(labelText)}\\b`),
+    }).first();
+  }
+
+  private getTitle(labelText: string): Locator {
+    return this.getNode(labelText).locator('.rc-tree-title').first();
+  }
+
+  private getToggle(labelText: string): Locator {
+    return this.getNode(labelText).locator('.rc-tree-switcher').first();
+  }
+
+  private getCheckbox(labelText: string): Locator {
+    return this.getNode(labelText).locator('.rc-tree-checkbox').first();
+  }
+
+  private async clickToggle(labelText: string): Promise<void> {
+    const toggle = this.getToggle(labelText);
+    if (!await toggle.count()) {
+      return;
     }
-  
-    switch (method) {
-      case 'viaCheckbox': {
-        const checkbox = this.page
-          .locator('label')
-          .filter({ hasText: labelText })
-          .getByRole('img')
-          .first();
-        await expect(checkbox).toBeVisible();
-        await expect(checkbox).toBeEnabled();
-        await checkbox.check();
-        break;
-      }
-  
-      case 'viaIcon': {
-        const icon = this.page
-          .locator('label')
-          .filter({ hasText: labelText })
-          .locator('.rct-icon-uncheck, .rct-icon-check, .rct-icon-half-check')
-          .first();
-        await expect(icon).toBeVisible();
-        await icon.click();
-        break;
-      }
-  
-      case 'viaText':
-      default: {
-        const label = this.page.getByText(labelText, { exact: true });
-        await expect(label).toBeVisible();
-        await expect(label).toBeEnabled();
-        await label.click();
-        break;
-      }
+
+    try {
+      await toggle.click({ force: true });
+    } catch {
+      await toggle.evaluate((element: HTMLElement) => element.click());
     }
   }
-  
-  async getOutputItems(): Promise<string[]> {
-    const items = this.resultOutput.locator('span.text-success');
-  
-    let previousCount = -1;
-    let stableCount = 0;
-    const maxRetries = 10; // total wait = maxRetries * interval
-    const interval = 200; // ms
-  
-    for (let i = 0; i < maxRetries; i++) {
-      const currentCount = await items.count();
-  
-      if (currentCount === previousCount && currentCount > 0) {
-        stableCount++;
-        if (stableCount >= 2) break; // Stable for two consecutive checks
-      } else {
-        stableCount = 0;
-      }
-  
-      previousCount = currentCount;
-      await this.page.waitForTimeout(interval);
+
+  async expectNodeVisible(labelText: string): Promise<void> {
+    const title = this.getTitle(labelText);
+    if (await title.count()) {
+      await expect(title).toBeVisible();
+      return;
     }
-  
-    const finalCount = await items.count();
-    if (finalCount === 0) {
-      throw new Error('No result items (.text-success) were found after checking checkboxes.');
+
+    await expect(this.getTreeItem(labelText)).toBeVisible();
+  }
+
+  async expand(label: string, expectedFirstChild?: string): Promise<void> {
+    const parent = parentByLabel[label];
+    if (parent) {
+      await this.expand(parent);
     }
-  
+
+    await this.expectNodeVisible(label);
+
+    const toggle = this.getToggle(label);
+    if (!await toggle.count()) {
+      return;
+    }
+
+    const toggleClass = await toggle.getAttribute('class');
+    if (toggleClass?.includes('rc-tree-switcher_open') || toggleClass?.includes('rc-tree-switcher-noop')) {
+      return;
+    }
+
+    await this.clickToggle(label);
+
+    if (expectedFirstChild) {
+      await this.expectNodeVisible(expectedFirstChild);
+    }
+  }
+
+  async check(label: string): Promise<void> {
+    await this.expectNodeVisible(label);
+    const checkbox = this.getCheckbox(label);
+    await expect(checkbox).toBeVisible();
+    await checkbox.click({ force: true });
+  }
+
+  async expectChecked(label: string): Promise<void> {
+    await expect(this.getNode(label).locator('.rc-tree-checkbox')).toHaveClass(/rc-tree-checkbox-checked/);
+  }
+
+  async expectIndeterminate(label: string): Promise<void> {
+    await expect(this.getNode(label).locator('.rc-tree-checkbox')).toHaveClass(/rc-tree-checkbox-indeterminate/);
+  }
+
+  async getSelectedItems(): Promise<string[]> {
+    const items = this.page.locator('#result .text-success');
+    await expect(items.first()).toBeVisible();
+    const count = await items.count();
     const values: string[] = [];
-    for (let i = 0; i < finalCount; i++) {
-      values.push(await items.nth(i).innerText());
-    } 
-  
+
+    for (let i = 0; i < count; i++) {
+      values.push((await items.nth(i).innerText()).trim());
+    }
+
     return values;
   }
-  
-  
 
-  async isOutputItemPresent(target: string): Promise<boolean> {
-    const normalize = (str: string) =>
-      str.replace(/\s+/g, '')           // Remove all spaces
-         .toLowerCase()                 // Case-insensitive
-         .replace(/\.[a-z0-9]+$/, '');  // Strip file extension
-    const outputItems = await this.getOutputItems();
-    const normalizedTarget = normalize(target);
-    return outputItems.some(item => normalize(item) === normalizedTarget);
-  }
-
-  async getCheckedBoxCount(): Promise<number> {
-    return await this.page.locator('.rct-icon-check').count(); // Return the count of checked checkboxes
-  }
-
-  async isCheckboxChecked(labelText: string): Promise<boolean> {
-    const checkboxIcon = this.page.locator(`label:has-text("${labelText}") .rct-icon-check`);
-    return await checkboxIcon.isVisible(); // Check if the checkbox is checked
-  }
-
-  async expectCheckboxVisible(labelText: string): Promise<void> {
-    const checkboxIcon = this.page.locator(`label:has-text("${labelText}") .rct-icon-check`);
-    await expect(checkboxIcon).toBeVisible(); // Ensure the checkbox is visible
+  async expectSelectedItems(expectedItems: string[]): Promise<void> {
+    await expect(this.page.locator('#result')).toBeVisible();
+    await expect.poll(async () => this.getSelectedItems()).toEqual(expectedItems);
   }
 
 

@@ -13,6 +13,7 @@ const config = {
 
 export class WebTablesPage extends BasePage implements NavigablePage {
   readonly goto;
+
   constructor(page: Page) {
     super(page);
     this.goto = createGotoWithVariants(
@@ -47,8 +48,16 @@ export class WebTablesPage extends BasePage implements NavigablePage {
   private departmentInput = this.page.locator('#department');
   private submitButton = this.page.locator('#submit');
   private searchBox = this.page.locator('#searchBox');
-  private tableRows = this.page.locator('.rt-tbody .rt-tr-group');
-  private paginationSelect = this.page.locator('select[aria-label="rows per page"]');
+  private table = this.page.getByRole('table');
+  private paginationSelect = this.page.getByRole('combobox');
+
+  private getBodyRowGroup(): Locator {
+    return this.table.getByRole('rowgroup').nth(1);
+  }
+
+  private getBodyRows(): Locator {
+    return this.getBodyRowGroup().getByRole('row');
+  }
 
   // Add user to table
   async addUser(user: Record<string, string>) {
@@ -65,54 +74,60 @@ export class WebTablesPage extends BasePage implements NavigablePage {
   // Search by keyword
   async search(keyword: string) {
     await this.searchBox.fill(keyword);
+    await expect(this.searchBox).toHaveValue(keyword);
   }
 
   // Delete user by name
   async deleteUserByName(name: string) {
-    const row = this.page.locator('.rt-tr-group', { hasText: name });
+    const row = this.getBodyRows().filter({ hasText: name });
     const deleteBtn = row.locator('[title="Delete"]');
     await deleteBtn.click();
   }
 
   // Count visible rows
   async getVisibleRowCount(): Promise<number> {
-    return await this.tableRows.count();
+    return (await this.getRowData()).length;
   }
 
   async getFilledRowCount(): Promise<number> {
-    const rows = this.page.locator('.rt-tbody .rt-tr-group');
-    const count = await rows.count();
-    let filled = 0;
-  
-    for (let i = 0; i < count; i++) {
-      const row = rows.nth(i);
-      const textContent = await row.textContent();
-      if (textContent && textContent.trim().length > 0) {
-        filled++;
-      }
-    }
-  
-    return filled;
+    return (await this.getRowData()).length;
   }
 
   async getRowData(): Promise<string[]> {
-    const rows = this.page.locator('.rt-tbody .rt-tr-group');
+    const rows = this.getBodyRows();
     const count = await rows.count();
-    const data = [];
-  
+    const data: string[] = [];
+
     for (let i = 0; i < count; i++) {
       const row = rows.nth(i);
-      const text = await row.textContent();
-      if (text && text.trim()) {
-        data.push(text.trim());
+      const text = (await row.innerText()).trim();
+
+      if (text) {
+        data.push(text);
       }
     }
-  
+
     return data;
   }
 
+  async getMatchingRowCount(keyword: string): Promise<number> {
+    return await this.getBodyRows().filter({ hasText: keyword }).count();
+  }
+
+  async expectMatchingRows(keyword: string): Promise<void> {
+    await expect
+      .poll(async () => this.getMatchingRowCount(keyword))
+      .toBeGreaterThan(0);
+  }
+
+  async expectNoMatchingRows(keyword: string): Promise<void> {
+    await expect
+      .poll(async () => this.getMatchingRowCount(keyword))
+      .toBe(0);
+  }
+
   async editUserByName(name: string, updated: Record<string, string>) {
-    const row = this.page.locator('.rt-tr-group', { hasText: name });
+    const row = this.getBodyRows().filter({ hasText: name });
     const editBtn = row.locator('[title="Edit"]');
     await editBtn.click();
   
@@ -129,25 +144,19 @@ export class WebTablesPage extends BasePage implements NavigablePage {
   async setPaginationSize(size: string) {
     await this.paginationSelect.selectOption(size);
   }
-  async clickColumnHeader(columnText: string) {
-    const header = this.page.locator('.rt-th').filter({ hasText: columnText });
-    await header.click();
-  }
   
   async getColumnValues(index: number): Promise<string[]> {
-    const rows = this.page.locator('.rt-tbody .rt-tr-group');
+    const rows = this.getBodyRows();
     const values: string[] = [];
-  
+
     for (let i = 0; i < await rows.count(); i++) {
-      const cells = rows.nth(i).locator('.rt-td');
+      const cells = rows.nth(i).getByRole('cell');
       const cellText = await cells.nth(index).textContent();
       if (cellText && cellText.trim()) {
         values.push(cellText.trim());
       }
     }
-  
+
     return values;
   }
-  
-  
 }
