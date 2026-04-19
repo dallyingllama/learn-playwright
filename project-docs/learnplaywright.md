@@ -29,3 +29,7 @@
 ### show the report
 
 `pnpm run show-report`
+
+### to run the sanity tests only in github workflow
+
+`pnpm test:e2e --grep=sanity`

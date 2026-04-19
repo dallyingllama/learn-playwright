@@ -2,9 +2,9 @@ name: Playwright Test Runner & Reporter
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 env:
@@ -21,7 +21,7 @@ jobs:
       - name: 🟢 Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: 📦 Install dependencies
         run: |
@@ -40,7 +40,7 @@ jobs:
         run: |
           export TEST_ENV=e2e
           pnpm playwright install --with-deps
-          pnpm test:e2e --grep=sanity
+          pnpm test:e2e
 
       - name: 📋 Record test result status
         run: |
