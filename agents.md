@@ -6,7 +6,7 @@ Goals:
 
 - Learn and apply Playwright best practices
 - Experiment with test architecture improvements
-- Run sample tests against demoqa.com
+- Run sample tests against demoqa.com, keep them up-to-date if the page changes over time
 - Eventually turn this into a reusable template/scaffold, but not yet
 - Keep demoqa-specific tests separate from reusable framework ideas
 
@@ -31,11 +31,10 @@ Goals:
 - /pageObjects/interfaces -> interfaces/types
 - /utils -> helper utilities, data generation, shared helpers
 - /data -> test data
-- /docs -> generated documentation output
+- /docs -> publishable documentation source and site assets
 - /project-docs -> docs for developer, using codex, learning playwright
 - /.github/workflows -> GitHub Actions workflows
 - /.github/scripts -> workflow helper scripts
-- /config -> environment and config handling
 
 # Existing Features
 
@@ -46,6 +45,7 @@ Goals:
 - Auto-documentation using AsciiDoc
 - Custom helper utilities
 - GitHub Actions test workflow
+- tag structure for certain tests, currently @sanity and @smoke
 
 # Conventions
 
