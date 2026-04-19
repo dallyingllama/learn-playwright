@@ -16,12 +16,12 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 🟢 Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "18"
+          node-version: "24"
 
       - name: 📦 Install dependencies
         run: |
@@ -58,7 +58,7 @@ jobs:
           echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
 
       - name: 🧲 Download existing GitHub Pages branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           ref: gh-pages
           path: history
@@ -93,7 +93,7 @@ jobs:
           zip -r artifacts/playwright-report.zip playwright-report
 
       - name: 📤 Upload zipped report artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: artifacts/playwright-report.zip
@@ -107,7 +107,7 @@ jobs:
           fi
 
       - name: 📊 Publish Playwright Reports to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./history
