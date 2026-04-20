@@ -12,8 +12,8 @@ test.describe('📚 Bookstore Search Scenarios', () => {
     });
   }
 
-  for (const { dataname, booktype, bookname, booksearch } of bookData) {
-    test(`🔍 Search scenario: ${dataname}`, async ({ page }) => {
+  for (const [index, { dataname, booktype, bookname, booksearch }] of bookData.entries()) {
+    test(`🔍 Search scenario: ${dataname}`, index === 0 ? { tag: '@sanity' } : {}, async ({ page }) => {
       const bookstore = await navigateToBookstore(page);
 
       await test.step(`🔎 Search for "${booksearch}"`, async () => {

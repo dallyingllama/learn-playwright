@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import { CheckBoxPage } from '../pageObjects/CheckBoxPage';
 import { checkboxTreeData, checkboxSelectionScenarios, CheckboxTreeNode } from '../data/checkboxData';
 
-test.describe('Elements', { tag: '@sanity' }, () => {
+test.describe('Elements', () => {
   test.describe('✅ Check Box', () => {
     async function navigateToCheckBoxPage(page): Promise<CheckBoxPage> {
       return await test.step('🌐 Navigate to Check Box page', async () => {
@@ -56,7 +56,7 @@ test.describe('Elements', { tag: '@sanity' }, () => {
       }
     }
 
-    test('✅ Expand checkbox tree and verify hierarchy matches data', async ({ page }) => {
+    test('✅ Expand checkbox tree and verify hierarchy matches data', { tag: '@sanity' }, async ({ page }) => {
       const checkBoxPage = await navigateToCheckBoxPage(page);
 
       await verifyHierarchy(checkBoxPage, checkboxTreeData);

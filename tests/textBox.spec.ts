@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 import { TextBoxPage } from '../pageObjects/TextBoxPage';
 import { generateFakeUser } from '../utils/fakeUser';
 
-test.describe('📝 Text Box Form Tests', { tag: '@sanity' }, () => {
-  test('✅ Submit valid form data shows correct output', async ({ page }) => {
+test.describe('📝 Text Box Form Tests', () => {
+  test('✅ Submit valid form data shows correct output', { tag: '@sanity' }, async ({ page }) => {
     const textBoxPage = new TextBoxPage(page);
     const user = generateFakeUser();
 

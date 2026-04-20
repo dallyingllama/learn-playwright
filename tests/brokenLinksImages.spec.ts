@@ -46,7 +46,7 @@ test.describe('✅ Broken Links - Images', () => {
     });
   });
 
-  test('🔗 should detect broken and valid links by status code', async ({ page, request }) => {
+  test('🔗 should detect broken and valid links by status code', { tag: '@sanity' }, async ({ page, request }) => {
     const brokenPage = await navigateToBrokenLinksImages(page);
 
     await test.step('🔍 Collect and validate all link elements', async () => {

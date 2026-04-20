@@ -5,7 +5,7 @@ import { RadioButtonPage } from '../pageObjects/RadioButtonPage';
 test.describe('Elements', () => {
   test.describe('✅ Radio Button', () => {
 
-    test('✅ Select Yes and verify result', async ({ page }) => {
+    test('✅ Select Yes and verify result', { tag: '@sanity' }, async ({ page }) => {
       const radioPage = new RadioButtonPage(page);
 
       await test.step('Navigate to Radio Button page', async () => {

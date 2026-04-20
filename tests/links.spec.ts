@@ -12,7 +12,7 @@ test.describe('🔗 Links Page', () => {
     });
   }
 
-  test('🧪 Clicking simple Home link opens demoqa.com homepage in new tab', async ({ page }) => {
+  test('🧪 Clicking simple Home link opens demoqa.com homepage in new tab', { tag: '@sanity' }, async ({ page }) => {
     const linksPage = await navigateToLinksPage(page);
 
     await test.step('🔗 Click simple Home link and capture URL', async () => {

@@ -11,7 +11,7 @@ test.describe('🖱️ Buttons Page', () => {
     });
   }
 
-  test('🖱️ Double click button shows correct message', async ({ page }) => {
+  test('🖱️ Double click button shows correct message', { tag: '@sanity' }, async ({ page }) => {
     const buttonsPage = await navigateToButtonsPage(page);
 
     await test.step('🖱️ Perform double click', async () => {

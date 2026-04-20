@@ -45,7 +45,7 @@ Goals:
 - Auto-documentation using AsciiDoc
 - Custom helper utilities
 - GitHub Actions test workflow
-- tag structure for certain tests, currently @sanity and @smoke
+- tag structure for certain tests, currently using @sanity as an example tag
 
 # Conventions
 

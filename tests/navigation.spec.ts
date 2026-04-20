@@ -22,11 +22,12 @@ const strategies = [
 ];
 
 for (const strategy of strategies) {
-  test.describe(`📚✅ Navigation (${strategy.name})`, { tag: '@smoke' }, () => {
-    for (const section of sections) {
+  test.describe(`📚✅ Navigation (${strategy.name})`, () => {
+    for (const [sectionIndex, section] of sections.entries()) {
       test.describe(`${section.name}`, () => {
-        for (const subPage of section.subPages) {
-          test(`➡️ ${section.name} → ${subPage.name}`, async ({ page }) => {
+        for (const [subPageIndex, subPage] of section.subPages.entries()) {
+          const isSanityExample = strategy.method === 'viaMenu' && sectionIndex === 0 && subPageIndex === 0;
+          test(`➡️ ${section.name} → ${subPage.name}`, isSanityExample ? { tag: '@sanity' } : {}, async ({ page }) => {
             await navigateTo(page, subPage.page ?? section.page, strategy.method);
           });
         }

@@ -36,7 +36,7 @@ test.describe('📚 Bookstore Registration Scenarios', () => {
     });
   });
 
-  test('❌ Invalid registration: missing first name', async ({ page }) => {
+  test('❌ Invalid registration: missing first name', { tag: '@sanity' }, async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser({ firstName: '' });
 

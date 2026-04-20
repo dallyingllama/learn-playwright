@@ -16,8 +16,8 @@ async function openLogin(page): Promise<LoginPage> {
 }
 
 test.describe('🔐✅ Valid Login Scenarios', () => {
-  for (const { dataname, username, password } of validLogins) {
-    test(`✅ ${dataname}`, async ({ page }) => {
+  for (const [index, { dataname, username, password }] of validLogins.entries()) {
+    test(`✅ ${dataname}`, index === 0 ? { tag: '@sanity' } : {}, async ({ page }) => {
       const loginPage = await openLogin(page);
 
       await test.step(`🔓 Login with valid credentials (${username})`, async () => {

@@ -22,7 +22,7 @@ test.describe('📊 Web Tables', () => {
     });
   });
 
-  test('🔍 Search for user and verify result', async ({ page }) => {
+  test('🔍 Search for user and verify result', { tag: '@sanity' }, async ({ page }) => {
     const webTablesPage = new WebTablesPage(page);
 
     await test.step('📄 Navigate to Web Tables page', async () => {

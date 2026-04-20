@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { AlertsPage } from '../pageObjects/AlertsPage';
 
-test.describe('🔔 Alerts and Windows Tests', { tag: '@sanity' }, () => {
+test.describe('🔔 Alerts and Windows Tests', () => {
   async function navigateToAlertsPage(page) {
     await test.step('🌐 Navigate to Alerts page', async () => {
       const alertsPage = new AlertsPage(page);
@@ -11,7 +11,7 @@ test.describe('🔔 Alerts and Windows Tests', { tag: '@sanity' }, () => {
     });
   }
 
-  test('🔘 should display an alert when alert button is clicked', async ({ page }) => {
+  test('🔘 should display an alert when alert button is clicked', { tag: '@sanity' }, async ({ page }) => {
     await navigateToAlertsPage(page);
     const alertsPage = new AlertsPage(page);
 
