@@ -9,6 +9,7 @@ on:
 
 env:
   REPORT_RETENTION_DAYS: 2
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   test:
