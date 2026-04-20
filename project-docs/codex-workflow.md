@@ -4,25 +4,25 @@ This document describes how to consistently use Codex for this project.
 
 ---
 
-## 🧠 Core Principle
+## Core Principle
 
 Codex does not remember anything between sessions.
 
 Always provide context by referencing:
 
-- AGENTS.md (rules & conventions)
-- project-docs/repo-state.md (current state)
-- project-docs/backlog.md (next planned work)
+- `AGENTS.md` (rules and conventions)
+- `project-docs/repo-state.md` (current state)
+- `project-docs/backlog.md` (next planned work)
 
 ---
 
-## 🚀 Standard Workflow
+## Standard Workflow
 
 ### 1. Start a new session
 
 Prompt:
 
-Read AGENTS.md, project-docs/repo-state.md, and project-docs/backlog.md.
+Read `AGENTS.md`, `project-docs/repo-state.md`, and `project-docs/backlog.md`.
 Summarize the current state of the repository and suggest the best next backlog item.
 
 ---
@@ -31,7 +31,7 @@ Summarize the current state of the repository and suggest the best next backlog 
 
 Prompt:
 
-Based on repo-state.md and backlog.md, suggest the best next task to work on.
+Based on `repo-state.md` and `backlog.md`, suggest the best next task to work on.
 
 (Optional: save results in `project-docs/backlog.md`)
 
@@ -42,7 +42,7 @@ Based on repo-state.md and backlog.md, suggest the best next task to work on.
 Prompt:
 
 Implement [specific task].
-Follow AGENTS.md conventions.
+Follow `AGENTS.md` conventions.
 Reuse existing utilities where possible.
 Explain changes.
 
@@ -64,9 +64,9 @@ Review the changes for:
 
 Prompt:
 
-Update project-docs/repo-state.md to reflect the latest changes.
+Update `project-docs/repo-state.md` to reflect the latest changes.
 
-This should normally happen at the end of a work session, after the current dialogue is finished and before committing/pushing changes.
+This should normally happen at the end of a work session, after the current dialogue is finished and before committing or pushing changes.
 
 ---
 
@@ -74,11 +74,11 @@ This should normally happen at the end of a work session, after the current dial
 
 Prompt:
 
-Based on recent changes, suggest updates to AGENTS.md.
+Based on recent changes, suggest updates to `AGENTS.md`.
 
 ---
 
-## 📝 Backlog Usage
+## Backlog Usage
 
 - Treat `project-docs/backlog.md` as the working list for future improvements.
 - When starting a new session, use the backlog together with `AGENTS.md` and `project-docs/repo-state.md`.
@@ -87,7 +87,7 @@ Based on recent changes, suggest updates to AGENTS.md.
 
 ---
 
-## ✅ End-of-Session Habit
+## End-of-Session Habit
 
 - Standard end-of-session flow:
   1. Finish the current dialogue
@@ -98,28 +98,30 @@ Based on recent changes, suggest updates to AGENTS.md.
 
 ---
 
-## 🔁 Quick Workflow (short version)
+## Quick Workflow (short version)
 
-1. Read AGENTS.md + project-docs/repo-state.md + project-docs/backlog.md
+1. Read `AGENTS.md` + `project-docs/repo-state.md` + `project-docs/backlog.md`
 2. Pick next task
 3. Implement
 4. Review
-5. Update project-docs/repo-state.md
-6. Update project-docs/backlog.md if priorities or status changed
+5. Update `project-docs/repo-state.md`
+6. Update `project-docs/backlog.md` if priorities or status changed
 7. Commit and push when ready
 
 ---
 
-## ⚠️ Rules
+## Rules
 
-- Do not skip updating project-docs/repo-state.md
+- Do not skip updating `project-docs/repo-state.md`
 - Do not let backlog decisions live only in chat; add them to `project-docs/backlog.md`
 - Always be specific in prompts
 - Prefer small improvements over large rewrites
 - Never duplicate existing functionality
+- If commands or scripts change, update the relevant docs in the same session
+- If test intent changes, reflect that in `project-docs/backlog.md` and `project-docs/repo-state.md` before finishing
 
 ---
 
-## 🎯 Goal
+## Goal
 
 Continuously evolve this project into a reusable Playwright template/scaffold.

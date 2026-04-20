@@ -32,12 +32,14 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The checkbox flow has been simplified substantially: hierarchy structure now lives in `data/checkboxData.ts`, the page object is aligned with the current `rc-tree` DOM, and the tests now focus on hierarchy expansion plus checkbox/result-message behavior instead of outdated click strategies.
 - Broken Links / Images assertions have been adjusted to match the current DemoQA page intent and to be less timing-sensitive in command-line runs.
 - The suite now uses `@sanity` as a lightweight example tag, with one representative test tagged in each spec file.
+- `tests/alerts.spec.ts` was updated so the timed-alert scenario now verifies the alert does not appear too early and then does appear after the expected delay, instead of relying on a short generic hard wait.
 
 ### Environment management
 
 - `playwright.config.ts` loads environment files from `.env/<name>.env`.
 - `BASE_URL` is validated at startup, which is a good early-fail safeguard.
 - `package.json` includes separate scripts for `dev`, `test`, and `e2e` runs.
+- `package.json` now also includes reusable single-spec scripts for both headless and UI mode, which makes it easier to run a specific spec without retyping the full Playwright command.
 
 ### Documentation and reporting
 
@@ -90,7 +92,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ### 3. Flakiness risks
 
 - `utils/gotoHelper.ts` uses `Math.random()` when plain `goto()` is called, which introduces non-deterministic navigation behavior.
-- `tests/alerts.spec.ts` still uses `waitForTimeout`, which conflicts with the repo goal of avoiding hard waits.
+- `tests/alerts.spec.ts` still contains one `waitForTimeout`, but it is now an intentional timing assertion for the delayed-alert behavior rather than a generic synchronization shortcut.
 - Some flows still rely on broad row counts or broad text checks that may be less stable than more targeted assertions, although `WebTablesPage` and `CheckBoxPage` have moved toward more page-specific assertions.
 
 ### 4. CI/test selection and tag intent
@@ -122,6 +124,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `tests/webTables.spec.ts` and `pageObjects/WebTablesPage.ts` were recently refactored to better match the current DemoQA table behavior, including removal of the no-longer-reliable sort test.
 - `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` now reflect the current DemoQA checkbox tree and have been simplified around explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` was updated to reduce command-line timing sensitivity around image loading and to align with the current valid/broken link behavior.
+- `tests/alerts.spec.ts` was updated with a stronger delayed-alert assertion, and the restored emoji labels are back in place after an encoding-related file rewrite issue during editing.
 - The local docs build was reworked and verified on Windows so `docs:build` now generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow was updated so sanity runs first, the full suite is gated behind sanity success, and only one report entry is published per workflow run.
 - The local suite appears to be in a better state than earlier in the work, but this document should still be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
@@ -129,7 +132,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ## Suggested Near-Term Improvements
 
 1. Make navigation deterministic by removing random default behavior from `createGotoWithVariants()` or limiting randomness to explicitly experimental tests.
-2. Replace `waitForTimeout` usage with event-based or assertion-based waits.
+2. Continue reviewing remaining `waitForTimeout` usage and distinguish between true sync workarounds and intentional timing assertions.
 3. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
 4. Decide on a clear CI strategy for `fast sanity` vs `full regression` now that the workflow no longer filters by tag.
 5. Tighten typings in helpers and test data builders.
@@ -140,4 +143,4 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ## Summary
 
-The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, and Broken Links, and the docs publishing area has expanded into a larger AsciiDoc set with a better-aligned local preview/build flow. The biggest next step is consistency: make navigation deterministic, reduce hard waits, finish the remaining docs cleanup, and define a clearer CI strategy for fast vs full test execution.
+The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, Broken Links, and Alerts, and the docs publishing area has expanded into a larger AsciiDoc set with a better-aligned local preview/build flow. The biggest next step is consistency: make navigation deterministic, keep reducing unintentional hard waits, finish the remaining docs cleanup, and define a clearer CI strategy for fast vs full test execution.

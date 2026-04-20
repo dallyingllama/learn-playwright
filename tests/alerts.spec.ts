@@ -16,14 +16,13 @@ test.describe('🔔 Alerts and Windows Tests', () => {
     const alertsPage = new AlertsPage(page);
 
     await test.step('⚠️ Trigger alert and validate message', async () => {
-      page.on('dialog', async (dialog) => {
+      page.once('dialog', async (dialog) => {
         expect(dialog.type()).toBe('alert');
         expect(dialog.message()).toBe('You clicked a button');
         await dialog.accept();
       });
 
       await alertsPage.alertButton.click();
-      await page.waitForTimeout(500);
     });
   });
 
@@ -32,14 +31,30 @@ test.describe('🔔 Alerts and Windows Tests', () => {
     const alertsPage = new AlertsPage(page);
 
     await test.step('⏳ Trigger timed alert and validate message', async () => {
-      page.on('dialog', async (dialog) => {
+      let dialogSeen = false;
+      const startTime = Date.now();
+
+      page.once('dialog', async (dialog) => {
+        dialogSeen = true;
         expect(dialog.type()).toBe('alert');
         expect(dialog.message()).toBe('This alert appeared after 5 seconds');
         await dialog.accept();
       });
 
       await alertsPage.timerAlertButton.click();
-      await page.waitForTimeout(500);
+
+      // Intentional timing assertion: this test proves the alert does not appear too early.
+      await page.waitForTimeout(4500);
+      expect(dialogSeen).toBe(false);
+
+      await expect
+        .poll(() => dialogSeen, {
+          timeout: 3000,
+          message: 'Expected timed alert to appear after the 5 second delay',
+        })
+        .toBe(true);
+
+      expect(Date.now() - startTime).toBeGreaterThanOrEqual(5000);
     });
   });
 
@@ -48,14 +63,13 @@ test.describe('🔔 Alerts and Windows Tests', () => {
     const alertsPage = new AlertsPage(page);
 
     await test.step('📝 Trigger confirm alert and accept', async () => {
-      page.on('dialog', async (dialog) => {
+      page.once('dialog', async (dialog) => {
         expect(dialog.type()).toBe('confirm');
         expect(dialog.message()).toBe('Do you confirm action?');
         await dialog.accept();
       });
 
       await alertsPage.confirmButton.click();
-      await page.waitForTimeout(500);
       await expect(page.getByText('You selected Ok')).toBeVisible();
     });
   });
@@ -65,14 +79,13 @@ test.describe('🔔 Alerts and Windows Tests', () => {
     const alertsPage = new AlertsPage(page);
 
     await test.step('📥 Trigger prompt and submit value', async () => {
-      page.on('dialog', async (dialog) => {
+      page.once('dialog', async (dialog) => {
         expect(dialog.type()).toBe('prompt');
         expect(dialog.message()).toBe('Please enter your name');
         await dialog.accept('John Doe');
       });
 
       await alertsPage.promptButton.click();
-      await page.waitForTimeout(500);
       await expect(page.getByText('You entered John Doe')).toBeVisible();
     });
   });

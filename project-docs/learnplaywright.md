@@ -4,7 +4,7 @@
 2. Enable the pinned `pnpm` version if it is not already available -> `corepack enable`
 3. Activate the repo version -> `corepack prepare pnpm@10.9.0 --activate`
 4. Install playwright -> `pnpm create playwright`
-5. Run the example test in headless mode -> `pnpm exec cross-env TEST_ENV=dev playwright test tests/example.spec.ts`
+5. Run the example test in headless mode -> `pnpm run test:spec:dev -- tests/example.spec.ts`
 6. Review the example test run report -> `pnpm exec playwright show-report`
 7. Run the example test in ui mode -> `pnpm run test:ui:dev`
 
@@ -23,6 +23,15 @@
 `pnpm run test:ui:dev`
 `pnpm run test:ui:test`
 `pnpm run test:ui:e2e`
+
+### run one spec file
+
+`pnpm run test:spec:dev -- tests/alerts.spec.ts`
+`pnpm run test:spec:test -- tests/alerts.spec.ts`
+`pnpm run test:spec:e2e -- tests/alerts.spec.ts`
+`pnpm run test:ui:spec:dev -- tests/alerts.spec.ts`
+`pnpm run test:ui:spec:test -- tests/alerts.spec.ts`
+`pnpm run test:ui:spec:e2e -- tests/alerts.spec.ts`
 
 ### build the docs for preview
 
@@ -46,3 +55,8 @@
   - sanity report if sanity fails
   - full-suite report if sanity passes and the full run completes
 - The workflow still ends in a failed state if either the sanity stage or the full suite fails.
+
+### alerts timing note
+
+- `tests/alerts.spec.ts` no longer uses a short hard wait as a generic sync workaround.
+- The timed alert scenario now uses one intentional timing assertion to verify the alert does not appear before the expected delay and then does appear after it.

@@ -67,7 +67,14 @@ Run one spec in `dev`:
 
 [source,bash]
 ----
-corepack pnpm exec cross-env TEST_ENV=dev playwright test tests/example.spec.ts
+corepack pnpm run test:spec:dev -- tests/example.spec.ts
+----
+
+Open Playwright UI mode for one spec in `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:ui:spec:dev -- tests/example.spec.ts
 ----
 
 Build local docs:

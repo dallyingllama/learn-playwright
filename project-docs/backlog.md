@@ -24,7 +24,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Keep them in the repo as examples of test tagging, but document that they currently demonstrate capability more than a finalized strategy.
 - Add a short explanation in internal docs so future sessions do not have to infer intent.
 
-### 1.4 Review workflow strategy for fast vs full test runs
+### 1.4 Review workflow strategy for fast vs full test runs (Completed)
 
 - Create a simple example split where:
   - `@sanity` and/or `@smoke` runs first
@@ -32,11 +32,13 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Decide whether this should be one workflow with dependent jobs or separate workflows.
 - Keep the first implementation intentionally simple and educational.
 
-### 1.5 Remove or reduce remaining hard waits
+### 1.5 Remove or reduce remaining hard waits (In Progress)
 
 - Identify remaining `waitForTimeout` usage.
 - Replace with state-based waits or assertion-driven synchronization where practical.
 - Focus first on tests that are most likely to run in CI.
+- `tests/alerts.spec.ts` was updated so the timed alert scenario no longer uses a short hard wait as a generic sync workaround.
+- One intentional timed wait remains there because the purpose of that specific test is to prove the alert does not appear before the expected delay.
 
 ### 1.6 Clean up stale or inconsistent naming
 
