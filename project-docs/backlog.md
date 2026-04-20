@@ -6,7 +6,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 
 ## 1. Tech Debt Cleanup
 
-### 1.1 Make package-manager usage fully consistent
+### 1.1 Make package-manager usage fully consistent (Completed)
 
 - Review docs, workflow comments, and command examples for any remaining `npm`-first wording.
 - Standardize on `pnpm` as the primary package-manager experience for this repo.
