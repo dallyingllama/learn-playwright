@@ -22,8 +22,12 @@ This project is maintained as a learning-focused Playwright repository, so the w
 
 The repo is `pnpm`-first and exposes simple scripts for common tasks.
 
+Local setup and GitHub Actions are intended to use the same pinned `pnpm` version so dependency installation behavior stays consistent between machines and CI.
+
 [source,bash]
 ----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
 corepack pnpm run test:dev
 corepack pnpm run test:ui:dev
 corepack pnpm run docs:build
@@ -38,6 +42,8 @@ GitHub Actions is used to:
 * run the Playwright suite in `e2e`
 * capture and publish Playwright report history
 * build and publish AsciiDoc documentation to GitHub Pages
+
+The workflow now activates the repo's pinned `pnpm@10.9.0` instead of using `latest`, which reduces drift between local development and CI.
 
 == Related
 

@@ -47,6 +47,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The local docs workflow is exposed through `docs:build` and `docs:preview`.
 - The local docs build now walks the full `docs/` tree recursively and writes matching `.html` output into `localDocs/`, including nested `features/` and `guidelines/` pages.
 - GitHub Actions publishes Playwright report history and generated docs to GitHub Pages.
+- The GitHub workflow now activates the same pinned `pnpm@10.9.0` version declared in `package.json`, which reduces install drift between local setup and CI.
 - The GitHub Actions docs build now mirrors the recursive local docs build by generating nested HTML pages instead of only top-level docs.
 - `.github/scripts/render-index.js` creates a browsable history index from prior runs.
 - The workflow now uses newer GitHub Action major versions and a Node 24 runtime.

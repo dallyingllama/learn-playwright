@@ -12,7 +12,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Standardize on `pnpm` as the primary package-manager experience for this repo.
 - Make sure examples for installing, running one test, and opening UI mode all use the same style.
 
-### 1.2 Pin `pnpm` in CI instead of using `pnpm@latest`
+### 1.2 Pin `pnpm` in CI instead of using `pnpm@latest` (Completed)
 
 - Update the GitHub workflow so CI uses the repo’s intended `pnpm` version rather than `latest`.
 - Reduce drift between local development and GitHub Actions.
