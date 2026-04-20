@@ -18,7 +18,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Reduce drift between local development and GitHub Actions.
 - Document the chosen approach in project docs if needed.
 
-### 1.3 Clean up tag intent and document it
+### 1.3 Clean up tag intent and document it (Completed)
 
 - Clarify what `@sanity` and `@smoke` are meant to represent.
 - Keep them in the repo as examples of test tagging, but document that they currently demonstrate capability more than a finalized strategy.

@@ -15,66 +15,76 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: 🟢 Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "24"
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: |
           corepack enable
           corepack prepare pnpm@10.9.0 --activate
           pnpm install
 
-      - name: 📚 Install Asciidoctor CLI
+      - name: Install Asciidoctor CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y asciidoctor
 
-      - name: 🧪 Run Playwright tests
-        id: testrun
+      - name: Run sanity tests
+        id: sanityrun
         continue-on-error: true
         run: |
           export TEST_ENV=e2e
           pnpm playwright install --with-deps
+          pnpm test:e2e -- --grep @sanity
+
+      - name: Run full Playwright suite
+        id: fullrun
+        if: steps.sanityrun.outcome == 'success'
+        continue-on-error: true
+        run: |
+          export TEST_ENV=e2e
           pnpm test:e2e
 
-      - name: 📋 Record test result status
+      - name: Record test result status
         run: |
           mkdir -p playwright-report
-          if [ "${{ steps.testrun.outcome }}" = "success" ]; then
+          if [ "${{ steps.sanityrun.outcome }}" != "success" ]; then
+            echo "FAIL" > playwright-report/status.txt
+          elif [ "${{ steps.fullrun.outcome }}" = "success" ]; then
             echo "PASS" > playwright-report/status.txt
           else
             echo "FAIL" > playwright-report/status.txt
           fi
 
-      - name: 📅 Set timestamp including converting to timezone
+      - name: Set timestamp including converting to timezone
         run: |
           export TZ="Europe/Berlin"
           export REPORT_DIR=$(date +'%Y-%m-%d_%H:%M:%S')
           echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
 
-      - name: 🧲 Download existing GitHub Pages branch
+      - name: Download existing GitHub Pages branch
         uses: actions/checkout@v6
         with:
           ref: gh-pages
           path: history
 
-      - name: 🧹 Delete old reports
+      - name: Delete old reports
         run: |
           find history -maxdepth 1 -type d -name "20*" -mtime +${{ env.REPORT_RETENTION_DAYS }} -exec rm -rf {} \;
 
-      - name: 🧱 Create folder-safe timestamp
+      - name: Create folder-safe timestamp
         run: |
           SAFE_DIR_NAME=$(echo "$REPORT_DIR" | tr ':' '-')
           echo "SAFE_DIR_NAME=$SAFE_DIR_NAME" >> $GITHUB_ENV
           mkdir -p history/$SAFE_DIR_NAME
           cp -r playwright-report/* history/$SAFE_DIR_NAME
 
-      - name: 🛠 Build documentation with Asciidoctor
+      - name: Build documentation with Asciidoctor
         run: |
           mkdir -p history/docs
           find docs -type f -name "*.adoc" | while read -r file; do
@@ -100,35 +110,39 @@ jobs:
               "$file"
           done
 
-      - name: 🧠 Generate styled index with EJS
+      - name: Generate styled index with EJS
         run: node .github/scripts/render-index.js
 
-      - name: 📦 Zip report and upload as artifact
+      - name: Zip report and upload as artifact
         run: |
           mkdir -p artifacts
           zip -r artifacts/playwright-report.zip playwright-report
 
-      - name: 📤 Upload zipped report artifact
+      - name: Upload zipped report artifact
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: artifacts/playwright-report.zip
 
-      - name: 📣 Add direct link to report in summary
+      - name: Add direct link to report in summary
         run: |
-          if [ "${{ steps.testrun.outcome }}" == "success" ]; then
+          if [ "${{ steps.sanityrun.outcome }}" != "success" ]; then
+            echo "### ❌ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Sanity test stage failed. Full suite was skipped." >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.fullrun.outcome }}" == "success" ]; then
             echo "### ✅ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
           else
             echo "### ❌ [View Playwright report](https://dallyingllama.github.io/learn-playwright/$SAFE_DIR_NAME/)" >> $GITHUB_STEP_SUMMARY
           fi
 
-      - name: 📊 Publish Playwright Reports to GitHub Pages
+      - name: Publish Playwright Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./history
           publish_branch: gh-pages
 
-      - name: ❌ Fail job if any tests fail
-        if: steps.testrun.outcome != 'success'
+      - name: Fail job if any tests fail
+        if: steps.sanityrun.outcome != 'success' || steps.fullrun.outcome == 'failure'
         run: exit 1

@@ -36,3 +36,13 @@
 ### to run the sanity tests only in github workflow
 
 `pnpm run test:e2e -- --grep=sanity`
+
+### current CI behavior
+
+- GitHub Actions now runs the `@sanity` tests first.
+- If the sanity stage passes, the workflow then runs the full `e2e` suite.
+- If the sanity stage fails, the full suite is skipped.
+- The workflow still publishes one report/history entry per run:
+  - sanity report if sanity fails
+  - full-suite report if sanity passes and the full run completes
+- The workflow still ends in a failed state if either the sanity stage or the full suite fails.

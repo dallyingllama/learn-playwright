@@ -31,6 +31,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The web tables flow has been tightened so table assertions rely more on populated row content than raw row container counts.
 - The checkbox flow has been simplified substantially: hierarchy structure now lives in `data/checkboxData.ts`, the page object is aligned with the current `rc-tree` DOM, and the tests now focus on hierarchy expansion plus checkbox/result-message behavior instead of outdated click strategies.
 - Broken Links / Images assertions have been adjusted to match the current DemoQA page intent and to be less timing-sensitive in command-line runs.
+- The suite now uses `@sanity` as a lightweight example tag, with one representative test tagged in each spec file.
 
 ### Environment management
 
@@ -48,6 +49,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The local docs build now walks the full `docs/` tree recursively and writes matching `.html` output into `localDocs/`, including nested `features/` and `guidelines/` pages.
 - GitHub Actions publishes Playwright report history and generated docs to GitHub Pages.
 - The GitHub workflow now activates the same pinned `pnpm@10.9.0` version declared in `package.json`, which reduces install drift between local setup and CI.
+- The GitHub workflow now runs `@sanity` first and only runs the full suite when that gate passes, while still publishing a single final report entry per workflow run.
 - The GitHub Actions docs build now mirrors the recursive local docs build by generating nested HTML pages instead of only top-level docs.
 - `.github/scripts/render-index.js` creates a browsable history index from prior runs.
 - The workflow now uses newer GitHub Action major versions and a Node 24 runtime.
@@ -64,6 +66,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The `docs/` vs `project-docs/` split is a good clarity improvement because publishable content and internal workflow notes now have distinct homes.
 - The merged docs structure suggests the publishable site is evolving beyond a single landing page into a small documentation set.
 - The local preview experience is better aligned with the published site now that doc-to-doc links target generated `.html` pages and nested pages are built locally.
+- The CI workflow now demonstrates a practical staged test strategy without creating duplicate history entries for sanity-only runs.
 - The project covers a broad portion of DemoQA, which is useful for experimenting with reusable abstractions.
 - Recent Check Box work is a good example of narrowing tests to current real site behavior instead of preserving stale assumptions.
 - The project now has a clearer restart story across sessions because rules, current state, and planned next work are all documented in separate internal files.
@@ -90,11 +93,11 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `tests/alerts.spec.ts` still uses `waitForTimeout`, which conflicts with the repo goal of avoiding hard waits.
 - Some flows still rely on broad row counts or broad text checks that may be less stable than more targeted assertions, although `WebTablesPage` and `CheckBoxPage` have moved toward more page-specific assertions.
 
-### 4. CI/test selection mismatch
+### 4. CI/test selection and tag intent
 
-- The previous GitHub workflow only ran `@sanity` tests, but the current workflow now runs `pnpm test:e2e` without a grep filter.
-- That improves coverage in CI, but it also increases the need for clear tagging and for separating fast checkpoint coverage from full regression coverage.
-- `tests/navigation.spec.ts` still uses `@smoke`, while some other suites use `@sanity`, so the tag model is still worth rationalizing before adding more workflow variants.
+- The workflow now uses a staged approach: run `@sanity` first, then run the full suite if sanity passes.
+- That better matches the current educational goal of showing how a small gate stage can protect a broader regression run.
+- `@sanity` is currently an example tag pattern rather than a finalized long-term taxonomy.
 
 ### 5. Type safety and reuse
 
@@ -112,6 +115,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `agents.md` still mentions `config/` as a top-level folder that has not yet been introduced.
 - The repo appears to be in the middle of a docs reorganization: `project-docs/learnplaywright.md` exists, while the former top-level `learnplaywright.md` has been removed.
 - One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
+- The updated CI/tag behavior should still be documented in a lightweight way so future sessions understand that `@sanity` currently demonstrates capability more than a final policy.
 
 ### 7. Current validation status
 
@@ -119,6 +123,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` now reflect the current DemoQA checkbox tree and have been simplified around explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` was updated to reduce command-line timing sensitivity around image loading and to align with the current valid/broken link behavior.
 - The local docs build was reworked and verified on Windows so `docs:build` now generates nested HTML pages and the `Documentation Map` links work in local preview.
+- The CI workflow was updated so sanity runs first, the full suite is gated behind sanity success, and only one report entry is published per workflow run.
 - The local suite appears to be in a better state than earlier in the work, but this document should still be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
 
 ## Suggested Near-Term Improvements

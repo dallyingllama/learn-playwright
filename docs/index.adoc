@@ -23,11 +23,12 @@ It is used to explore:
 == Current Highlights
 
 * 12 Playwright spec files covering key DemoQA flows
+* one `@sanity` example test in each spec file
 * `pageObjects/` as the active Page Object Model directory
 * shared helpers in `utils/`
 * reusable navigation metadata in `data/navigationSections.ts`
 * generated local docs via AsciiDoc
-* GitHub Actions workflow that runs tests, stores report history, and publishes docs
+* GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs
 
 == Local Usage
 
@@ -159,3 +160,5 @@ link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages].
 == Notes
 
 This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.
+
+The current CI workflow uses `@sanity` as an example tag for a small gate stage before the full suite. It is intended as a practical demonstration rather than a finalized long-term tagging strategy.
