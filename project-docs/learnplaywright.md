@@ -44,7 +44,7 @@
 
 ### to run the sanity tests only in github workflow
 
-`pnpm run test:e2e -- --grep=sanity`
+`pnpm run test:e2e -- --grep=@sanity`
 
 ### current CI behavior
 
