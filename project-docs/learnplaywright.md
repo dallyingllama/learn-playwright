@@ -3,9 +3,9 @@
 1. Disable ZScaler Internet Securty temporarily.
 2. Enable or install `pnpm` if it is not already available.
 3. Install playwright -> `pnpm create playwright`
-4. Run the example test in headless mode -> `pnpm exec playwright test`
+4. Run the example test in headless mode -> `pnpm exec cross-env TEST_ENV=dev playwright test tests/example.spec.ts`
 5. Review the example test run report -> `pnpm exec playwright show-report`
-6. Run the example test in ui mode -> `pnpm exec playwright test --ui`
+6. Run the example test in ui mode -> `pnpm run test:ui:dev`
 
 ### Getting started after repo clone
 

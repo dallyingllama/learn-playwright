@@ -36,6 +36,7 @@ Install dependencies:
 [source,bash]
 ----
 corepack pnpm install
+corepack pnpm exec playwright install
 ----
 
 Run tests in `dev`:
@@ -57,6 +58,13 @@ Open Playwright UI mode for `dev`:
 [source,bash]
 ----
 corepack pnpm run test:ui:dev
+----
+
+Run one spec in `dev`:
+
+[source,bash]
+----
+corepack pnpm exec cross-env TEST_ENV=dev playwright test tests/example.spec.ts
 ----
 
 Build local docs:
