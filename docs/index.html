@@ -105,7 +105,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">corepack pnpm <span class="nb">install</span></code></pre>
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm <span class="nb">install
+</span>corepack pnpm <span class="nb">exec </span>playwright <span class="nb">install</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -130,6 +131,14 @@
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:ui:dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run one spec in <code>dev</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm <span class="nb">exec </span>cross-env <span class="nv">TEST_ENV</span><span class="o">=</span>dev playwright <span class="nb">test </span>tests/example.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -278,7 +287,7 @@
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-20 11:09:25 UTC
+Last updated 2026-04-20 11:21:29 UTC
 </div>
 </div>
 </body>
