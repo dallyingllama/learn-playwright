@@ -52,6 +52,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - GitHub Actions publishes Playwright report history and generated docs to GitHub Pages.
 - The GitHub workflow now activates the same pinned `pnpm@10.9.0` version declared in `package.json`, which reduces install drift between local setup and CI.
 - The GitHub workflow now runs `@sanity` first and only runs the full suite when that gate passes, while still publishing a single final report entry per workflow run.
+- The CI test steps now call Playwright directly with `pnpm exec cross-env ... playwright test` so sanity filtering and report generation are not dependent on script-argument forwarding through `pnpm run`.
 - The GitHub Actions docs build now mirrors the recursive local docs build by generating nested HTML pages instead of only top-level docs.
 - `.github/scripts/render-index.js` creates a browsable history index from prior runs.
 - The workflow now uses newer GitHub Action major versions and a Node 24 runtime.
@@ -118,6 +119,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The repo appears to be in the middle of a docs reorganization: `project-docs/learnplaywright.md` exists, while the former top-level `learnplaywright.md` has been removed.
 - One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
 - The updated CI/tag behavior should still be documented in a lightweight way so future sessions understand that `@sanity` currently demonstrates capability more than a final policy.
+- The repo now includes easier single-spec commands in `package.json`, and the internal/published docs were updated to match that workflow.
 
 ### 7. Current validation status
 
@@ -125,22 +127,21 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` now reflect the current DemoQA checkbox tree and have been simplified around explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` was updated to reduce command-line timing sensitivity around image loading and to align with the current valid/broken link behavior.
 - `tests/alerts.spec.ts` was updated with a stronger delayed-alert assertion, and the restored emoji labels are back in place after an encoding-related file rewrite issue during editing.
+- Backlog item `1.5` is now effectively complete: there are no remaining generic `waitForTimeout` sync workarounds in test code, and the one timed wait left in `alerts.spec.ts` is deliberate because timing is the behavior under test.
 - The local docs build was reworked and verified on Windows so `docs:build` now generates nested HTML pages and the `Documentation Map` links work in local preview.
-- The CI workflow was updated so sanity runs first, the full suite is gated behind sanity success, and only one report entry is published per workflow run.
+- The CI workflow was updated so sanity runs first, the full suite is gated behind sanity success, only one report entry is published per workflow run, and the sanity-only failure path now publishes the expected report correctly after switching CI to direct Playwright commands.
 - The local suite appears to be in a better state than earlier in the work, but this document should still be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
 
 ## Suggested Near-Term Improvements
 
 1. Make navigation deterministic by removing random default behavior from `createGotoWithVariants()` or limiting randomness to explicitly experimental tests.
-2. Continue reviewing remaining `waitForTimeout` usage and distinguish between true sync workarounds and intentional timing assertions.
-3. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
-4. Decide on a clear CI strategy for `fast sanity` vs `full regression` now that the workflow no longer filters by tag.
-5. Tighten typings in helpers and test data builders.
-6. Finish the documentation reference cleanup so workflow prompts point to `project-docs/repo-state.md` and any future backlog file lives in a clearly chosen home.
-7. Resolve the remaining `docs/features/conventions.adoc` table warning so the docs build is clean in both local preview and CI.
-8. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
-9. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
+2. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
+3. Tighten typings in helpers and test data builders.
+4. Finish the documentation reference cleanup so workflow prompts point to `project-docs/repo-state.md` and any future backlog file lives in a clearly chosen home.
+5. Resolve the remaining `docs/features/conventions.adoc` table warning so the docs build is clean in both local preview and CI.
+6. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
+7. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
 
 ## Summary
 
-The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, Broken Links, and Alerts, and the docs publishing area has expanded into a larger AsciiDoc set with a better-aligned local preview/build flow. The biggest next step is consistency: make navigation deterministic, keep reducing unintentional hard waits, finish the remaining docs cleanup, and define a clearer CI strategy for fast vs full test execution.
+The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, Broken Links, and Alerts, and the docs publishing area has expanded into a larger AsciiDoc set with a better-aligned local preview/build flow. The biggest next step is consistency: make navigation deterministic, keep improving shared page-object structure and typing, and finish the remaining docs cleanup.
