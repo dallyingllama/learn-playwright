@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>gotoHelper Utility</title>
+<link rel="stylesheet" href="../_theme/playwright.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1><code>gotoHelper</code> Utility</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_purpose">Purpose</a></li>
+<li><a href="#_current_behavior">Current Behavior</a></li>
+<li><a href="#_example_usage">Example Usage</a></li>
+<li><a href="#_important_note">Important Note</a></li>
+<li><a href="#_source_code">Source Code</a></li>
+<li><a href="#_related">Related</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_purpose">Purpose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>gotoHelper</code> utility centralizes navigation behavior for page objects that support multiple ways of reaching the same page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_behavior">Current Behavior</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It creates a <code>goto()</code> function with these variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>goto()</code> picks between menu-based and direct-link navigation</p>
+</li>
+<li>
+<p><code>goto.viaMenu()</code> forces menu-based navigation</p>
+</li>
+<li>
+<p><code>goto.viaDirectLink()</code> forces direct-link navigation</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_usage">Example Usage</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">import { createGotoWithVariants } from '../utils/gotoHelper';
+
+this.goto = createGotoWithVariants(
+  async () =&gt; await this.gotoViaSidebarMenu(),
+  async () =&gt; await this.gotoViaDirectLink()
+);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_important_note">Important Note</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The plain <code>goto()</code> currently uses <code>Math.random()</code> to choose a strategy. That is useful for experimentation, but it also introduces non-deterministic behavior and is now considered a candidate for future cleanup.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_source_code">Source Code</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">// utils/gotoHelper.ts
+
+type GotoVariants = {
+  (): Promise&lt;void&gt;;
+  viaMenu: () =&gt; Promise&lt;void&gt;;
+  viaDirectLink: () =&gt; Promise&lt;void&gt;;
+};
+
+export function createGotoWithVariants(
+  viaMenuFn: () =&gt; Promise&lt;void&gt;,
+  viaDirectLinkFn: () =&gt; Promise&lt;void&gt;
+): GotoVariants {
+  const randomGoto = async () =&gt; {
+    const useMenu = Math.random() &gt; 0.5;
+    return useMenu ? goto.viaMenu() : goto.viaDirectLink();
+  };
+
+  const goto: GotoVariants = Object.assign(randomGoto, {
+    viaMenu: viaMenuFn,
+    viaDirectLink: viaDirectLinkFn
+  });
+
+  return goto;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related">Related</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See also: <a href="navigablePage.html"><code>NavigablePage</code> Interface</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

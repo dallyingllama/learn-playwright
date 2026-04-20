@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <title>Learn Playwright</title>
-<link rel="stylesheet" href="./_theme/playwright.css">
+<link rel="stylesheet" href="_theme/playwright.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./rouge-github.css">
+<link rel="stylesheet" href="_theme/rouge-github.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -17,11 +17,11 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_overview">Overview</a></li>
-<li><a href="#_features">Features</a></li>
-<li><a href="#_usage">Usage</a></li>
-<li><a href="#_tour_of_the_tests">Tour of the Tests</a></li>
-<li><a href="#_contributing">Contributing</a></li>
-<li><a href="#_license">License</a></li>
+<li><a href="#_current_highlights">Current Highlights</a></li>
+<li><a href="#_local_usage">Local Usage</a></li>
+<li><a href="#_current_test_coverage">Current Test Coverage</a></li>
+<li><a href="#_documentation_map">Documentation Map</a></li>
+<li><a href="#_notes">Notes</a></li>
 </ul>
 </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/tests.yml?branch=main" alt="GitHub Actions">
+<img src="https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/playwright.yml?branch=main" alt="GitHub Actions">
 </div>
 </div>
 <div class="imageblock">
@@ -44,7 +44,10 @@
 <h2 id="_overview"><a class="anchor" href="#_overview"></a><a class="link" href="#_overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This repository is a practical learning ground for Playwright end-to-end testing, using:</p>
+<p>This repository is a practical Playwright + TypeScript learning project built around <code>demoqa.com</code>.</p>
+</div>
+<div class="paragraph">
+<p>It is used to explore:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -52,72 +55,111 @@
 <p>Page Object Model (POM)</p>
 </li>
 <li>
-<p>Data-driven testing</p>
+<p>data-driven testing</p>
 </li>
 <li>
-<p>CI/CD with GitHub Actions</p>
+<p>environment-based execution</p>
 </li>
 <li>
-<p>GitHub Pages for publishing reports</p>
+<p>GitHub Actions CI</p>
+</li>
+<li>
+<p>GitHub Pages publishing for reports and docs</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_features"><a class="anchor" href="#_features"></a><a class="link" href="#_features">Features</a></h2>
+<h2 id="_current_highlights"><a class="anchor" href="#_current_highlights"></a><a class="link" href="#_current_highlights">Current Highlights</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>✅ Login Tests with valid and invalid scenarios</p>
+<p>12 Playwright spec files covering key DemoQA flows</p>
 </li>
 <li>
-<p>✅ Form field validation</p>
+<p><code>pageObjects/</code> as the active Page Object Model directory</p>
 </li>
 <li>
-<p>✅ UI component testing (checkboxes, radio buttons, buttons)</p>
+<p>shared helpers in <code>utils/</code></p>
 </li>
 <li>
-<p>✅ Table operations: add, edit, delete, search</p>
+<p>reusable navigation metadata in <code>data/navigationSections.ts</code></p>
 </li>
 <li>
-<p>✅ Navigation coverage</p>
+<p>generated local docs via AsciiDoc</p>
 </li>
 <li>
-<p>✅ CI-integrated HTML reports with tour of test coverage</p>
+<p>GitHub Actions workflow that runs tests, stores report history, and publishes docs</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_usage"><a class="anchor" href="#_usage"></a><a class="link" href="#_usage">Usage</a></h2>
+<h2 id="_local_usage"><a class="anchor" href="#_local_usage"></a><a class="link" href="#_local_usage">Local Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Run tests locally:</p>
+<p>Install dependencies:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">npx playwright <span class="nb">test</span></code></pre>
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm <span class="nb">install</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>To view the HTML report after local run:</p>
+<p>Run tests in <code>dev</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">npx playwright show-report</code></pre>
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:dev</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>CI-generated reports are auto-published to:
-<a href="https://dallyingllama.github.io/learn-playwright/">GitHub Pages Reports</a></p>
+<p>Run tests in <code>e2e</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:e2e</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open Playwright UI mode for <code>dev</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:ui:dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Build local docs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run docs:build</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Preview local docs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run docs:preview</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Show the Playwright HTML report:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run show-report</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tour_of_the_tests"><a class="anchor" href="#_tour_of_the_tests"></a><a class="link" href="#_tour_of_the_tests">Tour of the Tests</a></h2>
+<h2 id="_current_test_coverage"><a class="anchor" href="#_current_test_coverage"></a><a class="link" href="#_current_test_coverage">Current Test Coverage</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -127,79 +169,116 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Feature</th>
-<th class="tableblock halign-left valign-top">Test File</th>
-<th class="tableblock halign-left valign-top">Highlights</th>
+<th class="tableblock halign-left valign-top">Area</th>
+<th class="tableblock halign-left valign-top">Spec File</th>
+<th class="tableblock halign-left valign-top">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Login</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>login.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Valid and invalid tests using data-driven loop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Positive and negative login scenarios with data-driven coverage</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">📄 Text Box</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>register.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registration flow coverage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text Box</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>textBox.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field validation (positive and negative)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Form field interaction and validation checks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">🎚️ Radio Button</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>radioButton.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Single-selection logic</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">☑️ Check Box</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check Box</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>checkBox.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Multi-selection and visibility</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Current DemoQA tree structure and result-message validation</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">📊 Web Tables</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>webTables.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD operations and pagination</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Radio Button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>radioButton.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection-state validation</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">🖱️ Buttons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buttons</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>buttons.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Single, double, and right-clicks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Click, double-click, and right-click behavior</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">🔗 Navigation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>links.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link behavior checks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alerts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alerts.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dialog and alert coverage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Tables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>webTables.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD-style table workflows and search coverage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Broken Links / Images</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>brokenLinksImages.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Valid and broken state checks aligned to current site behavior</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Navigation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>navigation.spec.ts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sidebar and direct URL validation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sidebar and direct-link navigation patterns</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">📑 Reports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GitHub Pages</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Full HTML report viewer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Book Store</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookstore.spec.ts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Book Store and related user flow coverage</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation_map"><a class="anchor" href="#_documentation_map"></a><a class="link" href="#_documentation_map">Documentation Map</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="features-functions.html">Features / Functions</a></p>
+</li>
+<li>
+<p><a href="coding-standards.html">Playwright Coding Standards and Guidelines</a></p>
+</li>
+<li>
+<p><a href="system-under-test.html">System Under Test &amp; Test Approach</a></p>
+</li>
+<li>
+<p><a href="way-of-working.html">Way of Working</a></p>
+</li>
+<li>
+<p><a href="roles.html">Roles in Test Automation</a></p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>All tests follow the Page Object Model with <code>assertOnPage()</code> methods.</p>
+<p>CI-generated reports and published docs are available at
+<a href="https://dallyingllama.github.io/learn-playwright/">GitHub Pages</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contributing"><a class="anchor" href="#_contributing"></a><a class="link" href="#_contributing">Contributing</a></h2>
+<h2 id="_notes"><a class="anchor" href="#_notes"></a><a class="link" href="#_notes">Notes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>PRs welcome! Ideas for new test scenarios or tools are especially appreciated.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_license"><a class="anchor" href="#_license"></a><a class="link" href="#_license">License</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>MIT License.</p>
+<p>This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-19 20:16:02 UTC
+Last updated 2026-04-20 10:00:59 UTC
 </div>
 </div>
 </body>

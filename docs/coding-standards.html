@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Playwright Coding Standards and Guidelines</title>
+<link rel="stylesheet" href="_theme/playwright.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Playwright Coding Standards and Guidelines</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document captures the practical coding habits used in this repository today.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_guidelines">Core Guidelines</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Use the <a href="guidelines/POM.html">Page Object Model</a> for UI interactions.</p>
+</li>
+<li>
+<p>Prefer Playwright locators such as <code>getByRole()</code> and <code>getByLabel()</code>.</p>
+</li>
+<li>
+<p>Avoid brittle CSS or XPath selectors unless needed for a specific UI.</p>
+</li>
+<li>
+<p>Use <code>async</code> and <code>await</code> consistently for browser interactions.</p>
+</li>
+<li>
+<p>Avoid fixed timeouts; prefer assertion-driven or state-based waits.</p>
+</li>
+<li>
+<p>Keep test data separate from test logic where that improves reuse and readability.</p>
+</li>
+<li>
+<p>Reuse existing helpers, page objects, and shared data before creating new patterns.</p>
+</li>
+<li>
+<p>Keep tests easy to read, with meaningful assertions and focused workflows.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_repository_specific_notes">Repository-Specific Notes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The active page object directory is <code>pageObjects/</code>.</p>
+</li>
+<li>
+<p>Navigation helpers exist in <code>utils/gotoHelper.ts</code>.</p>
+</li>
+<li>
+<p>Shared navigation metadata exists in <code>data/navigationSections.ts</code>.</p>
+</li>
+<li>
+<p><code>pnpm</code> is the intended package manager for this repo.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This guide will continue to evolve as the project grows.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

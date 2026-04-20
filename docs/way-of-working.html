@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Way of Working</title>
+<link rel="stylesheet" href="_theme/playwright.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Way of Working</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This project is maintained as a learning-focused Playwright repository, so the way of working favors clarity, small improvements, and repeatable patterns over large rewrites.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_working_style">Working Style</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Keep tests readable and maintainable.</p>
+</li>
+<li>
+<p>Prefer incremental changes over broad refactors.</p>
+</li>
+<li>
+<p>Reuse existing helpers and page objects before adding new abstractions.</p>
+</li>
+<li>
+<p>Keep test logic separate from test data where practical.</p>
+</li>
+<li>
+<p>Treat documentation as part of the project, not an afterthought.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_practices">Test Practices</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Use Playwright locators such as <code>getByRole()</code> and <code>getByLabel()</code> where possible.</p>
+</li>
+<li>
+<p>Avoid brittle selectors unless there is no practical alternative.</p>
+</li>
+<li>
+<p>Avoid hard waits and prefer assertion-based or event-based synchronization.</p>
+</li>
+<li>
+<p>Use Page Objects for UI interactions.</p>
+</li>
+<li>
+<p>Add meaningful assertions rather than broad smoke-only checks.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_local_workflow">Local Workflow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The repo is <code>pnpm</code>-first and exposes simple scripts for common tasks.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">corepack pnpm run test:dev
+corepack pnpm run test:ui:dev
+corepack pnpm run docs:build
+corepack pnpm run docs:preview</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ci_and_publishing">CI and Publishing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GitHub Actions is used to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>install dependencies</p>
+</li>
+<li>
+<p>run the Playwright suite in <code>e2e</code></p>
+</li>
+<li>
+<p>capture and publish Playwright report history</p>
+</li>
+<li>
+<p>build and publish AsciiDoc documentation to GitHub Pages</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related">Related</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="roles.html">Roles in Test Automation</a></p>
+</li>
+<li>
+<p><a href="coding-standards.html">Playwright Coding Standards and Guidelines</a></p>
+</li>
+<li>
+<p><a href="system-under-test.html">System Under Test &amp; Test Approach</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

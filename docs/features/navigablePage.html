@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>NavigablePage Interface</title>
+<link rel="stylesheet" href="../_theme/playwright.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1><code>NavigablePage</code> Interface</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_purpose">Purpose</a></li>
+<li><a href="#_definition">Definition</a></li>
+<li><a href="#_typical_use">Typical Use</a></li>
+<li><a href="#_benefits">Benefits</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_purpose">Purpose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>NavigablePage</code> interface gives page objects a common navigation contract.</p>
+</div>
+<div class="paragraph">
+<p>In this repo, it is used with the <code>gotoHelper</code> utility so tests can work with consistent navigation behavior across multiple page objects.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_definition">Definition</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">// pageObjects/interfaces/NavigablePage.ts
+import type { GotoVariants } from '../../utils/gotoHelper';
+
+export interface NavigablePage {
+  goto: GotoVariants;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_typical_use">Typical Use</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">this.goto = createGotoWithVariants(
+  async () =&gt; await this.gotoViaSidebarMenu(),
+  async () =&gt; await this.gotoViaDirectLink()
+);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_benefits">Benefits</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>keeps navigation expectations consistent across page objects</p>
+</li>
+<li>
+<p>makes multiple navigation strategies easier to reuse</p>
+</li>
+<li>
+<p>supports cleaner page-object contracts in tests</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

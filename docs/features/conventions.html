@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Guidelines for DemoQA</title>
+<link rel="stylesheet" href="../_theme/playwright.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_guidelines_for_demoqa">Guidelines for DemoQA</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_structure">Project Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The DemoQA project follows a specific structure to ensure clarity and maintainability. Below is an overview of the key directories and their purposes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Purpose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local/repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains test data files. These files can be used to store test data in a structured format, such as JSON or CSV.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/docs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains documentation files. These files can include project documentation, user guides, and other relevant information.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the history of the project. This directory can include previous versions of files, changelogs, and other historical information.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localDocs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains local documentation files created when testing asciidoc.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>node_modules</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using npm or yarn.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/pageObjects</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>playwright-report</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains Playwright test reports. These reports provide detailed information about the test runs, including screenshots and logs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/tests</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains all test files. Each test file corresponds to a specific feature or functionality of the application.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/utils</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains utility functions and helpers that can be used across different test files.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/config</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains configuration files. These files can include environment variables, test configurations, and other settings that are used throughout the project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/screenshots</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains screenshots taken during test execution. These screenshots can be used for debugging and verification purposes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/logs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains log files generated during test execution. These logs can provide detailed information about the test runs and help in identifying issues.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>|Topic | Description | Example</p>
+</div>
+<div class="paragraph">
+<p>|POM Folder
+|<code>pageObjects</code>
+|<code>pageObjects/FooPage.ts</code></p>
+</div>
+<div class="paragraph">
+<p>|FileName &amp; Class Name
+|PascalCase
+|<code>FooPage.ts</code>, <code>FooPage</code></p>
+</div>
+<div class="paragraph">
+<p>|Method Name
+|camelCase
+|<code>goto()</code>, <code>assertOnPage()</code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

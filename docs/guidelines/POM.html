@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Page Object Model</title>
+<link rel="stylesheet" href="../_theme/playwright.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Page Object Model</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Page Object Model (POM) is a design pattern that represents application pages as classes. It helps keep tests readable, reusable, and easier to maintain as the UI changes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_practical_guidelines">Practical Guidelines</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Use a separate file for each page object or reusable page component.</p>
+</li>
+<li>
+<p>Keep page objects in the repository&#8217;s <code>pageObjects/</code> directory.</p>
+</li>
+<li>
+<p>Use PascalCase for page-object file names and class names.</p>
+</li>
+<li>
+<p>Prefer meaningful Playwright locators over brittle selectors.</p>
+</li>
+<li>
+<p>Encapsulate actions and assertions inside page-object methods where it improves readability.</p>
+</li>
+<li>
+<p>Keep page objects focused on one page or component responsibility.</p>
+</li>
+<li>
+<p>Reuse shared base functionality or interfaces when that reduces duplication.</p>
+</li>
+<li>
+<p>Avoid mixing test-data setup and page-interaction code unnecessarily.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example">Example</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-typescript" data-lang="typescript">import { expect, Page } from '@playwright/test';
+
+export class FooPage {
+  constructor(private page: Page) {}
+
+  async goto(): Promise&lt;void&gt; {
+    await this.page.goto('/foo');
+  }
+
+  async assertOnPage(): Promise&lt;void&gt; {
+    await expect(this.page.getByRole('heading', { name: 'Foo Page' })).toBeVisible();
+  }
+
+  async fillValue(value: string): Promise&lt;void&gt; {
+    await this.page.getByLabel('Foo').fill(value);
+  }
+
+  async save(): Promise&lt;void&gt; {
+    await this.page.getByRole('button', { name: 'Save' }).click();
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_this_helps">Why This Helps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>selectors stay centralized</p>
+</li>
+<li>
+<p>tests read more like user workflows</p>
+</li>
+<li>
+<p>UI changes are easier to isolate to one class</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>

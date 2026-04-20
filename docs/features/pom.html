@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>How This Repo Uses the Page Object Model (POM)</title>
+<link rel="stylesheet" href="../_theme/playwright.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>How This Repo Uses the Page Object Model (POM)</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Page Object Model helps keep test code readable by separating page interactions from test intent.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_this_repository">In This Repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The active page object classes live under <code>pageObjects/</code>.</p>
+</div>
+<div class="paragraph">
+<p>The pattern used here generally includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a page class per area or page</p>
+</li>
+<li>
+<p>locators and page actions kept together</p>
+</li>
+<li>
+<p>page-level assertions such as <code>assertOnPage()</code></p>
+</li>
+<li>
+<p>reuse through shared base behavior where it helps</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example">Example</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ts" data-lang="ts">import { expect, Page } from '@playwright/test';
+
+export class LoginPage {
+  constructor(private page: Page) {}
+
+  async goto(): Promise&lt;void&gt; {
+    await this.page.goto('/login');
+  }
+
+  async login(username: string, password: string): Promise&lt;void&gt; {
+    await this.page.getByLabel('UserName').fill(username);
+    await this.page.getByLabel('Password').fill(password);
+    await this.page.getByRole('button', { name: 'Login' }).click();
+  }
+
+  async assertOnPage(): Promise&lt;void&gt; {
+    await expect(this.page.getByRole('heading', { name: 'Login' })).toBeVisible();
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_it_helps">Why It Helps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>keeps tests focused on behavior rather than selector details</p>
+</li>
+<li>
+<p>reduces duplication across specs</p>
+</li>
+<li>
+<p>makes UI updates easier to absorb in one place</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-20 10:00:59 UTC
+</div>
+</div>
+</body>
+</html>
