@@ -74,9 +74,14 @@
 <div class="paragraph">
 <p>The repo is <code>pnpm</code>-first and exposes simple scripts for common tasks.</p>
 </div>
+<div class="paragraph">
+<p>Local setup and GitHub Actions are intended to use the same pinned <code>pnpm</code> version so dependency installation behavior stays consistent between machines and CI.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">corepack pnpm run test:dev
+<pre class="highlight"><code class="language-bash" data-lang="bash">corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm run test:dev
 corepack pnpm run test:ui:dev
 corepack pnpm run docs:build
 corepack pnpm run docs:preview</code></pre>
@@ -106,6 +111,9 @@ corepack pnpm run docs:preview</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The workflow now activates the repo&#8217;s pinned <code>pnpm@10.9.0</code> instead of using <code>latest</code>, which reduces drift between local development and CI.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -129,7 +137,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-20 11:21:29 UTC
+Last updated 2026-04-20 11:39:54 UTC
 </div>
 </div>
 </body>
