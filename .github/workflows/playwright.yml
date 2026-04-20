@@ -40,15 +40,14 @@ jobs:
         run: |
           export TEST_ENV=e2e
           pnpm playwright install --with-deps
-          pnpm test:e2e -- --grep=@sanity
+          pnpm exec cross-env TEST_ENV=e2e playwright test --grep=@sanity
 
       - name: Run full Playwright suite
         id: fullrun
         if: steps.sanityrun.outcome == 'success'
         continue-on-error: true
         run: |
-          export TEST_ENV=e2e
-          pnpm test:e2e
+          pnpm exec cross-env TEST_ENV=e2e playwright test
 
       - name: Record test result status
         run: |

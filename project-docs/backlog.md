@@ -32,10 +32,11 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Decide whether this should be one workflow with dependent jobs or separate workflows.
 - Keep the first implementation intentionally simple and educational.
 
-### 1.5 Remove or reduce remaining hard waits (In Progress)
+### 1.5 Remove or reduce remaining hard waits (Completed)
 
 - Identify remaining `waitForTimeout` usage.
-- Replace with state-based waits or assertion-driven synchronization where practical.
+- Replace generic hard waits with state-based waits or assertion-driven synchronization where practical.
+- Keep timing-based waits only when the timing itself is the behavior under test.
 - Focus first on tests that are most likely to run in CI.
 - `tests/alerts.spec.ts` was updated so the timed alert scenario no longer uses a short hard wait as a generic sync workaround.
 - One intentional timed wait remains there because the purpose of that specific test is to prove the alert does not appear before the expected delay.
