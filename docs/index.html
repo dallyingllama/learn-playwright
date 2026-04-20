@@ -79,6 +79,9 @@
 <p>12 Playwright spec files covering key DemoQA flows</p>
 </li>
 <li>
+<p>one <code>@sanity</code> example test in each spec file</p>
+</li>
+<li>
 <p><code>pageObjects/</code> as the active Page Object Model directory</p>
 </li>
 <li>
@@ -91,7 +94,7 @@
 <p>generated local docs via AsciiDoc</p>
 </li>
 <li>
-<p>GitHub Actions workflow that runs tests, stores report history, and publishes docs</p>
+<p>GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs</p>
 </li>
 </ul>
 </div>
@@ -284,12 +287,15 @@ corepack pnpm <span class="nb">install
 <div class="paragraph">
 <p>This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.</p>
 </div>
+<div class="paragraph">
+<p>The current CI workflow uses <code>@sanity</code> as an example tag for a small gate stage before the full suite. It is intended as a practical demonstration rather than a finalized long-term tagging strategy.</p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-20 11:39:54 UTC
+Last updated 2026-04-20 12:22:26 UTC
 </div>
 </div>
 </body>

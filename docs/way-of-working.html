@@ -101,7 +101,10 @@ corepack pnpm run docs:preview</code></pre>
 <p>install dependencies</p>
 </li>
 <li>
-<p>run the Playwright suite in <code>e2e</code></p>
+<p>run the <code>@sanity</code> subset first</p>
+</li>
+<li>
+<p>run the full Playwright <code>e2e</code> suite only if sanity passes</p>
 </li>
 <li>
 <p>capture and publish Playwright report history</p>
@@ -113,6 +116,22 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div class="paragraph">
 <p>The workflow now activates the repo&#8217;s pinned <code>pnpm@10.9.0</code> instead of using <code>latest</code>, which reduces drift between local development and CI.</p>
+</div>
+<div class="paragraph">
+<p>The reporting flow still publishes one report entry per workflow run:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if sanity fails, the published report is the sanity-stage report</p>
+</li>
+<li>
+<p>if sanity passes, the published report is the full-suite report</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This keeps the report history readable while still making failures visible at the workflow level.</p>
 </div>
 </div>
 </div>
@@ -137,7 +156,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-20 11:39:54 UTC
+Last updated 2026-04-20 12:22:26 UTC
 </div>
 </div>
 </body>
