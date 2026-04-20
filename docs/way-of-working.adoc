@@ -1,0 +1,46 @@
+= Way of Working
+
+This project is maintained as a learning-focused Playwright repository, so the way of working favors clarity, small improvements, and repeatable patterns over large rewrites.
+
+== Working Style
+
+* Keep tests readable and maintainable.
+* Prefer incremental changes over broad refactors.
+* Reuse existing helpers and page objects before adding new abstractions.
+* Keep test logic separate from test data where practical.
+* Treat documentation as part of the project, not an afterthought.
+
+== Test Practices
+
+* Use Playwright locators such as `getByRole()` and `getByLabel()` where possible.
+* Avoid brittle selectors unless there is no practical alternative.
+* Avoid hard waits and prefer assertion-based or event-based synchronization.
+* Use Page Objects for UI interactions.
+* Add meaningful assertions rather than broad smoke-only checks.
+
+== Local Workflow
+
+The repo is `pnpm`-first and exposes simple scripts for common tasks.
+
+[source,bash]
+----
+corepack pnpm run test:dev
+corepack pnpm run test:ui:dev
+corepack pnpm run docs:build
+corepack pnpm run docs:preview
+----
+
+== CI and Publishing
+
+GitHub Actions is used to:
+
+* install dependencies
+* run the Playwright suite in `e2e`
+* capture and publish Playwright report history
+* build and publish AsciiDoc documentation to GitHub Pages
+
+== Related
+
+* link:roles.html[Roles in Test Automation]
+* link:coding-standards.html[Playwright Coding Standards and Guidelines]
+* link:system-under-test.html[System Under Test & Test Approach]

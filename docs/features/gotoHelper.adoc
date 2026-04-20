@@ -1,0 +1,41 @@
+= `gotoHelper` Utility
+:toc: left
+
+== Purpose
+
+The `gotoHelper` utility centralizes navigation behavior for page objects that support multiple ways of reaching the same page.
+
+== Current Behavior
+
+It creates a `goto()` function with these variants:
+
+* `goto()` picks between menu-based and direct-link navigation
+* `goto.viaMenu()` forces menu-based navigation
+* `goto.viaDirectLink()` forces direct-link navigation
+
+== Example Usage
+
+[source,ts]
+----
+import { createGotoWithVariants } from '../utils/gotoHelper';
+
+this.goto = createGotoWithVariants(
+  async () => await this.gotoViaSidebarMenu(),
+  async () => await this.gotoViaDirectLink()
+);
+----
+
+== Important Note
+
+The plain `goto()` currently uses `Math.random()` to choose a strategy. That is useful for experimentation, but it also introduces non-deterministic behavior and is now considered a candidate for future cleanup.
+
+== Source Code
+
+[source,ts]
+----
+include::../../utils/gotoHelper.ts[]
+----
+
+== Related
+
+See also: link:navigablePage.html[`NavigablePage` Interface]

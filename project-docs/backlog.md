@@ -111,6 +111,12 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Continue using `project-docs/` for internal guidance and `docs/` for publishable content.
 - Avoid creating internal documentation that duplicates what the code already makes obvious.
 
+### 4.4 Clean up remaining docs build warnings
+
+- Fix the unterminated table block warning in `docs/features/conventions.adoc`.
+- Rebuild the local docs after the fix and confirm feature pages still render and link correctly.
+- Keep the local docs build and CI docs build aligned as the published docs set grows.
+
 ## Notes
 
 - This backlog intentionally starts with cleanup and clarity work before deeper architecture changes.

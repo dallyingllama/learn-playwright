@@ -5,91 +5,147 @@
 :sectlinks:
 :toc: left
 
-image::https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/tests.yml?branch=main[GitHub Actions]
+image::https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/playwright.yml?branch=main[GitHub Actions]
 image::https://img.shields.io/github/deployments/dallyingllama/learn-playwright/github-pages[GitHub Pages]
 
 == Overview
 
-This repository is a practical learning ground for Playwright end-to-end testing, using:
+This repository is a practical Playwright + TypeScript learning project built around `demoqa.com`.
+
+It is used to explore:
 
 * Page Object Model (POM)
-* Data-driven testing
-* CI/CD with GitHub Actions
-* GitHub Pages for publishing reports
+* data-driven testing
+* environment-based execution
+* GitHub Actions CI
+* GitHub Pages publishing for reports and docs
 
-== Features
+== Current Highlights
 
-- ✅ Login Tests with valid and invalid scenarios
-- ✅ Form field validation
-- ✅ UI component testing (checkboxes, radio buttons, buttons)
-- ✅ Table operations: add, edit, delete, search
-- ✅ Navigation coverage
-- ✅ CI-integrated HTML reports with tour of test coverage
+* 12 Playwright spec files covering key DemoQA flows
+* `pageObjects/` as the active Page Object Model directory
+* shared helpers in `utils/`
+* reusable navigation metadata in `data/navigationSections.ts`
+* generated local docs via AsciiDoc
+* GitHub Actions workflow that runs tests, stores report history, and publishes docs
 
-== Usage
+== Local Usage
 
-Run tests locally:
+Install dependencies:
 
-[source, bash]
+[source,bash]
 ----
-npx playwright test
-----
-
-To view the HTML report after local run:
-
-[source, bash]
-----
-npx playwright show-report
+corepack pnpm install
 ----
 
-CI-generated reports are auto-published to:
-link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages Reports]
+Run tests in `dev`:
 
-== Tour of the Tests
+[source,bash]
+----
+corepack pnpm run test:dev
+----
+
+Run tests in `e2e`:
+
+[source,bash]
+----
+corepack pnpm run test:e2e
+----
+
+Open Playwright UI mode for `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:ui:dev
+----
+
+Build local docs:
+
+[source,bash]
+----
+corepack pnpm run docs:build
+----
+
+Preview local docs:
+
+[source,bash]
+----
+corepack pnpm run docs:preview
+----
+
+Show the Playwright HTML report:
+
+[source,bash]
+----
+corepack pnpm run show-report
+----
+
+== Current Test Coverage
 
 [cols="1,2,3", options="header"]
 |===
-| Feature | Test File | Highlights
+| Area | Spec File | Notes
 
-| ✅ Login
+| Login
 | `login.spec.ts`
-| Valid and invalid tests using data-driven loop
+| Positive and negative login scenarios with data-driven coverage
 
-| 📄 Text Box
+| Registration
+| `register.spec.ts`
+| Registration flow coverage
+
+| Text Box
 | `textBox.spec.ts`
-| Field validation (positive and negative)
+| Form field interaction and validation checks
 
-| 🎚️ Radio Button
-| `radioButton.spec.ts`
-| Single-selection logic
-
-| ☑️ Check Box
+| Check Box
 | `checkBox.spec.ts`
-| Multi-selection and visibility
+| Current DemoQA tree structure and result-message validation
 
-| 📊 Web Tables
-| `webTables.spec.ts`
-| CRUD operations and pagination
+| Radio Button
+| `radioButton.spec.ts`
+| Selection-state validation
 
-| 🖱️ Buttons
+| Buttons
 | `buttons.spec.ts`
-| Single, double, and right-clicks
+| Click, double-click, and right-click behavior
 
-| 🔗 Navigation
+| Links
+| `links.spec.ts`
+| Link behavior checks
+
+| Alerts
+| `alerts.spec.ts`
+| Dialog and alert coverage
+
+| Web Tables
+| `webTables.spec.ts`
+| CRUD-style table workflows and search coverage
+
+| Broken Links / Images
+| `brokenLinksImages.spec.ts`
+| Valid and broken state checks aligned to current site behavior
+
+| Navigation
 | `navigation.spec.ts`
-| Sidebar and direct URL validation
+| Sidebar and direct-link navigation patterns
 
-| 📑 Reports
-| `GitHub Pages`
-| Full HTML report viewer
+| Book Store
+| `bookstore.spec.ts`
+| Book Store and related user flow coverage
 |===
 
-All tests follow the Page Object Model with `assertOnPage()` methods.
+== Documentation Map
 
-== Contributing
+* link:features-functions.html[Features / Functions]
+* link:coding-standards.html[Playwright Coding Standards and Guidelines]
+* link:system-under-test.html[System Under Test & Test Approach]
+* link:way-of-working.html[Way of Working]
+* link:roles.html[Roles in Test Automation]
 
-PRs welcome! Ideas for new test scenarios or tools are especially appreciated.
+CI-generated reports and published docs are available at
+link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages].
 
-== License
+== Notes
 
-MIT License.
+This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.

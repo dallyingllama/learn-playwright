@@ -1,0 +1,31 @@
+= `NavigablePage` Interface
+:toc: left
+
+== Purpose
+
+The `NavigablePage` interface gives page objects a common navigation contract.
+
+In this repo, it is used with the `gotoHelper` utility so tests can work with consistent navigation behavior across multiple page objects.
+
+== Definition
+
+[source,ts]
+----
+include::../../pageObjects/interfaces/NavigablePage.ts[]
+----
+
+== Typical Use
+
+[source,ts]
+----
+this.goto = createGotoWithVariants(
+  async () => await this.gotoViaSidebarMenu(),
+  async () => await this.gotoViaDirectLink()
+);
+----
+
+== Benefits
+
+* keeps navigation expectations consistent across page objects
+* makes multiple navigation strategies easier to reuse
+* supports cleaner page-object contracts in tests

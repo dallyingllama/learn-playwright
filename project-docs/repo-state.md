@@ -9,13 +9,13 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ### Present in the repository
 
 - `tests/` contains 12 Playwright spec files covering login, registration, text box, checkbox, buttons, links, alerts, bookstore, navigation, radio buttons, broken links/images, and web tables.
-- `pageObjects/` contains 42 files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
+- `pageObjects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
 - `data/` contains reusable test data definitions such as login data, bookstore data, and navigation metadata.
 - `utils/` contains shared helpers for fake data generation, annotations, and multi-strategy navigation helpers.
 - `.env/` contains environment-specific config files: `dev.env`, `test.env`, `e2e.env`, and `fail.env`.
 - `.github/workflows/` contains one CI workflow for running tests, building docs, uploading artifacts, and publishing report history to GitHub Pages.
 - `.github/scripts/` contains an EJS template and a Node script for generating a historical Playwright report index.
-- `docs/` now appears to be reserved for publishable documentation source, currently `docs/index.adoc` plus theme assets.
+- `docs/` now contains a broader publishable documentation set: `docs/index.adoc`, supporting topic pages, feature/guideline subfolders, `_includes/`, and theme assets.
 - `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `learnplaywright.md`, and the new `backlog.md`.
 - `config/` is described in `agents.md` as the place for environment and config handling, but it is not currently present as a top-level folder. At the moment, this responsibility is handled mainly through `playwright.config.ts` and `.env/`.
 
@@ -43,11 +43,16 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `docs/index.adoc` provides a published project overview.
 - `project-docs/` separates internal development/process documentation from publishable site documentation.
 - `package.json` includes local doc build and preview scripts.
+- `package.json` now pins the package manager as `pnpm@10.9.0`.
+- The local docs workflow is exposed through `docs:build` and `docs:preview`.
+- The local docs build now walks the full `docs/` tree recursively and writes matching `.html` output into `localDocs/`, including nested `features/` and `guidelines/` pages.
 - GitHub Actions publishes Playwright report history and generated docs to GitHub Pages.
+- The GitHub Actions docs build now mirrors the recursive local docs build by generating nested HTML pages instead of only top-level docs.
 - `.github/scripts/render-index.js` creates a browsable history index from prior runs.
 - The workflow now uses newer GitHub Action major versions and a Node 24 runtime.
 - `project-docs/codex-workflow.md` now explicitly tells new sessions to use `AGENTS.md`, `project-docs/repo-state.md`, and `project-docs/backlog.md` together.
 - `project-docs/backlog.md` now acts as the working list for follow-up improvements and tech-debt cleanup.
+- The published AsciiDoc pages were recently refreshed to better match the current repo structure, `pnpm` usage, and current test/docs workflow.
 
 ## Notable Strengths
 
@@ -56,6 +61,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Test data is separated from test logic in several places.
 - CI, docs, and report publishing are integrated rather than being an afterthought.
 - The `docs/` vs `project-docs/` split is a good clarity improvement because publishable content and internal workflow notes now have distinct homes.
+- The merged docs structure suggests the publishable site is evolving beyond a single landing page into a small documentation set.
+- The local preview experience is better aligned with the published site now that doc-to-doc links target generated `.html` pages and nested pages are built locally.
 - The project covers a broad portion of DemoQA, which is useful for experimenting with reusable abstractions.
 - Recent Check Box work is a good example of narrowing tests to current real site behavior instead of preserving stale assumptions.
 - The project now has a clearer restart story across sessions because rules, current state, and planned next work are all documented in separate internal files.
@@ -68,6 +75,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - The documented target structure now aligns more closely with the repo, but `config/` is still described as a top-level area that has not yet been created.
 - Naming is a little inconsistent in places, for example `DragablePage.ts` and `AlertsFrameWindowsPage.ts` vs class naming.
 - Documentation references are still being normalized after the `docs/` vs `project-docs/` split.
+- Recent merged docs briefly introduced `/pages` language, but that stray folder has been removed and the repo now consistently uses `pageObjects/` as the real POM directory.
 
 ### 2. Locator quality and maintainability
 
@@ -98,15 +106,18 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `agents.md` is now much closer to the repo as checked in, and it reflects the new `project-docs/` location for internal documentation.
 - `project-docs/codex-workflow.md` has been updated to reference `project-docs/repo-state.md` and `project-docs/backlog.md`.
 - `project-docs/backlog.md` now exists and provides an initial prioritized list of cleanup, CI, architecture, and documentation work for the next phase.
-- `docs/index.adoc` gives a solid overview, but it does not yet document the actual environment model, helper patterns, or current architectural inconsistencies.
+- The publishable `.adoc` pages now better reflect the actual repo structure, `pnpm`-first commands, current test coverage, and the real `pageObjects/` directory.
+- `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
 - `agents.md` still mentions `config/` as a top-level folder that has not yet been introduced.
 - The repo appears to be in the middle of a docs reorganization: `project-docs/learnplaywright.md` exists, while the former top-level `learnplaywright.md` has been removed.
+- One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
 
 ### 7. Current validation status
 
 - `tests/webTables.spec.ts` and `pageObjects/WebTablesPage.ts` were recently refactored to better match the current DemoQA table behavior, including removal of the no-longer-reliable sort test.
 - `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` now reflect the current DemoQA checkbox tree and have been simplified around explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` was updated to reduce command-line timing sensitivity around image loading and to align with the current valid/broken link behavior.
+- The local docs build was reworked and verified on Windows so `docs:build` now generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The local suite appears to be in a better state than earlier in the work, but this document should still be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
 
 ## Suggested Near-Term Improvements
@@ -117,9 +128,10 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 4. Decide on a clear CI strategy for `fast sanity` vs `full regression` now that the workflow no longer filters by tag.
 5. Tighten typings in helpers and test data builders.
 6. Finish the documentation reference cleanup so workflow prompts point to `project-docs/repo-state.md` and any future backlog file lives in a clearly chosen home.
-7. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
-8. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
+7. Resolve the remaining `docs/features/conventions.adoc` table warning so the docs build is clean in both local preview and CI.
+8. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
+9. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
 
 ## Summary
 
-The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, and Broken Links. The biggest next step is consistency: make navigation deterministic, reduce hard waits, unify page object patterns, finish aligning the internal documentation references with the current repo layout, and define a clearer CI strategy for fast vs full test execution.
+The repository is in a good intermediate state: it already demonstrates meaningful Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. Recent work has also brought several flaky or stale areas back in line with the current DemoQA UI, especially Check Box, Web Tables, Bookstore, and Broken Links, and the docs publishing area has expanded into a larger AsciiDoc set with a better-aligned local preview/build flow. The biggest next step is consistency: make navigation deterministic, reduce hard waits, finish the remaining docs cleanup, and define a clearer CI strategy for fast vs full test execution.

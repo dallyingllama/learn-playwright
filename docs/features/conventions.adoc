@@ -1,0 +1,41 @@
+== Guidelines for DemoQA
+
+== Project Structure
+The DemoQA project follows a specific structure to ensure clarity and maintainability. Below is an overview of the key directories and their purposes:
+
+[cols="1,1,1"]
+|===
+|Directory | Purpose | local/repo
+|`/data` | Contains test data files. These files can be used to store test data in a structured format, such as JSON or CSV.| repo
+|`/docs` | Contains documentation files. These files can include project documentation, user guides, and other relevant information.| repo
+|`history` | Contains the history of the project. This directory can include previous versions of files, changelogs, and other historical information.| local
+|`localDocs` | Contains local documentation files created when testing asciidoc.| local
+|`node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using npm or yarn.| local
+|`/pageObjects` | Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.| repo
+|`playwright-report` | Contains Playwright test reports. These reports provide detailed information about the test runs, including screenshots and logs.| local
+|`/tests` | Contains all test files. Each test file corresponds to a specific feature or functionality of the application.| repo
+|`/utils` | Contains utility functions and helpers that can be used across different test files.| repo
+|`/config` | Contains configuration files. These files can include environment variables, test configurations, and other settings that are used throughout the project.
+|`/screenshots` | Contains screenshots taken during test execution. These screenshots can be used for debugging and verification purposes.
+|`/logs` | Contains log files generated during test execution. These logs can provide detailed information about the test runs and help in identifying issues.
+|`/node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using npm or yarn.
+
+== Naming Conventions
+The following table outlines the basic naming conventions used in the DemoQA project. These conventions help maintain consistency and readability across the codebase.
+
+[cols="1,1,1"]
+|===
+|Topic | Description | Example
+
+|POM Folder 
+|`pageObjects`
+|`pageObjects/FooPage.ts`
+
+|FileName & Class Name
+|PascalCase 
+|`FooPage.ts`, `FooPage`
+
+|Method Name
+|camelCase
+|`goto()`, `assertOnPage()`
+|=== 
