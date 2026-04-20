@@ -35,6 +35,8 @@ Install dependencies:
 
 [source,bash]
 ----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
 corepack pnpm install
 corepack pnpm exec playwright install
 ----
