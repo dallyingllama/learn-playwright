@@ -67,7 +67,7 @@ Run tests:
 pnpm run test:dev
 
 Run one test:
-cross-env TEST_ENV=dev npx playwright test tests/example.spec.ts
+pnpm exec cross-env TEST_ENV=dev playwright test tests/example.spec.ts
 
 Open UI mode:
 pnpm run test:ui:dev
