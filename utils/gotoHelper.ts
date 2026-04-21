@@ -1,24 +1,36 @@
 // utils/gotoHelper.ts
 
-type GotoVariants = {
+export type GotoMethod = 'viaMenu' | 'viaDirectLink';
+
+type CreateGotoOptions = {
+  defaultMethod?: GotoMethod;
+};
+
+export type GotoVariants = {
   (): Promise<void>;
   viaMenu: () => Promise<void>;
   viaDirectLink: () => Promise<void>;
+  random: () => Promise<void>;
 };
 
 export function createGotoWithVariants(
   viaMenuFn: () => Promise<void>,
-  viaDirectLinkFn: () => Promise<void>
+  viaDirectLinkFn: () => Promise<void>,
+  options: CreateGotoOptions = {}
 ): GotoVariants {
-  const randomGoto = async () => {
-    const useMenu = Math.random() > 0.5;
-    return useMenu ? goto.viaMenu() : goto.viaDirectLink();
-  };
+  const defaultMethod = options.defaultMethod ?? 'viaDirectLink';
 
-  const goto: GotoVariants = Object.assign(randomGoto, {
-    viaMenu: viaMenuFn,
-    viaDirectLink: viaDirectLinkFn
-  });
+  const goto: GotoVariants = Object.assign(
+    async () => goto[defaultMethod](),
+    {
+      viaMenu: viaMenuFn,
+      viaDirectLink: viaDirectLinkFn,
+      random: async () => {
+        const useMenu = Math.random() > 0.5;
+        return useMenu ? goto.viaMenu() : goto.viaDirectLink();
+      }
+    }
+  );
 
   return goto;
 }

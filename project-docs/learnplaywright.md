@@ -70,6 +70,8 @@
 `git diff --staged`
 
 - Then commit normally.
+- or just combine it all
+`git add --renormalize . && git commit -m "your message"`
 
 ### current CI behavior
 

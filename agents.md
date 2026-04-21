@@ -104,3 +104,10 @@ Avoid:
 - Explain reasoning behind suggestions
 - Favor small, safe improvements
 - If a task is unclear, inspect the repo and summarize current state first
+- Make one logical change at a time.
+- When, for example, a shared utility or libraray needs to change, update that first, then suggest the next step so it can be reviewed
+- if there are affected tests, we should fix and test them one by one and not all at once, this way if they are not working we don't waste too much time. 
+- Do not combine unrelated refactors, cleanup, and test fixes in the same pass. Suggest a phased approach.
+- Prefer the smallest safe change that gets the current step working.
+- After each file or small group of closely related files, stop and report what changed.
+- Do not move on to the next phase until the previous phase is complete and summarized.
