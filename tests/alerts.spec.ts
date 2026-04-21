@@ -6,7 +6,7 @@ test.describe('🔔 Alerts and Windows Tests', () => {
   async function navigateToAlertsPage(page) {
     await test.step('🌐 Navigate to Alerts page', async () => {
       const alertsPage = new AlertsPage(page);
-      await alertsPage.goto();
+      await alertsPage.goto.random();
       await alertsPage.waitForPageReady();
     });
   }

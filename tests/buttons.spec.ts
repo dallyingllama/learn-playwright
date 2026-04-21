@@ -6,7 +6,7 @@ test.describe('🖱️ Buttons Page', () => {
   async function navigateToButtonsPage(page): Promise<ButtonsPage> {
     return await test.step('🌐 Navigate to Buttons page', async () => {
       const buttonsPage = new ButtonsPage(page);
-      await buttonsPage.goto();
+      await buttonsPage.goto.random();
       return buttonsPage;
     });
   }

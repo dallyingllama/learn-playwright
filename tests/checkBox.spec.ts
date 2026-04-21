@@ -8,7 +8,7 @@ test.describe('Elements', () => {
     async function navigateToCheckBoxPage(page): Promise<CheckBoxPage> {
       return await test.step('🌐 Navigate to Check Box page', async () => {
         const checkBoxPage = new CheckBoxPage(page);
-        await checkBoxPage.goto();
+        await checkBoxPage.goto.random();
         return checkBoxPage;
       });
     }

@@ -7,7 +7,7 @@ test.describe('📚 Bookstore Search Scenarios', () => {
   async function navigateToBookstore(page): Promise<BookstorePage> {
     return await test.step('🌐 Navigate to Bookstore page', async () => {
       const bookstore = new BookstorePage(page);
-      await bookstore.goto();
+      await bookstore.goto.random();
       return bookstore;
     });
   }

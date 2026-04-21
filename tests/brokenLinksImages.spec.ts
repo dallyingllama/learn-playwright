@@ -6,7 +6,7 @@ test.describe('✅ Broken Links - Images', () => {
   async function navigateToBrokenLinksImages(page): Promise<BrokenLinksImagesPage> {
     return await test.step('🌐 Navigate to Broken Links - Images page', async () => {
       const brokenPage = new BrokenLinksImagesPage(page);
-      await brokenPage.goto();
+      await brokenPage.goto.random();
       return brokenPage;
     });
   }

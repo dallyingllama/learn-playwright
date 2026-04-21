@@ -7,7 +7,7 @@ test.describe('🔗 Links Page', () => {
   async function navigateToLinksPage(page): Promise<LinksPage> {
     return await test.step('🌐 Navigate to Links page', async () => {
       const linksPage = new LinksPage(page);
-      await linksPage.goto();
+      await linksPage.goto.random();
       return linksPage;
     });
   }

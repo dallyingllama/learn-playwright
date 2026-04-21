@@ -9,7 +9,7 @@ test.describe('Elements', () => {
       const radioPage = new RadioButtonPage(page);
 
       await test.step('Navigate to Radio Button page', async () => {
-        await radioPage.goto();
+        await radioPage.goto.random();
       });
 
       await test.step('Select "Yes" radio button', async () => {
@@ -25,7 +25,7 @@ test.describe('Elements', () => {
       const radioPage = new RadioButtonPage(page);
 
       await test.step('Navigate to Radio Button page', async () => {
-        await radioPage.goto();
+        await radioPage.goto.random();
       });
 
       await test.step('Select "Impressive" radio button', async () => {
@@ -41,7 +41,7 @@ test.describe('Elements', () => {
       const radioPage = new RadioButtonPage(page);
 
       await test.step('Navigate to Radio Button page', async () => {
-        await radioPage.goto();
+        await radioPage.goto.random();
       });
 
       await test.step('Check if "No" button is disabled', async () => {

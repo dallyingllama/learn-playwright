@@ -54,12 +54,15 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 
 ## 2. Architecture and Test Design
 
-### 2.1 Clarify deterministic vs randomized navigation coverage
+### 2.1 Clarify deterministic vs randomized navigation coverage (Completed)
 
-- Review `utils/gotoHelper.ts`.
-- Keep support for randomized navigation behavior because it demonstrates a useful real-world testing technique.
-- Decide whether the default usage should encourage a deterministic test first, followed by an explicit randomized coverage pass where helpful.
-- Make the intent easy to understand in code and docs so future changes do not treat randomness as accidental flakiness.
+- Reviewed `utils/gotoHelper.ts`.
+- Kept support for randomized navigation behavior because it demonstrates a useful real-world testing technique.
+- Changed plain `goto()` to a deterministic default and made randomized behavior explicit through `goto.random()`.
+- Kept `tests/navigation.spec.ts` as the explicit deterministic proof that both navigation methods work.
+- Updated feature specs to use explicit randomized navigation where navigation is setup rather than the behavior under test.
+- Left `login.spec.ts` and `textBox.spec.ts` as examples of the deterministic-first plus randomized-follow-up pattern.
+- Documentation now reflects the intended usage so future changes do not treat randomness as accidental flakiness.
 
 ### 2.2 Standardize page object structure
 

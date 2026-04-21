@@ -46,6 +46,22 @@
 
 `pnpm run test:e2e -- --grep=@sanity`
 
+### navigation pattern
+
+- `tests/navigation.spec.ts` is the explicit place where both navigation methods are tested directly.
+- In most other feature specs, navigation is setup rather than the behavior under test.
+- For shared page objects using `gotoHelper`:
+
+`goto()` = deterministic default navigation
+`goto.viaMenu()` = explicit menu navigation
+`goto.viaDirectLink()` = explicit direct-link navigation
+`goto.random()` = explicit randomized navigation
+
+- Current repo pattern:
+  - use deterministic navigation where the test is demonstrating navigation behavior clearly
+  - use randomized navigation in feature specs when navigation is just part of setup
+  - keep randomized behavior explicit rather than hidden in the default `goto()`
+
 ### basic git commands
 
 `git status`

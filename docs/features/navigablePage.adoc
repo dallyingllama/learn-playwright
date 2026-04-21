@@ -24,8 +24,15 @@ this.goto = createGotoWithVariants(
 );
 ----
 
+That gives page objects a shared navigation contract with:
+
+* a deterministic default `goto()`
+* explicit `goto.viaMenu()` and `goto.viaDirectLink()` methods
+* an explicit `goto.random()` method for intentional randomized coverage
+
 == Benefits
 
 * keeps navigation expectations consistent across page objects
 * makes multiple navigation strategies easier to reuse
 * supports cleaner page-object contracts in tests
+* makes randomized navigation an intentional choice instead of accidental behavior

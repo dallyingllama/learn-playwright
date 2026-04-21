@@ -9,7 +9,7 @@ test.describe('📊 Web Tables', () => {
     const user = generateFakeTableUser();
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('➕ Add new user', async () => {
@@ -26,7 +26,7 @@ test.describe('📊 Web Tables', () => {
     const webTablesPage = new WebTablesPage(page);
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('🔍 Search for known user "Cierra"', async () => {
@@ -40,7 +40,7 @@ test.describe('📊 Web Tables', () => {
     const user = generateFakeTableUser();
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('➕ Add user and delete after search', async () => {
@@ -59,7 +59,7 @@ test.describe('📊 Web Tables', () => {
     const webTablesPage = new WebTablesPage(page);
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('🔢 Set pagination to 10 and validate', async () => {
@@ -81,7 +81,7 @@ test.describe('📊 Web Tables', () => {
     const updated = generateFakeTableUser();
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('➕ Add user and update with new info', async () => {
@@ -100,7 +100,7 @@ test.describe('📊 Web Tables', () => {
     const webTablesPage = new WebTablesPage(page);
 
     await test.step('📄 Navigate to Web Tables page', async () => {
-      await webTablesPage.goto();
+      await webTablesPage.goto.random();
     });
 
     await test.step('✅ Check email column format for each row', async () => {
