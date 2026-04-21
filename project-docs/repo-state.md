@@ -25,6 +25,10 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 - Page Object Model is the dominant pattern across the suite.
 - Navigation supports multiple strategies through `createGotoWithVariants()` in `utils/gotoHelper.ts`.
+- Shared page objects use deterministic `goto()` by default, explicit `goto.viaMenu()` and `goto.viaDirectLink()` methods, and explicit randomized navigation through `goto.random()`.
+- `tests/navigation.spec.ts` is the explicit navigation coverage spec for menu and direct-link navigation methods.
+- Feature specs such as alerts, bookstore, broken links/images, buttons, checkbox, links, radio button, and web tables use explicit randomized navigation when navigation is setup rather than the behavior under test.
+- `tests/login.spec.ts` and `tests/textBox.spec.ts` demonstrate a deterministic baseline plus randomized follow-up pattern.
 - Many tests use `test.step()` well, which makes reports easier to read.
 - Data-driven testing is already in use, especially in `tests/login.spec.ts` and `tests/navigation.spec.ts`.
 - Faker-based test data generation exists for form and table workflows.
@@ -33,6 +37,9 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Broken Links / Images assertions have been adjusted to match the current DemoQA page intent and to be less timing-sensitive in command-line runs.
 - The suite uses `@sanity` as a lightweight example tag, with one representative test tagged in each spec file.
 - `tests/alerts.spec.ts` includes one intentional timing assertion for the delayed-alert scenario.
+- `pageObjects/LoginPage.ts` uses user-visible post-login assertions such as `/profile`, `Logout`, and visible username text instead of fragile login-state locators.
+- `pageObjects/BasePage.ts` contains the shared home-card navigation helper used by many menu-based page objects.
+- Several page objects use stronger `waitForPageReady()` checks based on meaningful controls rather than heading-only assertions. Recent examples include Alerts, Book Store, Check Box, Links, Web Tables, Frames, Auto Complete, Upload and Download, and Dynamic Properties.
 
 ### Environment management
 
@@ -59,6 +66,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `project-docs/codex-workflow.md` tells new sessions to use `AGENTS.md`, `project-docs/repo-state.md`, and `project-docs/backlog.md` together.
 - `project-docs/backlog.md` acts as the working list for follow-up improvements and tech-debt cleanup.
 - The published AsciiDoc pages describe the repo structure, `pnpm` usage, and test/docs workflow.
+- `AGENTS.md` includes a documentation-writing rule: describe the repository as it is today with simple factual statements and avoid unnecessary comparison language.
 
 ## Notable Strengths
 
@@ -92,8 +100,10 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ### 3. Flakiness risks
 
-- `utils/gotoHelper.ts` uses `Math.random()` when plain `goto()` is called, which introduces non-deterministic navigation behavior.
+- Explicit randomized navigation still introduces variability in stressed runs, especially when many specs run in parallel or in headed/UI mode.
+- Shared home-card navigation from the DemoQA landing page can still be sensitive to page load timing and pointer interception during stressed runs.
 - `tests/alerts.spec.ts` still contains one `waitForTimeout`, but it is now an intentional timing assertion for the delayed-alert behavior rather than a generic synchronization shortcut.
+- Some page objects still rely on heading-only readiness checks and are likely candidates for stronger page-specific readiness assertions.
 - Some flows still rely on broad row counts or broad text checks that may be less stable than more targeted assertions, although `WebTablesPage` and `CheckBoxPage` have moved toward more page-specific assertions.
 
 ### 4. CI/test selection and tag intent
@@ -111,6 +121,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ### 6. Documentation accuracy
 
 - `AGENTS.md` reflects the `project-docs/` location for internal documentation.
+- `AGENTS.md` also includes the current rule for concise present-state documentation wording.
 - `project-docs/codex-workflow.md` references `project-docs/repo-state.md` and `project-docs/backlog.md`.
 - `project-docs/backlog.md` provides a prioritized list of cleanup, CI, architecture, and documentation work.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `pageObjects/` directory.
@@ -120,6 +131,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
 - The repo includes single-spec commands in `package.json`, and the internal/published docs match that workflow.
+- Backlog item `1.7` is complete. The reviewed docs describe the repository as it is today and avoid unnecessary change-history language.
 
 ### 7. Current validation status
 
@@ -127,21 +139,26 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` aligns with the current valid/broken link behavior and uses less timing-sensitive image checks.
 - `tests/alerts.spec.ts` uses one deliberate timed wait because timing is the behavior under test.
+- `utils/gotoHelper.ts` uses deterministic default navigation and explicit randomized navigation through `goto.random()`.
+- Backlog item `2.1` is complete. The helper, representative specs, and docs all reflect the deterministic-vs-randomized navigation strategy.
+- `LoginPage` and `BookstorePage` have stronger page-state assertions than before, and several page objects use stronger readiness checks to reduce stress-related failures.
 - Backlog item `1.5` is complete: there are no generic `waitForTimeout` synchronization workarounds in test code.
+- Backlog item `1.7` is complete: internal and publishable docs were reviewed and updated for factual present-state wording.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
-- The local suite appears to be in a better state than earlier in the work, but this document should still be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
+- Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.
+- This document should be treated as a code-level status summary rather than a proof that every workflow path is fully green on every environment.
 
 ## Suggested Near-Term Improvements
 
 1. Continue improving page-specific readiness checks and shared navigation stability for stressed runs.
 2. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
 3. Tighten typings in helpers and test data builders.
-4. Finish the documentation reference cleanup so workflow prompts point to `project-docs/repo-state.md` and any future backlog file lives in a clearly chosen home.
+4. Review which remaining page objects still use heading-only readiness checks and strengthen them incrementally when they appear in stressed-run failures.
 5. Resolve the remaining `docs/features/conventions.adoc` table warning so the docs build is clean in both local preview and CI.
 6. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
 7. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
 
 ## Summary
 
-The repository is in a good intermediate state. It demonstrates Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. The biggest next step is consistency: keep improving shared page-object structure and typing, strengthen stressed-run stability, and finish the remaining docs cleanup.
+The repository is in a good intermediate state. It demonstrates Playwright architecture, reusable page objects, environment-based execution, generated test data, and GitHub Pages reporting. The navigation strategy and documentation are clearer than before, and the biggest next step is consistency: keep improving shared page-object structure and typing, strengthen stressed-run stability, and finish the remaining docs cleanup.
