@@ -28,7 +28,7 @@ test.describe('Valid Login Scenarios', () => {
 
       await test.step(`Login with valid credentials (${username})`, async () => {
         await loginPage.login(username, password);
-        await loginPage.expectSuccessfulLogin();
+        await loginPage.expectSuccessfulLogin(username);
       });
     });
   }
@@ -39,7 +39,7 @@ test.describe('Valid Login Scenarios', () => {
 
     await test.step(`Login with valid credentials (${username}) after randomized navigation`, async () => {
       await loginPage.login(username, password);
-      await loginPage.expectSuccessfulLogin();
+      await loginPage.expectSuccessfulLogin(username);
     });
   });
 });

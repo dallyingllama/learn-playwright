@@ -13,6 +13,7 @@ const config = {
 
 export class LoginPage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly loginErrorMessage = 'Invalid username or password!';
 
   // Locators
   private usernameInputLocator: Locator;
@@ -41,8 +42,8 @@ export class LoginPage extends BasePage implements NavigablePage {
     this.usernameInputLocator = page.locator('#userName');
     this.passwordInputLocator = page.locator('#password');
     this.loginButtonLocator = page.locator('#login');
-    this.logoutButtonLocator = page.locator('#submit');
-    this.errorMessageLocator = page.locator('#name'); // "name" is actually the ID for the error msg
+    this.logoutButtonLocator = page.getByRole('button', { name: 'Logout' });
+    this.errorMessageLocator = page.getByText(this.loginErrorMessage);
   }
 
   override async waitForPageReady(): Promise<void> {
@@ -66,12 +67,15 @@ export class LoginPage extends BasePage implements NavigablePage {
     await this.loginButtonLocator.click();
   }
 
-  async expectSuccessfulLogin() {
-    await expect(this.page.locator('#userName-value')).toBeVisible();
+  async expectSuccessfulLogin(username: string) {
+    await expect(this.page).toHaveURL(/\/profile$/);
+    await expect(this.logoutButtonLocator).toBeVisible();
+    await expect(this.page.getByText(username, { exact: false })).toBeVisible();
   }
 
   async expectFailedLogin() {
-    await expect(this.errorMessageLocator).toContainText('Invalid username or password!');
+    await expect(this.page).toHaveURL(/\/login$/);
+    await expect(this.errorMessageLocator).toBeVisible();
   }
 
   async expectFieldInvalid(selector: string) {

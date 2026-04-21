@@ -44,11 +44,15 @@ export class AlertsPage extends BasePage implements NavigablePage {
   
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.alertButton).toBeVisible();
+    await expect(this.timerAlertButton).toBeVisible();
+    await expect(this.confirmButton).toBeVisible();
+    await expect(this.promptButton).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }
   }
   

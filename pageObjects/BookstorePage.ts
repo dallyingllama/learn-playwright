@@ -15,6 +15,7 @@ export class BookstorePage extends BasePage implements NavigablePage {
   readonly goto;
   private readonly table = this.page.getByRole('table');
   private readonly pageIndicator = this.page.getByText('Page 1 of 0');
+  private readonly loadingIndicator = this.page.getByText('Loading...');
 
   constructor(page: Page) {
     super(page);
@@ -52,7 +53,11 @@ export class BookstorePage extends BasePage implements NavigablePage {
   }
 
   override async waitForPageReady(): Promise<void> {
-    await expect(this.page.locator('#searchBox')).toBeVisible();
+    if (await this.loadingIndicator.isVisible().catch(() => false)) {
+      await expect(this.loadingIndicator).toBeHidden({ timeout: 15000 });
+    }
+
+    await expect(this.page.locator('#searchBox')).toBeVisible({ timeout: 15000 });
     await expect(this.getHeaderRowGroup()).toContainText('Title');
   }
   
