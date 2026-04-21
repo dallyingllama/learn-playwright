@@ -54,11 +54,12 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 
 ## 2. Architecture and Test Design
 
-### 2.1 Make navigation deterministic
+### 2.1 Clarify deterministic vs randomized navigation coverage
 
 - Review `utils/gotoHelper.ts`.
-- Decide whether the random navigation variant behavior should be removed, limited, or made opt-in.
-- Favor predictable defaults while preserving the learning value of multiple navigation strategies.
+- Keep support for randomized navigation behavior because it demonstrates a useful real-world testing technique.
+- Decide whether the default usage should encourage a deterministic test first, followed by an explicit randomized coverage pass where helpful.
+- Make the intent easy to understand in code and docs so future changes do not treat randomness as accidental flakiness.
 
 ### 2.2 Standardize page object structure
 

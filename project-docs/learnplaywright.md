@@ -46,6 +46,31 @@
 
 `pnpm run test:e2e -- --grep=@sanity`
 
+### basic git commands
+
+`git status`
+`git diff`
+`git diff --staged`
+`git add .`
+`git commit -m "your message"`
+`git pull`
+`git push`
+
+### line endings and `.gitattributes`
+
+- This repo uses `.gitattributes` to keep source files normalized to `LF`.
+- If you see a warning like `warning: in the working copy of 'project-docs/backlog.md', CRLF will be replaced by LF the next time Git touches it`, check that `.gitattributes` is present and then renormalize before commit.
+- Useful command:
+
+`git add --renormalize .`
+
+- After that, recheck what will be committed:
+
+`git status`
+`git diff --staged`
+
+- Then commit normally.
+
 ### current CI behavior
 
 - GitHub Actions now runs the `@sanity` tests first.
