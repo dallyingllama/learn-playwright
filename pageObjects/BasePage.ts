@@ -31,15 +31,27 @@ export class BasePage {
     }
   }
 
+  private async clickHomeCard(cardTitle: string): Promise<void> {
+    const categoryCards = this.page.locator('.category-cards');
+    const cardLink = categoryCards.getByRole('link', { name: cardTitle, exact: true }).first();
+
+    await categoryCards.waitFor({ state: 'visible' });
+    await cardLink.waitFor({ state: 'visible' });
+    await cardLink.scrollIntoViewIfNeeded();
+
+    try {
+      await cardLink.click();
+    } catch {
+      await cardLink.evaluate((element: HTMLElement) => element.click());
+    }
+  }
+
   async openSidebarFromHome(cardTitle: string): Promise<void> {
     // Navigate to home only if not already there
     if (!this.page.url().endsWith('/')) {
       await this.gotoHomePage();
     }
-    const card = this.page.getByText(cardTitle, { exact: true });
-    await card.waitFor({ state: 'visible' });
-    await card.scrollIntoViewIfNeeded();
-    await card.click();
+    await this.clickHomeCard(cardTitle);
 
     await this.waitForExpandedSidebar(cardTitle);
   }

@@ -13,6 +13,7 @@ const config = {
 
 export class AutoCompletePage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly multipleColorInput = this.page.locator('#autoCompleteMultipleInput');
   
   constructor(page: Page) {
     super(page);
@@ -31,10 +32,11 @@ export class AutoCompletePage extends BasePage implements NavigablePage {
   
     override async waitForPageReady(): Promise<void> {
       await expect(this.page.locator('h1')).toHaveText(config.header);
+      await expect(this.multipleColorInput).toBeVisible();
     }
   
     async assertOnPage(): Promise<void> {
       await expect(this.page).toHaveURL(config.url);
-      await expect(this.page.locator('h1')).toHaveText(config.header);
+      await this.waitForPageReady();
     }
   }

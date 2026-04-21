@@ -31,11 +31,13 @@ export class WebTablesPage extends BasePage implements NavigablePage {
 
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.searchBox).toBeVisible();
+    await expect(this.addButton).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }    
 
   // Locators

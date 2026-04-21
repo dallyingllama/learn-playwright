@@ -13,6 +13,8 @@ const config = {
 
 export class UploadAndDownloadPage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly downloadButton = this.page.locator('#downloadButton');
+  private readonly uploadInput = this.page.locator('#uploadFile');
   constructor(page: Page) {
     super(page);
 
@@ -31,10 +33,12 @@ export class UploadAndDownloadPage extends BasePage implements NavigablePage {
   
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.downloadButton).toBeVisible();
+    await expect(this.uploadInput).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }
 }

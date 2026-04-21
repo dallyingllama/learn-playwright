@@ -13,6 +13,8 @@ const config = {
 
 export class DynamicPropertiesPage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly enableAfterButton = this.page.locator('#enableAfter');
+  private readonly colorChangeButton = this.page.locator('#colorChange');
   constructor(page: Page) {
     super(page);
 
@@ -31,10 +33,12 @@ export class DynamicPropertiesPage extends BasePage implements NavigablePage {
   
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.enableAfterButton).toBeVisible();
+    await expect(this.colorChangeButton).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }
 }
