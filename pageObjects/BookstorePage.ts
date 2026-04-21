@@ -40,10 +40,7 @@ export class BookstorePage extends BasePage implements NavigablePage {
 
   // Goto Methods
   private async gotoViaMenu() {
-    await this.page.goto('/');
-    const card = this.page.locator('.card-body h5', { hasText: config.card });
-    await card.waitFor({ state: 'visible' });
-    await card.click();
+    await this.openSidebarFromHome(config.card);
     await this.waitForPageReady();
   }
 

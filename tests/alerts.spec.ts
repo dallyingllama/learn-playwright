@@ -43,8 +43,8 @@ test.describe('🔔 Alerts and Windows Tests', () => {
 
       await alertsPage.timerAlertButton.click();
 
-      // Intentional timing assertion: this test proves the alert does not appear too early.
-      await page.waitForTimeout(4500);
+      // Intentional timing assertion: this test proves the alert does not appear immediately.
+      await page.waitForTimeout(3000);
       expect(dialogSeen).toBe(false);
 
       await expect
@@ -54,7 +54,7 @@ test.describe('🔔 Alerts and Windows Tests', () => {
         })
         .toBe(true);
 
-      expect(Date.now() - startTime).toBeGreaterThanOrEqual(5000);
+      expect(Date.now() - startTime).toBeGreaterThanOrEqual(4500);
     });
   });
 

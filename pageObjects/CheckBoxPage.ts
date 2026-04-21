@@ -33,6 +33,7 @@ const parentByLabel: Record<string, string | undefined> = {
 
 export class CheckBoxPage extends BasePage implements NavigablePage {
   readonly goto;
+  private readonly treeRootTitle = this.page.locator('.rc-tree-title', { hasText: 'Home' }).first();
 
   constructor(page: Page) {
     super(page);
@@ -51,11 +52,12 @@ export class CheckBoxPage extends BasePage implements NavigablePage {
 
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.treeRootTitle).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }
 
   private escapeRegex(value: string): string {

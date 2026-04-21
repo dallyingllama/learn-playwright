@@ -15,12 +15,29 @@ export class BasePage {
     return this.page;
   }
 
+  private async gotoHomePage(): Promise<void> {
+    try {
+      await this.page.goto('/', { waitUntil: 'domcontentloaded' });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const isRetryableNavigationError =
+        message.includes('ERR_ABORTED') || message.includes('Test timeout');
+
+      if (!isRetryableNavigationError) {
+        throw error;
+      }
+
+      await this.page.goto('/', { waitUntil: 'domcontentloaded' });
+    }
+  }
+
   async openSidebarFromHome(cardTitle: string): Promise<void> {
     // Navigate to home only if not already there
     if (!this.page.url().endsWith('/')) {
-      await this.page.goto('/');
+      await this.gotoHomePage();
     }
     const card = this.page.getByText(cardTitle, { exact: true });
+    await card.waitFor({ state: 'visible' });
     await card.scrollIntoViewIfNeeded();
     await card.click();
 

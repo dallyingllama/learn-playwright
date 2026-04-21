@@ -30,11 +30,13 @@ export class LinksPage extends BasePage implements NavigablePage {
 
   override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(config.header);
+    await expect(this.simpleLink).toBeVisible();
+    await expect(this.createdLink).toBeVisible();
   }
 
   async assertOnPage(): Promise<void> {
     await expect(this.page).toHaveURL(config.url);
-    await expect(this.page.locator('h1')).toHaveText(config.header);
+    await this.waitForPageReady();
   }
 
   // Locators
@@ -74,18 +76,20 @@ export class LinksPage extends BasePage implements NavigablePage {
     await linkMap[linkType].click();
   }
 
-  async getLinkResponseText(): Promise<string> {
-    return (await this.linkResponse.textContent())?.trim() ?? '';
+  // Methods to click links and validate response
+  async clickLinkAndWaitForResponse(linkId: string): Promise<void> {
+    const link = this.page.locator(`#${linkId}`);
+    await link.click();
+    await expect(this.responseOutput).toBeVisible();
+    await expect.poll(async () => (await this.responseOutput.textContent())?.trim() ?? '').not.toBe('');
   }
 
-// Methods to click links and validate response
-async clickLinkAndWaitForResponse(linkId: string): Promise<void> {
-  const link = this.page.locator(`#${linkId}`);
-  await link.click();
-  await expect(this.responseOutput).toBeVisible();
-}
+  async assertResponseTextContains(text: string): Promise<void> {
+    await expect(this.responseOutput).toContainText(text);
+  }
 
-async assertResponseTextContains(text: string): Promise<void> {
-  await expect(this.responseOutput).toContainText(text);
-}  
+  async getLinkResponseText(): Promise<string> {
+    await expect.poll(async () => (await this.linkResponse.textContent())?.trim() ?? '').not.toBe('');
+    return (await this.linkResponse.textContent())?.trim() ?? '';
+  }
 }
