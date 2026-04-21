@@ -103,6 +103,7 @@ Avoid:
 - Do not introduce a new pattern if a similar one already exists
 - Explain reasoning behind suggestions
 - Favor small, safe improvements
+- In documentation, describe the repository as it is today. Prefer simple factual statements. Avoid comparison language such as "now", "no longer", "instead of", "recently", or references to earlier states unless historical context is required.
 - If a task is unclear, inspect the repo and summarize current state first
 - Make one logical change at a time.
 - When, for example, a shared utility or libraray needs to change, update that first, then suggest the next step so it can be reviewed

@@ -66,7 +66,7 @@ Prompt:
 
 Update `project-docs/repo-state.md` to reflect the latest changes.
 
-This should normally happen at the end of a work session, after the current dialogue is finished and before committing or pushing changes.
+This happens at the end of a work session, after the current dialogue is finished and before committing or pushing changes.
 
 ---
 

@@ -47,10 +47,11 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Examples include names like `DragablePage.ts`.
 - Prefer small, low-risk naming cleanup only where the benefit is clear.
 
-### 1.7 Review doc accuracy after recent repo changes
+### 1.7 Review doc accuracy after recent repo changes (Completed)
 
-- Recheck `project-docs/learnplaywright.md`, `docs/index.adoc`, and any setup notes against the current repo.
-- Make sure CI behavior, GitHub Pages links, and repo structure descriptions still match reality.
+- Rechecked `project-docs/learnplaywright.md`, `docs/index.adoc`, `project-docs/codex-workflow.md`, `project-docs/repo-state.md`, and `AGENTS.md` against the current repo.
+- Updated documentation to describe the repository as it is today with simple factual statements.
+- Confirmed CI behavior, GitHub Pages links, and repo structure descriptions match the current repo.
 
 ## 2. Architecture and Test Design
 

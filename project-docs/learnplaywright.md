@@ -91,15 +91,15 @@
 
 ### current CI behavior
 
-- GitHub Actions now runs the `@sanity` tests first.
-- If the sanity stage passes, the workflow then runs the full `e2e` suite.
+- GitHub Actions runs the `@sanity` tests first.
+- If the sanity stage passes, the workflow runs the full `e2e` suite.
 - If the sanity stage fails, the full suite is skipped.
-- The workflow still publishes one report/history entry per run:
+- The workflow publishes one report/history entry per run:
   - sanity report if sanity fails
   - full-suite report if sanity passes and the full run completes
-- The workflow still ends in a failed state if either the sanity stage or the full suite fails.
+- The workflow ends in a failed state if either the sanity stage or the full suite fails.
 
 ### alerts timing note
 
-- `tests/alerts.spec.ts` no longer uses a short hard wait as a generic sync workaround.
-- The timed alert scenario now uses one intentional timing assertion to verify the alert does not appear before the expected delay and then does appear after it.
+- `tests/alerts.spec.ts` contains one intentional timing assertion.
+- The timed alert scenario verifies that the alert does not appear immediately and then does appear after the expected delay window.

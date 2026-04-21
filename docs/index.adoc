@@ -20,7 +20,7 @@ It is used to explore:
 * GitHub Actions CI
 * GitHub Pages publishing for reports and docs
 
-== Current Highlights
+== Highlights
 
 * 12 Playwright spec files covering key DemoQA flows
 * one `@sanity` example test in each spec file
@@ -98,7 +98,7 @@ Show the Playwright HTML report:
 corepack pnpm run show-report
 ----
 
-== Current Test Coverage
+== Test Coverage
 
 [cols="1,2,3", options="header"]
 |===
@@ -168,4 +168,4 @@ link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages].
 
 This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.
 
-The current CI workflow uses `@sanity` as an example tag for a small gate stage before the full suite. It is intended as a practical demonstration rather than a finalized long-term tagging strategy.
+The CI workflow uses `@sanity` as an example tag for a small gate stage before the full suite. It demonstrates test tagging and staged execution.
