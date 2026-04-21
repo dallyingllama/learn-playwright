@@ -41,13 +41,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>goto()</code> picks between menu-based and direct-link navigation</p>
+<p><code>goto()</code> uses the configured default navigation method</p>
 </li>
 <li>
 <p><code>goto.viaMenu()</code> forces menu-based navigation</p>
 </li>
 <li>
 <p><code>goto.viaDirectLink()</code> forces direct-link navigation</p>
+</li>
+<li>
+<p><code>goto.random()</code> intentionally randomizes between menu-based and direct-link navigation</p>
 </li>
 </ul>
 </div>
@@ -66,13 +69,29 @@ this.goto = createGotoWithVariants(
 );</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>By default in this repo, plain <code>goto()</code> is now used as the deterministic path and randomized navigation is called explicitly with <code>goto.random()</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_important_note">Important Note</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The plain <code>goto()</code> currently uses <code>Math.random()</code> to choose a strategy. That is useful for experimentation, but it also introduces non-deterministic behavior and is now considered a candidate for future cleanup.</p>
+<p>The current testing pattern is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tests/navigation.spec.ts</code> explicitly verifies both navigation methods</p>
+</li>
+<li>
+<p>feature specs can use <code>goto.random()</code> when navigation is only setup and not the main behavior under test</p>
+</li>
+<li>
+<p>a few specs can still keep deterministic setup first when they are meant to demonstrate that pattern clearly</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -132,7 +151,7 @@ export function createGotoWithVariants(
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-21 13:43:35 UTC
+Last updated 2026-04-21 18:54:04 UTC
 </div>
 </div>
 </body>

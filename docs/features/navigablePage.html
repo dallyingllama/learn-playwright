@@ -59,6 +59,22 @@ export interface NavigablePage {
 );</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>That gives page objects a shared navigation contract with:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a deterministic default <code>goto()</code></p>
+</li>
+<li>
+<p>explicit <code>goto.viaMenu()</code> and <code>goto.viaDirectLink()</code> methods</p>
+</li>
+<li>
+<p>an explicit <code>goto.random()</code> method for intentional randomized coverage</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -75,6 +91,9 @@ export interface NavigablePage {
 <li>
 <p>supports cleaner page-object contracts in tests</p>
 </li>
+<li>
+<p>makes randomized navigation an intentional choice instead of accidental behavior</p>
+</li>
 </ul>
 </div>
 </div>
@@ -82,7 +101,7 @@ export interface NavigablePage {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-21 13:43:35 UTC
+Last updated 2026-04-21 18:54:04 UTC
 </div>
 </div>
 </body>
