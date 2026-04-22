@@ -12,7 +12,7 @@ import { DynamicPropertiesPage } from '../pageObjects/DynamicPropertiesPage';
 import { FormsPage } from '../pageObjects/FormsPage';
 import { PracticeFormPage } from '../pageObjects/PracticeFormPage';
 
-import { AlertsWindowsPage } from '../pageObjects/AlertsFrameWindowsPage';
+import { AlertsWindowsPage } from '../pageObjects/AlertsWindowsPage';
 import { BrowserWindowsPage } from '../pageObjects/BrowserWindowsPage';
 import { AlertsPage } from '../pageObjects/AlertsPage';
 import { FramesPage } from '../pageObjects/FramesPage';
@@ -35,7 +35,7 @@ import { SortablePage } from '../pageObjects/SortablePage';
 import { SelectablePage } from '../pageObjects/SelectablePage';
 import { ResizablePage } from '../pageObjects/ResizablePage';
 import { DroppablePage } from '../pageObjects/DroppablePage';
-import { DragablePage } from '../pageObjects/DragablePage';
+import { DragabblePage } from '../pageObjects/DragabblePage';
 
 import { BookstorePage } from '../pageObjects/BookstorePage';
 import { LoginPage } from '../pageObjects/LoginPage';
@@ -99,7 +99,7 @@ export const sections = [
       { name: 'Selectable', page: SelectablePage },
       { name: 'Resizable', page: ResizablePage },
       { name: 'Droppable', page: DroppablePage },
-      { name: 'Dragabble', page: DragablePage },
+      { name: 'Dragabble', page: DragabblePage },
     ],
   },
   {

@@ -41,11 +41,14 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - `tests/alerts.spec.ts` was updated so the timed alert scenario no longer uses a short hard wait as a generic sync workaround.
 - One intentional timed wait remains there because the purpose of that specific test is to prove the alert does not appear before the expected delay.
 
-### 1.6 Clean up stale or inconsistent naming
+### 1.6 Clean up stale or inconsistent naming (Completed)
 
 - Review page object filenames and class names for consistency.
 - Examples include names like `DragablePage.ts`.
 - Prefer small, low-risk naming cleanup only where the benefit is clear.
+- Renamed `pageObjects/DragablePage.ts` and `DragablePage` to `pageObjects/DragabblePage.ts` and `DragabblePage` so naming matches existing DemoQA page labels and URLs used by this repo.
+- Renamed `pageObjects/AlertsFrameWindowsPage.ts` to `pageObjects/AlertsWindowsPage.ts` to match the exported class name and existing usage.
+- Updated imports in `data/navigationSections.ts` and reran `tests/navigation.spec.ts` successfully.
 
 ### 1.7 Review doc accuracy after recent repo changes (Completed)
 

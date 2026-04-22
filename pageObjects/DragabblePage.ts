@@ -1,4 +1,4 @@
-// pageObjects/DragablePage.ts
+// pageObjects/DragabblePage.ts
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { createGotoWithVariants } from '../utils/gotoHelper';
@@ -11,7 +11,7 @@ const config = {
   header: 'Dragabble',
 };
 
-export class DragablePage extends BasePage implements NavigablePage {
+export class DragabblePage extends BasePage implements NavigablePage {
   readonly goto;
   
   constructor(page: Page) {
