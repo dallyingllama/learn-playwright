@@ -62,7 +62,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/pageObjects</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/page-objects</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
 </tr>
@@ -93,32 +93,51 @@
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>|Topic | Description | Example</p>
 </div>
-<div class="paragraph">
-<p>|POM Folder
-|<code>pageObjects</code>
-|<code>pageObjects/FooPage.ts</code></p>
 </div>
+<div class="sect1">
+<h2 id="_naming_conventions">Naming Conventions</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>|FileName &amp; Class Name
-|PascalCase
-|<code>FooPage.ts</code>, <code>FooPage</code></p>
-</div>
-<div class="paragraph">
-<p>|Method Name
-|camelCase
-|<code>goto()</code>, <code>assertOnPage()</code></p>
+<p>The following table outlines the basic naming conventions used in the DemoQA project. These conventions help maintain consistency and readability across the codebase.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Topic</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files and folders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use kebab-case names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>book-data.ts</code>, <code>page-objects/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Types, classes, and interfaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use PascalCase names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BookData</code>, <code>BookDataBuilder</code>, <code>NavigablePage</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables and functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use camelCase names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookData</code>, <code>buildBookData</code>, <code>assertOnPage()</code></p></td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-22 14:23:21 UTC
+Last updated 2026-04-22 19:50:51 UTC
 </div>
 </div>
 </body>
