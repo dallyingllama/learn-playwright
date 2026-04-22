@@ -56,6 +56,13 @@ Goals:
 - Keep test logic separate from test data
 - Reuse existing utilities before creating new ones
 - Prefer incremental improvements over large rewrites
+- Naming conventions:
+  - Files and folders use kebab-case
+  - Types, classes, and interfaces use PascalCase
+  - Variables and functions use camelCase
+- Page object location and naming:
+  - Keep page objects under `/page-objects`
+  - Test specs use kebab-case (for example `broken-links-images.spec.ts`, `textbox.spec.ts`, `radiobutton.spec.ts`, `checkbox.spec.ts`)
 
 # Commands
 
@@ -112,3 +119,13 @@ Avoid:
 - Prefer the smallest safe change that gets the current step working.
 - After each file or small group of closely related files, stop and report what changed.
 - Do not move on to the next phase until the previous phase is complete and summarized.
+- For rename changes, update references in the same pass:
+  - Imports and exports
+  - `package.json` scripts
+  - workflow commands and helper scripts
+  - documentation references
+- For rename changes, run the directly affected spec(s) after each chunk.
+- Use `project-docs/repository-approach.md` as the source for reusable architecture strategy decisions (backlog section `5`).
+- End-of-session checklist:
+  - Update `project-docs/repo-state.md` to match the current repository
+  - Update `project-docs/backlog.md` if status or priorities changed

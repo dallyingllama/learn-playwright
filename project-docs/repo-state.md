@@ -89,7 +89,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Some page objects inherit from `BasePage`, while others still duplicate navigation/setup logic independently.
 - The documented target structure now aligns more closely with the repo, but `config/` is still described as a top-level area that has not yet been created.
 - Naming conventions are documented as: kebab-case for files/folders, PascalCase for classes/interfaces/types, and camelCase for variables/functions.
-- The active page object directory is still `page-objects/`, which does not follow kebab-case naming.
+- The active page object directory is `page-objects/`, and page-object/spec filenames follow kebab-case naming.
 - Documentation references are still being normalized after the `docs/` vs `project-docs/` split.
 - Recent merged docs briefly introduced `/pages` language, but that stray folder has been removed and the repo now consistently uses `page-objects/` as the real POM directory.
 
@@ -125,11 +125,12 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `AGENTS.md` also includes the current rule for concise present-state documentation wording.
 - `project-docs/codex-workflow.md` references `project-docs/repo-state.md` and `project-docs/backlog.md`.
 - `project-docs/backlog.md` provides a prioritized list of cleanup, CI, architecture, and documentation work.
+- `project-docs/backlog.md` also includes section `5` for implementing the reusable architecture strategy and links to `project-docs/repository-approach.md`.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
 - `agents.md` still mentions `config/` as a top-level folder that has not yet been introduced.
 - `project-docs/learn-playwright.md` is the internal learning and setup guide.
-- One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
+- The docs build warning in `docs/features/conventions.adoc` was resolved, and docs build/preview runs cleanly.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
 - The repo includes single-spec commands in `package.json`, and the internal/published docs match that workflow.
 - Backlog item `1.7` is complete. The reviewed docs describe the repository as it is today and avoid unnecessary change-history language.
@@ -138,6 +139,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 - `tests/web-tables.spec.ts` and `page-objects/web-tables-page.ts` match the current DemoQA table behavior.
 - `tests/checkbox.spec.ts`, `page-objects/checkbox-page.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
+- `tests/textbox.spec.ts` and `page-objects/textbox-page.ts` reflect the naming convention updates and continue to validate textbox flows.
+- `tests/radiobutton.spec.ts` and `page-objects/radiobutton-page.ts` reflect the naming convention updates and continue to validate radio-button flows.
 - `tests/broken-links-images.spec.ts` aligns with the current valid/broken link behavior and uses less timing-sensitive image checks.
 - `tests/alerts.spec.ts` uses one deliberate timed wait because timing is the behavior under test.
 - `utils/gotoHelper.ts` uses deterministic default navigation and explicit randomized navigation through `goto.random()`.
@@ -145,6 +148,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `LoginPage` and `BookstorePage` have stronger page-state assertions than before, and several page objects use stronger readiness checks to reduce stress-related failures.
 - Backlog item `1.5` is complete: there are no generic `waitForTimeout` synchronization workarounds in test code.
 - Backlog item `1.7` is complete: internal and publishable docs were reviewed and updated for factual present-state wording.
+- Backlog item `1.8` is complete: naming conventions are applied across repository folders/files and references.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
 - Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.
@@ -156,7 +160,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 2. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
 3. Tighten typings in helpers and test data builders.
 4. Review which remaining page objects still use heading-only readiness checks and strengthen them incrementally when they appear in stressed-run failures.
-5. Resolve the remaining `docs/features/conventions.adoc` table warning so the docs build is clean in both local preview and CI.
+5. Continue implementing backlog section `5` (`project-docs/repository-approach.md`) to move from the single-repo learning setup toward reusable architecture packaging and template/showcase split.
 6. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
 7. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
 
