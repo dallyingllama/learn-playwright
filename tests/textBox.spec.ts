@@ -1,6 +1,6 @@
-// tests/textBox.spec.ts
+// tests/textbox.spec.ts
 import { test, expect } from '@playwright/test';
-import { TextBoxPage } from '../page-objects/text-box-page';
+import { TextBoxPage } from '../page-objects/textbox-page';
 import { generateFakeUser } from '../utils/fakeUser';
 
 test.describe('Text Box Form Tests', () => {

@@ -113,15 +113,15 @@ corepack pnpm run show-report
 | Registration flow coverage
 
 | Text Box
-| `textBox.spec.ts`
+| `textbox.spec.ts`
 | Form field interaction and validation checks
 
 | Check Box
-| `checkBox.spec.ts`
+| `checkbox.spec.ts`
 | Current DemoQA tree structure and result-message validation
 
 | Radio Button
-| `radioButton.spec.ts`
+| `radiobutton.spec.ts`
 | Selection-state validation
 
 | Buttons
@@ -137,11 +137,11 @@ corepack pnpm run show-report
 | Dialog and alert coverage
 
 | Web Tables
-| `webTables.spec.ts`
+| `web-tables.spec.ts`
 | CRUD-style table workflows and search coverage
 
 | Broken Links / Images
-| `brokenLinksImages.spec.ts`
+| `broken-links-images.spec.ts`
 | Valid and broken state checks aligned to current site behavior
 
 | Navigation

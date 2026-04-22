@@ -1,4 +1,4 @@
-// tests/brokenLinksImages.spec.ts
+// tests/broken-links-images.spec.ts
 import { test, expect, request } from '@playwright/test';
 import { BrokenLinksImagesPage } from '../page-objects/broken-links-images-page';
 

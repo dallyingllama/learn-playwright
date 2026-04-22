@@ -1,6 +1,6 @@
-// tests/checkBox.spec.ts
+// tests/checkbox.spec.ts
 import { test, expect } from '@playwright/test';
-import { CheckBoxPage } from '../page-objects/check-box-page';
+import { CheckBoxPage } from '../page-objects/checkbox-page';
 import { checkboxTreeData, checkboxSelectionScenarios, CheckboxTreeNode } from '../data/checkboxData';
 
 test.describe('Elements', () => {

@@ -14,7 +14,7 @@ Covered areas include:
 
 * authentication-related flows such as login and registration
 * form interaction
-* checkbox and radio-button behavior
+* checkbox and radiobutton behavior
 * buttons and links
 * alerts and dialogs
 * web tables

@@ -70,7 +70,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Changed plain `goto()` to a deterministic default and made randomized behavior explicit through `goto.random()`.
 - Kept `tests/navigation.spec.ts` as the explicit deterministic proof that both navigation methods work.
 - Updated feature specs to use explicit randomized navigation where navigation is setup rather than the behavior under test.
-- Left `login.spec.ts` and `textBox.spec.ts` as examples of the deterministic-first plus randomized-follow-up pattern.
+- Left `login.spec.ts` and `textbox.spec.ts` as examples of the deterministic-first plus randomized-follow-up pattern.
 - Documentation now reflects the intended usage so future changes do not treat randomness as accidental flakiness.
 
 ### 2.2 Standardize page object structure
@@ -132,6 +132,9 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Fix the unterminated table block warning in `docs/features/conventions.adoc`.
 - Rebuild the local docs after the fix and confirm feature pages still render and link correctly.
 - Keep the local docs build and CI docs build aligned as the published docs set grows.
+
+## 5. Implement the re-usable architecture strategy. 
+ - See [Repository approach](repository-approach.md)
 
 ## Notes
 

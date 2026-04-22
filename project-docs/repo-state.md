@@ -28,7 +28,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Shared page objects use deterministic `goto()` by default, explicit `goto.viaMenu()` and `goto.viaDirectLink()` methods, and explicit randomized navigation through `goto.random()`.
 - `tests/navigation.spec.ts` is the explicit navigation coverage spec for menu and direct-link navigation methods.
 - Feature specs such as alerts, bookstore, broken links/images, buttons, checkbox, links, radio button, and web tables use explicit randomized navigation when navigation is setup rather than the behavior under test.
-- `tests/login.spec.ts` and `tests/textBox.spec.ts` demonstrate a deterministic baseline plus randomized follow-up pattern.
+- `tests/login.spec.ts` and `tests/textbox.spec.ts` demonstrate a deterministic baseline plus randomized follow-up pattern.
 - Many tests use `test.step()` well, which makes reports easier to read.
 - Data-driven testing is already in use, especially in `tests/login.spec.ts` and `tests/navigation.spec.ts`.
 - Faker-based test data generation exists for form and table workflows.
@@ -136,9 +136,9 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ### 7. Current validation status
 
-- `tests/webTables.spec.ts` and `page-objects/web-tables-page.ts` match the current DemoQA table behavior.
-- `tests/checkBox.spec.ts`, `page-objects/check-box-page.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
-- `tests/brokenLinksImages.spec.ts` aligns with the current valid/broken link behavior and uses less timing-sensitive image checks.
+- `tests/web-tables.spec.ts` and `page-objects/web-tables-page.ts` match the current DemoQA table behavior.
+- `tests/checkbox.spec.ts`, `page-objects/checkbox-page.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
+- `tests/broken-links-images.spec.ts` aligns with the current valid/broken link behavior and uses less timing-sensitive image checks.
 - `tests/alerts.spec.ts` uses one deliberate timed wait because timing is the behavior under test.
 - `utils/gotoHelper.ts` uses deterministic default navigation and explicit randomized navigation through `goto.random()`.
 - Backlog item `2.1` is complete. The helper, representative specs, and docs all reflect the deterministic-vs-randomized navigation strategy.

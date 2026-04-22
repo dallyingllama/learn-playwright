@@ -1,4 +1,4 @@
-// tests/webTables.spec.ts
+// tests/web-tables.spec.ts
 import { test, expect } from '@playwright/test';
 import { WebTablesPage } from '../page-objects/web-tables-page';
 import { generateFakeTableUser } from '../utils/fakeTableUser';

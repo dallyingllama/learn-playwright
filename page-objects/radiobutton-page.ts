@@ -1,4 +1,4 @@
-// page-objects/radio-button-page.ts
+// page-objects/radiobutton-page.ts
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './base-page';
 import { createGotoWithVariants } from '../utils/gotoHelper';

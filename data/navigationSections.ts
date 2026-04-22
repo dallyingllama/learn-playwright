@@ -1,7 +1,7 @@
 import { ElementsPage } from '../page-objects/elements-page';
-import { TextBoxPage } from '../page-objects/text-box-page';
-import { CheckBoxPage } from '../page-objects/check-box-page';
-import { RadioButtonPage } from '../page-objects/radio-button-page';
+import { TextBoxPage } from '../page-objects/textbox-page';
+import { CheckBoxPage } from '../page-objects/checkbox-page';
+import { RadioButtonPage } from '../page-objects/radiobutton-page';
 import { WebTablesPage } from '../page-objects/web-tables-page';
 import { ButtonsPage } from '../page-objects/buttons-page';
 import { LinksPage } from '../page-objects/links-page';
