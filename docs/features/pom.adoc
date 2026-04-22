@@ -4,7 +4,7 @@ The Page Object Model helps keep test code readable by separating page interacti
 
 == In This Repository
 
-The active page object classes live under `pageObjects/`.
+The active page object classes live under `page-objects/`.
 
 The pattern used here generally includes:
 

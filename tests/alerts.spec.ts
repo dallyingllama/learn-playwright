@@ -1,6 +1,6 @@
 // tests/alerts.spec.ts
 import { test, expect } from '@playwright/test';
-import { AlertsPage } from '../pageObjects/AlertsPage';
+import { AlertsPage } from '../page-objects/alerts-page';
 
 test.describe('🔔 Alerts and Windows Tests', () => {
   async function navigateToAlertsPage(page) {

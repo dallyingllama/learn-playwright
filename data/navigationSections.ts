@@ -1,46 +1,46 @@
-import { ElementsPage } from '../pageObjects/ElementsPage';
-import { TextBoxPage } from '../pageObjects/TextBoxPage';
-import { CheckBoxPage } from '../pageObjects/CheckBoxPage';
-import { RadioButtonPage } from '../pageObjects/RadioButtonPage';
-import { WebTablesPage } from '../pageObjects/WebTablesPage';
-import { ButtonsPage } from '../pageObjects/ButtonsPage';
-import { LinksPage } from '../pageObjects/LinksPage';
-import { BrokenLinksImagesPage } from '../pageObjects/BrokenLinksImagesPage';
-import { UploadAndDownloadPage } from '../pageObjects/UploadAndDownloadPage';
-import { DynamicPropertiesPage } from '../pageObjects/DynamicPropertiesPage';
+import { ElementsPage } from '../page-objects/elements-page';
+import { TextBoxPage } from '../page-objects/text-box-page';
+import { CheckBoxPage } from '../page-objects/check-box-page';
+import { RadioButtonPage } from '../page-objects/radio-button-page';
+import { WebTablesPage } from '../page-objects/web-tables-page';
+import { ButtonsPage } from '../page-objects/buttons-page';
+import { LinksPage } from '../page-objects/links-page';
+import { BrokenLinksImagesPage } from '../page-objects/broken-links-images-page';
+import { UploadAndDownloadPage } from '../page-objects/upload-and-download-page';
+import { DynamicPropertiesPage } from '../page-objects/dynamic-properties-page';
 
-import { FormsPage } from '../pageObjects/FormsPage';
-import { PracticeFormPage } from '../pageObjects/PracticeFormPage';
+import { FormsPage } from '../page-objects/forms-page';
+import { PracticeFormPage } from '../page-objects/practice-form-page';
 
-import { AlertsWindowsPage } from '../pageObjects/AlertsWindowsPage';
-import { BrowserWindowsPage } from '../pageObjects/BrowserWindowsPage';
-import { AlertsPage } from '../pageObjects/AlertsPage';
-import { FramesPage } from '../pageObjects/FramesPage';
-import { NestedFramesPage } from '../pageObjects/NestedFramesPage';
-import { ModalDialogsPage } from '../pageObjects/ModalDialogsPage';
+import { AlertsWindowsPage } from '../page-objects/alerts-windows-page';
+import { BrowserWindowsPage } from '../page-objects/browser-windows-page';
+import { AlertsPage } from '../page-objects/alerts-page';
+import { FramesPage } from '../page-objects/frames-page';
+import { NestedFramesPage } from '../page-objects/nested-frames-page';
+import { ModalDialogsPage } from '../page-objects/modal-dialogs-page';
 
-import { WidgetsPage } from '../pageObjects/WidgetsPage';
-import { AccordianPage } from '../pageObjects/AccordianPage';
-import { AutoCompletePage } from '../pageObjects/AutoCompletePage';
-import { DatePickerPage } from '../pageObjects/DatePickerPage';
-import { SliderPage } from '../pageObjects/SliderPage';
-import { ProgressBarPage } from '../pageObjects/ProgressBarPage';
-import { TabsPage } from '../pageObjects/TabsPage';
-import { ToolTipsPage } from '../pageObjects/ToolTipsPage';
-import { MenuPage } from '../pageObjects/MenuPage';
-import { SelectMenuPage } from '../pageObjects/SelectMenuPage';
+import { WidgetsPage } from '../page-objects/widgets-page';
+import { AccordianPage } from '../page-objects/accordian-page';
+import { AutoCompletePage } from '../page-objects/auto-complete-page';
+import { DatePickerPage } from '../page-objects/date-picker-page';
+import { SliderPage } from '../page-objects/slider-page';
+import { ProgressBarPage } from '../page-objects/progress-bar-page';
+import { TabsPage } from '../page-objects/tabs-page';
+import { ToolTipsPage } from '../page-objects/tool-tips-page';
+import { MenuPage } from '../page-objects/menu-page';
+import { SelectMenuPage } from '../page-objects/select-menu-page';
 
-import { InteractionsPage } from '../pageObjects/InteractionsPage';
-import { SortablePage } from '../pageObjects/SortablePage';
-import { SelectablePage } from '../pageObjects/SelectablePage';
-import { ResizablePage } from '../pageObjects/ResizablePage';
-import { DroppablePage } from '../pageObjects/DroppablePage';
-import { DragabblePage } from '../pageObjects/DragabblePage';
+import { InteractionsPage } from '../page-objects/interactions-page';
+import { SortablePage } from '../page-objects/sortable-page';
+import { SelectablePage } from '../page-objects/selectable-page';
+import { ResizablePage } from '../page-objects/resizable-page';
+import { DroppablePage } from '../page-objects/droppable-page';
+import { DragabblePage } from '../page-objects/dragabble-page';
 
-import { BookstorePage } from '../pageObjects/BookstorePage';
-import { LoginPage } from '../pageObjects/LoginPage';
-import { ProfilePage } from '../pageObjects/ProfilePage';
-// import { BookstoreAPIPage } from '../pageObjects/BookstoreAPIPage'; // Uncomment if implemented
+import { BookstorePage } from '../page-objects/bookstore-page';
+import { LoginPage } from '../page-objects/login-page';
+import { ProfilePage } from '../page-objects/profile-page';
+// import { BookstoreAPIPage } from '../page-objects/BookstoreAPIPage'; // Uncomment if implemented
 
 export const sections = [
   {

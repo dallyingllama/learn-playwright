@@ -11,7 +11,7 @@ The DemoQA project follows a specific structure to ensure clarity and maintainab
 |`history` | Contains the history of the project. This directory can include previous versions of files, changelogs, and other historical information.| local
 |`localDocs` | Contains local documentation files created when testing asciidoc.| local
 |`node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using `pnpm`.| local
-|`/pageObjects` | Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.| repo
+|`/page-objects` | Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.| repo
 |`playwright-report` | Contains Playwright test reports. These reports provide detailed information about the test runs, including screenshots and logs.| local
 |`/tests` | Contains all test files. Each test file corresponds to a specific feature or functionality of the application.| repo
 |`/utils` | Contains utility functions and helpers that can be used across different test files.| repo
@@ -19,6 +19,7 @@ The DemoQA project follows a specific structure to ensure clarity and maintainab
 |`/screenshots` | Contains screenshots taken during test execution. These screenshots can be used for debugging and verification purposes.
 |`/logs` | Contains log files generated during test execution. These logs can provide detailed information about the test runs and help in identifying issues.
 |`/node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using `pnpm`.
+|===
 
 == Naming Conventions
 The following table outlines the basic naming conventions used in the DemoQA project. These conventions help maintain consistency and readability across the codebase.
@@ -27,15 +28,15 @@ The following table outlines the basic naming conventions used in the DemoQA pro
 |===
 |Topic | Description | Example
 
-|POM Folder 
-|`pageObjects`
-|`pageObjects/FooPage.ts`
+|Files and folders
+|Use kebab-case names.
+|`book-data.ts`, `page-objects/`
 
-|FileName & Class Name
-|PascalCase 
-|`FooPage.ts`, `FooPage`
+|Types, classes, and interfaces
+|Use PascalCase names.
+|`BookData`, `BookDataBuilder`, `NavigablePage`
 
-|Method Name
-|camelCase
-|`goto()`, `assertOnPage()`
+|Variables and functions
+|Use camelCase names.
+|`bookData`, `buildBookData`, `assertOnPage()`
 |=== 

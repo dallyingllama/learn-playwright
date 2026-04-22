@@ -1,6 +1,6 @@
 // tests/bookstore.spec.ts
 import { test, expect } from '@playwright/test';
-import { BookstorePage } from '../pageObjects/BookstorePage';
+import { BookstorePage } from '../page-objects/bookstore-page';
 import { bookData } from '../data/bookData';
 
 test.describe('📚 Bookstore Search Scenarios', () => {

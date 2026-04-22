@@ -1,6 +1,6 @@
 // tests/login.spec.ts
 import { test } from '@playwright/test';
-import { LoginPage } from '../pageObjects/LoginPage';
+import { LoginPage } from '../page-objects/login-page';
 import { loginData } from '../data/loginData';
 
 const validLogins = loginData.filter((data) => data.logintype === 'valid');

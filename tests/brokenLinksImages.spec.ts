@@ -1,6 +1,6 @@
 // tests/brokenLinksImages.spec.ts
 import { test, expect, request } from '@playwright/test';
-import { BrokenLinksImagesPage } from '../pageObjects/BrokenLinksImagesPage';
+import { BrokenLinksImagesPage } from '../page-objects/broken-links-images-page';
 
 test.describe('✅ Broken Links - Images', () => {
   async function navigateToBrokenLinksImages(page): Promise<BrokenLinksImagesPage> {

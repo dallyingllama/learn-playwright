@@ -1,6 +1,6 @@
 // tests/radioButton.spec.ts
 import { test, expect } from '@playwright/test';
-import { RadioButtonPage } from '../pageObjects/RadioButtonPage';
+import { RadioButtonPage } from '../page-objects/radio-button-page';
 
 test.describe('Elements', () => {
   test.describe('✅ Radio Button', () => {

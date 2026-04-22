@@ -26,9 +26,9 @@ Goals:
 # Project Structure
 
 - /tests -> Playwright test specs
-- /pageObjects -> Page Object Models
-- /pageObjects/components -> reusable components
-- /pageObjects/interfaces -> interfaces/types
+- /page-objects -> Page Object Models
+- /page-objects/components -> reusable components
+- /page-objects/interfaces -> interfaces/types
 - /utils -> helper utilities, data generation, shared helpers
 - /data -> test data
 - /docs -> publishable documentation source and site assets

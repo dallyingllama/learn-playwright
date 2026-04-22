@@ -46,15 +46,20 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Review page object filenames and class names for consistency.
 - Examples include names like `DragablePage.ts`.
 - Prefer small, low-risk naming cleanup only where the benefit is clear.
-- Renamed `pageObjects/DragablePage.ts` and `DragablePage` to `pageObjects/DragabblePage.ts` and `DragabblePage` so naming matches existing DemoQA page labels and URLs used by this repo.
-- Renamed `pageObjects/AlertsFrameWindowsPage.ts` to `pageObjects/AlertsWindowsPage.ts` to match the exported class name and existing usage.
+- Renamed `page-objects/DragablePage.ts` and `DragablePage` to `page-objects/dragabble-page.ts` and `DragabblePage` so naming matches existing DemoQA page labels and URLs used by this repo.
+- Renamed `page-objects/AlertsFrameWindowsPage.ts` to `page-objects/alerts-windows-page.ts` to match the exported class name and existing usage.
 - Updated imports in `data/navigationSections.ts` and reran `tests/navigation.spec.ts` successfully.
 
 ### 1.7 Review doc accuracy after recent repo changes (Completed)
 
-- Rechecked `project-docs/learnplaywright.md`, `docs/index.adoc`, `project-docs/codex-workflow.md`, `project-docs/repo-state.md`, and `AGENTS.md` against the current repo.
+- Rechecked `project-docs/learn-playwright.md`, `docs/index.adoc`, `project-docs/codex-workflow.md`, `project-docs/repo-state.md`, and `AGENTS.md` against the current repo.
 - Updated documentation to describe the repository as it is today with simple factual statements.
 - Confirmed CI behavior, GitHub Pages links, and repo structure descriptions match the current repo.
+
+### 1.8 Project Standards/Naming Conventions (Completed)
+
+- Set conventions to: files/folders: kebab-case; types/classes/interfaces: PascalCase; variables/functions: camelCase
+- complete cleanup in order to follow typescript, playwright, and node javascript naming conventions
 
 ## 2. Architecture and Test Design
 

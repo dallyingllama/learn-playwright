@@ -12,10 +12,13 @@ This document captures the practical coding habits used in this repository today
 * Keep test data separate from test logic where that improves reuse and readability.
 * Reuse existing helpers, page objects, and shared data before creating new patterns.
 * Keep tests easy to read, with meaningful assertions and focused workflows.
+* Use kebab-case for file and folder names.
+* Use PascalCase for classes, interfaces, and types.
+* Use camelCase for variables and functions.
 
 == Repository-Specific Notes
 
-* The active page object directory is `pageObjects/`.
+* The active page object directory is `page-objects/`.
 * Navigation helpers exist in `utils/gotoHelper.ts`.
 * Shared navigation metadata exists in `data/navigationSections.ts`.
 * `pnpm` is the intended package manager for this repo.

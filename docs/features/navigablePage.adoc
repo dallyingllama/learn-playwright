@@ -11,7 +11,7 @@ In this repo, it is used with the `gotoHelper` utility so tests can work with co
 
 [source,ts]
 ----
-include::../../pageObjects/interfaces/NavigablePage.ts[]
+include::../../page-objects/interfaces/navigable-page.ts[]
 ----
 
 == Typical Use

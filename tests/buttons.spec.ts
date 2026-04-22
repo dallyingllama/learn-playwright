@@ -1,6 +1,6 @@
 // tests/buttons.spec.ts
 import { test, expect } from '@playwright/test';
-import { ButtonsPage } from '../pageObjects/ButtonsPage';
+import { ButtonsPage } from '../page-objects/buttons-page';
 
 test.describe('🖱️ Buttons Page', () => {
   async function navigateToButtonsPage(page): Promise<ButtonsPage> {

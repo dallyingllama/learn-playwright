@@ -24,7 +24,7 @@ It is used to explore:
 
 * 12 Playwright spec files covering key DemoQA flows
 * one `@sanity` example test in each spec file
-* `pageObjects/` as the active Page Object Model directory
+* `page-objects/` as the active Page Object Model directory
 * shared helpers in `utils/`
 * reusable navigation metadata in `data/navigationSections.ts`
 * generated local docs via AsciiDoc

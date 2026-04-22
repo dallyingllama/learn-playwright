@@ -1,7 +1,7 @@
 // tests/register.spec.ts
 import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { RegisterPage } from '../pageObjects/RegisterPage';
+import { RegisterPage } from '../page-objects/register-page';
 
 function generateUser(overrides = {}) {
   const firstName = faker.person.firstName();

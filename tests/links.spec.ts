@@ -1,6 +1,6 @@
 // tests/links.spec.ts
 import { test, expect } from '@playwright/test';
-import { LinksPage } from '../pageObjects/LinksPage';
+import { LinksPage } from '../page-objects/links-page';
 
 test.describe('🔗 Links Page', () => {
 

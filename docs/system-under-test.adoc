@@ -26,7 +26,7 @@ Covered areas include:
 The project currently emphasizes:
 
 * UI testing with Playwright + TypeScript
-* Page Object Model structure through `pageObjects/`
+* Page Object Model structure through `page-objects/`
 * shared helpers and reusable navigation patterns
 * environment-specific execution through `.env/<name>.env`
 * CI execution with GitHub Actions

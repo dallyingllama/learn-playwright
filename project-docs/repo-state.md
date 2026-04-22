@@ -9,14 +9,14 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ### Present in the repository
 
 - `tests/` contains 12 Playwright spec files covering login, registration, text box, checkbox, buttons, links, alerts, bookstore, navigation, radio buttons, broken links/images, and web tables.
-- `pageObjects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
+- `page-objects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
 - `data/` contains reusable test data definitions such as login data, bookstore data, and navigation metadata.
 - `utils/` contains shared helpers for fake data generation, annotations, and multi-strategy navigation helpers.
 - `.env/` contains environment-specific config files: `dev.env`, `test.env`, `e2e.env`, and `fail.env`.
 - `.github/workflows/` contains one CI workflow for running tests, building docs, uploading artifacts, and publishing report history to GitHub Pages.
 - `.github/scripts/` contains an EJS template and a Node script for generating a historical Playwright report index.
 - `docs/` contains a publishable documentation set: `docs/index.adoc`, supporting topic pages, feature/guideline subfolders, `_includes/`, and theme assets.
-- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `learnplaywright.md`, and `backlog.md`.
+- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `learn-playwright.md`, and `backlog.md`.
 - `config/` is described in `agents.md` as the place for environment and config handling, but it is not currently present as a top-level folder. At the moment, this responsibility is handled mainly through `playwright.config.ts` and `.env/`.
 
 ## Implemented Features
@@ -37,8 +37,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Broken Links / Images assertions have been adjusted to match the current DemoQA page intent and to be less timing-sensitive in command-line runs.
 - The suite uses `@sanity` as a lightweight example tag, with one representative test tagged in each spec file.
 - `tests/alerts.spec.ts` includes one intentional timing assertion for the delayed-alert scenario.
-- `pageObjects/LoginPage.ts` uses user-visible post-login assertions such as `/profile`, `Logout`, and visible username text instead of fragile login-state locators.
-- `pageObjects/BasePage.ts` contains the shared home-card navigation helper used by many menu-based page objects.
+- `page-objects/login-page.ts` uses user-visible post-login assertions such as `/profile`, `Logout`, and visible username text instead of fragile login-state locators.
+- `page-objects/base-page.ts` contains the shared home-card navigation helper used by many menu-based page objects.
 - Several page objects use stronger `waitForPageReady()` checks based on meaningful controls rather than heading-only assertions. Recent examples include Alerts, Book Store, Check Box, Links, Web Tables, Frames, Auto Complete, Upload and Download, and Dynamic Properties.
 
 ### Environment management
@@ -88,9 +88,10 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 - Some page objects inherit from `BasePage`, while others still duplicate navigation/setup logic independently.
 - The documented target structure now aligns more closely with the repo, but `config/` is still described as a top-level area that has not yet been created.
-- Naming is a little inconsistent in places, for example `DragablePage.ts` and `AlertsFrameWindowsPage.ts` vs class naming.
+- Naming conventions are documented as: kebab-case for files/folders, PascalCase for classes/interfaces/types, and camelCase for variables/functions.
+- The active page object directory is still `page-objects/`, which does not follow kebab-case naming.
 - Documentation references are still being normalized after the `docs/` vs `project-docs/` split.
-- Recent merged docs briefly introduced `/pages` language, but that stray folder has been removed and the repo now consistently uses `pageObjects/` as the real POM directory.
+- Recent merged docs briefly introduced `/pages` language, but that stray folder has been removed and the repo now consistently uses `page-objects/` as the real POM directory.
 
 ### 2. Locator quality and maintainability
 
@@ -124,10 +125,10 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `AGENTS.md` also includes the current rule for concise present-state documentation wording.
 - `project-docs/codex-workflow.md` references `project-docs/repo-state.md` and `project-docs/backlog.md`.
 - `project-docs/backlog.md` provides a prioritized list of cleanup, CI, architecture, and documentation work.
-- The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `pageObjects/` directory.
+- The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
 - `agents.md` still mentions `config/` as a top-level folder that has not yet been introduced.
-- `project-docs/learnplaywright.md` is the internal learning and setup guide.
+- `project-docs/learn-playwright.md` is the internal learning and setup guide.
 - One docs-build warning remains: `docs/features/conventions.adoc` has an unterminated table block, but the docs still build and preview successfully.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
 - The repo includes single-spec commands in `package.json`, and the internal/published docs match that workflow.
@@ -135,8 +136,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ### 7. Current validation status
 
-- `tests/webTables.spec.ts` and `pageObjects/WebTablesPage.ts` match the current DemoQA table behavior.
-- `tests/checkBox.spec.ts`, `pageObjects/CheckBoxPage.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
+- `tests/webTables.spec.ts` and `page-objects/web-tables-page.ts` match the current DemoQA table behavior.
+- `tests/checkBox.spec.ts`, `page-objects/check-box-page.ts`, and `data/checkboxData.ts` match the current DemoQA checkbox tree and use explicit hierarchy and result-message validation.
 - `tests/brokenLinksImages.spec.ts` aligns with the current valid/broken link behavior and uses less timing-sensitive image checks.
 - `tests/alerts.spec.ts` uses one deliberate timed wait because timing is the behavior under test.
 - `utils/gotoHelper.ts` uses deterministic default navigation and explicit randomized navigation through `goto.random()`.

@@ -1,6 +1,6 @@
 // tests/webTables.spec.ts
 import { test, expect } from '@playwright/test';
-import { WebTablesPage } from '../pageObjects/WebTablesPage';
+import { WebTablesPage } from '../page-objects/web-tables-page';
 import { generateFakeTableUser } from '../utils/fakeTableUser';
 
 test.describe('📊 Web Tables', () => {

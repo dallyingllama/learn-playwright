@@ -7,8 +7,9 @@ The Page Object Model (POM) is a design pattern that represents application page
 == Practical Guidelines
 
 * Use a separate file for each page object or reusable page component.
-* Keep page objects in the repository's `pageObjects/` directory.
-* Use PascalCase for page-object file names and class names.
+* Keep page objects in the repository's `page-objects/` directory.
+* Use kebab-case for page-object file names.
+* Use PascalCase for class and interface names.
 * Prefer meaningful Playwright locators over brittle selectors.
 * Encapsulate actions and assertions inside page-object methods where it improves readability.
 * Keep page objects focused on one page or component responsibility.
