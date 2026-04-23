@@ -10,6 +10,13 @@ Build a reusable Playwright architecture that can support multiple project repos
 - Use this repo for learning, experimentation, and architectural improvement based on current automation experience.
 - Stabilize the structure, conventions, utilities, and test patterns before splitting into reusable components.
 
+### Definition of ready to split (Phase 1 exit criteria)
+- `pnpm run typecheck` passes.
+- Directly affected specs pass for each architecture change.
+- Documentation build and preview workflow is stable (`pnpm run docs:build`, `pnpm run docs:preview`).
+- Shared-vs-project-specific boundaries are documented and agreed.
+- Core architecture patterns are represented in this repo with at least one working showcase flow per major area.
+
 ### Phase 2: Split into reusable repos after MVP
 After the MVP is stable, create the following repo types:
 
@@ -37,6 +44,88 @@ After the MVP is stable, create the following repo types:
 - Create another showcase project using a different demo application.
 - This will validate that the shared package and template project work across multiple websites.
 - It will help confirm the architecture is reusable and not too tightly coupled to one application.
+
+## Boundary Rules
+
+### Shared package candidates
+- Reusable fixtures and test setup patterns.
+- Navigation helpers and shared test utilities.
+- Stable typed interfaces/contracts used across projects.
+- Reusable utilities that are not tied to site-specific selectors or business rules.
+
+### Project-specific scope
+- Site selectors and page-object locators.
+- Site-specific workflows and assertions.
+- Website/business-rule-specific test data.
+- Documentation and run conventions that are unique to the consuming repo.
+
+## Versioning and release approach
+- Start the shared package with `0.x` while boundaries and API shapes are still changing.
+- Move to `1.0.0` when package interfaces are stable and tested across at least two showcase repos.
+- Use semver for package evolution:
+  - patch: bug fixes without contract changes
+  - minor: backward-compatible features
+  - major: breaking changes
+- Project repos should upgrade intentionally and at their own pace.
+
+## Execution Plan Mapping (Backlog Section 5)
+- `5.1`: Antora migration spike/decision.
+- `5.2`: Define split blueprint using this document’s ready criteria, boundaries, versioning, and repo sequence.
+- `5.3`: Create shared package skeleton and first reusable exports.
+- `5.4`: Integrate the current repo as first showcase consumer.
+- `5.5`: Create template repo from stable shared package version.
+- `5.6`: Create second showcase repo and validate cross-site reuse.
+
+## Documentation Audience Model
+
+### Shared package documentation
+- Primary audience: framework maintainers and contributors.
+- Focus:
+  - public API contracts
+  - extension points
+  - versioning/changelog
+  - migration notes between package versions
+- Keep project- or website-specific workflow guidance out of this repo.
+
+### Template repo documentation
+- Primary audience: developers bootstrapping a new automation project.
+- Focus:
+  - first-run onboarding
+  - setup and configuration steps
+  - customization guide for common project needs
+  - operational run/debug basics for a new repo owner
+
+### Showcase repo documentation
+- Primary audience: adopters evaluating architecture patterns in real usage.
+- Focus:
+  - concrete examples and test flows
+  - architecture decisions and tradeoffs
+  - site-specific assumptions and selectors
+  - practical usage of the shared package in a real project
+
+## Minimum Documentation by Repo Type
+
+### Shared package minimum docs
+- README with install and API overview.
+- Changelog and version policy.
+- Migration notes for breaking or behavioral changes.
+
+### Template repo minimum docs
+- Quick start guide.
+- Customization guide.
+- Standard run/test/typecheck commands.
+
+### Showcase repo minimum docs
+- Scope and purpose overview.
+- Site-specific assumptions.
+- Example workflows mapped to the shared package.
+
+## Cross-Repo Documentation Rules
+- The shared package is the canonical source for reusable API behavior and version migration guidance.
+- The template repo is the canonical source for onboarding and project bootstrap instructions.
+- Showcase repos are canonical for real-world examples and site-specific behavior.
+- Each repo should link to the canonical docs in sibling repos rather than duplicating long-form explanations.
+- Keep cross-repo links explicit and lightweight so readers can quickly find the right source of truth.
 
 ## Intended Repo Roles
 
