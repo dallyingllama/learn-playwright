@@ -189,6 +189,7 @@ corepack pnpm run test:spec:dev tests/alerts.spec.ts
 == Documentation Map
 
 * link:features-functions.html[Features / Functions]
+* link:developer-how-to.html[Developer How-To]
 * link:coding-standards.html[Playwright Coding Standards and Guidelines]
 * link:system-under-test.html[System Under Test & Test Approach]
 * link:way-of-working.html[Way of Working]

@@ -16,7 +16,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `.github/workflows/` contains one CI workflow for running tests, building docs, uploading artifacts, and publishing report history to GitHub Pages.
 - `.github/scripts/` contains an EJS template and a Node script for generating a historical Playwright report index.
 - `docs/` contains a publishable documentation set: `docs/index.adoc`, supporting topic pages, feature/guideline subfolders, `_includes/`, and theme assets.
-- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `developer-how-to.md`, and `backlog.md`.
+- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `backlog.md`, and repository strategy notes.
 - Environment/config handling is currently done through `playwright.config.ts` and `.env/`.
 
 ## Implemented Features
@@ -128,7 +128,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `project-docs/backlog.md` also includes section `5` for implementing the reusable architecture strategy and links to `project-docs/repository-approach.md`.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
-- `project-docs/developer-how-to.md` is the internal learning and setup guide.
+- `docs/developer-how-to.adoc` is the developer learning and setup guide, and `project-docs/developer-how-to.md` is a short internal pointer to that source.
 - The docs build warning in `docs/features/conventions.adoc` was resolved, and docs build/preview runs cleanly.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
 - The repo includes single-spec commands in `package.json`, and the internal/published docs match that workflow.

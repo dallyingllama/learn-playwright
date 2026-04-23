@@ -34,5 +34,6 @@ corepack pnpm run test:spec:dev tests/alerts.spec.ts
 
 - Source docs: `docs/`
 - Internal project docs: `project-docs/`
+- Developer how-to: `docs/developer-how-to.adoc`
 - Build local docs: `corepack pnpm run docs:build`
 - Preview local docs: `corepack pnpm run docs:preview`

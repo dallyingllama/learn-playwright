@@ -2,7 +2,7 @@
 
 This document describes how to consistently use Codex for this project.
 Audience: Codex-assisted repository sessions.
-For local setup and day-to-day developer commands, use `project-docs/developer-how-to.md`.
+For local setup and day-to-day developer commands, use `docs/developer-how-to.adoc`.
 
 ---
 
