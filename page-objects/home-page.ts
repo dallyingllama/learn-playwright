@@ -1,45 +1,46 @@
 // page-objects/home-page.ts
 import { Page, expect } from '@playwright/test';
+import { BasePage } from './base-page';
 import { createGotoWithVariants } from '../utils/gotoHelper';
+import { NavigablePage } from './interfaces/navigable-page';
 
-export class HomePage {
-  readonly page: Page;
+const config = {
+  url: /\/$/,
+};
 
-  readonly goto: {
-    (): Promise<void>;
-    viaMenu: () => Promise<void>;
-    viaDirectLink: () => Promise<void>;
-  };
+export class HomePage extends BasePage implements NavigablePage {
+  readonly goto;
 
   constructor(page: Page) {
-    this.page = page;
-
+    super(page);
     this.goto = createGotoWithVariants(
-      this.gotoViaMenu.bind(this),
-      this.gotoViaDirectLink.bind(this)
+      async () => {
+        await this.page.goto('/');
+        await this.waitForPageReady();
+      },
+      async () => {
+        await this.page.goto('/');
+        await this.waitForPageReady();
+      }
     );
   }
 
-  private async gotoViaMenu() {
-    await this.page.goto('/');
-  }
-
-  private async gotoViaDirectLink() {
-    await this.page.goto('/');
-  }
-
-  async clickCard(sectionName: string) {
-    const card = this.page.locator('.card-body h5', { hasText: sectionName });
-    await card.waitFor({ state: 'visible' });
-    await card.scrollIntoViewIfNeeded();
-    await card.click();
-  }
-
-  async assertOnPage() {
-    // URL check
-    await expect(this.page).toHaveURL(/\/$/);
-
-    // UI element check (for demoqa homepage)
+  override async waitForPageReady(): Promise<void> {
     await expect(this.page.locator('.home-body')).toBeVisible();
+  }
+
+  async clickCard(sectionName: string): Promise<void> {
+    const categoryCards = this.page.locator('.category-cards');
+    const cardLink = categoryCards.getByRole('link', { name: sectionName, exact: true }).first();
+
+    await categoryCards.waitFor({ state: 'visible' });
+    await cardLink.waitFor({ state: 'visible' });
+    await cardLink.scrollIntoViewIfNeeded();
+    await cardLink.click();
+  }
+
+  async assertOnPage(): Promise<void> {
+    await expect(this.page).toHaveURL(config.url);
+    await this.waitForPageReady();
   }
 }

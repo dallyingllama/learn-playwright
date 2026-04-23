@@ -8,7 +8,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ### Present in the repository
 
-- `tests/` contains 12 Playwright spec files covering login, registration, text box, checkbox, buttons, links, alerts, bookstore, navigation, radio buttons, broken links/images, and web tables.
+- `tests/` contains 13 Playwright spec files covering home page, login, registration, text box, checkbox, buttons, links, alerts, bookstore, navigation, radio buttons, broken links/images, and web tables.
 - `page-objects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
 - `data/` contains reusable test data definitions such as login data, bookstore data, and navigation metadata.
 - `utils/` contains shared helpers for fake data generation, annotations, and multi-strategy navigation helpers.
@@ -17,7 +17,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `.github/scripts/` contains an EJS template and a Node script for generating a historical Playwright report index.
 - `docs/` contains a publishable documentation set: `docs/index.adoc`, supporting topic pages, feature/guideline subfolders, `_includes/`, and theme assets.
 - `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `learn-playwright.md`, and `backlog.md`.
-- `config/` is described in `agents.md` as the place for environment and config handling, but it is not currently present as a top-level folder. At the moment, this responsibility is handled mainly through `playwright.config.ts` and `.env/`.
+- Environment/config handling is currently done through `playwright.config.ts` and `.env/`.
 
 ## Implemented Features
 
@@ -86,8 +86,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 ### 1. Structure and consistency
 
-- Some page objects inherit from `BasePage`, while others still duplicate navigation/setup logic independently.
-- The documented target structure now aligns more closely with the repo, but `config/` is still described as a top-level area that has not yet been created.
+- Page objects are standardized on `BasePage` for shared navigation/setup behavior, with `register-page.ts` kept as an intentional auth-flow exception.
+- Environment/config handling is centralized through `playwright.config.ts` and `.env/`.
 - Naming conventions are documented as: kebab-case for files/folders, PascalCase for classes/interfaces/types, and camelCase for variables/functions.
 - The active page object directory is `page-objects/`, and page-object/spec filenames follow kebab-case naming.
 - Documentation references are still being normalized after the `docs/` vs `project-docs/` split.
@@ -128,7 +128,6 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `project-docs/backlog.md` also includes section `5` for implementing the reusable architecture strategy and links to `project-docs/repository-approach.md`.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
-- `agents.md` still mentions `config/` as a top-level folder that has not yet been introduced.
 - `project-docs/learn-playwright.md` is the internal learning and setup guide.
 - The docs build warning in `docs/features/conventions.adoc` was resolved, and docs build/preview runs cleanly.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
@@ -146,9 +145,11 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `utils/gotoHelper.ts` uses deterministic default navigation and explicit randomized navigation through `goto.random()`.
 - Backlog item `2.1` is complete. The helper, representative specs, and docs all reflect the deterministic-vs-randomized navigation strategy.
 - `LoginPage` and `BookstorePage` have stronger page-state assertions than before, and several page objects use stronger readiness checks to reduce stress-related failures.
+- `tests/home-page.spec.ts` validates homepage card visibility and section-card navigation coverage through the `HomePage` page object.
 - Backlog item `1.5` is complete: there are no generic `waitForTimeout` synchronization workarounds in test code.
 - Backlog item `1.7` is complete: internal and publishable docs were reviewed and updated for factual present-state wording.
 - Backlog item `1.8` is complete: naming conventions are applied across repository folders/files and references.
+- Backlog item `2.2` is complete: section/root page objects share the `BasePage` + `createGotoWithVariants()` structure.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
 - Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.
@@ -157,7 +158,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ## Suggested Near-Term Improvements
 
 1. Continue improving page-specific readiness checks and shared navigation stability for stressed runs.
-2. Standardize page objects around `BasePage` and a shared config pattern to reduce duplication.
+2. Tighten page-specific readiness logic in flaky areas such as Book Store loading-state transitions.
 3. Tighten typings in helpers and test data builders.
 4. Review which remaining page objects still use heading-only readiness checks and strengthen them incrementally when they appear in stressed-run failures.
 5. Continue implementing backlog section `5` (`project-docs/repository-approach.md`) to move from the single-repo learning setup toward reusable architecture packaging and template/showcase split.

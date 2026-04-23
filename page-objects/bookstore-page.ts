@@ -21,8 +21,14 @@ export class BookstorePage extends BasePage implements NavigablePage {
     super(page);
 
     this.goto = createGotoWithVariants(
-      this.gotoViaMenu.bind(this),
-      this.gotoViaDirectLink.bind(this)
+      async () => {
+        await this.openSidebarFromHome(config.card);
+        await this.waitForPageReady();
+      },
+      async () => {
+        await this.page.goto(config.url);
+        await this.waitForPageReady();
+      }
     );
   }
 
@@ -36,17 +42,6 @@ export class BookstorePage extends BasePage implements NavigablePage {
 
   private getBodyRowGroup(): Locator {
     return this.table.getByRole('rowgroup').nth(1);
-  }
-
-  // Goto Methods
-  private async gotoViaMenu() {
-    await this.openSidebarFromHome(config.card);
-    await this.waitForPageReady();
-  }
-
-  private async gotoViaDirectLink() {
-    await this.page.goto(config.url);
-    await this.waitForPageReady();
   }
 
   override async waitForPageReady(): Promise<void> {

@@ -73,11 +73,12 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Left `login.spec.ts` and `textbox.spec.ts` as examples of the deterministic-first plus randomized-follow-up pattern.
 - Documentation now reflects the intended usage so future changes do not treat randomness as accidental flakiness.
 
-### 2.2 Standardize page object structure
+### 2.2 Standardize page object structure (Completed)
 
-- Continue reducing duplication across page objects.
-- Prefer a more consistent `BasePage` + shared config approach where it improves readability.
-- Avoid large rewrites; refactor incrementally as pages are touched.
+- Standardized section/root page objects on `BasePage` + shared `createGotoWithVariants()` setup.
+- Migrated the remaining outlier page objects: `interactions-page.ts`, `alerts-windows-page.ts`, `widgets-page.ts`, and `home-page.ts`.
+- Aligned `bookstore-page.ts` `goto` setup to the same inline pattern used by the other standardized page objects.
+- Kept `register-page.ts` as an intentional exception for its auth-focused flow.
 
 ### 2.3 Improve typing in helpers and data builders
 

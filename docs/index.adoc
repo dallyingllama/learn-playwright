@@ -22,7 +22,7 @@ It is used to explore:
 
 == Highlights
 
-* 12 Playwright spec files covering key DemoQA flows
+* 13 Playwright spec files covering key DemoQA flows
 * one `@sanity` example test in each spec file
 * `page-objects/` as the active Page Object Model directory
 * shared helpers in `utils/`
@@ -103,6 +103,10 @@ corepack pnpm run show-report
 [cols="1,2,3", options="header"]
 |===
 | Area | Spec File | Notes
+
+| Home Page
+| `home-page.spec.ts`
+| Homepage card visibility and section-card navigation checks
 
 | Login
 | `login.spec.ts`
