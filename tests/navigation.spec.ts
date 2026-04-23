@@ -1,6 +1,6 @@
 // tests/navigation.spec.ts
 import { Page, test } from '@playwright/test';
-import { sections, type NavigationPageObjectClass } from '../data/navigationSections';
+import { sections, type NavigationPageObjectClass } from '../page-objects/metadata/navigation-sections';
 
 type NavigationMethod = 'viaMenu' | 'viaDirectLink';
 

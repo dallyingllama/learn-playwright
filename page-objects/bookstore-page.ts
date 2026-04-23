@@ -3,11 +3,11 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './base-page';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 import { NavigablePage } from './interfaces/navigable-page';
+import { sectionMetadata } from './metadata/section-metadata';
 
 const config = {
-  card: 'Book Store Application',
-  menuItem: 'Book Store Application',
-  url: 'books',
+  card: sectionMetadata.bookStoreApplication.homeCard,
+  url: sectionMetadata.bookStoreApplication.url,
   header: 'Book Store',
 };
 

@@ -48,7 +48,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Prefer small, low-risk naming cleanup only where the benefit is clear.
 - Renamed `page-objects/DragablePage.ts` and `DragablePage` to `page-objects/dragabble-page.ts` and `DragabblePage` so naming matches existing DemoQA page labels and URLs used by this repo.
 - Renamed `page-objects/AlertsFrameWindowsPage.ts` to `page-objects/alerts-windows-page.ts` to match the exported class name and existing usage.
-- Updated imports in `data/navigationSections.ts` and reran `tests/navigation.spec.ts` successfully.
+- Updated imports in `page-objects/metadata/navigation-sections.ts` and reran `tests/navigation.spec.ts` successfully.
 
 ### 1.7 Review doc accuracy after recent repo changes (Completed)
 
@@ -82,16 +82,19 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 
 ### 2.3 Improve typing in helpers and data builders (Completed)
 
-- Typed navigation page-object constructors and shared section metadata in `tests/navigation.spec.ts` and `data/navigationSections.ts`.
+- Typed navigation page-object constructors and shared section metadata in `tests/navigation.spec.ts` and `page-objects/metadata/navigation-sections.ts`.
 - Typed registration user builder overrides in `tests/register.spec.ts` with `Partial<RegisterUser>`.
 - Added typed data models for `data/loginData.ts` and `data/bookData.ts`.
 - Added explicit `FakeUser` type for `utils/fakeUser.ts`.
 - Added repository typecheck foundation with `tsconfig.json`, `typescript` dev dependency, and `pnpm run typecheck`.
 
-### 2.4 Extract reusable page metadata where it helps
+### 2.4 Extract reusable page metadata where it helps (Completed)
 
-- Explore whether shared page metadata can reduce duplication between page objects, navigation data, and tests.
-- Keep this lightweight and only adopt it if it makes the learning project clearer rather than more abstract.
+- Added `page-objects/metadata/section-metadata.ts` as the shared source for section names, urls, card labels, and landing behavior metadata.
+- Added `page-objects/metadata/navigation-sections.ts` and moved navigation page mappings there to keep metadata with page-object architecture.
+- Updated section/root page objects to consume shared section metadata for menu/card labels and urls.
+- Updated `tests/navigation.spec.ts` and `tests/home-page.spec.ts` to consume shared metadata and reduce duplicated literals.
+- Kept the extraction lightweight and scoped to section-level metadata to avoid large rewrites.
 
 ## 3. Test Stability and Coverage
 

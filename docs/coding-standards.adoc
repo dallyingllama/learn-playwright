@@ -20,7 +20,7 @@ This document captures the practical coding habits used in this repository today
 
 * The active page object directory is `page-objects/`.
 * Navigation helpers exist in `utils/gotoHelper.ts`.
-* Shared navigation metadata exists in `data/navigationSections.ts`.
+* Shared navigation metadata exists in `page-objects/metadata/navigation-sections.ts`.
 * `pnpm` is the intended package manager for this repo.
 
 This guide will continue to evolve as the project grows.

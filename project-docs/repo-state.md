@@ -9,8 +9,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 ### Present in the repository
 
 - `tests/` contains 13 Playwright spec files covering home page, login, registration, text box, checkbox, buttons, links, alerts, bookstore, navigation, radio buttons, broken links/images, and web tables.
-- `page-objects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, and a simple navigation interface.
-- `data/` contains reusable test data definitions such as login data, bookstore data, and navigation metadata.
+- `page-objects/` contains the active Page Object Model files, including page-level models, shared base behavior, a sidebar component, a simple navigation interface, and metadata files under `page-objects/metadata/`.
+- `data/` contains reusable test data definitions such as login data, bookstore data, and checkbox hierarchy data.
 - `utils/` contains shared helpers for fake data generation, annotations, and multi-strategy navigation helpers.
 - `.env/` contains environment-specific config files: `dev.env`, `test.env`, `e2e.env`, and `fail.env`.
 - `.github/workflows/` contains one CI workflow for running tests, building docs, uploading artifacts, and publishing report history to GitHub Pages.
@@ -146,13 +146,15 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Backlog item `2.1` is complete. The helper, representative specs, and docs all reflect the deterministic-vs-randomized navigation strategy.
 - `LoginPage` and `BookstorePage` have stronger page-state assertions than before, and several page objects use stronger readiness checks to reduce stress-related failures.
 - `tests/home-page.spec.ts` validates homepage card visibility and section-card navigation coverage through the `HomePage` page object.
-- `data/navigationSections.ts`, `data/loginData.ts`, `data/bookData.ts`, and helper/test builders use explicit shared TypeScript types for navigation and data-driven test contracts.
+- `page-objects/metadata/navigation-sections.ts`, `data/loginData.ts`, `data/bookData.ts`, and helper/test builders use explicit shared TypeScript types for navigation and data-driven test contracts.
+- `page-objects/metadata/section-metadata.ts` provides shared section metadata used by section/root page objects and navigation/home-page tests.
 - The repo includes a dedicated `pnpm run typecheck` command backed by `tsconfig.json` and `typescript` in `devDependencies`.
 - Backlog item `1.5` is complete: there are no generic `waitForTimeout` synchronization workarounds in test code.
 - Backlog item `1.7` is complete: internal and publishable docs were reviewed and updated for factual present-state wording.
 - Backlog item `1.8` is complete: naming conventions are applied across repository folders/files and references.
 - Backlog item `2.2` is complete: section/root page objects share the `BasePage` + `createGotoWithVariants()` structure.
 - Backlog item `2.3` is complete: helper signatures, data builders, and shared test data models are typed and validated with `pnpm run typecheck`.
+- Backlog item `2.4` is complete: section-level metadata is extracted and reused across page objects and navigation/home-page test coverage.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
 - Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.
@@ -165,7 +167,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 3. Incrementally increase TypeScript strictness after stabilizing the new baseline typecheck command.
 4. Review which remaining page objects still use heading-only readiness checks and strengthen them incrementally when they appear in stressed-run failures.
 5. Continue implementing backlog section `5` (`project-docs/repository-approach.md`) to move from the single-repo learning setup toward reusable architecture packaging and template/showcase split.
-6. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.
+6. Evaluate whether subpage-level metadata extraction improves clarity without over-abstracting the learning project.
 7. Review the remaining page objects for stale DemoQA assumptions the same way Check Box, Web Tables, Bookstore, and Broken Links were recently cleaned up.
 
 ## Summary

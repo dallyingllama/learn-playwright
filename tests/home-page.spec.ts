@@ -1,16 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../page-objects/home-page';
+import { sectionMetadata, SECTION_KEYS_ORDER, SECTION_LANDING_MESSAGE } from '../page-objects/metadata/section-metadata';
 
 test.describe('Home Page Tests', () => {
-  const cards = [
-    { name: 'Elements', urlPath: 'elements', readiness: 'sectionLanding' },
-    { name: 'Forms', urlPath: 'forms', readiness: 'sectionLanding' },
-    { name: 'Alerts, Frame & Windows', urlPath: 'alertsWindows', readiness: 'sectionLanding' },
-    { name: 'Widgets', urlPath: 'widgets', readiness: 'sectionLanding' },
-    { name: 'Interactions', urlPath: 'interaction', readiness: 'sectionLanding' },
-    { name: 'Book Store Application', urlPath: 'books', readiness: 'bookStoreLanding' },
-  ];
-
   async function navigateToHomePage(page): Promise<HomePage> {
     const homePage = new HomePage(page);
     await homePage.goto();
@@ -26,29 +18,28 @@ test.describe('Home Page Tests', () => {
 
     await test.step('Verify section cards are visible', async () => {
       const categoryCards = page.locator('.category-cards');
-      await expect(categoryCards.getByRole('link', { name: 'Elements', exact: true })).toBeVisible();
-      await expect(categoryCards.getByRole('link', { name: 'Forms', exact: true })).toBeVisible();
-      await expect(categoryCards.getByRole('link', { name: 'Alerts, Frame & Windows', exact: true })).toBeVisible();
-      await expect(categoryCards.getByRole('link', { name: 'Widgets', exact: true })).toBeVisible();
-      await expect(categoryCards.getByRole('link', { name: 'Interactions', exact: true })).toBeVisible();
-      await expect(categoryCards.getByRole('link', { name: 'Book Store Application', exact: true })).toBeVisible();
+      for (const sectionKey of SECTION_KEYS_ORDER) {
+        await expect(categoryCards.getByRole('link', { name: sectionMetadata[sectionKey].name, exact: true })).toBeVisible();
+      }
     });
   });
 
   test('Each homepage card opens the expected section', async ({ page }) => {
     const homePage = await navigateToHomePage(page);
 
-    for (const card of cards) {
-      await test.step(`Open ${card.name} card`, async () => {
+    for (const sectionKey of SECTION_KEYS_ORDER) {
+      const metadata = sectionMetadata[sectionKey];
+
+      await test.step(`Open ${metadata.name} card`, async () => {
         await homePage.goto();
-        await homePage.clickCard(card.name);
+        await homePage.clickCard(metadata.name);
       });
 
-      await test.step(`Verify ${card.name} section page is loaded`, async () => {
-        await expect(page).toHaveURL(new RegExp(`/${card.urlPath}$`));
+      await test.step(`Verify ${metadata.name} section page is loaded`, async () => {
+        await expect(page).toHaveURL(new RegExp(`/${metadata.url}$`));
 
-        if (card.readiness === 'sectionLanding') {
-          await expect(page.getByText('Please select an item from left to start practice.')).toBeVisible();
+        if (metadata.landingType === 'sectionLanding') {
+          await expect(page.getByText(SECTION_LANDING_MESSAGE)).toBeVisible();
           return;
         }
 

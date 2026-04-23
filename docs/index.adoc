@@ -26,7 +26,7 @@ It is used to explore:
 * one `@sanity` example test in each spec file
 * `page-objects/` as the active Page Object Model directory
 * shared helpers in `utils/`
-* reusable navigation metadata in `data/navigationSections.ts`
+* reusable navigation metadata in `page-objects/metadata/navigation-sections.ts`
 * generated local docs via AsciiDoc
 * GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs
 

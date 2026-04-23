@@ -3,11 +3,12 @@ import { Page, expect } from '@playwright/test';
 import { BasePage } from './base-page';
 import { createGotoWithVariants } from '../utils/gotoHelper';
 import { NavigablePage } from './interfaces/navigable-page';
+import { sectionMetadata, SECTION_LANDING_MESSAGE } from './metadata/section-metadata';
 
 const config = {
-  menu: 'Forms',
-  message: 'Please select an item from left to start practice.',
-  url: 'forms',
+  menu: sectionMetadata.forms.homeCard,
+  message: SECTION_LANDING_MESSAGE,
+  url: sectionMetadata.forms.url,
 };
 
 export class FormsPage extends BasePage implements NavigablePage {
