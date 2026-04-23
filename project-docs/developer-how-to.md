@@ -1,3 +1,6 @@
+Audience: Developers working in this repository.
+If you are using Codex for implementation workflow, also read `project-docs/codex-workflow.md`.
+
 ### Getting Started Locally on Laptop.
 
 1. Disable ZScaler Internet Securty temporarily.
