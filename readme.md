@@ -1,21 +1,38 @@
 # Learn Playwright
 
-This repository demonstrates structured end-to-end testing using [Playwright](https://playwright.dev/), with features like:
+Practical Playwright + TypeScript learning project targeting `demoqa.com`.
 
-- Page Object Model
-- Data-driven tests
-- GitHub Actions CI
-- HTML Reports on GitHub Pages
+Full published docs: [https://dallyingllama.github.io/learn-playwright](https://dallyingllama.github.io/learn-playwright)
 
-📘 **Full Documentation**  
-👉 Visit the docs here: [https://dallyingllama.github.io/learn-playwright](https://dallyingllama.github.io/learn-playwright)
+## First 10 Minutes
 
-Includes:
-- Test tour and coverage
-- Usage instructions
-- Development practices and examples
+Run these commands from the repository root:
 
----
+```bash
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm install
+corepack pnpm exec playwright install
+corepack pnpm run test:spec:dev tests/login.spec.ts
+corepack pnpm run show-report
+```
 
-📂 Project folder: `docs/`  
-Docs are written in [AsciiDoc](https://asciidoc.org/) and auto-published via GitHub Actions.
+## TEST_ENV quick note
+
+
+- `TEST_ENV=dev` loads `.env/dev.env`
+- `TEST_ENV=test` loads `.env/test.env`
+- `TEST_ENV=e2e` loads `.env/e2e.env`
+
+Example:
+
+```bash
+corepack pnpm run test:spec:dev tests/alerts.spec.ts
+```
+
+## Docs
+
+- Source docs: `docs/`
+- Internal project docs: `project-docs/`
+- Build local docs: `corepack pnpm run docs:build`
+- Preview local docs: `corepack pnpm run docs:preview`

@@ -30,6 +30,20 @@ It is used to explore:
 * generated local docs via AsciiDoc
 * GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs
 
+== First 10 Minutes
+
+Run these commands from the repository root:
+
+[source,bash]
+----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm install
+corepack pnpm exec playwright install
+corepack pnpm run test:spec:dev tests/login.spec.ts
+corepack pnpm run show-report
+----
+
 == Local Usage
 
 Install dependencies:
@@ -67,14 +81,14 @@ Run one spec in `dev`:
 
 [source,bash]
 ----
-corepack pnpm run test:spec:dev -- tests/example.spec.ts
+corepack pnpm run test:spec:dev tests/example.spec.ts
 ----
 
 Open Playwright UI mode for one spec in `dev`:
 
 [source,bash]
 ----
-corepack pnpm run test:ui:spec:dev -- tests/example.spec.ts
+corepack pnpm run test:ui:spec:dev tests/example.spec.ts
 ----
 
 Build local docs:
@@ -96,6 +110,21 @@ Show the Playwright HTML report:
 [source,bash]
 ----
 corepack pnpm run show-report
+----
+
+== Environment Selection (`TEST_ENV`)
+
+The test scripts select environment files through `TEST_ENV`:
+
+* `TEST_ENV=dev` uses `.env/dev.env`
+* `TEST_ENV=test` uses `.env/test.env`
+* `TEST_ENV=e2e` uses `.env/e2e.env`
+
+Example:
+
+[source,bash]
+----
+corepack pnpm run test:spec:dev tests/alerts.spec.ts
 ----
 
 == Test Coverage

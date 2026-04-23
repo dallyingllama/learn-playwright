@@ -1,107 +1,108 @@
-Audience: Developers working in this repository.
+Audience: developers working in this repository.
 If you are using Codex for implementation workflow, also read `project-docs/codex-workflow.md`.
 
-### Getting Started Locally on Laptop.
+## First-time setup after clone
 
-1. Disable ZScaler Internet Securty temporarily.
-2. Enable the pinned `pnpm` version if it is not already available -> `corepack enable`
-3. Activate the repo version -> `corepack prepare pnpm@10.9.0 --activate`
-4. Install playwright -> `pnpm create playwright`
-5. Run the example test in headless mode -> `pnpm run test:spec:dev -- tests/example.spec.ts`
-6. Review the example test run report -> `pnpm exec playwright show-report`
-7. Run the example test in ui mode -> `pnpm run test:ui:dev`
+Run from the repository root:
 
-### Getting started after repo clone
+`corepack enable`  
+`corepack prepare pnpm@10.9.0 --activate`  
+`corepack pnpm install`  
+`corepack pnpm exec playwright install`
 
-`corepack enable`
-`corepack prepare pnpm@10.9.0 --activate`
-`pnpm install`
-`pnpm exec playwright install`
+## First 10 minutes
 
-### run all tests
+`corepack pnpm run test:spec:dev tests/login.spec.ts`  
+`corepack pnpm run show-report`
 
-`pnpm run test:dev`
-`pnpm run test:test`
-`pnpm run test:e2e`
-`pnpm run test:ui:dev`
-`pnpm run test:ui:test`
-`pnpm run test:ui:e2e`
+## Environment selection (`TEST_ENV`)
 
-### run one spec file
+Test scripts select environment files through `TEST_ENV`:
 
-`pnpm run test:spec:dev -- tests/alerts.spec.ts`
-`pnpm run test:spec:test -- tests/alerts.spec.ts`
-`pnpm run test:spec:e2e -- tests/alerts.spec.ts`
-`pnpm run test:ui:spec:dev -- tests/alerts.spec.ts`
-`pnpm run test:ui:spec:test -- tests/alerts.spec.ts`
-`pnpm run test:ui:spec:e2e -- tests/alerts.spec.ts`
+- `dev` -> `.env/dev.env`
+- `test` -> `.env/test.env`
+- `e2e` -> `.env/e2e.env`
 
-### build the docs for preview
+Examples:
 
-`pnpm run docs:build`
-`pnpm run docs:preview`
+`corepack pnpm run test:dev`  
+`corepack pnpm run test:test`  
+`corepack pnpm run test:e2e`
 
-### show the report
+## Key dependencies and why they exist
 
-`pnpm run show-report`
+- `@playwright/test`: browser automation test runner and assertion API used by this repo.
+- `typescript`: static type checking for tests, page objects, data, and utilities.
+- `cross-env`: cross-platform environment variable support in npm scripts (for example `TEST_ENV`).
+- `dotenv`: loads environment variables from `.env/<name>.env` via `playwright.config.ts`.
+- `@faker-js/faker`: generates realistic test data for forms and table scenarios.
+- `@asciidoctor/cli` and `@asciidoctor/core`: build publishable docs from AsciiDoc source.
+- `live-server`: previews generated local docs from `localDocs/`.
+- `ejs`: templates report index content used by GitHub workflow helper scripts.
 
-### typecheck (typescript safety check)
+## Run all tests
 
-`pnpm run typecheck`
+`corepack pnpm run test:dev`  
+`corepack pnpm run test:test`  
+`corepack pnpm run test:e2e`
 
-- run after TypeScript changes in `tests/`, `page-objects/`, `data/`, or `utils/`
-- run before commit
-- run before opening or merging a PR
-- this checks types only and does not run tests
+`corepack pnpm run test:ui:dev`  
+`corepack pnpm run test:ui:test`  
+`corepack pnpm run test:ui:e2e`
 
-### to run the sanity tests only in github workflow
+## Run one spec file
 
-`pnpm run test:e2e -- --grep=@sanity`
+`corepack pnpm run test:spec:dev tests/alerts.spec.ts`  
+`corepack pnpm run test:spec:test tests/alerts.spec.ts`  
+`corepack pnpm run test:spec:e2e tests/alerts.spec.ts`
 
-### navigation pattern
+`corepack pnpm run test:ui:spec:dev tests/alerts.spec.ts`  
+`corepack pnpm run test:ui:spec:test tests/alerts.spec.ts`  
+`corepack pnpm run test:ui:spec:e2e tests/alerts.spec.ts`
+
+## Typecheck (TypeScript safety check)
+
+`corepack pnpm run typecheck`
+
+Run typecheck:
+
+- after TypeScript changes in `tests/`, `page-objects/`, `data/`, or `utils/`
+- before commit
+- before opening or merging a PR
+
+This checks types only and does not run tests.
+
+## Local docs preview
+
+`corepack pnpm run docs:build`  
+`corepack pnpm run docs:preview`
+
+## Show test report
+
+`corepack pnpm run show-report`
+
+## Run sanity-only filter
+
+`corepack pnpm run test:e2e -- --grep=@sanity`
+
+## Navigation pattern
 
 - `tests/navigation.spec.ts` is the explicit place where both navigation methods are tested directly.
 - In most other feature specs, navigation is setup rather than the behavior under test.
 - For shared page objects using `gotoHelper`:
 
-`goto()` = deterministic default navigation
-`goto.viaMenu()` = explicit menu navigation
-`goto.viaDirectLink()` = explicit direct-link navigation
+`goto()` = deterministic default navigation  
+`goto.viaMenu()` = explicit menu navigation  
+`goto.viaDirectLink()` = explicit direct-link navigation  
 `goto.random()` = explicit randomized navigation
 
-- Current repo pattern:
-  - use deterministic navigation where the test is demonstrating navigation behavior clearly
-  - use randomized navigation in feature specs when navigation is just part of setup
-  - keep randomized behavior explicit rather than hidden in the default `goto()`
+Current repo pattern:
 
-### basic git commands
+- use deterministic navigation where the test demonstrates navigation behavior
+- use randomized navigation in feature specs when navigation is setup
+- keep randomized behavior explicit rather than hidden in default `goto()`
 
-`git status`
-`git diff`
-`git diff --staged`
-`git add .`
-`git commit -m "your message"`
-`git pull`
-`git push`
-
-### line endings and `.gitattributes`
-
-- This repo uses `.gitattributes` to keep source files normalized to `LF`.
-- If you see a warning like `warning: in the working copy of 'project-docs/backlog.md', CRLF will be replaced by LF the next time Git touches it`, check that `.gitattributes` is present and then renormalize before commit.
-- Useful command:
-
-`git add --renormalize .`
-
-- After that, recheck what will be committed:
-
-`git status`
-`git diff --staged`
-
-- Then commit normally.
-- or just combine it all
-`git add --renormalize . && git commit -m "your message"`
-
-### current CI behavior
+## Current CI behavior
 
 - GitHub Actions runs the `@sanity` tests first.
 - If the sanity stage passes, the workflow runs the full `e2e` suite.
@@ -111,7 +112,7 @@ If you are using Codex for implementation workflow, also read `project-docs/code
   - full-suite report if sanity passes and the full run completes
 - The workflow ends in a failed state if either the sanity stage or the full suite fails.
 
-### alerts timing note
+## Alerts timing note
 
 - `tests/alerts.spec.ts` contains one intentional timing assertion.
-- The timed alert scenario verifies that the alert does not appear immediately and then does appear after the expected delay window.
+- The timed alert scenario verifies that the alert does not appear immediately and then appears within the expected delay window.

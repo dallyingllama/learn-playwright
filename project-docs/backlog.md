@@ -4,11 +4,6 @@ Active backlog only. Completed work is tracked in `project-docs/repo-state.md` a
 
 ## 4. Documentation and Learning Experience
 
-### 4.1 Improve environment and setup documentation
-
-- Make the first-time setup path easy to follow for someone new to `pnpm`, Playwright, and CI.
-- Keep the wording beginner-friendly and explicit.
-
 ### 4.2 Document current CI and report publishing flow
 
 - Explain what the GitHub workflow does:
