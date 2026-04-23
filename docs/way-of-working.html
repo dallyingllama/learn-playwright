@@ -90,15 +90,15 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ci_and_publishing">CI and Publishing</h2>
+<h2 id="_ci_and_report_publishing_flow">CI and Report Publishing Flow</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>GitHub Actions is used to:</p>
+<p>GitHub Actions follows this practical flow:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>install dependencies</p>
+<p>install dependencies with the pinned <code>pnpm@10.9.0</code> version</p>
 </li>
 <li>
 <p>run the <code>@sanity</code> subset first</p>
@@ -107,7 +107,10 @@ corepack pnpm run docs:preview</code></pre>
 <p>run the full Playwright <code>e2e</code> suite only if sanity passes</p>
 </li>
 <li>
-<p>capture and publish Playwright report history</p>
+<p>upload test artifacts from the run</p>
+</li>
+<li>
+<p>publish one Playwright report-history entry for the run</p>
 </li>
 <li>
 <p>build and publish AsciiDoc documentation to GitHub Pages</p>
@@ -115,10 +118,7 @@ corepack pnpm run docs:preview</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>The workflow now activates the repo&#8217;s pinned <code>pnpm@10.9.0</code> instead of using <code>latest</code>, which reduces drift between local development and CI.</p>
-</div>
-<div class="paragraph">
-<p>The reporting flow still publishes one report entry per workflow run:</p>
+<p>Report-history publishing behavior:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -129,9 +129,6 @@ corepack pnpm run docs:preview</code></pre>
 <p>if sanity passes, the published report is the full-suite report</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>This keeps the report history readable while still making failures visible at the workflow level.</p>
 </div>
 </div>
 </div>
@@ -156,7 +153,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-23 18:19:32 UTC
+Last updated 2026-04-23 20:59:02 UTC
 </div>
 </div>
 </body>

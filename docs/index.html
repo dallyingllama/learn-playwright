@@ -18,7 +18,9 @@
 <ul class="sectlevel1">
 <li><a href="#_overview">Overview</a></li>
 <li><a href="#_highlights">Highlights</a></li>
+<li><a href="#_first_10_minutes">First 10 Minutes</a></li>
 <li><a href="#_local_usage">Local Usage</a></li>
+<li><a href="#_environment_selection_test_env">Environment Selection (<code>TEST_ENV</code>)</a></li>
 <li><a href="#_test_coverage">Test Coverage</a></li>
 <li><a href="#_documentation_map">Documentation Map</a></li>
 <li><a href="#_notes">Notes</a></li>
@@ -101,6 +103,24 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_first_10_minutes"><a class="anchor" href="#_first_10_minutes"></a><a class="link" href="#_first_10_minutes">First 10 Minutes</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run these commands from the repository root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack <span class="nb">enable
+</span>corepack prepare pnpm@10.9.0 <span class="nt">--activate</span>
+corepack pnpm <span class="nb">install
+</span>corepack pnpm <span class="nb">exec </span>playwright <span class="nb">install
+</span>corepack pnpm run <span class="nb">test</span>:spec:dev tests/login.spec.ts
+corepack pnpm run show-report</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_local_usage"><a class="anchor" href="#_local_usage"></a><a class="link" href="#_local_usage">Local Usage</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -143,7 +163,7 @@ corepack pnpm <span class="nb">install
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:spec:dev <span class="nt">--</span> tests/example.spec.ts</code></pre>
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:spec:dev tests/example.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -151,7 +171,7 @@ corepack pnpm <span class="nb">install
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:ui:spec:dev <span class="nt">--</span> tests/example.spec.ts</code></pre>
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:ui:spec:dev tests/example.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -176,6 +196,35 @@ corepack pnpm <span class="nb">install
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="bash">corepack pnpm run show-report</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_selection_test_env"><a class="anchor" href="#_environment_selection_test_env"></a><a class="link" href="#_environment_selection_test_env">Environment Selection (<code>TEST_ENV</code>)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The test scripts select environment files through <code>TEST_ENV</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>TEST_ENV=dev</code> uses <code>.env/dev.env</code></p>
+</li>
+<li>
+<p><code>TEST_ENV=test</code> uses <code>.env/test.env</code></p>
+</li>
+<li>
+<p><code>TEST_ENV=e2e</code> uses <code>.env/e2e.env</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:spec:dev tests/alerts.spec.ts</code></pre>
 </div>
 </div>
 </div>
@@ -275,6 +324,9 @@ corepack pnpm <span class="nb">install
 <p><a href="features-functions.html">Features / Functions</a></p>
 </li>
 <li>
+<p><a href="developer-how-to.html">Developer How-To</a></p>
+</li>
+<li>
 <p><a href="coding-standards.html">Playwright Coding Standards and Guidelines</a></p>
 </li>
 <li>
@@ -308,7 +360,7 @@ corepack pnpm <span class="nb">install
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-23 18:19:32 UTC
+Last updated 2026-04-23 20:59:02 UTC
 </div>
 </div>
 </body>

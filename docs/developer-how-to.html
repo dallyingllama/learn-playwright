@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Developer How-To</title>
+<link rel="stylesheet" href="_theme/playwright.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="_theme/rouge-github.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Developer How-To</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_first_time_setup_after_clone">First-Time Setup After Clone</a></li>
+<li><a href="#_first_10_minutes">First 10 Minutes</a></li>
+<li><a href="#_environment_selection_test_env">Environment Selection (<code>TEST_ENV</code>)</a></li>
+<li><a href="#_key_dependencies_and_why_they_exist">Key Dependencies and Why They Exist</a></li>
+<li><a href="#_run_all_tests">Run All Tests</a></li>
+<li><a href="#_run_one_spec_file">Run One Spec File</a></li>
+<li><a href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></li>
+<li><a href="#_local_docs_preview">Local Docs Preview</a></li>
+<li><a href="#_show_test_report">Show Test Report</a></li>
+<li><a href="#_run_sanity_only_filter">Run Sanity-Only Filter</a></li>
+<li><a href="#_navigation_pattern">Navigation Pattern</a></li>
+<li><a href="#_current_ci_behavior">Current CI Behavior</a></li>
+<li><a href="#_alerts_timing_note">Alerts Timing Note</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Audience: developers working in this repository.
+If you are using Codex for implementation workflow, also read <code>project-docs/codex-workflow.md</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_first_time_setup_after_clone"><a class="anchor" href="#_first_time_setup_after_clone"></a><a class="link" href="#_first_time_setup_after_clone">First-Time Setup After Clone</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run from the repository root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack <span class="nb">enable
+</span>corepack prepare pnpm@10.9.0 <span class="nt">--activate</span>
+corepack pnpm <span class="nb">install
+</span>corepack pnpm <span class="nb">exec </span>playwright <span class="nb">install</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_first_10_minutes"><a class="anchor" href="#_first_10_minutes"></a><a class="link" href="#_first_10_minutes">First 10 Minutes</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:spec:dev tests/login.spec.ts
+corepack pnpm run show-report</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_selection_test_env"><a class="anchor" href="#_environment_selection_test_env"></a><a class="link" href="#_environment_selection_test_env">Environment Selection (<code>TEST_ENV</code>)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Test scripts select environment files through <code>TEST_ENV</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>dev</code> &#8594; <code>.env/dev.env</code></p>
+</li>
+<li>
+<p><code>test</code> &#8594; <code>.env/test.env</code></p>
+</li>
+<li>
+<p><code>e2e</code> &#8594; <code>.env/e2e.env</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:dev
+corepack pnpm run <span class="nb">test</span>:test
+corepack pnpm run <span class="nb">test</span>:e2e</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_dependencies_and_why_they_exist"><a class="anchor" href="#_key_dependencies_and_why_they_exist"></a><a class="link" href="#_key_dependencies_and_why_they_exist">Key Dependencies and Why They Exist</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>@playwright/test</code>: browser automation test runner and assertion API used by this repo.</p>
+</li>
+<li>
+<p><code>typescript</code>: static type checking for tests, page objects, data, and utilities.</p>
+</li>
+<li>
+<p><code>cross-env</code>: cross-platform environment variable support in npm scripts (for example <code>TEST_ENV</code>).</p>
+</li>
+<li>
+<p><code>dotenv</code>: loads environment variables from <code>.env/&lt;name&gt;.env</code> via <code>playwright.config.ts</code>.</p>
+</li>
+<li>
+<p><code>@faker-js/faker</code>: generates realistic test data for forms and table scenarios.</p>
+</li>
+<li>
+<p><code>@asciidoctor/cli</code> and <code>@asciidoctor/core</code>: build publishable docs from AsciiDoc source.</p>
+</li>
+<li>
+<p><code>live-server</code>: previews generated local docs from <code>localDocs/</code>.</p>
+</li>
+<li>
+<p><code>ejs</code>: templates report index content used by GitHub workflow helper scripts.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_all_tests"><a class="anchor" href="#_run_all_tests"></a><a class="link" href="#_run_all_tests">Run All Tests</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:dev
+corepack pnpm run <span class="nb">test</span>:test
+corepack pnpm run <span class="nb">test</span>:e2e
+
+corepack pnpm run <span class="nb">test</span>:ui:dev
+corepack pnpm run <span class="nb">test</span>:ui:test
+corepack pnpm run <span class="nb">test</span>:ui:e2e</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_one_spec_file"><a class="anchor" href="#_run_one_spec_file"></a><a class="link" href="#_run_one_spec_file">Run One Spec File</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:spec:dev tests/alerts.spec.ts
+corepack pnpm run <span class="nb">test</span>:spec:test tests/alerts.spec.ts
+corepack pnpm run <span class="nb">test</span>:spec:e2e tests/alerts.spec.ts
+
+corepack pnpm run <span class="nb">test</span>:ui:spec:dev tests/alerts.spec.ts
+corepack pnpm run <span class="nb">test</span>:ui:spec:test tests/alerts.spec.ts
+corepack pnpm run <span class="nb">test</span>:ui:spec:e2e tests/alerts.spec.ts</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_typecheck_typescript_safety_check"><a class="anchor" href="#_typecheck_typescript_safety_check"></a><a class="link" href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run typecheck</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run typecheck:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>after TypeScript changes in <code>tests/</code>, <code>page-objects/</code>, <code>data/</code>, or <code>utils/</code></p>
+</li>
+<li>
+<p>before commit</p>
+</li>
+<li>
+<p>before opening or merging a PR</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This checks types only and does not run tests.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_local_docs_preview"><a class="anchor" href="#_local_docs_preview"></a><a class="link" href="#_local_docs_preview">Local Docs Preview</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run docs:build
+corepack pnpm run docs:preview</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_show_test_report"><a class="anchor" href="#_show_test_report"></a><a class="link" href="#_show_test_report">Show Test Report</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run show-report</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_sanity_only_filter"><a class="anchor" href="#_run_sanity_only_filter"></a><a class="link" href="#_run_sanity_only_filter">Run Sanity-Only Filter</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">corepack pnpm run <span class="nb">test</span>:e2e <span class="nt">--</span> <span class="nt">--grep</span><span class="o">=</span>@sanity</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_navigation_pattern"><a class="anchor" href="#_navigation_pattern"></a><a class="link" href="#_navigation_pattern">Navigation Pattern</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>tests/navigation.spec.ts</code> is the explicit place where both navigation methods are tested directly.</p>
+</li>
+<li>
+<p>In most other feature specs, navigation is setup rather than the behavior under test.</p>
+</li>
+<li>
+<p>For shared page objects using <code>gotoHelper</code>:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>goto()</code> = deterministic default navigation
+<code>goto.viaMenu()</code> = explicit menu navigation
+<code>goto.viaDirectLink()</code> = explicit direct-link navigation
+<code>goto.random()</code> = explicit randomized navigation</p>
+</div>
+<div class="paragraph">
+<p>Current repo pattern:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use deterministic navigation where the test demonstrates navigation behavior</p>
+</li>
+<li>
+<p>use randomized navigation in feature specs when navigation is setup</p>
+</li>
+<li>
+<p>keep randomized behavior explicit rather than hidden in default <code>goto()</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_ci_behavior"><a class="anchor" href="#_current_ci_behavior"></a><a class="link" href="#_current_ci_behavior">Current CI Behavior</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>GitHub Actions runs the <code>@sanity</code> tests first.</p>
+</li>
+<li>
+<p>If the sanity stage passes, the workflow runs the full <code>e2e</code> suite.</p>
+</li>
+<li>
+<p>If the sanity stage fails, the full suite is skipped.</p>
+</li>
+<li>
+<p>The workflow publishes one report/history entry per run:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>sanity report if sanity fails</p>
+</li>
+<li>
+<p>full-suite report if sanity passes and the full run completes</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The workflow ends in a failed state if either the sanity stage or the full suite fails.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_alerts_timing_note"><a class="anchor" href="#_alerts_timing_note"></a><a class="link" href="#_alerts_timing_note">Alerts Timing Note</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>tests/alerts.spec.ts</code> contains one intentional timing assertion.</p>
+</li>
+<li>
+<p>The timed alert scenario verifies that the alert does not appear immediately and then appears within the expected delay window.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-04-23 20:59:02 UTC
+</div>
+</div>
+</body>
+</html>
