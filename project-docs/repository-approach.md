@@ -59,6 +59,20 @@ After the MVP is stable, create the following repo types:
 - Website/business-rule-specific test data.
 - Documentation and run conventions that are unique to the consuming repo.
 
+## Testing Ownership Rules
+
+### Shared package test ownership
+- Unit tests for shared helpers, contracts, and reusable utility logic live in the shared package repo.
+- The shared package repo is the source of truth for shared behavior and regression coverage.
+- Shared package changes should be validated there first before publishing a new version.
+
+### Consumer project test ownership
+- Consumer repos focus on project-specific tests and integration usage of shared package APIs.
+- Consumer repos should not duplicate full shared package unit test suites.
+- Add consumer-side tests only for:
+  - project-specific behavior built on top of shared utilities
+  - integration checks needed to validate package usage in that project context
+
 ## Versioning and release approach
 - Start the shared package with `0.x` while boundaries and API shapes are still changing.
 - Move to `1.0.0` when package interfaces are stable and tested across at least two showcase repos.
