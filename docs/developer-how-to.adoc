@@ -82,6 +82,32 @@ corepack pnpm run test:ui:spec:test tests/alerts.spec.ts
 corepack pnpm run test:ui:spec:e2e tests/alerts.spec.ts
 ----
 
+== Unit Tests in This Repo
+
+This repository uses both end-to-end tests and unit-style tests.
+
+Unit-style tests live under `tests/unit/` and focus on repository-owned logic (for example helper functions, metadata contracts, and data shape rules).
+
+When unit tests make sense:
+
+* shared helper logic with branching (example: `utils/gotoHelper.ts`)
+* reusable utility behavior used by multiple specs
+* metadata and data-contract validation that should fail fast
+
+When unit tests usually do not add value:
+
+* thin page-object wrappers that only click/fill once
+* flows already validated as user behavior in E2E coverage
+* checks that duplicate full browser workflows without adding faster feedback
+
+Current examples:
+
+* `tests/unit/goto-helper.unit.spec.ts`
+* `tests/unit/annotations.unit.spec.ts`
+* `tests/unit/section-metadata.unit.spec.ts`
+* `tests/unit/checkbox-data.unit.spec.ts`
+* `tests/unit/fake-data-generators.unit.spec.ts`
+
 == Typecheck (TypeScript Safety Check)
 
 [source,bash]
@@ -138,7 +164,8 @@ Current repo pattern:
 
 == Current CI Behavior
 
-* GitHub Actions runs the `@sanity` tests first.
+* GitHub Actions runs unit tests first as a fail-fast gate.
+* If unit tests pass, GitHub Actions runs the `@sanity` tests.
 * If the sanity stage passes, the workflow runs the full `e2e` suite.
 * If the sanity stage fails, the full suite is skipped.
 * The workflow publishes one report/history entry per run:

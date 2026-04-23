@@ -11,6 +11,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Test stack: `@playwright/test`, TypeScript, `cross-env`, `dotenv`, `@faker-js/faker`.
 - Main code areas:
   - `tests/` for spec coverage
+  - `tests/unit/` for unit-style coverage of local helper and metadata logic
   - `page-objects/` for page models, base behavior, and shared metadata
   - `data/` for reusable test data
   - `utils/` for shared helpers
@@ -31,7 +32,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 - `pnpm run typecheck` is available and used as the TS safety gate.
 - Local docs build uses `corepack pnpm run docs:build`.
-- CI workflow runs `@sanity` first, then full `e2e` only if sanity passes.
+- CI workflow runs a unit-test gate first, then `@sanity`, then full `e2e` only if sanity passes.
 - CI publishes report history and docs to GitHub Pages.
 
 ## Completed Backlog Items
@@ -48,6 +49,17 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `4.1` setup/env docs improvements with `corepack pnpm` consistency.
 - `4.2` short CI/report publishing flow documented in `docs/way-of-working.adoc`.
 - `4.3` internal docs split is lightweight: publishable developer guide in `docs/developer-how-to.adoc`, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
+
+## Session Updates (Latest)
+
+- Added unit-style tests in `tests/unit/` for:
+  - `utils/gotoHelper.ts`
+  - `utils/annotations.ts`
+  - `page-objects/metadata/section-metadata.ts`
+  - `data/checkboxData.ts`
+  - `utils/fakeUser.ts` and `utils/fakeTableUser.ts`
+- Updated CI workflow (`.github/workflows/playwright.yml`) to run unit tests as a fail-fast gate before sanity/full runs.
+- Updated docs drift cleanup in `docs/features/conventions.adoc` and refreshed backlog wording for `4.4`.
 
 ## Active Focus
 

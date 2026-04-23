@@ -39,7 +39,8 @@ corepack pnpm run docs:preview
 GitHub Actions follows this practical flow:
 
 * install dependencies with the pinned `pnpm@10.9.0` version
-* run the `@sanity` subset first
+* run unit tests first as a fail-fast gate
+* run the `@sanity` subset if unit tests pass
 * run the full Playwright `e2e` suite only if sanity passes
 * upload test artifacts from the run
 * publish one Playwright report-history entry for the run
