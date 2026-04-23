@@ -116,10 +116,10 @@ export class WebTablesPage extends BasePage implements NavigablePage {
     return await this.getBodyRows().filter({ hasText: keyword }).count();
   }
 
-  async expectMatchingRows(keyword: string): Promise<void> {
+  async expectFirstNamePresent(firstName: string): Promise<void> {
     await expect
-      .poll(async () => this.getMatchingRowCount(keyword))
-      .toBeGreaterThan(0);
+      .poll(async () => this.getColumnValues(0))
+      .toContain(firstName);
   }
 
   async expectNoMatchingRows(keyword: string): Promise<void> {
@@ -162,3 +162,4 @@ export class WebTablesPage extends BasePage implements NavigablePage {
     return values;
   }
 }
+

@@ -59,15 +59,15 @@ export class ButtonsPage extends BasePage implements NavigablePage {
     await this.dynamicClickBtn.click();
   }
 
-  async getDoubleClickMessage() {
-    return this.doubleClickMsg.textContent();
+  async getDoubleClickMessage(): Promise<string> {
+    return (await this.doubleClickMsg.textContent())?.trim() ?? '';
   }
 
-  async getRightClickMessage() {
-    return this.rightClickMsg.textContent();
+  async getRightClickMessage(): Promise<string> {
+    return (await this.rightClickMsg.textContent())?.trim() ?? '';
   }
 
-  async getDynamicClickMessage() {
-    return this.dynamicClickMsg.textContent();
+  async getDynamicClickMessage(): Promise<string> {
+    return (await this.dynamicClickMsg.textContent())?.trim() ?? '';
   }
 }

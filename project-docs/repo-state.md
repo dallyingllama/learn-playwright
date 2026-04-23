@@ -64,7 +64,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `.github/scripts/render-index.js` creates a browsable history index from prior runs.
 - The workflow uses current GitHub Action major versions and a Node 24 runtime.
 - `project-docs/codex-workflow.md` tells new sessions to use `AGENTS.md`, `project-docs/repo-state.md`, and `project-docs/backlog.md` together.
-- `project-docs/backlog.md` acts as the working list for follow-up improvements and tech-debt cleanup.
+- `project-docs/backlog.md` is maintained as an active-work list, while completed items are tracked in `project-docs/repo-state.md` and git history.
 - The published AsciiDoc pages describe the repo structure, `pnpm` usage, and test/docs workflow.
 - `AGENTS.md` includes a documentation-writing rule: describe the repository as it is today with simple factual statements and avoid unnecessary comparison language.
 
@@ -124,7 +124,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `AGENTS.md` reflects the `project-docs/` location for internal documentation.
 - `AGENTS.md` also includes the current rule for concise present-state documentation wording.
 - `project-docs/codex-workflow.md` references `project-docs/repo-state.md` and `project-docs/backlog.md`.
-- `project-docs/backlog.md` provides a prioritized list of cleanup, CI, architecture, and documentation work.
+- `project-docs/backlog.md` provides a prioritized active list of cleanup, CI, architecture, and documentation work.
 - `project-docs/backlog.md` also includes section `5` for implementing the reusable architecture strategy and links to `project-docs/repository-approach.md`.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
@@ -155,6 +155,8 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Backlog item `2.2` is complete: section/root page objects share the `BasePage` + `createGotoWithVariants()` structure.
 - Backlog item `2.3` is complete: helper signatures, data builders, and shared test data models are typed and validated with `pnpm run typecheck`.
 - Backlog item `2.4` is complete: section-level metadata is extracted and reused across page objects and navigation/home-page test coverage.
+- Backlog item `3.2` is complete: assertions were tightened across links, home-page navigation, web tables search verification, textbox page URL checks, and broken-links URL/status checks.
+- The suite includes intentional assertion examples for exact match (`toBe`/`toHaveText`), pattern match (`toMatch`), and presence checks (`toBeTruthy`) based on whether values are fixed, format-based, or dynamic.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
 - Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.

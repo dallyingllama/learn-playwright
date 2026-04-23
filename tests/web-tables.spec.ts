@@ -18,7 +18,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for new user and verify result', async () => {
       await webTablesPage.search(user.firstName);
-      await webTablesPage.expectMatchingRows(user.firstName);
+      await webTablesPage.expectFirstNamePresent(user.firstName);
     });
   });
 
@@ -31,7 +31,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for known user "Cierra"', async () => {
       await webTablesPage.search('Cierra');
-      await webTablesPage.expectMatchingRows('Cierra');
+      await webTablesPage.expectFirstNamePresent('Cierra');
     });
   });
 
@@ -92,7 +92,7 @@ test.describe('📊 Web Tables', () => {
 
     await test.step('🔍 Search for updated user and validate', async () => {
       await webTablesPage.search(updated.firstName);
-      await webTablesPage.expectMatchingRows(updated.firstName);
+      await webTablesPage.expectFirstNamePresent(updated.firstName);
     });
   });
 
@@ -111,3 +111,4 @@ test.describe('📊 Web Tables', () => {
     });
   });
 });
+

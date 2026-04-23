@@ -84,8 +84,8 @@ export class LinksPage extends BasePage implements NavigablePage {
     await expect.poll(async () => (await this.responseOutput.textContent())?.trim() ?? '').not.toBe('');
   }
 
-  async assertResponseTextContains(text: string): Promise<void> {
-    await expect(this.responseOutput).toContainText(text);
+  async assertResponseTextEquals(text: string): Promise<void> {
+    await expect(this.responseOutput).toHaveText(text);
   }
 
   async getLinkResponseText(): Promise<string> {
@@ -93,3 +93,4 @@ export class LinksPage extends BasePage implements NavigablePage {
     return (await this.linkResponse.textContent())?.trim() ?? '';
   }
 }
+

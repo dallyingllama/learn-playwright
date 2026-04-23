@@ -44,6 +44,10 @@ export class BookstorePage extends BasePage implements NavigablePage {
     return this.table.getByRole('rowgroup').nth(1);
   }
 
+  private getBodyRows(): Locator {
+    return this.getBodyRowGroup().getByRole('row');
+  }
+
   override async waitForPageReady(): Promise<void> {
     if (await this.loadingIndicator.isVisible().catch(() => false)) {
       await expect(this.loadingIndicator).toBeHidden({ timeout: 15000 });
@@ -69,7 +73,8 @@ export class BookstorePage extends BasePage implements NavigablePage {
   }
 
   async expectNoResults(): Promise<void> {
-    await expect(this.getBodyRowGroup()).toBeEmpty();
     await expect(this.pageIndicator).toBeVisible();
+    await expect(this.getBodyRows()).toHaveCount(0);
+    await expect(this.getBodyRowGroup().locator('a')).toHaveCount(0);
   }
 }

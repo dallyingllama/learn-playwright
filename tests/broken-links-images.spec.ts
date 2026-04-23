@@ -56,14 +56,22 @@ test.describe('✅ Broken Links - Images', () => {
       const validUrl = await validLink.getAttribute('href');
       const brokenUrl = await brokenLink.getAttribute('href');
 
-      expect(validUrl).toBeTruthy();
-      expect(brokenUrl).toBeTruthy();
+      expect(validUrl, 'Valid link href should exist').toBeTruthy();
+      expect(brokenUrl, 'Broken link href should exist').toBeTruthy();
 
-      const validResponse = await request.get(validUrl!);
-      const brokenResponse = await request.get(brokenUrl!);
+      if (!validUrl || !brokenUrl) {
+        throw new Error('Expected both link href values to be present.');
+      }
 
-      expect(validResponse.status()).toBeLessThan(400);
-      expect(brokenResponse.status()).toBeGreaterThanOrEqual(400);
+      // Regex is intentional here because protocol/trailing slash can vary.
+      expect(validUrl).toMatch(/^https?:\/\/demoqa\.com\/?$/);
+      expect(brokenUrl).toMatch(/^https?:\/\/the-internet\.herokuapp\.com\/status_codes\/500\/?$/);
+
+      const validResponse = await request.get(validUrl);
+      const brokenResponse = await request.get(brokenUrl);
+
+      expect(validResponse.status()).toBe(200);
+      expect(brokenResponse.status()).toBe(500);
     });
   });
 });

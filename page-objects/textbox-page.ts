@@ -75,7 +75,9 @@ export class TextBoxPage extends BasePage implements NavigablePage {
   }
 
   async assertOnPage(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(config.url));
+    await expect
+      .poll(() => new URL(this.page.url()).pathname.replace(/\/$/, ''))
+      .toBe(config.url);
     await expect(this.page.locator('h1')).toHaveText(config.header);
   }
 }

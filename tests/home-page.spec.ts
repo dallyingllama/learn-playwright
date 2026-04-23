@@ -36,7 +36,9 @@ test.describe('Home Page Tests', () => {
       });
 
       await test.step(`Verify ${metadata.name} section page is loaded`, async () => {
-        await expect(page).toHaveURL(new RegExp(`/${metadata.url}$`));
+        await expect
+          .poll(() => new URL(page.url()).pathname.replace(/\/$/, ''))
+          .toBe(`/${metadata.url}`);
 
         if (metadata.landingType === 'sectionLanding') {
           await expect(page.getByText(SECTION_LANDING_MESSAGE)).toBeVisible();

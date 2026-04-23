@@ -9,6 +9,7 @@ This document captures the practical coding habits used in this repository today
 * Avoid brittle CSS or XPath selectors unless needed for a specific UI.
 * Use `async` and `await` consistently for browser interactions.
 * Avoid fixed timeouts; prefer assertion-driven or state-based waits.
+* Prefer exact assertions (for example `toBe`) when the full expected value is known; use broader checks (for example `toContain`) only when partial matching is intentional.
 * Keep test data separate from test logic where that improves reuse and readability.
 * Reuse existing helpers, page objects, and shared data before creating new patterns.
 * Keep tests easy to read, with meaningful assertions and focused workflows.

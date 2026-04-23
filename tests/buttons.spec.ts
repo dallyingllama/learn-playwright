@@ -20,7 +20,7 @@ test.describe('🖱️ Buttons Page', () => {
 
     await test.step('✅ Verify double click message', async () => {
       const msg = await buttonsPage.getDoubleClickMessage();
-      expect(msg).toContain('You have done a double click');
+      expect(msg).toBe('You have done a double click');
     });
   });
 
@@ -33,7 +33,7 @@ test.describe('🖱️ Buttons Page', () => {
 
     await test.step('✅ Verify right click message', async () => {
       const msg = await buttonsPage.getRightClickMessage();
-      expect(msg).toContain('You have done a right click');
+      expect(msg).toBe('You have done a right click');
     });
   });
 
@@ -46,7 +46,7 @@ test.describe('🖱️ Buttons Page', () => {
 
     await test.step('✅ Verify dynamic click message', async () => {
       const msg = await buttonsPage.getDynamicClickMessage();
-      expect(msg).toContain('You have done a dynamic click');
+      expect(msg).toBe('You have done a dynamic click');
     });
   });
 });
