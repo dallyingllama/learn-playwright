@@ -1,3 +1,6 @@
+import type { Page } from '@playwright/test';
+import type { NavigablePage } from '../page-objects/interfaces/navigable-page';
+
 import { ElementsPage } from '../page-objects/elements-page';
 import { TextBoxPage } from '../page-objects/textbox-page';
 import { CheckBoxPage } from '../page-objects/checkbox-page';
@@ -42,7 +45,24 @@ import { LoginPage } from '../page-objects/login-page';
 import { ProfilePage } from '../page-objects/profile-page';
 // import { BookstoreAPIPage } from '../page-objects/BookstoreAPIPage'; // Uncomment if implemented
 
-export const sections = [
+export type NavigationPageObject = NavigablePage & {
+  assertOnPage: () => Promise<void>;
+};
+
+export type NavigationPageObjectClass = new (page: Page) => NavigationPageObject;
+
+export type NavigationSubPage = {
+  name: string;
+  page?: NavigationPageObjectClass;
+};
+
+export type NavigationSection = {
+  name: string;
+  page: NavigationPageObjectClass;
+  subPages: NavigationSubPage[];
+};
+
+export const sections: NavigationSection[] = [
   {
     name: 'Elements',
     page: ElementsPage,

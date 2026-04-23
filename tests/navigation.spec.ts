@@ -1,17 +1,21 @@
 // tests/navigation.spec.ts
-import { test } from '@playwright/test';
-import { sections } from '../data/navigationSections'; // 💡 moved to external file for readability (optional)
+import { Page, test } from '@playwright/test';
+import { sections, type NavigationPageObjectClass } from '../data/navigationSections';
 
 type NavigationMethod = 'viaMenu' | 'viaDirectLink';
 
-async function navigateTo(page, pageObjectClass: any, method: NavigationMethod) {
+async function navigateTo(
+  page: Page,
+  pageObjectClass: NavigationPageObjectClass,
+  method: NavigationMethod
+) {
   const instance = new pageObjectClass(page);
 
-  await test.step(`📄 Navigate ${method === 'viaMenu' ? 'via sidebar menu' : 'via direct URL'}`, async () => {
+  await test.step(`Navigate ${method === 'viaMenu' ? 'via sidebar menu' : 'via direct URL'}`, async () => {
     await instance.goto[method]();
   });
 
-  await test.step('🔎 Assert correct page loaded', async () => {
+  await test.step('Assert correct page loaded', async () => {
     await instance.assertOnPage();
   });
 }
@@ -22,12 +26,12 @@ const strategies = [
 ];
 
 for (const strategy of strategies) {
-  test.describe(`📚✅ Navigation (${strategy.name})`, () => {
+  test.describe(`Navigation (${strategy.name})`, () => {
     for (const [sectionIndex, section] of sections.entries()) {
       test.describe(`${section.name}`, () => {
         for (const [subPageIndex, subPage] of section.subPages.entries()) {
           const isSanityExample = strategy.method === 'viaMenu' && sectionIndex === 0 && subPageIndex === 0;
-          test(`➡️ ${section.name} → ${subPage.name}`, isSanityExample ? { tag: '@sanity' } : {}, async ({ page }) => {
+          test(`${section.name} -> ${subPage.name}`, isSanityExample ? { tag: '@sanity' } : {}, async ({ page }) => {
             await navigateTo(page, subPage.page ?? section.page, strategy.method);
           });
         }

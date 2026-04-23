@@ -52,7 +52,7 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 
 ### 1.7 Review doc accuracy after recent repo changes (Completed)
 
-- Rechecked `project-docs/learn-playwright.md`, `docs/index.adoc`, `project-docs/codex-workflow.md`, `project-docs/repo-state.md`, and `AGENTS.md` against the current repo.
+- Rechecked `project-docs/developer-how-to.md`, `docs/index.adoc`, `project-docs/codex-workflow.md`, `project-docs/repo-state.md`, and `AGENTS.md` against the current repo.
 - Updated documentation to describe the repository as it is today with simple factual statements.
 - Confirmed CI behavior, GitHub Pages links, and repo structure descriptions match the current repo.
 
@@ -80,10 +80,13 @@ The top section focuses on existing tech debt and cleanup so the repo stays unde
 - Aligned `bookstore-page.ts` `goto` setup to the same inline pattern used by the other standardized page objects.
 - Kept `register-page.ts` as an intentional exception for its auth-focused flow.
 
-### 2.3 Improve typing in helpers and data builders
+### 2.3 Improve typing in helpers and data builders (Completed)
 
-- Tighten loose helper signatures and generic config usage.
-- Use clearer shared types for data-driven tests and page-object contracts where helpful.
+- Typed navigation page-object constructors and shared section metadata in `tests/navigation.spec.ts` and `data/navigationSections.ts`.
+- Typed registration user builder overrides in `tests/register.spec.ts` with `Partial<RegisterUser>`.
+- Added typed data models for `data/loginData.ts` and `data/bookData.ts`.
+- Added explicit `FakeUser` type for `utils/fakeUser.ts`.
+- Added repository typecheck foundation with `tsconfig.json`, `typescript` dev dependency, and `pnpm run typecheck`.
 
 ### 2.4 Extract reusable page metadata where it helps
 

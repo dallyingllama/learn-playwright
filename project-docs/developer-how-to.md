@@ -42,6 +42,15 @@
 
 `pnpm run show-report`
 
+### typecheck (typescript safety check)
+
+`pnpm run typecheck`
+
+- run after TypeScript changes in `tests/`, `page-objects/`, `data/`, or `utils/`
+- run before commit
+- run before opening or merging a PR
+- this checks types only and does not run tests
+
 ### to run the sanity tests only in github workflow
 
 `pnpm run test:e2e -- --grep=@sanity`

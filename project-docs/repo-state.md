@@ -16,7 +16,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `.github/workflows/` contains one CI workflow for running tests, building docs, uploading artifacts, and publishing report history to GitHub Pages.
 - `.github/scripts/` contains an EJS template and a Node script for generating a historical Playwright report index.
 - `docs/` contains a publishable documentation set: `docs/index.adoc`, supporting topic pages, feature/guideline subfolders, `_includes/`, and theme assets.
-- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `learn-playwright.md`, and `backlog.md`.
+- `project-docs/` contains internal project guidance such as `repo-state.md`, `codex-workflow.md`, `developer-how-to.md`, and `backlog.md`.
 - Environment/config handling is currently done through `playwright.config.ts` and `.env/`.
 
 ## Implemented Features
@@ -128,7 +128,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - `project-docs/backlog.md` also includes section `5` for implementing the reusable architecture strategy and links to `project-docs/repository-approach.md`.
 - The publishable `.adoc` pages reflect the repo structure, `pnpm` commands, current test coverage, and the `page-objects/` directory.
 - `docs/` has grown, and the broader internal docs still need to keep pace with the expanded publishable docs structure.
-- `project-docs/learn-playwright.md` is the internal learning and setup guide.
+- `project-docs/developer-how-to.md` is the internal learning and setup guide.
 - The docs build warning in `docs/features/conventions.adoc` was resolved, and docs build/preview runs cleanly.
 - The docs describe the CI/tag behavior in a lightweight way so future sessions understand that `@sanity` is an example tag rather than a final policy.
 - The repo includes single-spec commands in `package.json`, and the internal/published docs match that workflow.
@@ -146,10 +146,13 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Backlog item `2.1` is complete. The helper, representative specs, and docs all reflect the deterministic-vs-randomized navigation strategy.
 - `LoginPage` and `BookstorePage` have stronger page-state assertions than before, and several page objects use stronger readiness checks to reduce stress-related failures.
 - `tests/home-page.spec.ts` validates homepage card visibility and section-card navigation coverage through the `HomePage` page object.
+- `data/navigationSections.ts`, `data/loginData.ts`, `data/bookData.ts`, and helper/test builders use explicit shared TypeScript types for navigation and data-driven test contracts.
+- The repo includes a dedicated `pnpm run typecheck` command backed by `tsconfig.json` and `typescript` in `devDependencies`.
 - Backlog item `1.5` is complete: there are no generic `waitForTimeout` synchronization workarounds in test code.
 - Backlog item `1.7` is complete: internal and publishable docs were reviewed and updated for factual present-state wording.
 - Backlog item `1.8` is complete: naming conventions are applied across repository folders/files and references.
 - Backlog item `2.2` is complete: section/root page objects share the `BasePage` + `createGotoWithVariants()` structure.
+- Backlog item `2.3` is complete: helper signatures, data builders, and shared test data models are typed and validated with `pnpm run typecheck`.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.
 - Individual specs pass reliably in command-line runs when run alone. Stressed runs such as parallel/headed execution still surface intermittent failures on some pages.
@@ -159,7 +162,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 
 1. Continue improving page-specific readiness checks and shared navigation stability for stressed runs.
 2. Tighten page-specific readiness logic in flaky areas such as Book Store loading-state transitions.
-3. Tighten typings in helpers and test data builders.
+3. Incrementally increase TypeScript strictness after stabilizing the new baseline typecheck command.
 4. Review which remaining page objects still use heading-only readiness checks and strengthen them incrementally when they appear in stressed-run failures.
 5. Continue implementing backlog section `5` (`project-docs/repository-approach.md`) to move from the single-repo learning setup toward reusable architecture packaging and template/showcase split.
 6. Consider extracting reusable page metadata so navigation specs and page object config stay in sync.

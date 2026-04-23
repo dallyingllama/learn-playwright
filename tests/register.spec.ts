@@ -3,7 +3,14 @@ import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { RegisterPage } from '../page-objects/register-page';
 
-function generateUser(overrides = {}) {
+type RegisterUser = {
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+};
+
+function generateUser(overrides: Partial<RegisterUser> = {}): RegisterUser {
   const firstName = faker.person.firstName();
   const lastName = faker.person.lastName();
   const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;

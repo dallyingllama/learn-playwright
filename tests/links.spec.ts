@@ -57,7 +57,9 @@ test.describe('🔗 Links Page', () => {
     });
   }
 
-  const staticApiTests = [
+  type StaticApiLinkId = 'created' | 'noContent' | 'moved';
+
+  const staticApiTests: Array<{ id: StaticApiLinkId; emoji: string; code: number }> = [
     { id: 'created', emoji: '✅', code: 201 },
     { id: 'noContent', emoji: '🚫', code: 204 },
     { id: 'moved', emoji: '📦', code: 301 },
