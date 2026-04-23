@@ -101,7 +101,10 @@ corepack pnpm run docs:preview</code></pre>
 <p>install dependencies with the pinned <code>pnpm@10.9.0</code> version</p>
 </li>
 <li>
-<p>run the <code>@sanity</code> subset first</p>
+<p>run unit tests first as a fail-fast gate</p>
+</li>
+<li>
+<p>run the <code>@sanity</code> subset if unit tests pass</p>
 </li>
 <li>
 <p>run the full Playwright <code>e2e</code> suite only if sanity passes</p>
@@ -153,7 +156,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-23 21:31:45 UTC
+Last updated 2026-04-23 21:36:20 UTC
 </div>
 </div>
 </body>

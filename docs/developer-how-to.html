@@ -22,6 +22,7 @@
 <li><a href="#_key_dependencies_and_why_they_exist">Key Dependencies and Why They Exist</a></li>
 <li><a href="#_run_all_tests">Run All Tests</a></li>
 <li><a href="#_run_one_spec_file">Run One Spec File</a></li>
+<li><a href="#_unit_tests_in_this_repo">Unit Tests in This Repo</a></li>
 <li><a href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></li>
 <li><a href="#_local_docs_preview">Local Docs Preview</a></li>
 <li><a href="#_show_test_report">Show Test Report</a></li>
@@ -165,6 +166,71 @@ corepack pnpm run <span class="nb">test</span>:ui:spec:e2e tests/alerts.spec.ts<
 </div>
 </div>
 <div class="sect1">
+<h2 id="_unit_tests_in_this_repo"><a class="anchor" href="#_unit_tests_in_this_repo"></a><a class="link" href="#_unit_tests_in_this_repo">Unit Tests in This Repo</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This repository uses both end-to-end tests and unit-style tests.</p>
+</div>
+<div class="paragraph">
+<p>Unit-style tests live under <code>tests/unit/</code> and focus on repository-owned logic (for example helper functions, metadata contracts, and data shape rules).</p>
+</div>
+<div class="paragraph">
+<p>When unit tests make sense:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>shared helper logic with branching (example: <code>utils/gotoHelper.ts</code>)</p>
+</li>
+<li>
+<p>reusable utility behavior used by multiple specs</p>
+</li>
+<li>
+<p>metadata and data-contract validation that should fail fast</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When unit tests usually do not add value:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>thin page-object wrappers that only click/fill once</p>
+</li>
+<li>
+<p>flows already validated as user behavior in E2E coverage</p>
+</li>
+<li>
+<p>checks that duplicate full browser workflows without adding faster feedback</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Current examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tests/unit/goto-helper.unit.spec.ts</code></p>
+</li>
+<li>
+<p><code>tests/unit/annotations.unit.spec.ts</code></p>
+</li>
+<li>
+<p><code>tests/unit/section-metadata.unit.spec.ts</code></p>
+</li>
+<li>
+<p><code>tests/unit/checkbox-data.unit.spec.ts</code></p>
+</li>
+<li>
+<p><code>tests/unit/fake-data-generators.unit.spec.ts</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_typecheck_typescript_safety_check"><a class="anchor" href="#_typecheck_typescript_safety_check"></a><a class="link" href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
@@ -270,7 +336,10 @@ corepack pnpm run docs:preview</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>GitHub Actions runs the <code>@sanity</code> tests first.</p>
+<p>GitHub Actions runs unit tests first as a fail-fast gate.</p>
+</li>
+<li>
+<p>If unit tests pass, GitHub Actions runs the <code>@sanity</code> tests.</p>
 </li>
 <li>
 <p>If the sanity stage passes, the workflow runs the full <code>e2e</code> suite.</p>
@@ -316,7 +385,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-23 21:31:45 UTC
+Last updated 2026-04-23 21:36:20 UTC
 </div>
 </div>
 </body>
