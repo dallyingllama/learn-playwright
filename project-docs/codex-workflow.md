@@ -119,6 +119,7 @@ Based on recent changes, suggest updates to `AGENTS.md`.
 - Never duplicate existing functionality
 - If commands or scripts change, update the relevant docs in the same session
 - If test intent changes, reflect that in `project-docs/backlog.md` and `project-docs/repo-state.md` before finishing
+- Use Playwright's default `test-results/` folder for run output; do not create custom test result folders
 
 ---
 

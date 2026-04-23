@@ -1,48 +1,38 @@
 // page-objects/interactions-page.ts
 import { Page, expect } from '@playwright/test';
-import { SidebarMenu } from './components/sidebar-menu';
+import { BasePage } from './base-page';
 import { createGotoWithVariants } from '../utils/gotoHelper';
+import { NavigablePage } from './interfaces/navigable-page';
 
 const config = {
-  card: 'Interactions',
+  menu: 'Interactions',
   message: 'Please select an item from left to start practice.',
-  menuItem: 'Interactions',
   url: 'interaction',
 };
 
-export class InteractionsPage {
-  readonly page: Page;
-  readonly sidebarMenu: SidebarMenu;
-  
-  readonly goto: {
-    (): Promise<void>;
-    viaMenu: () => Promise<void>;
-    viaDirectLink: () => Promise<void>;
-  };
+export class InteractionsPage extends BasePage implements NavigablePage {
+  readonly goto;
 
   constructor(page: Page) {
-    this.page = page;
-    this.sidebarMenu = new SidebarMenu(page);
-
+    super(page);
     this.goto = createGotoWithVariants(
-      this.gotoViaMenu.bind(this),
-      this.gotoViaDirectLink.bind(this)
+      async () => {
+        await this.openSidebarFromHome(config.menu);
+        await this.waitForPageReady();
+      },
+      async () => {
+        await this.page.goto(config.url);
+        await this.waitForPageReady();
+      }
     );
   }
 
-  private async gotoViaMenu() {
-    await this.page.goto('/');
-    const card = this.page.locator('.card-body h5', { hasText: config.card });
-    await card.waitFor({ state: 'visible' });
-    await card.click();
-  }
-
-  private async gotoViaDirectLink() {
-    await this.page.goto(config.url);
-  }
-
-  async assertOnPage() {
-    await expect(this.page).toHaveURL(config.url);
+  override async waitForPageReady(): Promise<void> {
     await expect(this.page.getByText(config.message)).toBeVisible();
+  }
+
+  async assertOnPage(): Promise<void> {
+    await expect(this.page).toHaveURL(config.url);
+    await this.waitForPageReady();
   }
 }
