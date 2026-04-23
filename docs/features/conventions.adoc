@@ -8,17 +8,15 @@ The DemoQA project follows a specific structure to ensure clarity and maintainab
 |Directory | Purpose | local/repo
 |`/data` | Contains test data files. These files can be used to store test data in a structured format, such as JSON or CSV.| repo
 |`/docs` | Contains documentation files. These files can include project documentation, user guides, and other relevant information.| repo
-|`history` | Contains the history of the project. This directory can include previous versions of files, changelogs, and other historical information.| local
-|`localDocs` | Contains local documentation files created when testing asciidoc.| local
-|`node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using `pnpm`.| local
+|`history` | Contains generated Playwright report history used for published run navigation.| local
+|`localDocs` | Contains generated local HTML documentation output from AsciiDoc builds.| local
+|`node_modules` | Contains installed dependencies required to run tests, scripts, and docs tooling.| local
 |`/page-objects` | Contains Page Object Model (POM) files. Each POM file represents a page in the application and contains methods to interact with that page.| repo
 |`playwright-report` | Contains Playwright test reports. These reports provide detailed information about the test runs, including screenshots and logs.| local
+|`project-docs` | Contains internal workflow and state documentation used for project coordination.| repo
+|`test-results` | Contains Playwright test result output for the latest run in local development.| local
 |`/tests` | Contains all test files. Each test file corresponds to a specific feature or functionality of the application.| repo
 |`/utils` | Contains utility functions and helpers that can be used across different test files.| repo
-|`/config` | Contains configuration files. These files can include environment variables, test configurations, and other settings that are used throughout the project.
-|`/screenshots` | Contains screenshots taken during test execution. These screenshots can be used for debugging and verification purposes.
-|`/logs` | Contains log files generated during test execution. These logs can provide detailed information about the test runs and help in identifying issues.
-|`/node_modules` | Contains all the dependencies and packages required for the project. This directory is automatically generated when you install the project dependencies using `pnpm`.
 |===
 
 == Naming Conventions

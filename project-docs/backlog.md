@@ -4,25 +4,12 @@ Active backlog only. Completed work is tracked in `project-docs/repo-state.md` a
 
 ## 4. Documentation and Learning Experience
 
-### 4.2 Document current CI and report publishing flow
-
-- Explain what the GitHub workflow does:
-  - install dependencies
-  - run tests
-  - upload artifacts
-  - publish history to GitHub Pages
-- Keep this short and practical.
-
-### 4.3 Keep internal docs lightweight but current
-
-- Continue using `project-docs/` for internal guidance and `docs/` for publishable content.
-- Avoid creating internal documentation that duplicates what the code already makes obvious.
-
 ### 4.4 Clean up remaining docs build warnings
 
-- Fix the unterminated table block warning in `docs/features/conventions.adoc`.
-- Rebuild the local docs after the fix and confirm feature pages still render and link correctly.
-- Keep the local docs build and CI docs build aligned as the published docs set grows.
+- Keep `docs/features/conventions.adoc` aligned with the actual repository folders and local-only outputs.
+- Remove stale or duplicate directory rows that are not present in this repository.
+- Rebuild local docs after conventions updates and confirm generated pages still render and link correctly.
+- Keep local docs build and CI docs build behavior aligned as the docs set grows.
 
 ## 5. Implement the re-usable architecture strategy
 

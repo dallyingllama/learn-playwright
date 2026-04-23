@@ -34,24 +34,21 @@ corepack pnpm run docs:build
 corepack pnpm run docs:preview
 ----
 
-== CI and Publishing
+== CI and Report Publishing Flow
 
-GitHub Actions is used to:
+GitHub Actions follows this practical flow:
 
-* install dependencies
+* install dependencies with the pinned `pnpm@10.9.0` version
 * run the `@sanity` subset first
 * run the full Playwright `e2e` suite only if sanity passes
-* capture and publish Playwright report history
+* upload test artifacts from the run
+* publish one Playwright report-history entry for the run
 * build and publish AsciiDoc documentation to GitHub Pages
 
-The workflow now activates the repo's pinned `pnpm@10.9.0` instead of using `latest`, which reduces drift between local development and CI.
-
-The reporting flow still publishes one report entry per workflow run:
+Report-history publishing behavior:
 
 * if sanity fails, the published report is the sanity-stage report
 * if sanity passes, the published report is the full-suite report
-
-This keeps the report history readable while still making failures visible at the workflow level.
 
 == Related
 
