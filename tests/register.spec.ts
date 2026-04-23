@@ -1,6 +1,5 @@
-// tests/register.spec.ts
-import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { test } from '@playwright/test';
 import { RegisterPage } from '../page-objects/register-page';
 
 type RegisterUser = {
@@ -21,93 +20,71 @@ function generateUser(overrides: Partial<RegisterUser> = {}): RegisterUser {
     lastName,
     username,
     password,
-    ...overrides
+    ...overrides,
   };
 }
 
-test.describe('📚 Bookstore Registration Scenarios', () => {
-  test('✅ Valid user registration (captcha expected)', async ({ page }) => {
+test.describe('Bookstore Registration Scenarios', () => {
+  test('Valid user registration (captcha expected)', async ({ page }) => {
     const registerPage = new RegisterPage(page);
     const user = generateUser();
 
-    await test.step('📄 Navigate to registration page', async () => {
+    await test.step('Navigate to registration page', async () => {
       await registerPage.goto();
     });
 
-    await test.step('📝 Fill out and submit registration form', async () => {
+    await test.step('Fill out and submit registration form', async () => {
       await registerPage.register(user.firstName, user.lastName, user.username, user.password);
     });
 
-    await test.step('✅ Expect success or captcha prompt', async () => {
+    await test.step('Expect success or captcha prompt', async () => {
       await registerPage.expectSuccessOrCaptcha();
     });
   });
 
-  test('❌ Invalid registration: missing first name', { tag: '@sanity' }, async ({ page }) => {
-    const registerPage = new RegisterPage(page);
-    const user = generateUser({ firstName: '' });
+  const invalidRegistrationCases: Array<{
+    dataname: string;
+    invalidFieldSelector: string;
+    overrides: Partial<RegisterUser>;
+  }> = [
+    {
+      dataname: 'Invalid registration: missing first name',
+      invalidFieldSelector: '#firstname',
+      overrides: { firstName: '' },
+    },
+    {
+      dataname: 'Invalid registration: missing last name',
+      invalidFieldSelector: '#lastname',
+      overrides: { lastName: '' },
+    },
+    {
+      dataname: 'Invalid registration: missing username',
+      invalidFieldSelector: '#userName',
+      overrides: { username: '' },
+    },
+    {
+      dataname: 'Invalid registration: missing password',
+      invalidFieldSelector: '#password',
+      overrides: { password: '' },
+    },
+  ];
 
-    await test.step('📄 Navigate to registration page', async () => {
-      await registerPage.goto();
+  for (const [index, scenario] of invalidRegistrationCases.entries()) {
+    test(scenario.dataname, index === 0 ? { tag: '@sanity' } : {}, async ({ page }) => {
+      const registerPage = new RegisterPage(page);
+      const user = generateUser(scenario.overrides);
+
+      await test.step('Navigate to registration page', async () => {
+        await registerPage.goto();
+      });
+
+      await test.step(`Submit form with ${scenario.dataname.replace('Invalid registration: ', '')}`, async () => {
+        await registerPage.register(user.firstName, user.lastName, user.username, user.password);
+      });
+
+      await test.step('Expect field validation error', async () => {
+        await registerPage.expectFieldInvalid(scenario.invalidFieldSelector);
+      });
     });
-
-    await test.step('🚫 Submit form with missing first name', async () => {
-      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    });
-
-    await test.step('🔍 Expect first name field validation error', async () => {
-      await registerPage.expectFieldInvalid('#firstname');
-    });
-  });
-
-  test('❌ Invalid registration: missing last name', async ({ page }) => {
-    const registerPage = new RegisterPage(page);
-    const user = generateUser({ lastName: '' });
-
-    await test.step('📄 Navigate to registration page', async () => {
-      await registerPage.goto();
-    });
-
-    await test.step('🚫 Submit form with missing last name', async () => {
-      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    });
-
-    await test.step('🔍 Expect last name field validation error', async () => {
-      await registerPage.expectFieldInvalid('#lastname');
-    });
-  });
-
-  test('❌ Invalid registration: missing username', async ({ page }) => {
-    const registerPage = new RegisterPage(page);
-    const user = generateUser({ username: '' });
-
-    await test.step('📄 Navigate to registration page', async () => {
-      await registerPage.goto();
-    });
-
-    await test.step('🚫 Submit form with missing username', async () => {
-      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    });
-
-    await test.step('🔍 Expect username field validation error', async () => {
-      await registerPage.expectFieldInvalid('#userName');
-    });
-  });
-
-  test('❌ Invalid registration: missing password', async ({ page }) => {
-    const registerPage = new RegisterPage(page);
-    const user = generateUser({ password: '' });
-
-    await test.step('📄 Navigate to registration page', async () => {
-      await registerPage.goto();
-    });
-
-    await test.step('🚫 Submit form with missing password', async () => {
-      await registerPage.register(user.firstName, user.lastName, user.username, user.password);
-    });
-
-    await test.step('🔍 Expect password field validation error', async () => {
-      await registerPage.expectFieldInvalid('#password');
-    });
-  });
+  }
 });

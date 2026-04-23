@@ -2,13 +2,6 @@
 
 Active backlog only. Completed work is tracked in `project-docs/repo-state.md` and git history.
 
-## 3. Test Stability and Coverage
-
-### 3.3 Add more small, data-driven examples
-
-- Use the Check Box work as a model for test/data separation.
-- Add small examples that demonstrate useful patterns without overcomplicating the repo.
-
 ## 4. Documentation and Learning Experience
 
 ### 4.1 Improve environment and setup documentation

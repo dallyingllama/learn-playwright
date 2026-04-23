@@ -156,6 +156,7 @@ This repository is a Playwright + TypeScript learning project focused on buildin
 - Backlog item `2.3` is complete: helper signatures, data builders, and shared test data models are typed and validated with `pnpm run typecheck`.
 - Backlog item `2.4` is complete: section-level metadata is extracted and reused across page objects and navigation/home-page test coverage.
 - Backlog item `3.2` is complete: assertions were tightened across links, home-page navigation, web tables search verification, textbox page URL checks, and broken-links URL/status checks.
+- Backlog item `3.3` is complete: additional small data-driven examples were added for register required-field validation, buttons click/message scenarios, and radio-button selectable options.
 - The suite includes intentional assertion examples for exact match (`toBe`/`toHaveText`), pattern match (`toMatch`), and presence checks (`toBeTruthy`) based on whether values are fixed, format-based, or dynamic.
 - The local docs build generates nested HTML pages and the `Documentation Map` links work in local preview.
 - The CI workflow runs sanity first, gates the full suite behind sanity success, and publishes one report entry per workflow run.

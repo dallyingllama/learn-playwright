@@ -1,43 +1,29 @@
-// tests/radiobutton.spec.ts
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { RadioButtonPage } from '../page-objects/radiobutton-page';
 
 test.describe('Elements', () => {
-  test.describe('✅ Radio Button', () => {
+  test.describe('Radio Button', () => {
+    const selectableOptions: Array<'Yes' | 'Impressive'> = ['Yes', 'Impressive'];
 
-    test('✅ Select Yes and verify result', { tag: '@sanity' }, async ({ page }) => {
-      const radioPage = new RadioButtonPage(page);
+    for (const [index, option] of selectableOptions.entries()) {
+      test(`Select ${option} and verify result`, index === 0 ? { tag: '@sanity' } : {}, async ({ page }) => {
+        const radioPage = new RadioButtonPage(page);
 
-      await test.step('Navigate to Radio Button page', async () => {
-        await radioPage.goto.random();
+        await test.step('Navigate to Radio Button page', async () => {
+          await radioPage.goto.random();
+        });
+
+        await test.step(`Select "${option}" radio button`, async () => {
+          await radioPage.selectRadio(option);
+        });
+
+        await test.step(`Verify "${option}" is selected`, async () => {
+          await radioPage.expectSelected(option);
+        });
       });
+    }
 
-      await test.step('Select "Yes" radio button', async () => {
-        await radioPage.selectRadio('Yes');
-      });
-
-      await test.step('Verify "Yes" is selected', async () => {
-        await radioPage.expectSelected('Yes');
-      });
-    });
-
-    test('✅ Select Impressive and verify result', async ({ page }) => {
-      const radioPage = new RadioButtonPage(page);
-
-      await test.step('Navigate to Radio Button page', async () => {
-        await radioPage.goto.random();
-      });
-
-      await test.step('Select "Impressive" radio button', async () => {
-        await radioPage.selectRadio('Impressive');
-      });
-
-      await test.step('Verify "Impressive" is selected', async () => {
-        await radioPage.expectSelected('Impressive');
-      });
-    });
-
-    test('🚫 No button is disabled', async ({ page }) => {
+    test('No button is disabled', async ({ page }) => {
       const radioPage = new RadioButtonPage(page);
 
       await test.step('Navigate to Radio Button page', async () => {
@@ -49,6 +35,5 @@ test.describe('Elements', () => {
         expect(isDisabled).toBe(true);
       });
     });
-
   });
 });

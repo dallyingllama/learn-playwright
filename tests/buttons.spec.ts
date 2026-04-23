@@ -1,52 +1,59 @@
-// tests/buttons.spec.ts
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { ButtonsPage } from '../page-objects/buttons-page';
 
-test.describe('🖱️ Buttons Page', () => {
+test.describe('Buttons Page', () => {
   async function navigateToButtonsPage(page): Promise<ButtonsPage> {
-    return await test.step('🌐 Navigate to Buttons page', async () => {
+    return await test.step('Navigate to Buttons page', async () => {
       const buttonsPage = new ButtonsPage(page);
       await buttonsPage.goto.random();
       return buttonsPage;
     });
   }
 
-  test('🖱️ Double click button shows correct message', { tag: '@sanity' }, async ({ page }) => {
-    const buttonsPage = await navigateToButtonsPage(page);
+  const buttonScenarios: Array<{
+    dataname: string;
+    expectedMessage: string;
+    runAction: (buttonsPage: ButtonsPage) => Promise<void>;
+    readMessage: (buttonsPage: ButtonsPage) => Promise<string>;
+  }> = [
+    {
+      dataname: 'Double click button shows correct message',
+      expectedMessage: 'You have done a double click',
+      runAction: async (buttonsPage) => {
+        await buttonsPage.doubleClick();
+      },
+      readMessage: async (buttonsPage) => buttonsPage.getDoubleClickMessage(),
+    },
+    {
+      dataname: 'Right click button shows correct message',
+      expectedMessage: 'You have done a right click',
+      runAction: async (buttonsPage) => {
+        await buttonsPage.rightClick();
+      },
+      readMessage: async (buttonsPage) => buttonsPage.getRightClickMessage(),
+    },
+    {
+      dataname: 'Dynamic click button shows correct message',
+      expectedMessage: 'You have done a dynamic click',
+      runAction: async (buttonsPage) => {
+        await buttonsPage.dynamicClick();
+      },
+      readMessage: async (buttonsPage) => buttonsPage.getDynamicClickMessage(),
+    },
+  ];
 
-    await test.step('🖱️ Perform double click', async () => {
-      await buttonsPage.doubleClick();
+  for (const [index, scenario] of buttonScenarios.entries()) {
+    test(scenario.dataname, index === 0 ? { tag: '@sanity' } : {}, async ({ page }) => {
+      const buttonsPage = await navigateToButtonsPage(page);
+
+      await test.step('Perform click action', async () => {
+        await scenario.runAction(buttonsPage);
+      });
+
+      await test.step('Verify click message', async () => {
+        const msg = await scenario.readMessage(buttonsPage);
+        expect(msg).toBe(scenario.expectedMessage);
+      });
     });
-
-    await test.step('✅ Verify double click message', async () => {
-      const msg = await buttonsPage.getDoubleClickMessage();
-      expect(msg).toBe('You have done a double click');
-    });
-  });
-
-  test('🖱️ Right click button shows correct message', async ({ page }) => {
-    const buttonsPage = await navigateToButtonsPage(page);
-
-    await test.step('🖱️ Perform right click', async () => {
-      await buttonsPage.rightClick();
-    });
-
-    await test.step('✅ Verify right click message', async () => {
-      const msg = await buttonsPage.getRightClickMessage();
-      expect(msg).toBe('You have done a right click');
-    });
-  });
-
-  test('🖱️ Dynamic click button shows correct message', async ({ page }) => {
-    const buttonsPage = await navigateToButtonsPage(page);
-
-    await test.step('🖱️ Perform dynamic click', async () => {
-      await buttonsPage.dynamicClick();
-    });
-
-    await test.step('✅ Verify dynamic click message', async () => {
-      const msg = await buttonsPage.getDynamicClickMessage();
-      expect(msg).toBe('You have done a dynamic click');
-    });
-  });
+  }
 });
