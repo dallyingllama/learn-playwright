@@ -24,6 +24,7 @@
 <li><a href="#_run_one_spec_file">Run One Spec File</a></li>
 <li><a href="#_unit_tests_in_this_repo">Unit Tests in This Repo</a></li>
 <li><a href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></li>
+<li><a href="#_git_command_helpers">Git Command Helpers</a></li>
 <li><a href="#_local_docs_preview">Local Docs Preview</a></li>
 <li><a href="#_show_test_report">Show Test Report</a></li>
 <li><a href="#_run_sanity_only_filter">Run Sanity-Only Filter</a></li>
@@ -260,6 +261,54 @@ corepack pnpm run <span class="nb">test</span>:ui:spec:e2e tests/alerts.spec.ts<
 </div>
 </div>
 <div class="sect1">
+<h2 id="_git_command_helpers"><a class="anchor" href="#_git_command_helpers"></a><a class="link" href="#_git_command_helpers">Git Command Helpers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Common local git commands used during normal development:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">git status <span class="nt">-sb</span>
+git add &lt;file-or-folder&gt;
+git add <span class="nt">-A</span>
+git <span class="nb">rm</span> &lt;file&gt;
+git add <span class="nt">--renormalize</span> <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"short summary"</span>
+git pull <span class="nt">--rebase</span> origin main
+git log <span class="nt">--oneline</span> <span class="nt">-n</span> 10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quick usage notes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use <code>git status -sb</code> before and after test runs to confirm only expected files changed.</p>
+</li>
+<li>
+<p>Stage specific files with <code>git add &lt;file-or-folder&gt;</code> to keep commits focused.</p>
+</li>
+<li>
+<p>Use <code>git add -A</code> when your change includes newly created files together with edits/deletions.</p>
+</li>
+<li>
+<p>Use <code>git rm &lt;file&gt;</code> when a file should be removed from both the working tree and git tracking.</p>
+</li>
+<li>
+<p>Use <code>git add --renormalize .</code> after line-ending rule changes (for example <code>.gitattributes</code>) to restage files with consistent EOL normalization.</p>
+</li>
+<li>
+<p>Use short commit messages that describe one logical change.</p>
+</li>
+<li>
+<p>Rebase on <code>origin/main</code> before opening a PR when your branch is behind.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_local_docs_preview"><a class="anchor" href="#_local_docs_preview"></a><a class="link" href="#_local_docs_preview">Local Docs Preview</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
@@ -385,7 +434,7 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-23 21:36:20 UTC
+Last updated 2026-04-24 15:42:58 UTC
 </div>
 </div>
 </body>
