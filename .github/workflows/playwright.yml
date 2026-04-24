@@ -95,6 +95,20 @@ jobs:
           corepack pnpm run docs:build:antora
           mkdir -p history/docs
           cp -r spikes/antora-pilot/build/site/* history/docs/
+          cat > history/docs/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=./demoqa-docs/current/index.html">
+            <title>Redirecting...</title>
+            <link rel="canonical" href="./demoqa-docs/current/index.html">
+          </head>
+          <body>
+            <p>Redirecting to <a href="./demoqa-docs/current/index.html">documentation</a>.</p>
+          </body>
+          </html>
+          EOF
 
       - name: Build documentation with Asciidoctor (fallback)
         if: env.DOCS_PIPELINE == 'asciidoctor'

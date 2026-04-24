@@ -73,6 +73,7 @@ Use this file as a concise restart snapshot for implementation sessions.
   - `build/site/demoqa-docs/current/features/conventions.html`
 - Switched CI docs pipeline default to Antora in `.github/workflows/playwright.yml` and publish docs from `spikes/antora-pilot/build/site` into `history/docs`.
 - Added CI rollback guard via `DOCS_PIPELINE` env (`antora` default, `asciidoctor` fallback path retained).
+- Added explicit redirect generation for `history/docs/index.html` in Antora CI path so old docs entry URL resolves to `docs/demoqa-docs/current/index.html`.
 
 ## Active Focus
 
