@@ -1,0 +1,205 @@
+= Learn Playwright
+:icons: font
+:source-highlighter: rouge
+:sectanchors:
+:sectlinks:
+:toc: left
+
+image::https://img.shields.io/github/actions/workflow/status/dallyingllama/learn-playwright/playwright.yml?branch=main[GitHub Actions]
+image::https://img.shields.io/github/deployments/dallyingllama/learn-playwright/github-pages[GitHub Pages]
+
+== Overview
+
+This repository is a practical Playwright + TypeScript learning project built around `demoqa.com`.
+
+It is used to explore:
+
+* Page Object Model (POM)
+* data-driven testing
+* environment-based execution
+* GitHub Actions CI
+* GitHub Pages publishing for reports and docs
+
+== Highlights
+
+* 13 Playwright spec files covering key DemoQA flows
+* one `@sanity` example test in each spec file
+* `page-objects/` as the active Page Object Model directory
+* shared helpers in `utils/`
+* reusable navigation metadata in `page-objects/metadata/navigation-sections.ts`
+* generated local docs via AsciiDoc
+* GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs
+
+== First 10 Minutes
+
+Run these commands from the repository root:
+
+[source,bash]
+----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm install
+corepack pnpm exec playwright install
+corepack pnpm run test:spec:dev tests/login.spec.ts
+corepack pnpm run show-report
+----
+
+== Local Usage
+
+Install dependencies:
+
+[source,bash]
+----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm install
+corepack pnpm exec playwright install
+----
+
+Run tests in `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:dev
+----
+
+Run tests in `e2e`:
+
+[source,bash]
+----
+corepack pnpm run test:e2e
+----
+
+Open Playwright UI mode for `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:ui:dev
+----
+
+Run one spec in `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:spec:dev tests/example.spec.ts
+----
+
+Open Playwright UI mode for one spec in `dev`:
+
+[source,bash]
+----
+corepack pnpm run test:ui:spec:dev tests/example.spec.ts
+----
+
+Build local docs:
+
+[source,bash]
+----
+corepack pnpm run docs:build
+----
+
+Preview local docs:
+
+[source,bash]
+----
+corepack pnpm run docs:preview
+----
+
+Show the Playwright HTML report:
+
+[source,bash]
+----
+corepack pnpm run show-report
+----
+
+== Environment Selection (`TEST_ENV`)
+
+The test scripts select environment files through `TEST_ENV`:
+
+* `TEST_ENV=dev` uses `.env/dev.env`
+* `TEST_ENV=test` uses `.env/test.env`
+* `TEST_ENV=e2e` uses `.env/e2e.env`
+
+Example:
+
+[source,bash]
+----
+corepack pnpm run test:spec:dev tests/alerts.spec.ts
+----
+
+== Test Coverage
+
+[cols="1,2,3", options="header"]
+|===
+| Area | Spec File | Notes
+
+| Home Page
+| `home-page.spec.ts`
+| Homepage card visibility and section-card navigation checks
+
+| Login
+| `login.spec.ts`
+| Positive and negative login scenarios with data-driven coverage
+
+| Registration
+| `register.spec.ts`
+| Registration flow coverage
+
+| Text Box
+| `textbox.spec.ts`
+| Form field interaction and validation checks
+
+| Check Box
+| `checkbox.spec.ts`
+| Current DemoQA tree structure and result-message validation
+
+| Radio Button
+| `radiobutton.spec.ts`
+| Selection-state validation
+
+| Buttons
+| `buttons.spec.ts`
+| Click, double-click, and right-click behavior
+
+| Links
+| `links.spec.ts`
+| Link behavior checks
+
+| Alerts
+| `alerts.spec.ts`
+| Dialog and alert coverage
+
+| Web Tables
+| `web-tables.spec.ts`
+| CRUD-style table workflows and search coverage
+
+| Broken Links / Images
+| `broken-links-images.spec.ts`
+| Valid and broken state checks aligned to current site behavior
+
+| Navigation
+| `navigation.spec.ts`
+| Sidebar and direct-link navigation patterns
+
+| Book Store
+| `bookstore.spec.ts`
+| Book Store and related user flow coverage
+|===
+
+== Documentation Map
+
+* link:features-functions.html[Features / Functions]
+* link:developer-how-to.html[Developer How-To]
+* link:coding-standards.html[Playwright Coding Standards and Guidelines]
+* link:system-under-test.html[System Under Test & Test Approach]
+* link:way-of-working.html[Way of Working]
+* link:roles.html[Roles in Test Automation]
+
+CI-generated reports and published docs are available at
+link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages].
+
+== Notes
+
+This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.
+
+The CI workflow uses `@sanity` as an example tag for a small gate stage before the full suite. It demonstrates test tagging and staged execution.

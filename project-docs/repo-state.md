@@ -62,12 +62,24 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Updated CI workflow (`.github/workflows/playwright.yml`) to run unit tests as a fail-fast gate before sanity/full runs.
 - Updated `docs/features/conventions.adoc` directory rows to match current repository folders and local-only outputs.
 - Rebuilt docs with `corepack pnpm run docs:build` and verified generated pages at `localDocs/index.html` and `localDocs/features/conventions.html`.
+- Started `5.2` slice 1 by adding Antora pilot scripts in `package.json`:
+  - `docs:build:antora`
+  - `docs:preview:antora`
+- Added Antora pilot command usage to `docs/developer-how-to.adoc`.
+- Added minimal pilot artifacts in `spikes/antora-pilot/` and validated Antora output pages:
+  - `build/site/index.html`
+  - `build/site/demoqa-docs/current/index.html`
+  - `build/site/demoqa-docs/current/developer-how-to.html`
+  - `build/site/demoqa-docs/current/features/conventions.html`
+- Switched CI docs pipeline default to Antora in `.github/workflows/playwright.yml` and publish docs from `spikes/antora-pilot/build/site` into `history/docs`.
+- Added CI rollback guard via `DOCS_PIPELINE` env (`antora` default, `asciidoctor` fallback path retained).
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `5.x` reusable architecture strategy (split blueprint, shared package, template/showcases).
+- `5.2` migrate docs pipeline to Antora before split work.
+- `5.3+` reusable architecture strategy (split blueprint, shared package, template/showcases).
 
 ## Known Risks and Notes
 

@@ -157,14 +157,6 @@ corepack pnpm run docs:build
 corepack pnpm run docs:preview
 ----
 
-Antora pilot build (for migration validation):
-
-[source,bash]
-----
-corepack pnpm run docs:build:antora
-corepack pnpm run docs:preview:antora
-----
-
 == Show Test Report
 
 [source,bash]
