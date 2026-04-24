@@ -44,6 +44,12 @@ Acceptance criteria:
   - landing/index
   - developer how-to
   - features/conventions
+- Status: in progress.
+- Completed slices:
+  - added local Antora build/preview scripts and pilot workspace
+  - switched CI docs pipeline default to Antora with `DOCS_PIPELINE` fallback
+  - added `/docs/index.html` redirect to `/docs/demoqa-docs/current/index.html`
+  - validated published Antora docs in GitHub Actions
 
 Acceptance criteria:
 

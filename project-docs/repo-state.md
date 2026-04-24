@@ -53,16 +53,8 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 ## Session Updates (Latest)
 
-- Added unit-style tests in `tests/unit/` for:
-  - `utils/gotoHelper.ts`
-  - `utils/annotations.ts`
-  - `page-objects/metadata/section-metadata.ts`
-  - `data/checkboxData.ts`
-  - `utils/fakeUser.ts` and `utils/fakeTableUser.ts`
-- Updated CI workflow (`.github/workflows/playwright.yml`) to run unit tests as a fail-fast gate before sanity/full runs.
-- Updated `docs/features/conventions.adoc` directory rows to match current repository folders and local-only outputs.
-- Rebuilt docs with `corepack pnpm run docs:build` and verified generated pages at `localDocs/index.html` and `localDocs/features/conventions.html`.
-- Started `5.2` slice 1 by adding Antora pilot scripts in `package.json`:
+- Closed `5.1` with a documented Antora pilot and recommendation to adopt Antora before split work.
+- Started `5.2` by adding Antora pilot scripts in `package.json`:
   - `docs:build:antora`
   - `docs:preview:antora`
 - Added Antora pilot command usage to `docs/developer-how-to.adoc`.
@@ -74,6 +66,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Switched CI docs pipeline default to Antora in `.github/workflows/playwright.yml` and publish docs from `spikes/antora-pilot/build/site` into `history/docs`.
 - Added CI rollback guard via `DOCS_PIPELINE` env (`antora` default, `asciidoctor` fallback path retained).
 - Added explicit redirect generation for `history/docs/index.html` in Antora CI path so old docs entry URL resolves to `docs/demoqa-docs/current/index.html`.
+- Confirmed Antora docs build step passes in GitHub Actions and docs are published at `/docs/demoqa-docs/current/index.html`.
 
 ## Active Focus
 
@@ -87,6 +80,7 @@ From `project-docs/backlog.md`:
 - Some page objects still use heading-only readiness checks and can be tightened incrementally.
 - Stressed runs (parallel/headed/UI) can still surface intermittent failures.
 - A recurring local Windows lock can appear on `test-results/.last-run.json` during reruns.
+- Antora build currently emits upstream deprecation/transitive dependency warnings (`DEP0169`, `glob@7`, `inflight@1`) that do not fail the pipeline.
 
 ## Update Contract (to avoid drift)
 
