@@ -2,15 +2,6 @@
 
 Active backlog only. Completed work is tracked in `project-docs/repo-state.md` and git history.
 
-## 4. Documentation and Learning Experience
-
-### 4.4 Clean up remaining docs build warnings
-
-- Keep `docs/features/conventions.adoc` aligned with the actual repository folders and local-only outputs.
-- Remove stale or duplicate directory rows that are not present in this repository.
-- Rebuild local docs after conventions updates and confirm generated pages still render and link correctly.
-- Keep local docs build and CI docs build behavior aligned as the docs set grows.
-
 ## 5. Implement the re-usable architecture strategy
 
 ### 5.1 Evaluate Antora migration fit

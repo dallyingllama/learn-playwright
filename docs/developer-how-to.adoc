@@ -123,6 +123,32 @@ Run typecheck:
 
 This checks types only and does not run tests.
 
+== Git Command Helpers
+
+Common local git commands used during normal development:
+
+[source,bash]
+----
+git status -sb
+git add <file-or-folder>
+git add -A
+git rm <file>
+git add --renormalize .
+git commit -m "short summary"
+git pull --rebase origin main
+git log --oneline -n 10
+----
+
+Quick usage notes:
+
+* Use `git status -sb` before and after test runs to confirm only expected files changed.
+* Stage specific files with `git add <file-or-folder>` to keep commits focused.
+* Use `git add -A` when your change includes newly created files together with edits/deletions.
+* Use `git rm <file>` when a file should be removed from both the working tree and git tracking.
+* Use `git add --renormalize .` after line-ending rule changes (for example `.gitattributes`) to restage files with consistent EOL normalization.
+* Use short commit messages that describe one logical change.
+* Rebase on `origin/main` before opening a PR when your branch is behind.
+
 == Local Docs Preview
 
 [source,bash]

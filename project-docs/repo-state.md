@@ -49,6 +49,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `4.1` setup/env docs improvements with `corepack pnpm` consistency.
 - `4.2` short CI/report publishing flow documented in `docs/way-of-working.adoc`.
 - `4.3` internal docs split is lightweight: publishable developer guide in `docs/developer-how-to.adoc`, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
+- `4.4` conventions doc directory map aligned with current repository/local outputs and validated with local docs build.
 
 ## Session Updates (Latest)
 
@@ -59,13 +60,13 @@ Use this file as a concise restart snapshot for implementation sessions.
   - `data/checkboxData.ts`
   - `utils/fakeUser.ts` and `utils/fakeTableUser.ts`
 - Updated CI workflow (`.github/workflows/playwright.yml`) to run unit tests as a fail-fast gate before sanity/full runs.
-- Updated docs drift cleanup in `docs/features/conventions.adoc` and refreshed backlog wording for `4.4`.
+- Updated `docs/features/conventions.adoc` directory rows to match current repository folders and local-only outputs.
+- Rebuilt docs with `corepack pnpm run docs:build` and verified generated pages at `localDocs/index.html` and `localDocs/features/conventions.html`.
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `4.4` keep docs build and CI docs build aligned as docs evolve.
 - `5.x` reusable architecture strategy (split blueprint, shared package, template/showcases).
 
 ## Known Risks and Notes
