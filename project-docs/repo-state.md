@@ -73,6 +73,8 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Added Antora docs smoke-check script at `.github/scripts/verify-antora-docs.js` and package command `docs:verify:antora`.
 - Added CI Antora validation hook in `.github/workflows/playwright.yml` to run `corepack pnpm run docs:verify:antora` before docs publish copy.
 - Confirmed `corepack pnpm run docs:verify:antora` passes after local Antora build.
+- Pinned Antora CLI version in `docs:build:antora` to `antora@3.1.14` for consistent local and CI docs builds.
+- Confirmed `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora` pass with pinned Antora version.
 
 ## Active Focus
 
