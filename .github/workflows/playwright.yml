@@ -93,6 +93,7 @@ jobs:
         if: env.DOCS_PIPELINE == 'antora'
         run: |
           corepack pnpm run docs:build:antora
+          corepack pnpm run docs:verify:antora
           mkdir -p history/docs
           cp -r spikes/antora-pilot/build/site/* history/docs/
           cat > history/docs/index.html <<'EOF'

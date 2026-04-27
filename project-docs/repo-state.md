@@ -70,6 +70,9 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Added local Antora UI baseline artifact `spikes/antora-pilot/ui-bundle.zip`.
 - Added editable local Antora UI source in `spikes/antora-pilot/ui-src/` and switched the playbook UI path to `./ui-src`.
 - Confirmed `corepack pnpm run docs:build:antora` passes with local `ui-src` path.
+- Added Antora docs smoke-check script at `.github/scripts/verify-antora-docs.js` and package command `docs:verify:antora`.
+- Added CI Antora validation hook in `.github/workflows/playwright.yml` to run `corepack pnpm run docs:verify:antora` before docs publish copy.
+- Confirmed `corepack pnpm run docs:verify:antora` passes after local Antora build.
 
 ## Active Focus
 

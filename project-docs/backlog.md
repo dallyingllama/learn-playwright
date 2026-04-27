@@ -52,6 +52,7 @@ Acceptance criteria:
   - validated published Antora docs in GitHub Actions
   - vendored Antora default UI baseline as `spikes/antora-pilot/ui-bundle.zip`
   - extracted local editable UI source to `spikes/antora-pilot/ui-src/` and wired playbook `ui.bundle.url` to `./ui-src`
+  - added Antora docs smoke-check command (`docs:verify:antora`) and wired it into CI Antora docs build step
 
 Acceptance criteria:
 

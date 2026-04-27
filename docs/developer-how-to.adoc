@@ -162,6 +162,7 @@ Antora pilot build (for migration validation):
 [source,bash]
 ----
 corepack pnpm run docs:build:antora
+corepack pnpm run docs:verify:antora
 corepack pnpm run docs:preview:antora
 ----
 

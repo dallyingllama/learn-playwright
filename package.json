@@ -21,6 +21,7 @@
     "docs:build": "powershell -NoProfile -Command \"$root = ((Resolve-Path 'docs').Path + [System.IO.Path]::DirectorySeparatorChar); Get-ChildItem 'docs' -Recurse -Filter '*.adoc' | ForEach-Object { $relative = $_.FullName.Substring($root.Length); $output = Join-Path 'localDocs' ([System.IO.Path]::ChangeExtension($relative, '.html')); $outputDir = Split-Path -Parent $output; if ($outputDir) { New-Item -ItemType Directory -Force -Path $outputDir | Out-Null }; $relativeDir = Split-Path -Parent $relative; $styleDir = '_theme'; if ($relativeDir) { $depth = ($relativeDir -split '[\\\\/]').Count; $styleDir = ('../' * $depth) + '_theme' }; asciidoctor -a stylesdir=$styleDir -a stylesheet=playwright.css -a linkcss -a docinfo=shared -o $output $_.FullName }\"",
     "docs:preview": "live-server localDocs --open=index.html",
     "docs:build:antora": "cd spikes/antora-pilot && pnpm dlx antora antora-playbook.yml --fetch",
+    "docs:verify:antora": "node .github/scripts/verify-antora-docs.js",
     "docs:preview:antora": "live-server spikes/antora-pilot/build/site --open=index.html"
   },
   "keywords": [],
