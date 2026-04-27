@@ -44,7 +44,7 @@ Acceptance criteria:
   - landing/index
   - developer how-to
   - features/conventions
-- Status: in progress.
+- Status: completed.
 - Completed slices:
   - added local Antora build/preview scripts and pilot workspace
   - switched CI docs pipeline default to Antora with `DOCS_PIPELINE` fallback
@@ -54,6 +54,7 @@ Acceptance criteria:
   - extracted local editable UI source to `spikes/antora-pilot/ui-src/` and wired playbook `ui.bundle.url` to `./ui-src`
   - added Antora docs smoke-check command (`docs:verify:antora`) and wired it into CI Antora docs build step
   - pinned `docs:build:antora` to `antora@3.1.14` in `package.json` to keep local and CI build behavior stable
+  - documented explicit rollback steps for local docs flow and CI `DOCS_PIPELINE` fallback in `docs/developer-how-to.adoc`
 
 Acceptance criteria:
 

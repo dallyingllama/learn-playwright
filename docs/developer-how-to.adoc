@@ -166,6 +166,22 @@ corepack pnpm run docs:verify:antora
 corepack pnpm run docs:preview:antora
 ----
 
+Rollback to Asciidoctor local docs flow:
+
+[source,bash]
+----
+corepack pnpm run docs:build
+corepack pnpm run docs:preview
+----
+
+CI docs rollback path:
+
+* In `.github/workflows/playwright.yml`, set `DOCS_PIPELINE: asciidoctor`.
+* The workflow keeps both docs paths:
+  ** Antora path: `docs:build:antora` + `docs:verify:antora`
+  ** fallback path: Asciidoctor build block
+* Switch `DOCS_PIPELINE` back to `antora` to return to the Antora publish path.
+
 == Show Test Report
 
 [source,bash]

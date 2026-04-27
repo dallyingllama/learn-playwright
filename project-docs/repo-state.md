@@ -50,6 +50,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `4.2` short CI/report publishing flow documented in `docs/way-of-working.adoc`.
 - `4.3` internal docs split is lightweight: publishable developer guide in `docs/developer-how-to.adoc`, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
 - `4.4` conventions doc directory map aligned with current repository/local outputs and validated with local docs build.
+- `5.2` docs pipeline migrated to Antora with local UI source, pinned Antora CLI, CI smoke checks, and documented rollback path.
 
 ## Session Updates (Latest)
 
@@ -75,12 +76,12 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Confirmed `corepack pnpm run docs:verify:antora` passes after local Antora build.
 - Pinned Antora CLI version in `docs:build:antora` to `antora@3.1.14` for consistent local and CI docs builds.
 - Confirmed `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora` pass with pinned Antora version.
+- Added explicit rollback instructions in `docs/developer-how-to.adoc` for local Asciidoctor flow and CI `DOCS_PIPELINE=asciidoctor` fallback.
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `5.2` migrate docs pipeline to Antora before split work.
 - `5.3+` reusable architecture strategy (split blueprint, shared package, template/showcases).
 
 ## Known Risks and Notes
