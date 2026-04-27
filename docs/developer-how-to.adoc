@@ -168,11 +168,7 @@ corepack pnpm run docs:preview:antora
 
 Rollback to Asciidoctor local docs flow:
 
-[source,bash]
-----
-corepack pnpm run docs:build
-corepack pnpm run docs:preview
-----
+* Use the `Local Docs Preview` commands in this file (`docs:build` and `docs:preview`).
 
 CI docs rollback path:
 

@@ -54,35 +54,19 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 ## Session Updates (Latest)
 
-- Closed `5.1` with a documented Antora pilot and recommendation to adopt Antora before split work.
-- Started `5.2` by adding Antora pilot scripts in `package.json`:
-  - `docs:build:antora`
-  - `docs:preview:antora`
-- Added Antora pilot command usage to `docs/developer-how-to.adoc`.
-- Added minimal pilot artifacts in `spikes/antora-pilot/` and validated Antora output pages:
-  - `build/site/index.html`
-  - `build/site/demoqa-docs/current/index.html`
-  - `build/site/demoqa-docs/current/developer-how-to.html`
-  - `build/site/demoqa-docs/current/features/conventions.html`
-- Switched CI docs pipeline default to Antora in `.github/workflows/playwright.yml` and publish docs from `spikes/antora-pilot/build/site` into `history/docs`.
-- Added CI rollback guard via `DOCS_PIPELINE` env (`antora` default, `asciidoctor` fallback path retained).
-- Added explicit redirect generation for `history/docs/index.html` in Antora CI path so old docs entry URL resolves to `docs/demoqa-docs/current/index.html`.
-- Confirmed Antora docs build step passes in GitHub Actions and docs are published at `/docs/demoqa-docs/current/index.html`.
-- Added local Antora UI baseline artifact `spikes/antora-pilot/ui-bundle.zip`.
-- Added editable local Antora UI source in `spikes/antora-pilot/ui-src/` and switched the playbook UI path to `./ui-src`.
-- Confirmed `corepack pnpm run docs:build:antora` passes with local `ui-src` path.
-- Added Antora docs smoke-check script at `.github/scripts/verify-antora-docs.js` and package command `docs:verify:antora`.
-- Added CI Antora validation hook in `.github/workflows/playwright.yml` to run `corepack pnpm run docs:verify:antora` before docs publish copy.
-- Confirmed `corepack pnpm run docs:verify:antora` passes after local Antora build.
-- Pinned Antora CLI version in `docs:build:antora` to `antora@3.1.14` for consistent local and CI docs builds.
-- Confirmed `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora` pass with pinned Antora version.
-- Added explicit rollback instructions in `docs/developer-how-to.adoc` for local Asciidoctor flow and CI `DOCS_PIPELINE=asciidoctor` fallback.
+- Completed backlog item `5.2` (Antora docs migration slice set).
+- Antora UI implementation is local-source based (`spikes/antora-pilot/ui-src/`) with baseline artifact retained (`spikes/antora-pilot/ui-bundle.zip`).
+- Antora docs validation is gated by `docs:verify:antora` in CI before docs publish copy.
+- Antora CLI version is pinned to `antora@3.1.14` in `docs:build:antora` for stable local/CI behavior.
+- Developer rollback instructions are documented for `DOCS_PIPELINE=asciidoctor` during transition.
+- GitHub Actions validation for build + verify is green for this session's pushes.
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
 - `5.3+` reusable architecture strategy (split blueprint, shared package, template/showcases).
+- Pending session follow-up: collect and record feedback from the next GitHub push/run before removing fallback.
 
 ## Known Risks and Notes
 
