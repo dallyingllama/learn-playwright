@@ -12,7 +12,7 @@ runtime:
 
 ui:
   bundle:
-    url: ./ui-bundle.zip
+    url: ./ui-src
     snapshot: false
 
 output:

@@ -67,6 +67,9 @@ Use this file as a concise restart snapshot for implementation sessions.
 - Added CI rollback guard via `DOCS_PIPELINE` env (`antora` default, `asciidoctor` fallback path retained).
 - Added explicit redirect generation for `history/docs/index.html` in Antora CI path so old docs entry URL resolves to `docs/demoqa-docs/current/index.html`.
 - Confirmed Antora docs build step passes in GitHub Actions and docs are published at `/docs/demoqa-docs/current/index.html`.
+- Added local Antora UI baseline artifact `spikes/antora-pilot/ui-bundle.zip`.
+- Added editable local Antora UI source in `spikes/antora-pilot/ui-src/` and switched the playbook UI path to `./ui-src`.
+- Confirmed `corepack pnpm run docs:build:antora` passes with local `ui-src` path.
 
 ## Active Focus
 

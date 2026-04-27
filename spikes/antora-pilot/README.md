@@ -14,7 +14,8 @@ This folder contains the minimal Antora pilot used for `5.2` slice validation.
 
 ## Local UI bundle baseline
 
-- Antora UI bundle is vendored at `spikes/antora-pilot/ui-bundle.zip`.
-- Playbook uses the local bundle path (`./ui-bundle.zip`) instead of a remote URL.
+- Playbook UI source path is `spikes/antora-pilot/ui-src/` (`./ui-src` in playbook).
+- Original downloaded baseline bundle is kept at `spikes/antora-pilot/ui-bundle.zip`.
+- Local UI customizations are made directly in `ui-src` and picked up by `docs:build:antora`.
 - Baseline source used for this bundle:
   - `https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable`

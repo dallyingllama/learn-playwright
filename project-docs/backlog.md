@@ -50,6 +50,8 @@ Acceptance criteria:
   - switched CI docs pipeline default to Antora with `DOCS_PIPELINE` fallback
   - added `/docs/index.html` redirect to `/docs/demoqa-docs/current/index.html`
   - validated published Antora docs in GitHub Actions
+  - vendored Antora default UI baseline as `spikes/antora-pilot/ui-bundle.zip`
+  - extracted local editable UI source to `spikes/antora-pilot/ui-src/` and wired playbook `ui.bundle.url` to `./ui-src`
 
 Acceptance criteria:
 
