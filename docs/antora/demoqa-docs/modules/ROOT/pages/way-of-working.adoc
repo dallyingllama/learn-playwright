@@ -1,0 +1,58 @@
+= Way of Working
+
+This project is maintained as a learning-focused Playwright repository, so the way of working favors clarity, small improvements, and repeatable patterns over large rewrites.
+
+== Working Style
+
+* Keep tests readable and maintainable.
+* Prefer incremental changes over broad refactors.
+* Reuse existing helpers and page objects before adding new abstractions.
+* Keep test logic separate from test data where practical.
+* Treat documentation as part of the project, not an afterthought.
+
+== Test Practices
+
+* Use Playwright locators such as `getByRole()` and `getByLabel()` where possible.
+* Avoid brittle selectors unless there is no practical alternative.
+* Avoid hard waits and prefer assertion-based or event-based synchronization.
+* Use Page Objects for UI interactions.
+* Add meaningful assertions rather than broad smoke-only checks.
+
+== Local Workflow
+
+The repo is `pnpm`-first and exposes simple scripts for common tasks.
+
+Local setup and GitHub Actions are intended to use the same pinned `pnpm` version so dependency installation behavior stays consistent between machines and CI.
+
+[source,bash]
+----
+corepack enable
+corepack prepare pnpm@10.9.0 --activate
+corepack pnpm run test:dev
+corepack pnpm run test:ui:dev
+corepack pnpm run docs:build
+corepack pnpm run docs:preview
+----
+
+== CI and Report Publishing Flow
+
+GitHub Actions follows this practical flow:
+
+* install dependencies with the pinned `pnpm@10.9.0` version
+* run unit tests first as a fail-fast gate
+* run the `@sanity` subset if unit tests pass
+* run the full Playwright `e2e` suite only if sanity passes
+* upload test artifacts from the run
+* publish one Playwright report-history entry for the run
+* build and publish AsciiDoc documentation to GitHub Pages
+
+Report-history publishing behavior:
+
+* if sanity fails, the published report is the sanity-stage report
+* if sanity passes, the published report is the full-suite report
+
+== Related
+
+* link:roles.html[Roles in Test Automation]
+* link:coding-standards.html[Playwright Coding Standards and Guidelines]
+* link:system-under-test.html[System Under Test & Test Approach]

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>System Under Test &amp; Test Approach :: Learn Playwright Antora Pilot</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Learn Playwright Antora Pilot</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="demoqa-docs" data-version="current">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-explore is-active" data-panel="explore">
+  <div class="context">
+    <span class="title">DemoQA Docs Pilot</span>
+    <span class="version">current</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">DemoQA Docs Pilot</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">current</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">DemoQA Docs Pilot</a></li>
+    <li><a href="system-under-test.html">System Under Test &amp; Test Approach</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///C:/dev/learn-playwright/docs/antora/demoqa-docs/modules/ROOT/pages/system-under-test.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">System Under Test &amp; Test Approach</h1>
+<div class="sect1">
+<h2 id="_system_under_test"><a class="anchor" href="#_system_under_test"></a>System Under Test</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This repository uses <code><a href="https://demoqa.com/" class="bare">https://demoqa.com/</a></code> as the application under test.</p>
+</div>
+<div class="paragraph">
+<p>DemoQA is a useful target for this learning project because it provides a broad mix of interactive UI patterns, including forms, tables, navigation, alerts, widgets, and other browser-driven workflows.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_scope"><a class="anchor" href="#_current_scope"></a>Current Scope</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The current repository focus is browser-based UI automation with Playwright.</p>
+</div>
+<div class="paragraph">
+<p>Covered areas include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>authentication-related flows such as login and registration</p>
+</li>
+<li>
+<p>form interaction</p>
+</li>
+<li>
+<p>checkbox and radiobutton behavior</p>
+</li>
+<li>
+<p>buttons and links</p>
+</li>
+<li>
+<p>alerts and dialogs</p>
+</li>
+<li>
+<p>web tables</p>
+</li>
+<li>
+<p>navigation patterns</p>
+</li>
+<li>
+<p>bookstore-related user flows</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_approach"><a class="anchor" href="#_test_approach"></a>Test Approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The project currently emphasizes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>UI testing with Playwright + TypeScript</p>
+</li>
+<li>
+<p>Page Object Model structure through <code>page-objects/</code></p>
+</li>
+<li>
+<p>shared helpers and reusable navigation patterns</p>
+</li>
+<li>
+<p>environment-specific execution through <code>.env/&lt;name&gt;.env</code></p>
+</li>
+<li>
+<p>CI execution with GitHub Actions</p>
+</li>
+<li>
+<p>documentation and report publishing through GitHub Pages</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes"><a class="anchor" href="#_notes"></a>Notes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The repository is designed as a learning and architecture exercise as much as a test suite. That means examples are chosen not only for coverage, but also for showing maintainable patterns that can later evolve into a reusable starter framework.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

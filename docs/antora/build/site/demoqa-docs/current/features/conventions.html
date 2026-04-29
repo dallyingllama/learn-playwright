@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Learn Playwright Antora Pilot</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Learn Playwright Antora Pilot</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="demoqa-docs" data-version="current">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-explore is-active" data-panel="explore">
+  <div class="context">
+    <span class="title">DemoQA Docs Pilot</span>
+    <span class="version">current</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../index.html">DemoQA Docs Pilot</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">current</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+<div class="edit-this-page"><a href="file:///C:/dev/learn-playwright/docs/antora/demoqa-docs/modules/ROOT/pages/features/conventions.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect1">
+<h2 id="_guidelines_for_demoqa"><a class="anchor" href="#_guidelines_for_demoqa"></a>Guidelines for DemoQA</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_project_structure"><a class="anchor" href="#_project_structure"></a>Project Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The DemoQA project follows a specific structure to ensure clarity and maintainability. Below is an overview of the key directories and their purposes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Purpose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local/repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.env</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment-specific <code>.env</code> files used by Playwright config through <code>TEST_ENV</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.github</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI workflow and helper scripts for test execution, docs publishing, and report publishing.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable test data builders and fixtures used by specs and helpers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publishable AsciiDoc source, shared theme assets, and generated site content inputs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated GitHub Pages report/history workspace used during publish steps.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localDocs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated local HTML documentation output from AsciiDoc builds.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>node_modules</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Installed dependencies for tests, scripts, and documentation tooling.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page-objects</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page models, shared page behavior, and component abstractions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>playwright-report</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local Playwright HTML report output.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>project-docs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal planning and workflow documents for ongoing repository work.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>test-results</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local Playwright artifacts for latest runs (traces, screenshots, and output).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tests</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-to-end and unit-style Playwright specs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>utils</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shared helper utilities for navigation, annotations, and common test support.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_naming_conventions"><a class="anchor" href="#_naming_conventions"></a>Naming Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following table outlines the basic naming conventions used in the DemoQA project. These conventions help maintain consistency and readability across the codebase.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Topic</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files and folders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use kebab-case names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>book-data.ts</code>, <code>page-objects/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Types, classes, and interfaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use PascalCase names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BookData</code>, <code>BookDataBuilder</code>, <code>NavigablePage</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables and functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use camelCase names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookData</code>, <code>buildBookData</code>, <code>assertOnPage()</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

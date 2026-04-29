@@ -1,0 +1,27 @@
+= Playwright Coding Standards and Guidelines
+
+This document captures the practical coding habits used in this repository today.
+
+== Core Guidelines
+
+* Use the link:guidelines/POM.html[Page Object Model] for UI interactions.
+* Prefer Playwright locators such as `getByRole()` and `getByLabel()`.
+* Avoid brittle CSS or XPath selectors unless needed for a specific UI.
+* Use `async` and `await` consistently for browser interactions.
+* Avoid fixed timeouts; prefer assertion-driven or state-based waits.
+* Prefer exact assertions (for example `toBe`) when the full expected value is known; use broader checks (for example `toContain`) only when partial matching is intentional.
+* Keep test data separate from test logic where that improves reuse and readability.
+* Reuse existing helpers, page objects, and shared data before creating new patterns.
+* Keep tests easy to read, with meaningful assertions and focused workflows.
+* Use kebab-case for file and folder names.
+* Use PascalCase for classes, interfaces, and types.
+* Use camelCase for variables and functions.
+
+== Repository-Specific Notes
+
+* The active page object directory is `page-objects/`.
+* Navigation helpers exist in `utils/gotoHelper.ts`.
+* Shared navigation metadata exists in `page-objects/metadata/navigation-sections.ts`.
+* `pnpm` is the intended package manager for this repo.
+
+This guide will continue to evolve as the project grows.

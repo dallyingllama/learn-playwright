@@ -1,0 +1,50 @@
+= Page Object Model
+
+== Introduction
+
+The Page Object Model (POM) is a design pattern that represents application pages as classes. It helps keep tests readable, reusable, and easier to maintain as the UI changes.
+
+== Practical Guidelines
+
+* Use a separate file for each page object or reusable page component.
+* Keep page objects in the repository's `page-objects/` directory.
+* Use kebab-case for page-object file names.
+* Use PascalCase for class and interface names.
+* Prefer meaningful Playwright locators over brittle selectors.
+* Encapsulate actions and assertions inside page-object methods where it improves readability.
+* Keep page objects focused on one page or component responsibility.
+* Reuse shared base functionality or interfaces when that reduces duplication.
+* Avoid mixing test-data setup and page-interaction code unnecessarily.
+
+== Example
+
+[source,typescript]
+----
+import { expect, Page } from '@playwright/test';
+
+export class FooPage {
+  constructor(private page: Page) {}
+
+  async goto(): Promise<void> {
+    await this.page.goto('/foo');
+  }
+
+  async assertOnPage(): Promise<void> {
+    await expect(this.page.getByRole('heading', { name: 'Foo Page' })).toBeVisible();
+  }
+
+  async fillValue(value: string): Promise<void> {
+    await this.page.getByLabel('Foo').fill(value);
+  }
+
+  async save(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Save' }).click();
+  }
+}
+----
+
+== Why This Helps
+
+* selectors stay centralized
+* tests read more like user workflows
+* UI changes are easier to isolate to one class

@@ -1,0 +1,19 @@
+site:
+  title: Learn Playwright Antora Pilot
+  start_page: demoqa-docs::index.adoc
+
+content:
+  sources:
+    - url: ../..
+      start_path: docs/antora/demoqa-docs
+
+runtime:
+  fetch: false
+
+ui:
+  bundle:
+    url: ./ui-src
+    snapshot: false
+
+output:
+  dir: ./build/site

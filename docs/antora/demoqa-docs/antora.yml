@@ -1,0 +1,4 @@
+name: demoqa-docs
+title: DemoQA Docs Pilot
+version: current
+start_page: ROOT:index.adoc

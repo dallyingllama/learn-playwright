@@ -63,6 +63,37 @@ Acceptance criteria:
 - Existing key pages render and link correctly in the generated site.
 - A rollback path to current docs build is documented during transition.
 
+### 5.2a Antora post-migration cleanup and UI alignment
+
+- Purpose: finish Antora migration cleanup so active docs assets are organized and production-ready.
+- Scope: Antora docs structure, source-of-truth alignment, and UI polish only.
+- Status: in progress.
+
+Phase A: structure cleanup
+
+- A.1 move active Antora runtime workspace from `spikes/antora-pilot/` to stable `docs/antora/`.
+- A.2 switch scripts/CI/verification paths to stable `docs/antora/` locations.
+- A.3 keep spike artifacts temporarily until parity is validated, then remove remaining runtime dependencies on `spikes/`.
+
+Phase B: source de-duplication
+
+- B.1 define one source of truth for publishable pages.
+- B.2 remove duplicate page copies between `docs/` and Antora component pages.
+- B.3 run docs smoke checks and fix any broken links/navigation caused by consolidation.
+
+Phase C: UI and navigation polish
+
+- C.1 replace default sample top-nav items with repository-relevant actions/links.
+- C.2 update pilot labels/titles to production naming.
+- C.3 tune left navigation structure and styling for parity with prior docs usability expectations.
+
+Acceptance criteria:
+
+- No active docs build, preview, or CI publish step depends on `spikes/`.
+- Publishable docs pages have one clear source of truth.
+- Top navigation, labels, and left menu are intentional and project-relevant.
+- `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora` pass.
+
 ### 5.3 Define architecture split blueprint
 
 - Use `project-docs/repository-approach.md` sections:

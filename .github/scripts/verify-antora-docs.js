@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const siteRoot = path.join('spikes', 'antora-pilot', 'build', 'site');
+const siteRoot = path.join('docs', 'antora', 'build', 'site');
 
 const requiredFiles = [
   path.join(siteRoot, 'index.html'),
