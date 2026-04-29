@@ -49,6 +49,32 @@
 
   <!-- JavaScript for filtering reports -->
   <script>
+    // Auto-refresh once when this index file is stale in browser cache.
+    // We compare the version this HTML was rendered with to freshly fetched version metadata.
+    (async function refreshReportIndexIfStale() {
+      const renderedVersion = '<%= latestReportVersion %>';
+      if (!renderedVersion) return;
+
+      const params = new URLSearchParams(window.location.search);
+      const reloadedForVersion = params.get('rv');
+
+      try {
+        const response = await fetch(`version.json?t=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) return;
+
+        const metadata = await response.json();
+        const latestVersion = metadata && metadata.version;
+        if (!latestVersion) return;
+
+        if (latestVersion !== renderedVersion && reloadedForVersion !== latestVersion) {
+          params.set('rv', latestVersion);
+          window.location.search = params.toString();
+        }
+      } catch (_) {
+        // Keep page usable if metadata fetch fails.
+      }
+    })();
+
     function filterReports(status) {
       const items = document.querySelectorAll('.report-item');
       items.forEach(item => {

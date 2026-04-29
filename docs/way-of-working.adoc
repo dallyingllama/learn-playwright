@@ -50,6 +50,7 @@ Report-history publishing behavior:
 
 * if sanity fails, the published report is the sanity-stage report
 * if sanity passes, the published report is the full-suite report
+* the published `index.html` checks `version.json` and auto-refreshes once when browser cache serves an older report list
 
 == Related
 

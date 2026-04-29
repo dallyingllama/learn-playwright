@@ -89,6 +89,16 @@ jobs:
           mkdir -p history/$SAFE_DIR_NAME
           cp -r playwright-report/* history/$SAFE_DIR_NAME
 
+      - name: Write report index version metadata
+        run: |
+          # index.html uses this file to detect stale browser cache and auto-refresh once.
+          cat > history/version.json <<EOF
+          {
+            "version": "${SAFE_DIR_NAME}",
+            "generatedAtUtc": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          }
+          EOF
+
       - name: Build documentation with Antora
         if: env.DOCS_PIPELINE == 'antora'
         run: |

@@ -50,8 +50,9 @@ folders.sort().reverse().forEach(folder => {
 });
 
 const today = new Date().toISOString().split('T')[0];
+const latestReportVersion = folders.find(folder => /^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}$/.test(folder)) || '';
 
-ejs.renderFile(templateFile, { reportsByDate, today }, (err, html) => {
+ejs.renderFile(templateFile, { reportsByDate, today, latestReportVersion }, (err, html) => {
   if (err) {
     console.error('❌ Error rendering index:', err);
     process.exit(1);
