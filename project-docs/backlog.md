@@ -68,8 +68,9 @@ Acceptance criteria:
 - Purpose: finish Antora migration cleanup so active docs assets are organized and production-ready.
 - Scope: Antora docs structure, source-of-truth alignment, and UI polish only.
 - Status: in progress.
+- Phase A status: completed (runtime lives under `docs/antora/`, scripts/CI point to `docs/antora/`, and Antora build/verify checks pass).
 
-Phase A: structure cleanup
+Phase A: structure cleanup (completed)
 
 - A.1 move active Antora runtime workspace from `spikes/antora-pilot/` to stable `docs/antora/`.
 - A.2 switch scripts/CI/verification paths to stable `docs/antora/` locations.

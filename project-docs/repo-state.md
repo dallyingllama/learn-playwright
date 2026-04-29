@@ -55,18 +55,19 @@ Use this file as a concise restart snapshot for implementation sessions.
 ## Session Updates (Latest)
 
 - Completed backlog item `5.2` (Antora docs migration slice set).
-- Antora UI implementation is local-source based (`spikes/antora-pilot/ui-src/`) with baseline artifact retained (`spikes/antora-pilot/ui-bundle.zip`).
+- Active Antora runtime is under `docs/antora/` with local UI source at `docs/antora/ui-src/`.
 - Antora docs validation is gated by `docs:verify:antora` in CI before docs publish copy.
 - Antora CLI version is pinned to `antora@3.1.14` in `docs:build:antora` for stable local/CI behavior.
 - Developer rollback instructions are documented for `DOCS_PIPELINE=asciidoctor` during transition.
 - GitHub Actions validation for build + verify is green for this session's pushes.
+- `5.2a` Phase A structure cleanup checks pass: `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora`.
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `5.3+` reusable architecture strategy (split blueprint, shared package, template/showcases).
-- Pending session follow-up: collect and record feedback from the next GitHub push/run before removing fallback.
+- `5.2a` Phase B source de-duplication (single publishable source of truth and cleanup of duplicate page copies).
+- `5.2a` Phase C UI and navigation polish (top nav labels/links and left-nav structure).
 
 ## Known Risks and Notes
 
