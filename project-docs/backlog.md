@@ -69,6 +69,7 @@ Acceptance criteria:
 - Scope: Antora docs structure, source-of-truth alignment, and UI polish only.
 - Status: in progress.
 - Phase A status: completed (runtime lives under `docs/antora/`, scripts/CI point to `docs/antora/`, and Antora build/verify checks pass).
+- Session slice update: report-history index cache refresh safeguard added (`history/version.json` + one-time auto-refresh when stale).
 
 Phase A: structure cleanup (completed)
 

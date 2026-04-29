@@ -54,13 +54,15 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 ## Session Updates (Latest)
 
-- Completed backlog item `5.2` (Antora docs migration slice set).
-- Active Antora runtime is under `docs/antora/` with local UI source at `docs/antora/ui-src/`.
-- Antora docs validation is gated by `docs:verify:antora` in CI before docs publish copy.
-- Antora CLI version is pinned to `antora@3.1.14` in `docs:build:antora` for stable local/CI behavior.
-- Developer rollback instructions are documented for `DOCS_PIPELINE=asciidoctor` during transition.
-- GitHub Actions validation for build + verify is green for this session's pushes.
-- `5.2a` Phase A structure cleanup checks pass: `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora`.
+- `5.2a` Phase A structure cleanup is recorded complete in backlog.
+- Report index cache-staleness handling was added for GitHub Pages history:
+  - workflow writes `history/version.json` each publish
+  - generated `index.html` checks version metadata and auto-refreshes once when stale
+- Workflow/template/docs comments were added to explain the cache-refresh behavior.
+- Local validation passed for this slice:
+  - `node --check .github/scripts/render-index.js`
+  - `corepack pnpm run docs:build:antora`
+  - `corepack pnpm run docs:verify:antora`
 
 ## Active Focus
 
