@@ -79,7 +79,7 @@
     <li><a href="developer-how-to.html">Developer How-To</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/dallyingllama/learn-playwright/edit/main/spikes/antora-pilot/demoqa-docs/modules/ROOT/pages/developer-how-to.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/dallyingllama/learn-playwright/edit/main/docs/antora/demoqa-docs/modules/ROOT/pages/developer-how-to.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -388,6 +388,52 @@ git log --oneline -n 10</code></pre>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run docs:build
 corepack pnpm run docs:preview</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Antora pilot build (for migration validation):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run docs:build:antora
+corepack pnpm run docs:verify:antora
+corepack pnpm run docs:preview:antora</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rollback to Asciidoctor local docs flow:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the <code>Local Docs Preview</code> commands in this file (<code>docs:build</code> and <code>docs:preview</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>CI docs rollback path:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In <code>.github/workflows/playwright.yml</code>, set <code>DOCS_PIPELINE: asciidoctor</code>.</p>
+</li>
+<li>
+<p>The workflow keeps both docs paths:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Antora path: <code>docs:build:antora</code> + <code>docs:verify:antora</code></p>
+</li>
+<li>
+<p>fallback path: Asciidoctor build block</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Switch <code>DOCS_PIPELINE</code> back to <code>antora</code> to return to the Antora publish path.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>gotoHelper Utility :: Learn Playwright Antora Pilot</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Learn Playwright Antora Pilot</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="demoqa-docs" data-version="current">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-explore is-active" data-panel="explore">
+  <div class="context">
+    <span class="title">DemoQA Docs Pilot</span>
+    <span class="version">current</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../index.html">DemoQA Docs Pilot</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">current</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DemoQA Docs Pilot</a></li>
+    <li><a href="gotoHelper.html"><code>gotoHelper</code> Utility</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/dallyingllama/learn-playwright/edit/main/docs/antora/demoqa-docs/modules/ROOT/pages/features/gotoHelper.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page"><code>gotoHelper</code> Utility</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_purpose">Purpose</a></li>
+<li><a href="#_current_behavior">Current Behavior</a></li>
+<li><a href="#_example_usage">Example Usage</a></li>
+<li><a href="#_important_note">Important Note</a></li>
+<li><a href="#_source_code">Source Code</a></li>
+<li><a href="#_related">Related</a></li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_purpose"><a class="anchor" href="#_purpose"></a>Purpose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>gotoHelper</code> utility centralizes navigation behavior for page objects that support multiple ways of reaching the same page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_behavior"><a class="anchor" href="#_current_behavior"></a>Current Behavior</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It creates a <code>goto()</code> function with these variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>goto()</code> uses the configured default navigation method</p>
+</li>
+<li>
+<p><code>goto.viaMenu()</code> forces menu-based navigation</p>
+</li>
+<li>
+<p><code>goto.viaDirectLink()</code> forces direct-link navigation</p>
+</li>
+<li>
+<p><code>goto.random()</code> intentionally randomizes between menu-based and direct-link navigation</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_usage"><a class="anchor" href="#_example_usage"></a>Example Usage</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ts hljs" data-lang="ts">import { createGotoWithVariants } from '../utils/gotoHelper';
+
+this.goto = createGotoWithVariants(
+  async () =&gt; await this.gotoViaSidebarMenu(),
+  async () =&gt; await this.gotoViaDirectLink()
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default in this repo, plain <code>goto()</code> is now used as the deterministic path and randomized navigation is called explicitly with <code>goto.random()</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_important_note"><a class="anchor" href="#_important_note"></a>Important Note</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The current testing pattern is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tests/navigation.spec.ts</code> explicitly verifies both navigation methods</p>
+</li>
+<li>
+<p>feature specs can use <code>goto.random()</code> when navigation is only setup and not the main behavior under test</p>
+</li>
+<li>
+<p>a few specs can still keep deterministic setup first when they are meant to demonstrate that pattern clearly</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_source_code"><a class="anchor" href="#_source_code"></a>Source Code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>utils/gotoHelper.ts</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related"><a class="anchor" href="#_related"></a>Related</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See also: <a href="navigablePage.html"><code>NavigablePage</code> Interface</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
