@@ -55,6 +55,9 @@ Use this file as a concise restart snapshot for implementation sessions.
 ## Session Updates (Latest)
 
 - `5.2a` Phase A structure cleanup is recorded complete in backlog.
+- `5.2a` Phase B.1 decision is recorded:
+  - publishable page content source of truth is `docs/antora/demoqa-docs/modules/ROOT/pages/`
+  - `project-docs/` remains internal and is not part of Antora publish output
 - Report index cache-staleness handling was added for GitHub Pages history:
   - workflow writes `history/version.json` each publish
   - generated `index.html` checks version metadata and auto-refreshes once when stale
