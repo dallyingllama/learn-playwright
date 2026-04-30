@@ -54,24 +54,17 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 ## Session Updates (Latest)
 
-- `5.2a` Phase A structure cleanup is recorded complete in backlog.
-- `5.2a` Phase B.1 decision is recorded:
+- `5.2a` Phase B.1 is completed and decision is recorded:
   - publishable page content source of truth is `docs/antora/demoqa-docs/modules/ROOT/pages/`
   - `project-docs/` remains internal and is not part of Antora publish output
-- Report index cache-staleness handling was added for GitHub Pages history:
-  - workflow writes `history/version.json` each publish
-  - generated `index.html` checks version metadata and auto-refreshes once when stale
-- Workflow/template/docs comments were added to explain the cache-refresh behavior.
 - Local validation passed for this slice:
-  - `node --check .github/scripts/render-index.js`
-  - `corepack pnpm run docs:build:antora`
   - `corepack pnpm run docs:verify:antora`
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `5.2a` Phase B source de-duplication (single publishable source of truth and cleanup of duplicate page copies).
+- `5.2a` Phase B.2-B.3 source de-duplication execution (remove duplicate publishable page copies and verify links/navigation).
 - `5.2a` Phase C UI and navigation polish (top nav labels/links and left-nav structure).
 
 ## Known Risks and Notes

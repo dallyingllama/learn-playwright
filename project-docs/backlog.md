@@ -79,7 +79,7 @@ Phase A: structure cleanup (completed)
 
 Phase B: source de-duplication
 
-- B.1 define one source of truth for publishable pages.
+- B.1 define one source of truth for publishable pages. Status: completed.
   - Decision: Antora component pages under `docs/antora/demoqa-docs/modules/ROOT/pages/` are the single source of truth for publishable page content.
   - Scope note: `project-docs/` remains internal repository documentation and is not part of Antora publish output.
 - B.2 remove duplicate page copies between `docs/` and Antora component pages.
