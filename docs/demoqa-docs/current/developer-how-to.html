@@ -99,7 +99,7 @@
 <li><a href="#_unit_tests_in_this_repo">Unit Tests in This Repo</a></li>
 <li><a href="#_typecheck_typescript_safety_check">Typecheck (TypeScript Safety Check)</a></li>
 <li><a href="#_git_command_helpers">Git Command Helpers</a></li>
-<li><a href="#_local_docs_preview">Local Docs Preview</a></li>
+<li><a href="#_local_docs_build_and_preview">Local Docs Build and Preview</a></li>
 <li><a href="#_show_test_report">Show Test Report</a></li>
 <li><a href="#_run_sanity_only_filter">Run Sanity-Only Filter</a></li>
 <li><a href="#_navigation_pattern">Navigation Pattern</a></li>
@@ -194,10 +194,10 @@ corepack pnpm run test:e2e</code></pre>
 <p><code>@faker-js/faker</code>: generates realistic test data for forms and table scenarios.</p>
 </li>
 <li>
-<p><code>@asciidoctor/cli</code> and <code>@asciidoctor/core</code>: build publishable docs from AsciiDoc source.</p>
+<p><code>antora</code>: builds and assembles the publishable documentation site.</p>
 </li>
 <li>
-<p><code>live-server</code>: previews generated local docs from <code>localDocs/</code>.</p>
+<p><code>live-server</code>: previews generated Antora docs output from <code>docs/antora/build/site/</code>.</p>
 </li>
 <li>
 <p><code>ejs</code>: templates report index content used by GitHub workflow helper scripts.</p>
@@ -381,7 +381,7 @@ git log --oneline -n 10</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_local_docs_preview"><a class="anchor" href="#_local_docs_preview"></a><a class="link" href="#_local_docs_preview">Local Docs Preview</a></h2>
+<h2 id="_local_docs_build_and_preview"><a class="anchor" href="#_local_docs_build_and_preview"></a><a class="link" href="#_local_docs_build_and_preview">Local Docs Build and Preview</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -390,50 +390,12 @@ corepack pnpm run docs:preview</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Antora pilot build (for migration validation):</p>
+<p>Docs smoke check:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run docs:build:antora
-corepack pnpm run docs:verify:antora
-corepack pnpm run docs:preview:antora</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run docs:verify:antora</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Rollback to Asciidoctor local docs flow:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Use the <code>Local Docs Preview</code> commands in this file (<code>docs:build</code> and <code>docs:preview</code>).</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>CI docs rollback path:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>In <code>.github/workflows/playwright.yml</code>, set <code>DOCS_PIPELINE: asciidoctor</code>.</p>
-</li>
-<li>
-<p>The workflow keeps both docs paths:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Antora path: <code>docs:build:antora</code> + <code>docs:verify:antora</code></p>
-</li>
-<li>
-<p>fallback path: Asciidoctor build block</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Switch <code>DOCS_PIPELINE</code> back to <code>antora</code> to return to the Antora publish path.</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
