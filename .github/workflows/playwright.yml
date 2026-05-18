@@ -9,7 +9,6 @@ on:
 
 env:
   REPORT_RETENTION_DAYS: 2
-  DOCS_PIPELINE: antora
 
 jobs:
   test:
@@ -29,12 +28,6 @@ jobs:
           corepack enable
           corepack prepare pnpm@10.9.0 --activate
           pnpm install
-
-      - name: Install Asciidoctor CLI (fallback)
-        if: env.DOCS_PIPELINE == 'asciidoctor'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y asciidoctor
 
       - name: Run unit tests (gate)
         run: |
@@ -100,7 +93,6 @@ jobs:
           EOF
 
       - name: Build documentation with Antora
-        if: env.DOCS_PIPELINE == 'antora'
         run: |
           corepack pnpm run docs:build:antora
           corepack pnpm run docs:verify:antora
@@ -120,33 +112,6 @@ jobs:
           </body>
           </html>
           EOF
-
-      - name: Build documentation with Asciidoctor (fallback)
-        if: env.DOCS_PIPELINE == 'asciidoctor'
-        run: |
-          mkdir -p history/docs
-          find docs -type f -name "*.adoc" | while read -r file; do
-            rel_path="${file#docs/}"
-            out_path="history/docs/${rel_path%.adoc}.html"
-            rel_dir="$(dirname "$rel_path")"
-            style_dir="_theme"
-            if [ "$rel_dir" != "." ]; then
-              depth=$(awk -F/ '{print NF}' <<< "$rel_dir")
-              prefix=""
-              for _ in $(seq 1 "$depth"); do
-                prefix="../${prefix}"
-              done
-              style_dir="${prefix}_theme"
-            fi
-            mkdir -p "$(dirname "$out_path")"
-            asciidoctor \
-              -a stylesdir="$style_dir" \
-              -a stylesheet=playwright.css \
-              -a linkcss \
-              -a docinfo=shared \
-              -o "$out_path" \
-              "$file"
-          done
 
       - name: Generate styled index with EJS
         run: node .github/scripts/render-index.js

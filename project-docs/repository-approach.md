@@ -13,7 +13,7 @@ Build a reusable Playwright architecture that can support multiple project repos
 ### Definition of ready to split (Phase 1 exit criteria)
 - `pnpm run typecheck` passes.
 - Directly affected specs pass for each architecture change.
-- Documentation build and preview workflow is stable (`pnpm run docs:build`, `pnpm run docs:preview`).
+- Documentation build and preview workflow is stable (`pnpm run docs:build:antora`, `pnpm run docs:preview:antora`).
 - Shared-vs-project-specific boundaries are documented and agreed.
 - Core architecture patterns are represented in this repo with at least one working showcase flow per major area.
 

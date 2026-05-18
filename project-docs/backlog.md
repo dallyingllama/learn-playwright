@@ -32,7 +32,7 @@ Acceptance criteria:
 - The recommendation includes migration cost and phased execution outline.
 - The recommendation identifies risks, mitigations, and rollback approach.
 - No production test files, page objects, or CI test execution logic are changed as part of the spike.
-- `corepack pnpm run docs:build` still succeeds in the main repository after the spike changes.
+- `corepack pnpm run docs:build:antora` still succeeds in the main repository after the spike changes.
 
 ### 5.2 Migrate docs pipeline to Antora before split work
 
@@ -47,14 +47,14 @@ Acceptance criteria:
 - Status: completed.
 - Completed slices:
   - added local Antora build/preview scripts and pilot workspace
-  - switched CI docs pipeline default to Antora with `DOCS_PIPELINE` fallback
+- switched CI docs pipeline default to Antora
   - added `/docs/index.html` redirect to `/docs/demoqa-docs/current/index.html`
   - validated published Antora docs in GitHub Actions
   - vendored Antora default UI baseline as `spikes/antora-pilot/ui-bundle.zip`
   - extracted local editable UI source to `spikes/antora-pilot/ui-src/` and wired playbook `ui.bundle.url` to `./ui-src`
   - added Antora docs smoke-check command (`docs:verify:antora`) and wired it into CI Antora docs build step
   - pinned `docs:build:antora` to `antora@3.1.14` in `package.json` to keep local and CI build behavior stable
-  - documented explicit rollback steps for local docs flow and CI `DOCS_PIPELINE` fallback in `docs/developer-how-to.adoc`
+- documented local docs build and verification flow in the publishable developer guide
 
 Acceptance criteria:
 
@@ -70,19 +70,23 @@ Acceptance criteria:
 - Status: in progress.
 - Phase A status: completed (runtime lives under `docs/antora/`, scripts/CI point to `docs/antora/`, and Antora build/verify checks pass).
 - Session slice update: report-history index cache refresh safeguard added (`history/version.json` + one-time auto-refresh when stale).
+- Session slice update: legacy pilot workspace `spikes/antora-pilot/` removed after Antora verify pass.
 
 Phase A: structure cleanup (completed)
 
 - A.1 move active Antora runtime workspace from `spikes/antora-pilot/` to stable `docs/antora/`.
 - A.2 switch scripts/CI/verification paths to stable `docs/antora/` locations.
-- A.3 keep spike artifacts temporarily until parity is validated, then remove remaining runtime dependencies on `spikes/`.
+- A.3 keep spike artifacts temporarily until parity is validated, then remove remaining runtime dependencies on `spikes/`. Status: completed.
 
 Phase B: source de-duplication
 
 - B.1 define one source of truth for publishable pages. Status: completed.
   - Decision: Antora component pages under `docs/antora/demoqa-docs/modules/ROOT/pages/` are the single source of truth for publishable page content.
   - Scope note: `project-docs/` remains internal repository documentation and is not part of Antora publish output.
-- B.2 remove duplicate page copies between `docs/` and Antora component pages.
+- B.2 remove duplicate page copies between `docs/` and Antora component pages. Status: completed.
+  - Removed duplicate legacy publishable `.adoc` page copies from `docs/`.
+  - Removed empty legacy directories `docs/features/` and `docs/guidelines/`.
+  - Validation: `corepack pnpm run docs:verify:antora` passed.
 - B.3 run docs smoke checks and fix any broken links/navigation caused by consolidation.
 
 Phase C: UI and navigation polish

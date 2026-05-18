@@ -27,7 +27,7 @@ It is used to explore:
 * `page-objects/` as the active Page Object Model directory
 * shared helpers in `utils/`
 * reusable navigation metadata in `page-objects/metadata/navigation-sections.ts`
-* generated local docs via AsciiDoc
+* generated local docs via Antora
 * GitHub Actions workflow that runs sanity first, then full regression if sanity passes, stores report history, and publishes docs
 
 == First 10 Minutes

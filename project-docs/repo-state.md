@@ -23,15 +23,16 @@ Use this file as a concise restart snapshot for implementation sessions.
   - `playwright.config.ts` loads `.env/<name>.env` from `TEST_ENV`
   - active env files: `.env/dev.env`, `.env/test.env`, `.env/e2e.env`, `.env/fail.env`
 - Docs model:
-  - publishable docs in `docs/`
+  - publishable docs source lives under `docs/antora/demoqa-docs/modules/ROOT/pages/`
   - internal process/state docs in `project-docs/`
-  - developer guide source of truth: `docs/developer-how-to.adoc`
+  - Antora runtime and UI source live under `docs/antora/`
+  - legacy pilot workspace under `spikes/` has been removed
   - `project-docs/developer-how-to.md` is a pointer file only
 
 ## Validation Snapshot
 
 - `pnpm run typecheck` is available and used as the TS safety gate.
-- Local docs build uses `corepack pnpm run docs:build`.
+- Local docs build uses `corepack pnpm run docs:build:antora`.
 - CI workflow runs a unit-test gate first, then `@sanity`, then full `e2e` only if sanity passes.
 - CI publishes report history and docs to GitHub Pages.
 
@@ -47,8 +48,8 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `3.2` targeted assertion tightening where broad checks existed.
 - `3.3` added small data-driven examples (register/buttons/radiobutton).
 - `4.1` setup/env docs improvements with `corepack pnpm` consistency.
-- `4.2` short CI/report publishing flow documented in `docs/way-of-working.adoc`.
-- `4.3` internal docs split is lightweight: publishable developer guide in `docs/developer-how-to.adoc`, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
+- `4.2` short CI/report publishing flow documented in the publishable docs (`way-of-working.adoc`).
+- `4.3` internal docs split is lightweight: publishable developer guide in Antora component pages, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
 - `4.4` conventions doc directory map aligned with current repository/local outputs and validated with local docs build.
 - `5.2` docs pipeline migrated to Antora with local UI source, pinned Antora CLI, CI smoke checks, and documented rollback path.
 
@@ -57,6 +58,11 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `5.2a` Phase B.1 is completed and decision is recorded:
   - publishable page content source of truth is `docs/antora/demoqa-docs/modules/ROOT/pages/`
   - `project-docs/` remains internal and is not part of Antora publish output
+- `5.2a` Phase B.2 is completed:
+  - duplicate legacy publishable page copies were removed from `docs/`
+  - empty legacy publishable directories (`docs/features/`, `docs/guidelines/`) were removed
+- `5.2a` Phase A.3 is completed:
+  - legacy pilot directory `spikes/antora-pilot/` was removed after validation
 - Local validation passed for this slice:
   - `corepack pnpm run docs:verify:antora`
 
@@ -64,7 +70,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 From `project-docs/backlog.md`:
 
-- `5.2a` Phase B.2-B.3 source de-duplication execution (remove duplicate publishable page copies and verify links/navigation).
+- `5.2a` Phase B.3 source de-duplication verification (smoke checks and link/navigation fixes if needed).
 - `5.2a` Phase C UI and navigation polish (top nav labels/links and left-nav structure).
 
 ## Known Risks and Notes

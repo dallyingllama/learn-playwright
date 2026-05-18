@@ -20,7 +20,7 @@ Goals:
 - ejs
 - cross-env
 - live-server
-- asciidoctor (core, cli)
+- antora
 - GitHub Actions
 
 # Project Structure

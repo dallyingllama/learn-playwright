@@ -44,7 +44,7 @@ GitHub Actions follows this practical flow:
 * run the full Playwright `e2e` suite only if sanity passes
 * upload test artifacts from the run
 * publish one Playwright report-history entry for the run
-* build and publish AsciiDoc documentation to GitHub Pages
+* build and publish Antora documentation to GitHub Pages
 
 Report-history publishing behavior:
 

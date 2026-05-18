@@ -32,8 +32,8 @@ corepack pnpm run test:spec:dev tests/alerts.spec.ts
 
 ## Docs
 
-- Source docs: `docs/`
+- Source docs: `docs/antora/demoqa-docs/modules/ROOT/pages/`
 - Internal project docs: `project-docs/`
-- Developer how-to: `docs/developer-how-to.adoc`
+- Developer how-to: `docs/antora/demoqa-docs/modules/ROOT/pages/developer-how-to.adoc`
 - Build local docs: `corepack pnpm run docs:build`
 - Preview local docs: `corepack pnpm run docs:preview`

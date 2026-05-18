@@ -1,7 +1,7 @@
 # Codex Workflow Guide
 
 Audience: Codex-assisted repository sessions.
-For local setup and day-to-day developer commands, use `docs/developer-how-to.adoc`.
+For local setup and day-to-day developer commands, use `docs/antora/demoqa-docs/modules/ROOT/pages/developer-how-to.adoc`.
 
 ## 1) Fresh Session Start
 

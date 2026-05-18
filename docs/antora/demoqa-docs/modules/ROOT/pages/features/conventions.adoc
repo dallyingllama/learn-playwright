@@ -9,9 +9,8 @@ The DemoQA project follows a specific structure to ensure clarity and maintainab
 |`.env` | Environment-specific `.env` files used by Playwright config through `TEST_ENV`. | repo
 |`.github` | CI workflow and helper scripts for test execution, docs publishing, and report publishing. | repo
 |`data` | Reusable test data builders and fixtures used by specs and helpers. | repo
-|`docs` | Publishable AsciiDoc source, shared theme assets, and generated site content inputs. | repo
+|`docs` | Publishable Antora docs source and site assets. | repo
 |`history` | Generated GitHub Pages report/history workspace used during publish steps. | local
-|`localDocs` | Generated local HTML documentation output from AsciiDoc builds. | local
 |`node_modules` | Installed dependencies for tests, scripts, and documentation tooling. | local
 |`page-objects` | Page models, shared page behavior, and component abstractions. | repo
 |`playwright-report` | Local Playwright HTML report output. | local

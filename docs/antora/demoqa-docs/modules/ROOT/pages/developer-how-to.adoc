@@ -52,8 +52,8 @@ corepack pnpm run test:e2e
 * `cross-env`: cross-platform environment variable support in npm scripts (for example `TEST_ENV`).
 * `dotenv`: loads environment variables from `.env/<name>.env` via `playwright.config.ts`.
 * `@faker-js/faker`: generates realistic test data for forms and table scenarios.
-* `@asciidoctor/cli` and `@asciidoctor/core`: build publishable docs from AsciiDoc source.
-* `live-server`: previews generated local docs from `localDocs/`.
+* `antora`: builds and assembles the publishable documentation site.
+* `live-server`: previews generated Antora docs output from `docs/antora/build/site/`.
 * `ejs`: templates report index content used by GitHub workflow helper scripts.
 
 == Run All Tests
@@ -149,7 +149,7 @@ Quick usage notes:
 * Use short commit messages that describe one logical change.
 * Rebase on `origin/main` before opening a PR when your branch is behind.
 
-== Local Docs Preview
+== Local Docs Build and Preview
 
 [source,bash]
 ----
@@ -157,26 +157,12 @@ corepack pnpm run docs:build
 corepack pnpm run docs:preview
 ----
 
-Antora pilot build (for migration validation):
+Docs smoke check:
 
 [source,bash]
 ----
-corepack pnpm run docs:build:antora
 corepack pnpm run docs:verify:antora
-corepack pnpm run docs:preview:antora
 ----
-
-Rollback to Asciidoctor local docs flow:
-
-* Use the `Local Docs Preview` commands in this file (`docs:build` and `docs:preview`).
-
-CI docs rollback path:
-
-* In `.github/workflows/playwright.yml`, set `DOCS_PIPELINE: asciidoctor`.
-* The workflow keeps both docs paths:
-  ** Antora path: `docs:build:antora` + `docs:verify:antora`
-  ** fallback path: Asciidoctor build block
-* Switch `DOCS_PIPELINE` back to `antora` to return to the Antora publish path.
 
 == Show Test Report
 
