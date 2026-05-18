@@ -48,3 +48,17 @@ Goal:
 - Keep updates factual and concise.
 - Do not leave backlog decisions only in chat.
 - Use Playwright default `test-results/` output folder only.
+
+## Backlog Closeout Checklist
+
+Before a backlog item is marked complete:
+
+- Validate the item with directly relevant checks (tests, typecheck, docs verify, or equivalent).
+- Remove temporary backup/spike artifacts created for the item unless explicitly asked to keep them.
+- Update `project-docs/repo-state.md` and `project-docs/backlog.md` to match the actual current state.
+- Pause for user review and approval.
+- Mark the item done only after user approval.
+
+When moving to a new backlog item:
+
+- First confirm the previous item has been reviewed and closed.

@@ -127,6 +127,12 @@ Avoid:
   - documentation references
 - For rename changes, run the directly affected spec(s) after each chunk.
 - Use `project-docs/repository-approach.md` as the source for reusable architecture strategy decisions (backlog section `5`).
+- Backlog item completion guardrails:
+  - During an active backlog item, temporary backup/spike artifacts are allowed when they reduce risk.
+  - Before marking a backlog item complete, remove temporary backup/spike artifacts unless the user explicitly asks to keep them.
+  - Before marking a backlog item complete, pause and ask the user to review and approve the result.
+  - Do not mark a backlog item as done in docs until user review/approval is received.
+  - If the team is ready to move to a new backlog item, first confirm the previous item is reviewed/closed.
 - End-of-session checklist:
   - Update `project-docs/repo-state.md` to match the current repository
   - Update `project-docs/backlog.md` if status or priorities changed
