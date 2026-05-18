@@ -47,21 +47,21 @@ Acceptance criteria:
 - Status: completed.
 - Completed slices:
   - added local Antora build/preview scripts and pilot workspace
-- switched CI docs pipeline default to Antora
+  - switched CI docs pipeline default to Antora
   - added `/docs/index.html` redirect to `/docs/demoqa-docs/current/index.html`
   - validated published Antora docs in GitHub Actions
   - vendored Antora default UI baseline as `spikes/antora-pilot/ui-bundle.zip`
   - extracted local editable UI source to `spikes/antora-pilot/ui-src/` and wired playbook `ui.bundle.url` to `./ui-src`
   - added Antora docs smoke-check command (`docs:verify:antora`) and wired it into CI Antora docs build step
   - pinned `docs:build:antora` to `antora@3.1.14` in `package.json` to keep local and CI build behavior stable
-- documented local docs build and verification flow in the publishable developer guide
+  - documented local docs build and verification flow in the publishable developer guide
 
 Acceptance criteria:
 
 - Local Antora build command is documented and working.
 - CI docs publish step builds and publishes Antora output successfully.
 - Existing key pages render and link correctly in the generated site.
-- A rollback path to current docs build is documented during transition.
+- Antora build, verify, and preview workflow is documented for local and CI usage.
 
 ### 5.2a Antora post-migration cleanup and UI alignment
 
@@ -87,7 +87,9 @@ Phase B: source de-duplication
   - Removed duplicate legacy publishable `.adoc` page copies from `docs/`.
   - Removed empty legacy directories `docs/features/` and `docs/guidelines/`.
   - Validation: `corepack pnpm run docs:verify:antora` passed.
-- B.3 run docs smoke checks and fix any broken links/navigation caused by consolidation.
+- B.3 run docs smoke checks and fix any broken links/navigation caused by consolidation. Status: completed.
+  - Validation: `corepack pnpm run docs:verify:antora` passed.
+  - Manual review: GitHub Actions publish succeeded and published docs pages were reviewed.
 
 Phase C: UI and navigation polish
 

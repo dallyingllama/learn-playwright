@@ -61,8 +61,15 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `5.2a` Phase B.2 is completed:
   - duplicate legacy publishable page copies were removed from `docs/`
   - empty legacy publishable directories (`docs/features/`, `docs/guidelines/`) were removed
+- `5.2a` Phase B.3 is completed:
+  - docs smoke checks passed for consolidated publishable docs pages
+  - published docs review in GitHub confirmed expected output
 - `5.2a` Phase A.3 is completed:
   - legacy pilot directory `spikes/antora-pilot/` was removed after validation
+- Legacy AsciiDoctor path cleanup is completed:
+  - `package.json` and lockfile no longer include AsciiDoctor dependencies
+  - CI docs fallback logic was removed; docs pipeline is Antora-only
+  - stale `localDocs` artifacts/references were removed
 - Local validation passed for this slice:
   - `corepack pnpm run docs:verify:antora`
 
@@ -70,7 +77,6 @@ Use this file as a concise restart snapshot for implementation sessions.
 
 From `project-docs/backlog.md`:
 
-- `5.2a` Phase B.3 source de-duplication verification (smoke checks and link/navigation fixes if needed).
 - `5.2a` Phase C UI and navigation polish (top nav labels/links and left-nav structure).
 
 ## Known Risks and Notes
