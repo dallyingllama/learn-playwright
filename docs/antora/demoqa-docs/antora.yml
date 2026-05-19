@@ -2,3 +2,5 @@ name: demoqa-docs
 title: Playwright Test Architecture Lab Docs
 version: current
 start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc

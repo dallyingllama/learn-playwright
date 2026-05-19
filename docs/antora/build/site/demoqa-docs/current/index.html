@@ -50,7 +50,67 @@
 <div class="nav-container" data-component="demoqa-docs" data-version="current">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Playwright Test Architecture Lab Docs</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-how-to.html">Developer How-To</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="way-of-working.html">Way of Working</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="coding-standards.html">Coding Standards</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="system-under-test.html">System Under Test and Test Approach</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="roles.html">Roles in Test Automation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Framework Features</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="features-functions.html">Feature Map</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="features/pom.html">Page Object Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="features/gotoHelper.html">gotoHelper Navigation Utility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="features/navigablePage.html">NavigablePage Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="features/conventions.html">Project Structure and Naming Conventions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Guidelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="guidelines/POM.html">Page Object Model Guidelines</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Playwright Test Architecture Lab Docs</span>
     <span class="version">current</span>
@@ -76,7 +136,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Playwright Test Architecture Lab Docs</a></li>
-    <li><a href="index.html">Playwright Test Architecture Lab</a></li>
+    <li><a href="index.html">Overview</a></li>
   </ul>
 </nav>
 <div class="edit-this-page"><a href="file:///C:/dev/learn-playwright/docs/antora/demoqa-docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
@@ -118,7 +178,7 @@
 <h2 id="_overview"><a class="anchor" href="#_overview"></a><a class="link" href="#_overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This repository is a practical Playwright + TypeScript learning project built around <code>demoqa.com</code>.</p>
+<p>This repository is a practical Playwright + TypeScript test architecture project built around <code>demoqa.com</code>.</p>
 </div>
 <div class="paragraph">
 <p>It is used to explore:</p>
@@ -153,7 +213,7 @@
 <p>13 Playwright spec files covering key DemoQA flows</p>
 </li>
 <li>
-<p>one <code>@sanity</code> example test in each spec file</p>
+<p>one <code>@sanity</code> baseline test in each spec file</p>
 </li>
 <li>
 <p><code>page-objects/</code> as the active Page Object Model directory</p>
@@ -235,7 +295,7 @@ corepack pnpm exec playwright install</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:spec:dev tests/example.spec.ts</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:spec:dev tests/login.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -243,7 +303,7 @@ corepack pnpm exec playwright install</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:ui:spec:dev tests/example.spec.ts</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:ui:spec:dev tests/login.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -425,7 +485,7 @@ corepack pnpm exec playwright install</code></pre>
 <p>This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.</p>
 </div>
 <div class="paragraph">
-<p>The CI workflow uses <code>@sanity</code> as an example tag for a small gate stage before the full suite. It demonstrates test tagging and staged execution.</p>
+<p>The CI workflow uses <code>@sanity</code> as a small gate stage before the full suite and supports staged execution.</p>
 </div>
 </div>
 </div>

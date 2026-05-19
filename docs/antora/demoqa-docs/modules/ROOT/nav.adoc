@@ -1,0 +1,16 @@
+* xref:index.adoc[Overview]
+* xref:developer-how-to.adoc[Developer How-To]
+* xref:way-of-working.adoc[Way of Working]
+* xref:coding-standards.adoc[Coding Standards]
+* xref:system-under-test.adoc[System Under Test and Test Approach]
+* xref:roles.adoc[Roles in Test Automation]
+
+* Framework Features
+** xref:features-functions.adoc[Feature Map]
+** xref:features/pom.adoc[Page Object Model]
+** xref:features/gotoHelper.adoc[gotoHelper Navigation Utility]
+** xref:features/navigablePage.adoc[NavigablePage Interface]
+** xref:features/conventions.adoc[Project Structure and Naming Conventions]
+
+* Guidelines
+** xref:guidelines/POM.adoc[Page Object Model Guidelines]
