@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Learn Playwright :: Learn Playwright Antora Pilot</title>
+    <title>Playwright Test Architecture Lab :: Playwright Test Architecture Lab</title>
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -11,7 +11,7 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">Learn Playwright Antora Pilot</a>
+      <a class="navbar-item" href="../..">Playwright Test Architecture Lab</a>
       <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
         <span></span>
         <span></span>
@@ -20,26 +20,26 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item" href="#">Home</a>
+        <a class="navbar-item" href="../../demoqa-docs/current/index.html">Docs Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Products</a>
+          <a class="navbar-link" href="../../demoqa-docs/current/way-of-working.html">Project Docs</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Product A</a>
-            <a class="navbar-item" href="#">Product B</a>
-            <a class="navbar-item" href="#">Product C</a>
+            <a class="navbar-item" href="../../demoqa-docs/current/developer-how-to.html">Developer How-To</a>
+            <a class="navbar-item" href="../../demoqa-docs/current/way-of-working.html">Way of Working</a>
+            <a class="navbar-item" href="../../demoqa-docs/current/features/conventions.html">Conventions</a>
           </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Services</a>
+          <a class="navbar-link" href="https://demoqa.com/" target="_blank" rel="noopener">Demo Site</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Service A</a>
-            <a class="navbar-item" href="#">Service B</a>
-            <a class="navbar-item" href="#">Service C</a>
+            <a class="navbar-item" href="https://demoqa.com/" target="_blank" rel="noopener">DemoQA</a>
+            <a class="navbar-item" href="https://playwright.dev/" target="_blank" rel="noopener">Playwright Docs</a>
+            <a class="navbar-item" href="https://github.com/dallyingllama/learn-playwright" target="_blank" rel="noopener">GitHub Repository</a>
           </div>
         </div>
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="#">Download</a>
+            <a class="button is-primary" href="https://github.com/dallyingllama/learn-playwright/actions" target="_blank" rel="noopener">CI Runs</a>
           </span>
         </div>
       </div>
@@ -52,12 +52,12 @@
     <div class="panels">
 <div class="nav-panel-explore is-active" data-panel="explore">
   <div class="context">
-    <span class="title">DemoQA Docs Pilot</span>
+    <span class="title">Playwright Test Architecture Lab Docs</span>
     <span class="version">current</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="index.html">DemoQA Docs Pilot</a></div>
+      <div class="title"><a href="index.html">Playwright Test Architecture Lab Docs</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="index.html">current</a>
@@ -75,8 +75,8 @@
   <a href="index.html" class="home-link is-current"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">DemoQA Docs Pilot</a></li>
-    <li><a href="index.html">Learn Playwright</a></li>
+    <li><a href="index.html">Playwright Test Architecture Lab Docs</a></li>
+    <li><a href="index.html">Playwright Test Architecture Lab</a></li>
   </ul>
 </nav>
 <div class="edit-this-page"><a href="https://github.com/dallyingllama/learn-playwright/edit/main/docs/antora/demoqa-docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
@@ -86,7 +86,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Learn Playwright</h1>
+<h1 class="page">Playwright Test Architecture Lab</h1>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -118,7 +118,7 @@
 <h2 id="_overview"><a class="anchor" href="#_overview"></a><a class="link" href="#_overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This repository is a practical Playwright + TypeScript learning project built around <code>demoqa.com</code>.</p>
+<p>This repository is a practical Playwright + TypeScript test architecture project built around <code>demoqa.com</code>.</p>
 </div>
 <div class="paragraph">
 <p>It is used to explore:</p>
@@ -153,7 +153,7 @@
 <p>13 Playwright spec files covering key DemoQA flows</p>
 </li>
 <li>
-<p>one <code>@sanity</code> example test in each spec file</p>
+<p>one <code>@sanity</code> baseline test in each spec file</p>
 </li>
 <li>
 <p><code>page-objects/</code> as the active Page Object Model directory</p>
@@ -235,7 +235,7 @@ corepack pnpm exec playwright install</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:spec:dev tests/example.spec.ts</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:spec:dev tests/login.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -243,7 +243,7 @@ corepack pnpm exec playwright install</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:ui:spec:dev tests/example.spec.ts</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">corepack pnpm run test:ui:spec:dev tests/login.spec.ts</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -425,7 +425,7 @@ corepack pnpm exec playwright install</code></pre>
 <p>This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.</p>
 </div>
 <div class="paragraph">
-<p>The CI workflow uses <code>@sanity</code> as an example tag for a small gate stage before the full suite. It demonstrates test tagging and staged execution.</p>
+<p>The CI workflow uses <code>@sanity</code> as a small gate stage before the full suite and supports staged execution.</p>
 </div>
 </div>
 </div>
