@@ -67,7 +67,7 @@ Acceptance criteria:
 
 - Purpose: finish Antora migration cleanup so active docs assets are organized and production-ready.
 - Scope: Antora docs structure, source-of-truth alignment, and UI polish only.
-- Status: in progress.
+- Status: completed.
 - Phase A status: completed (runtime lives under `docs/antora/`, scripts/CI point to `docs/antora/`, and Antora build/verify checks pass).
 - Session slice update: report-history index cache refresh safeguard added (`history/version.json` + one-time auto-refresh when stale).
 - Session slice update: legacy pilot workspace `spikes/antora-pilot/` removed after Antora verify pass.
@@ -93,9 +93,12 @@ Phase B: source de-duplication
 
 Phase C: UI and navigation polish
 
-- C.1 replace default sample top-nav items with repository-relevant actions/links.
-- C.2 update pilot labels/titles to production naming.
-- C.3 tune left navigation structure and styling for parity with prior docs usability expectations.
+- C.1 replace default sample top-nav items with repository-relevant actions/links. Status: completed.
+- C.2 update pilot labels/titles to production naming. Status: completed.
+- C.3 tune left navigation structure and styling for parity with prior docs usability expectations. Status: completed.
+  - Added curated Antora nav source file at `docs/antora/demoqa-docs/modules/ROOT/nav.adoc`.
+  - Wired component nav config in `docs/antora/demoqa-docs/antora.yml`.
+  - Validation: `corepack pnpm run docs:build:antora` and `corepack pnpm run docs:verify:antora` passed.
 
 Acceptance criteria:
 

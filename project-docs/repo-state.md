@@ -52,6 +52,7 @@ Use this file as a concise restart snapshot for implementation sessions.
 - `4.3` internal docs split is lightweight: publishable developer guide in Antora component pages, internal pointer in `project-docs/developer-how-to.md`, and concise session workflow in `project-docs/codex-workflow.md`.
 - `4.4` conventions doc directory map aligned with current repository/local outputs and validated with local docs build.
 - `5.2` docs pipeline migrated to Antora with local UI source, pinned Antora CLI, CI smoke checks, and documented rollback path.
+- `5.2a` Antora post-migration cleanup and UI alignment (A/B/C phases) completed with curated top nav, naming alignment, and left-nav structure.
 
 ## Session Updates (Latest)
 
@@ -72,12 +73,22 @@ Use this file as a concise restart snapshot for implementation sessions.
   - stale `localDocs` artifacts/references were removed
 - Local validation passed for this slice:
   - `corepack pnpm run docs:verify:antora`
+- `5.2a` Phase C is completed:
+  - top navigation placeholder items were replaced with project-relevant links/actions
+  - site/component/docs page naming was aligned to `Playwright Test Architecture Lab`
+  - landing page title is `Playwright Test Architecture Lab`
+  - left navigation now uses curated structure from `docs/antora/demoqa-docs/modules/ROOT/nav.adoc`
+  - component nav is wired in `docs/antora/demoqa-docs/antora.yml`
+  - docs wording was tightened toward framework-oriented terminology in key publishable pages
+- Local validation passed for this session:
+  - `corepack pnpm run docs:build:antora`
+  - `corepack pnpm run docs:verify:antora`
 
 ## Active Focus
 
 From `project-docs/backlog.md`:
 
-- `5.2a` Phase C UI and navigation polish (top nav labels/links and left-nav structure).
+- `5.3` define architecture split blueprint.
 
 ## Known Risks and Notes
 
