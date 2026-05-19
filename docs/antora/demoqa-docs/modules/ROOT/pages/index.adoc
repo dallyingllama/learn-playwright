@@ -1,4 +1,4 @@
-= Learn Playwright
+= Playwright Test Architecture Lab
 :icons: font
 :source-highlighter: rouge
 :sectanchors:
@@ -10,7 +10,7 @@ image::https://img.shields.io/github/deployments/dallyingllama/learn-playwright/
 
 == Overview
 
-This repository is a practical Playwright + TypeScript learning project built around `demoqa.com`.
+This repository is a practical Playwright + TypeScript test architecture project built around `demoqa.com`.
 
 It is used to explore:
 
@@ -23,7 +23,7 @@ It is used to explore:
 == Highlights
 
 * 13 Playwright spec files covering key DemoQA flows
-* one `@sanity` example test in each spec file
+* one `@sanity` baseline test in each spec file
 * `page-objects/` as the active Page Object Model directory
 * shared helpers in `utils/`
 * reusable navigation metadata in `page-objects/metadata/navigation-sections.ts`
@@ -81,14 +81,14 @@ Run one spec in `dev`:
 
 [source,bash]
 ----
-corepack pnpm run test:spec:dev tests/example.spec.ts
+corepack pnpm run test:spec:dev tests/login.spec.ts
 ----
 
 Open Playwright UI mode for one spec in `dev`:
 
 [source,bash]
 ----
-corepack pnpm run test:ui:spec:dev tests/example.spec.ts
+corepack pnpm run test:ui:spec:dev tests/login.spec.ts
 ----
 
 Build local docs:
@@ -202,4 +202,4 @@ link:https://dallyingllama.github.io/learn-playwright/[GitHub Pages].
 
 This project is intentionally educational. The goal is not only to run tests, but also to keep the repo understandable, reusable, and easy to evolve over time.
 
-The CI workflow uses `@sanity` as an example tag for a small gate stage before the full suite. It demonstrates test tagging and staged execution.
+The CI workflow uses `@sanity` as a small gate stage before the full suite and supports staged execution.

@@ -4,7 +4,7 @@
 
 This repository uses `https://demoqa.com/` as the application under test.
 
-DemoQA is a useful target for this learning project because it provides a broad mix of interactive UI patterns, including forms, tables, navigation, alerts, widgets, and other browser-driven workflows.
+DemoQA is a useful target for this test architecture project because it provides a broad mix of interactive UI patterns, including forms, tables, navigation, alerts, widgets, and other browser-driven workflows.
 
 == Current Scope
 
@@ -34,4 +34,4 @@ The project currently emphasizes:
 
 == Notes
 
-The repository is designed as a learning and architecture exercise as much as a test suite. That means examples are chosen not only for coverage, but also for showing maintainable patterns that can later evolve into a reusable starter framework.
+The repository is designed as an architecture-focused test suite. Coverage targets are selected to exercise maintainable patterns that can evolve into a reusable starter framework.

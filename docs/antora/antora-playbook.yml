@@ -1,5 +1,5 @@
 site:
-  title: Learn Playwright Antora Pilot
+  title: Playwright Test Architecture Lab
   start_page: demoqa-docs::index.adoc
 
 content:

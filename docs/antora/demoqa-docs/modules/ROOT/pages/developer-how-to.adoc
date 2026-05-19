@@ -100,7 +100,7 @@ When unit tests usually do not add value:
 * flows already validated as user behavior in E2E coverage
 * checks that duplicate full browser workflows without adding faster feedback
 
-Current examples:
+Current implementations:
 
 * `tests/unit/goto-helper.unit.spec.ts`
 * `tests/unit/annotations.unit.spec.ts`
