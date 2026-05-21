@@ -7,13 +7,19 @@ For local setup and day-to-day developer commands, use `docs/antora/demoqa-docs/
 
 Use this prompt first:
 
-Read `AGENTS.md`, `project-docs/repo-state.md`, and `project-docs/backlog.md`.
+Read `AGENTS.md`, `project-docs/repo-state.md`, `project-docs/backlog.md`, and `project-docs/multi-repo-working-agreement.md`.
 Summarize current repository state and recommend the best next backlog item.
 
 Goal:
 
 - re-establish context quickly
 - pick one clear next task
+
+For split/multi-repo phases, also confirm:
+
+- active repo path
+- active branch
+- active backlog item slice
 
 ## 2) During Session (Prevent Drift)
 
@@ -43,11 +49,33 @@ Goal:
 
 - leave a reliable restart point for the next session
 
+## 4) Multi-Repo Mode (When Split Work Starts)
+
+Use this prompt at the start of each repo slice:
+
+Multi-repo slice start:
+- Confirm repo root, branch, and working tree status
+- Confirm one backlog slice objective for this repo only
+- List files expected to change in this slice
+- List validation commands for this slice
+
+Execution rule:
+
+- one active repo per slice
+- smallest safe change
+- validate immediately
+- summarize and pause before switching repos
+
+Reference:
+
+- `project-docs/multi-repo-working-agreement.md`
+
 ## Rules
 
 - Keep updates factual and concise.
 - Do not leave backlog decisions only in chat.
 - Use Playwright default `test-results/` output folder only.
+- During split phases, follow `project-docs/multi-repo-working-agreement.md` for step-by-step, explainer-first collaboration and repo-switch guardrails.
 
 ## Backlog Closeout Checklist
 

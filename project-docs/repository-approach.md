@@ -90,6 +90,44 @@ After the MVP is stable, create the following repo types:
 - `5.6`: Create template repo from stable shared package version.
 - `5.7`: Create second showcase repo and validate cross-site reuse.
 
+## Split Execution Workflow
+
+Use this order to reduce risk and keep validation clear.
+
+### Step 1: Finalize the blueprint
+- Lock the initial public API surface for shared package `v0.1.0`.
+- Lock explicit out-of-scope items for `v0.1.0`.
+- Lock migration phases and acceptance checks per phase.
+
+### Step 2: Build the shared package first
+- Create package structure, exports, and unit tests in the shared package repo.
+- Start with narrow, low-risk APIs only.
+- Validate shared behavior in-package before consumer integration.
+
+### Step 3: Use this repo as the first showcase consumer
+- Integrate shared package APIs into this repo in small slices.
+- Keep DemoQA-specific selectors/flows local.
+- After each slice, run directly affected specs and `pnpm run typecheck`.
+
+### Step 4: Stabilize and release `0.1.x`
+- Fix integration findings discovered in the first showcase consumer.
+- Publish/update shared package version with migration notes as needed.
+
+### Step 5: Create the template from the stabilized pattern
+- Build template repo from the proven consumer structure.
+- Keep template generic and remove site-specific logic.
+- Include step-by-step onboarding and project docs generation guidance.
+
+### Step 6: Create the second showcase from template
+- Bootstrap a second showcase on a different application.
+- Validate shared boundaries across multiple real consumers.
+- Promote repeated cross-project patterns into shared package in later versions.
+
+### Validation Model Across Repos
+- Shared package validates reusable behavior via unit/contract tests.
+- Showcase repos validate integration behavior in real site contexts.
+- Template repo validates bootstrap and onboarding workflow quality.
+
 ## Documentation Audience Model
 
 ### Shared package documentation
@@ -105,6 +143,8 @@ After the MVP is stable, create the following repo types:
 - Primary audience: developers bootstrapping a new automation project.
 - Focus:
   - first-run onboarding
+  - step-by-step guide for converting a cloned template into a project-specific repo
+  - documentation workflow guidance for generating project-specific docs
   - setup and configuration steps
   - customization guide for common project needs
   - operational run/debug basics for a new repo owner
@@ -126,6 +166,8 @@ After the MVP is stable, create the following repo types:
 
 ### Template repo minimum docs
 - Quick start guide.
+- Step-by-step template-to-project setup guide.
+- Project docs generation guide.
 - Customization guide.
 - Standard run/test/typecheck commands.
 
