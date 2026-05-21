@@ -84,11 +84,11 @@ After the MVP is stable, create the following repo types:
 
 ## Execution Plan Mapping (Backlog Section 5)
 - `5.1`: Antora migration spike/decision.
-- `5.2`: Define split blueprint using this document’s ready criteria, boundaries, versioning, and repo sequence.
-- `5.3`: Create shared package skeleton and first reusable exports.
-- `5.4`: Integrate the current repo as first showcase consumer.
-- `5.5`: Create template repo from stable shared package version.
-- `5.6`: Create second showcase repo and validate cross-site reuse.
+- `5.3`: Define split blueprint using this document's ready criteria, boundaries, versioning, and repo sequence.
+- `5.4`: Create shared package skeleton and first reusable exports.
+- `5.5`: Integrate the current repo as first showcase consumer.
+- `5.6`: Create template repo from stable shared package version.
+- `5.7`: Create second showcase repo and validate cross-site reuse.
 
 ## Documentation Audience Model
 
@@ -172,3 +172,4 @@ After the MVP is stable, create the following repo types:
 - Keep the shared package focused on truly reusable logic.
 - Keep project-specific selectors, flows, and business rules inside each project repo.
 - Use showcase repos to validate changes before making them the new standard.
+
