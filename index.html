@@ -31,6 +31,18 @@
   <!-- Loop through reports by date -->
   
     <details open>
+      <summary>2026-05-21</summary>
+      <ul>
+        
+          <!-- Each report item, with a class for status filtering -->
+          <li class="report-item status-pass">
+            ✅ <a href="2026-05-21_18-51-01/index.html" target="_blank">18:51:01</a>
+          </li>
+        
+      </ul>
+    </details>
+  
+    <details >
       <summary>2026-05-19</summary>
       <ul>
         
@@ -516,7 +528,7 @@
     // Auto-refresh once when this index file is stale in browser cache.
     // We compare the version this HTML was rendered with to freshly fetched version metadata.
     (async function refreshReportIndexIfStale() {
-      const renderedVersion = '2026-05-19_18-13-33';
+      const renderedVersion = '2026-05-21_18-51-01';
       if (!renderedVersion) return;
 
       const params = new URLSearchParams(window.location.search);
